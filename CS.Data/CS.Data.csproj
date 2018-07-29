@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="DTO\" />
+    <Folder Include="Entities\Enums\" />
+    <Folder Include="Entities\Dictionaries\" />
+    <Folder Include="DTO\Excel\" />
+    <Folder Include="EntitiesValidators\" />
+    <Folder Include="Mappers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="Entities\ActIdentitate.cs" />
+    <Compile Remove="Entities\Act.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Entities\Imobil.css" />
+    <None Remove="DTO\Excel\OutputActProprietate.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="7.6.104" />
+  </ItemGroup>
+</Project>
