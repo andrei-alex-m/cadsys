@@ -1,0 +1,13 @@
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/bin/Debug/netcoreapp2.1/CS.Excel.deps.json
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/bin/Debug/netcoreapp2.1/CS.Excel.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/bin/Debug/netcoreapp2.1/CS.Excel.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/bin/Debug/netcoreapp2.1/Caly.Common.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/bin/Debug/netcoreapp2.1/CS.Data.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/bin/Debug/netcoreapp2.1/CS.Data.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/bin/Debug/netcoreapp2.1/Caly.Common.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/obj/Debug/netcoreapp2.1/CS.Excel.csprojResolveAssemblyReference.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/obj/Debug/netcoreapp2.1/CS.Excel.csproj.CoreCompileInputs.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/obj/Debug/netcoreapp2.1/CS.Excel.AssemblyInfoInputs.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/obj/Debug/netcoreapp2.1/CS.Excel.AssemblyInfo.cs
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/obj/Debug/netcoreapp2.1/CS.Excel.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/obj/Debug/netcoreapp2.1/CS.Excel.pdb

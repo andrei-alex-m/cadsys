@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
+    <Files>
+      <File FileName="CS.Data/EntitiesValidators/ProprietarValidator.cs" Line="7" Column="37" />
+      <File FileName="CS.Data/EntitiesValidators/ActProprietateValidator.cs" Line="15" Column="47" />
+      <File FileName="CS.Data/EntitiesValidators/ParcelaValidator.cs" Line="10" Column="34" />
+      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="9" Column="1" />
+      <File FileName="CadSys Status" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/usr/local/share/dotnet/sdk/2.1.300/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" line="198" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel.Tests/ImportTests.cs" relfile="CS.Excel.Tests/ImportTests.cs" line="15" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/DBContextFactory.cs" relfile="CS.EF/DBContextFactory.cs" line="22" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/Reflection.cs" relfile="Caly.Common/Reflection.cs" line="45" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.CS.ImportExportWeb PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.CS.CRUDAPI PreferredExecutionTarget="MonoDevelop.Default" />
+  <DisabledProjects>
+    <String>CS.Interfaces/CS.Interfaces.csproj</String>
+  </DisabledProjects>
+</Properties>

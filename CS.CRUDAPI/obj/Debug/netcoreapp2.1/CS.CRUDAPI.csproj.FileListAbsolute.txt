@@ -1,0 +1,14 @@
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/bin/Debug/netcoreapp2.1/CS.CRUDAPI.deps.json
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/bin/Debug/netcoreapp2.1/CS.CRUDAPI.runtimeconfig.json
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/bin/Debug/netcoreapp2.1/CS.CRUDAPI.runtimeconfig.dev.json
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/bin/Debug/netcoreapp2.1/CS.CRUDAPI.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/bin/Debug/netcoreapp2.1/CS.CRUDAPI.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.csprojResolveAssemblyReference.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.csproj.CoreCompileInputs.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.RazorAssemblyInfo.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.RazorAssemblyInfo.cs
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.AssemblyInfoInputs.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.AssemblyInfo.cs
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.RazorTargetAssemblyInfo.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.pdb

@@ -1,0 +1,8 @@
+/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/bin/Debug/netcoreapp2.1/Caly.Common.deps.json
+/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/bin/Debug/netcoreapp2.1/Caly.Common.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/bin/Debug/netcoreapp2.1/Caly.Common.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/obj/Debug/netcoreapp2.1/Caly.Common.csproj.CoreCompileInputs.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/obj/Debug/netcoreapp2.1/Caly.Common.AssemblyInfoInputs.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/obj/Debug/netcoreapp2.1/Caly.Common.AssemblyInfo.cs
+/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/obj/Debug/netcoreapp2.1/Caly.Common.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/obj/Debug/netcoreapp2.1/Caly.Common.pdb
