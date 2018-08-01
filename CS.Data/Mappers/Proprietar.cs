@@ -1,10 +1,12 @@
 ﻿using System;
+using AutoMapper;
 namespace CS.Data.Mappers
 {
-    public class Proprietar
+    public class BaseProfile:Profile
     {
-        public Proprietar()
-        {
-        }
+        
     }
+
 }
+
+
