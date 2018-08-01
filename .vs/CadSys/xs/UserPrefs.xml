@@ -5,6 +5,11 @@
       <File FileName="CS.Data/EntitiesValidators/ActProprietateValidator.cs" Line="15" Column="47" />
       <File FileName="CS.Data/EntitiesValidators/ParcelaValidator.cs" Line="10" Column="34" />
       <File FileName="CS.Data/Mappers/Proprietar.cs" Line="9" Column="1" />
+      <File FileName="CS.ImportExportAPI/Controllers/ExportController.cs" Line="9" Column="45" />
+      <File FileName="CS.EF/DBContextFactory.cs" Line="1" Column="1" />
+      <File FileName="CS.Excel/Importer.cs" Line="81" Column="17" />
+      <File FileName="Caly.Common/Reflection.cs" Line="38" Column="17" />
+      <File FileName="CS.EF/Migrations/20180727202207_initial.Designer.cs" Line="14" Column="6" />
       <File FileName="CadSys Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
