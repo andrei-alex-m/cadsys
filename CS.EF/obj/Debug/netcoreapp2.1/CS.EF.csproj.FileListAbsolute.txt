@@ -10,5 +10,7 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.AssemblyInfo.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/bin/Debug/netcoreapp2.1/Caly.Common.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/bin/Debug/netcoreapp2.1/Caly.Common.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.csprojAssemblyReference.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.csproj.CopyComplete

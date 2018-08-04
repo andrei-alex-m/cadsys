@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "a2b712a215c89ab514b401eb39e72da96f2204fc"
+    "signature": "76837c1779b9b5e2dd83ae3255ee8f742ebc1e9d"
   },
   "compilationOptions": {},
   "targets": {
@@ -15,17 +15,6 @@
         },
         "runtime": {
           "CS.Excel.Tests.dll": {}
-        }
-      },
-      "AutoMapper/7.0.1": {
-        "dependencies": {
-          "System.ValueTuple": "4.5.0"
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/AutoMapper.dll": {
-            "assemblyVersion": "7.0.1.0",
-            "fileVersion": "7.0.1.0"
-          }
         }
       },
       "DotNetCore.NPOI/1.2.0": {
@@ -1172,7 +1161,6 @@
       },
       "CS.Data/1.0.0": {
         "dependencies": {
-          "AutoMapper": "7.0.1",
           "FluentValidation": "7.6.104"
         },
         "runtime": {
@@ -1196,13 +1184,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "AutoMapper/7.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-6xHbhsW09sWjjYuE1sqhYn25PQzB6UEUVPME5uhlaIz2NR2+L3+FGbVxvknJKug1BLp6VTLxDb5RcGXKMm0ieQ==",
-      "path": "automapper/7.0.1",
-      "hashPath": "automapper.7.0.1.nupkg.sha512"
     },
     "DotNetCore.NPOI/1.2.0": {
       "type": "package",

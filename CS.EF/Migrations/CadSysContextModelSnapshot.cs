@@ -160,6 +160,8 @@ namespace CS.EF.Migrations
 
                     b.Property<string>("Adresa");
 
+                    b.Property<DateTime?>("DataEmiterii");
+
                     b.Property<string>("Emitent");
 
                     b.Property<int>("ExcelRow");
@@ -174,7 +176,7 @@ namespace CS.EF.Migrations
 
                     b.Property<string>("Localitate");
 
-                    b.Property<long>("Numar");
+                    b.Property<string>("Numar");
 
                     b.Property<string>("Nume");
 
@@ -188,7 +190,7 @@ namespace CS.EF.Migrations
 
                     b.Property<int?>("TipActIdentitate");
 
-                    b.Property<int?>("TipPersoana");
+                    b.Property<int>("TipPersoana");
 
                     b.HasKey("Id");
 

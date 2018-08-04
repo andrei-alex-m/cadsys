@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "a680bdb02cc9efd2a2f598bf3e3fe718a1d8cf82"
+    "signature": "ed891e119d5b10f97481a886ab07b75c865cf278"
   },
   "compilationOptions": {
     "defines": [
@@ -33,20 +33,6 @@
         },
         "compile": {
           "CS.ImportExportAPI.dll": {}
-        }
-      },
-      "AutoMapper/7.0.1": {
-        "dependencies": {
-          "System.ValueTuple": "4.5.0"
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/AutoMapper.dll": {
-            "assemblyVersion": "7.0.1.0",
-            "fileVersion": "7.0.1.0"
-          }
-        },
-        "compile": {
-          "lib/netcoreapp2.0/AutoMapper.dll": {}
         }
       },
       "DotNetCore.NPOI/1.2.0": {
@@ -379,7 +365,6 @@
       },
       "CS.Data/1.0.0": {
         "dependencies": {
-          "AutoMapper": "7.0.1",
           "FluentValidation": "7.6.104"
         },
         "runtime": {
@@ -3347,13 +3332,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "AutoMapper/7.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-6xHbhsW09sWjjYuE1sqhYn25PQzB6UEUVPME5uhlaIz2NR2+L3+FGbVxvknJKug1BLp6VTLxDb5RcGXKMm0ieQ==",
-      "path": "automapper/7.0.1",
-      "hashPath": "automapper.7.0.1.nupkg.sha512"
     },
     "DotNetCore.NPOI/1.2.0": {
       "type": "package",

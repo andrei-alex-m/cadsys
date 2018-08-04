@@ -30,7 +30,7 @@ namespace CS.Data.Entities
             get;
             set;
         }
-        public long Numar
+        public string Numar
         {
             get;
             set;
@@ -45,6 +45,13 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
+        public DateTime? DataEmiterii
+        {
+            get;
+            set;
+        }
+
         public string Adresa
         {
             get;
@@ -65,7 +72,7 @@ namespace CS.Data.Entities
             get;
             set;
         }
-        public TipPersoana? TipPersoana
+        public TipPersoana TipPersoana
         {
             get;
             set;

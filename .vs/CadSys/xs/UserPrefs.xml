@@ -4,12 +4,15 @@
       <File FileName="CS.Data/EntitiesValidators/ProprietarValidator.cs" Line="7" Column="37" />
       <File FileName="CS.Data/EntitiesValidators/ActProprietateValidator.cs" Line="15" Column="47" />
       <File FileName="CS.Data/EntitiesValidators/ParcelaValidator.cs" Line="10" Column="34" />
-      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="9" Column="1" />
+      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="39" Column="13" />
       <File FileName="CS.ImportExportAPI/Controllers/ExportController.cs" Line="9" Column="45" />
       <File FileName="CS.EF/DBContextFactory.cs" Line="1" Column="1" />
       <File FileName="CS.Excel/Importer.cs" Line="81" Column="17" />
-      <File FileName="Caly.Common/Reflection.cs" Line="38" Column="17" />
-      <File FileName="CS.EF/Migrations/20180727202207_initial.Designer.cs" Line="14" Column="6" />
+      <File FileName="Caly.Common/Reflection.cs" Line="18" Column="25" />
+      <File FileName="CS.Data/DTO/Excel/OutputProprietar.cs" Line="55" Column="25" />
+      <File FileName="CS.Data/Entities/Proprietar.cs" Line="75" Column="24" />
+      <File FileName="Caly.Common/Strings.cs" Line="15" Column="10" />
+      <File FileName="CS.EF/Migrations/CadSysContextModelSnapshot.cs" Line="1" Column="1" />
       <File FileName="CadSys Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
@@ -19,7 +22,6 @@
       <Breakpoint file="/usr/local/share/dotnet/sdk/2.1.300/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" line="198" column="1" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel.Tests/ImportTests.cs" relfile="CS.Excel.Tests/ImportTests.cs" line="15" column="1" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/DBContextFactory.cs" relfile="CS.EF/DBContextFactory.cs" line="22" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/Reflection.cs" relfile="Caly.Common/Reflection.cs" line="45" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

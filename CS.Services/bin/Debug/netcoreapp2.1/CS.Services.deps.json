@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "48cef056c803e91ac12e01cf614a5807ba7edd8e"
+    "signature": "ead54923c8ec045b2243fe2705eae6c7009b02bb"
   },
   "compilationOptions": {},
   "targets": {
@@ -14,17 +14,6 @@
         },
         "runtime": {
           "CS.Services.dll": {}
-        }
-      },
-      "AutoMapper/7.0.1": {
-        "dependencies": {
-          "System.ValueTuple": "4.5.0"
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/AutoMapper.dll": {
-            "assemblyVersion": "7.0.1.0",
-            "fileVersion": "7.0.1.0"
-          }
         }
       },
       "FluentValidation/7.6.104": {
@@ -588,7 +577,6 @@
       },
       "CS.Data/1.0.0": {
         "dependencies": {
-          "AutoMapper": "7.0.1",
           "FluentValidation": "7.6.104"
         },
         "runtime": {
@@ -615,13 +603,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "AutoMapper/7.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-6xHbhsW09sWjjYuE1sqhYn25PQzB6UEUVPME5uhlaIz2NR2+L3+FGbVxvknJKug1BLp6VTLxDb5RcGXKMm0ieQ==",
-      "path": "automapper/7.0.1",
-      "hashPath": "automapper.7.0.1.nupkg.sha512"
     },
     "FluentValidation/7.6.104": {
       "type": "package",
