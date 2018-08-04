@@ -18,5 +18,16 @@ namespace CS.Data.Mappers
             actProp.Emitent = actPropDTO.Emitent;
             actProp.Carnet = actPropDTO.Carnet;
         }
+
+        public static void FromPOCO(this OutputActProprietate actPropDTO, ActProprietate actProp)
+        {
+            actPropDTO.RowIndex = actProp.ExcelRow;
+            actPropDTO.Index = actProp.Index;
+            actPropDTO.TipAct = actProp.TipActProprietate.Denumire;
+            actPropDTO.Numar = actProp.Numar;
+            actPropDTO.Data = actProp.Data;
+            actPropDTO.Emitent = actProp.Emitent;
+            actPropDTO.Carnet = actProp.Carnet;
+        }
     }
 }

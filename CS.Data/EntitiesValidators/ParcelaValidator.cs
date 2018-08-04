@@ -9,11 +9,12 @@ namespace CS.Data.EntitiesValidators
     {
         public ParcelaValidator()
         {
+            RuleFor(x => x.Index).NotEmpty().WithMessage("Index lipsa");
             RuleFor(x => x.TarlaId).NotNull().NotEqual(0).WithMessage("Tarla lipsa");
 
             RuleFor(x => x.Denumire).NotEmpty().WithMessage("Numar lipsa");
 
-            RuleFor(x => x.CatFol).NotEmpty().Must(x => x != 0).WithMessage("Cat Fol lipsa");
+            RuleFor(x => x.CatFol).Must(x=>x.HasValue).Must(x => x != 0).WithMessage("Cat Fol lipsa");
 
             RuleFor(x => x.Suprafata).NotEmpty().WithMessage("Suprafata lipsa");
 

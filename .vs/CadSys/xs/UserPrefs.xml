@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Caly.Common Status">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Data/Mappers/ActProprietate.cs">
     <Files>
       <File FileName="CS.Data/Mappers/Proprietar.cs" Line="26" Column="40" />
       <File FileName="Caly.Common/Reflection.cs" Line="34" Column="13" />
@@ -14,9 +14,8 @@
       <File FileName="CS.Data/EntitiesValidators/ActProprietateValidator.cs" Line="15" Column="47" />
       <File FileName="CS.Data/Entities/Proprietar.cs" Line="23" Column="34" />
       <File FileName="CS.Data/Entities/Parcela.cs" Line="21" Column="17" />
-      <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="11" Column="79" />
+      <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="20" Column="10" />
       <File FileName="CS.Data/Entities/ActProprietate.cs" Line="23" Column="25" />
-      <File FileName="Caly.Common Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
