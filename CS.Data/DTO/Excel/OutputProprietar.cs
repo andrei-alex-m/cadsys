@@ -52,7 +52,7 @@ namespace CS.Data.DTO.Excel
             get;
             set;
         }
-        public DateTime DataEmiterii
+        public DateTime? DataEmiterii
         {
             get;
             set;

@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Data/DTO/Excel/OutputProprietar.cs">
     <Files>
-      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="26" Column="25" />
+      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="54" Column="25" />
       <File FileName="Caly.Common/Reflection.cs" Line="18" Column="25" />
-      <File FileName="CS.Excel/Importer.cs" Line="7" Column="18" />
-      <File FileName="CadSys Status" />
+      <File FileName="CS.Excel/Importer.cs" Line="55" Column="58" />
+      <File FileName="CS.Excel/Utils.cs" Line="9" Column="43" />
+      <File FileName="CS.Data/DTO/Excel/OutputProprietar.cs" Line="51" Column="10" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

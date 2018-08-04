@@ -38,6 +38,25 @@ namespace CS.Data.Mappers
                         : (Sex?)null;
 
         }
+
+        public static void FromPOCO (this OutputProprietar propDTO, Proprietar prop)
+        {
+            propDTO.RowIndex = prop.ExcelRow;
+            propDTO.Index = prop.Index;
+            propDTO.Nume = prop.Nume;
+            propDTO.Initiala = prop.Initiala;
+            propDTO.Prenume = prop.Prenume;
+            propDTO.TipActIdentitate = prop.TipActIdentitate.HasValue ? prop.TipActIdentitate.ToString() : null;
+            propDTO.Serie = prop.Serie;
+            propDTO.Numar = prop.Numar;
+            propDTO.Identificator = prop.Identificator;
+            propDTO.Emitent = prop.Emitent;
+            propDTO.DataEmiterii = prop.DataEmiterii;
+            propDTO.Adresa = prop.Adresa;
+            propDTO.Localitate = prop.Localitate;
+            propDTO.Judet = prop.Judet;
+            propDTO.Tara = prop.Tara;
+        }
     }
 
 }
