@@ -1,20 +1,22 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Caly.Common Status">
     <Files>
-      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="36" Column="32" />
+      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="26" Column="40" />
       <File FileName="Caly.Common/Reflection.cs" Line="34" Column="13" />
       <File FileName="CS.Excel/Importer.cs" Line="59" Column="17" />
       <File FileName="CS.Excel/Utils.cs" Line="9" Column="43" />
       <File FileName="CS.Data/DTO/Excel/OutputProprietar.cs" Line="14" Column="10" />
       <File FileName="CS.Data/EntitiesValidators/ParcelaValidator.cs" Line="10" Column="33" />
       <File FileName="CS.Data/EntitiesValidators/ProprietarValidator.cs" Line="7" Column="37" />
-      <File FileName="CS.Data/Mappers/Parcela.cs" Line="19" Column="1" />
-      <File FileName="CS.Data/DTO/Excel/OutputActProprietate.cs" Line="35" Column="10" />
+      <File FileName="CS.Data/Mappers/Parcela.cs" Line="36" Column="10" />
+      <File FileName="CS.Data/DTO/Excel/OutputActProprietate.cs" Line="36" Column="29" />
       <File FileName="CS.Data/DTO/Excel/OutputParcela.cs" Line="18" Column="17" />
       <File FileName="CS.Data/EntitiesValidators/ActProprietateValidator.cs" Line="15" Column="47" />
       <File FileName="CS.Data/Entities/Proprietar.cs" Line="23" Column="34" />
-      <File FileName="CS.Data/Entities/Parcela.cs" Line="11" Column="30" />
-      <File FileName="CadSys Status" />
+      <File FileName="CS.Data/Entities/Parcela.cs" Line="21" Column="17" />
+      <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="11" Column="79" />
+      <File FileName="CS.Data/Entities/ActProprietate.cs" Line="23" Column="25" />
+      <File FileName="Caly.Common Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

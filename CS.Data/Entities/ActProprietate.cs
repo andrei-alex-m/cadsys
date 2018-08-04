@@ -20,7 +20,7 @@ namespace CS.Data.Entities
             set;
         }
 
-        public DateTime Data
+        public DateTime? Data
         {
             get;
             set;

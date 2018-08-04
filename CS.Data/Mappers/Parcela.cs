@@ -21,10 +21,18 @@ namespace CS.Data.Mappers
                 parcela.CatFol = (CatFol)catFol;
             }
 
-            parcela.CatFol = string.IsNullOrEmpty(parcelaDTO.CatFol) ?
-                (CatFol)Enum.Parse(typeof(CatFol), parcelaDTO.CatFol)
-                : (CatFol?)null;
+            parcela.Suprafata = parcelaDTO.Suprafata;
 
+        }
+
+        public static void FromPOCO(this OutputParcela parcelaDTO, Parcela parcela)
+        {
+            parcelaDTO.RowIndex = parcela.ExcelRow;
+            parcelaDTO.Index = parcela.Index;
+            parcelaDTO.Tarla = parcela.Tarla?.Denumire;
+            parcelaDTO.Parcela = parcela.Denumire;
+            parcelaDTO.CatFol = parcela.CatFol.ToString();
+            parcelaDTO.Suprafata = parcela.Suprafata;
         }
     }
 }

@@ -33,5 +33,10 @@ namespace CS.Data.DTO.Excel
             get;
             set;
         }
+        public string Carnet
+        {
+            get;
+            set;
+        }
     }
 }

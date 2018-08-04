@@ -22,7 +22,7 @@ namespace CS.Data.Entities
         }
 
         [Required]
-        public decimal Suprafata
+        public int Suprafata
         {
             get;
             set;
