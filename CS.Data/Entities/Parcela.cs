@@ -8,7 +8,7 @@ namespace CS.Data.Entities
     public class Parcela:BaseEntity
     {
         [Required]
-        public CatFol CatFol
+        public CatFol? CatFol
         {
             get;
             set;

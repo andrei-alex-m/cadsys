@@ -40,7 +40,7 @@ namespace Caly.Common
                 {
                     try
                     {
-                        if (info.PropertyType == typeof(DateTime))
+                        if (info.PropertyType == typeof(DateTime) || info.PropertyType== typeof(DateTime?))
                         {
                             info.SetValue(instance, DateTime.ParseExact(kvp.Value, dateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None));
                         }

@@ -32,7 +32,7 @@ namespace CS.Data.EntitiesValidators
             RuleFor(x => x.Index).NotNull().NotEqual(0).WithMessage("Index lipsa");
         }
 
-        private static bool isValidCNP(long vcnp)
+        public static bool isValidCNP(long vcnp)
         {
             var cnp = vcnp.ToString();
             try

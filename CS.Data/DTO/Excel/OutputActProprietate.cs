@@ -18,11 +18,20 @@ namespace CS.Data.DTO.Excel
             get;
             set;
         }
-        public long Numar
+        public string Numar
         {
             get;
             set;
         }
-
+        public DateTime? Data
+        {
+            get;
+            set;
+        }
+        public string Emitent
+        {
+            get;
+            set;
+        }
     }
 }

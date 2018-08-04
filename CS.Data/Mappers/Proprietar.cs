@@ -2,10 +2,11 @@
 using Caly.Common;
 using CS.Data.DTO.Excel;
 using CS.Data.Entities;
+using CS.Data.EntitiesValidators;
 
 namespace CS.Data.Mappers
 {
-    public static class Mapper
+    public static class ProprietarMapperExtensions
     {
         public static void FromDTO (this Proprietar prop, OutputProprietar propDTO)
         {
@@ -15,9 +16,12 @@ namespace CS.Data.Mappers
             prop.Initiala = propDTO.Initiala;
             prop.Prenume = propDTO.Prenume;
 
-            prop.TipActIdentitate = string.IsNullOrEmpty(propDTO.TipActIdentitate) ? 
-                                        (TipActIdentitate)Enum.Parse(typeof(TipActIdentitate), propDTO.TipActIdentitate)
-                                       : (TipActIdentitate?)null;
+            object tipact;
+
+            if (Enum.TryParse(typeof(TipActIdentitate), propDTO.TipActIdentitate, true, out tipact))
+            {
+                prop.TipActIdentitate = (TipActIdentitate)tipact;
+            }
 
             prop.Serie = propDTO.Serie;
             prop.Numar = propDTO.Numar;
@@ -29,7 +33,7 @@ namespace CS.Data.Mappers
             prop.Judet = propDTO.Judet;
             prop.Tara = propDTO.Tara;
 
-            prop.TipPersoana = prop.Identificator.ToString().Length == 13
+            prop.TipPersoana = ProprietarValidator.isValidCNP(prop.Identificator)
                                 && !prop.Nume.ContainsAny("S.C.", "SC ", "S.R.L.", "SRL") ?
                                 TipPersoana.F : TipPersoana.J;
             

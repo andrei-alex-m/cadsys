@@ -6,4 +6,3 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/obj/Debug/netcoreapp2.1/Caly.Common.AssemblyInfo.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/obj/Debug/netcoreapp2.1/Caly.Common.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/obj/Debug/netcoreapp2.1/Caly.Common.pdb
-/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/obj/Debug/netcoreapp2.1/Caly.Common.csprojAssemblyReference.cache

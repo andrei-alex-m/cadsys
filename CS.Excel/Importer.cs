@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -70,6 +71,19 @@ namespace CS.Excel
 
             Caly.Common.Reflection.FillInstanceFromDictionary(kvp, result, true);
             return result;
+        }
+
+        public static Task<List<OutputParcela>> Parcele (MemoryStream stream, ImportConfig config)
+        {
+            
+
+            throw new NotImplementedException();
+        }
+
+        private static OutputParcela GetParcelaDTO(IRow row, List<string> columnNames, int rowIndex = 0)
+        {
+            var result = new OutputParcela() { RowIndex = rowIndex };
+            throw new NotImplementedException();
         }
 
     }
