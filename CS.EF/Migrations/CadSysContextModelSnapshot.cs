@@ -24,7 +24,7 @@ namespace CS.EF.Migrations
 
                     b.Property<string>("Carnet");
 
-                    b.Property<DateTime>("Data");
+                    b.Property<DateTime?>("Data");
 
                     b.Property<string>("Emitent");
 
@@ -66,30 +66,118 @@ namespace CS.EF.Migrations
                     );
                 });
 
+            modelBuilder.Entity("CS.Data.Entities.Imobil", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("ImobilNou");
+
+                    b.Property<bool>("Intravilan");
+
+                    b.Property<string>("NumarCadGeneral")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("NumarCadastral")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("NumarCarteFunciara")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("NumarTopografic")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Observatii")
+                        .HasMaxLength(2000);
+
+                    b.Property<string>("SectorCadastral")
+                        .HasMaxLength(200);
+
+                    b.Property<decimal>("SuprafataDinActe");
+
+                    b.Property<decimal>("SuprafataDinActeConstructii");
+
+                    b.Property<decimal>("SuprafataMasurata");
+
+                    b.Property<decimal>("ValoareImpozitare");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Imobil");
+                });
+
             modelBuilder.Entity("CS.Data.Entities.Inscriere", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ExcelRow");
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
-                    b.Property<int>("IdActProprietate");
-
-                    b.Property<int>("IdParcela");
-
-                    b.Property<int>("IdProprietar");
-
-                    b.Property<int>("Index");
+                    b.Property<int>("IdInscriereDetaliu");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdActProprietate");
-
-                    b.HasIndex("IdParcela");
-
-                    b.HasIndex("IdProprietar");
+                    b.HasIndex("IdInscriereDetaliu");
 
                     b.ToTable("Inscrieri");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Inscriere");
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.InscriereDetaliu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CotaActuala")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("CotaInitiala")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("DataCererii");
+
+                    b.Property<int?>("IdForerinta");
+
+                    b.Property<int>("IdImobilReferinta");
+
+                    b.Property<int>("IdTipDrept");
+
+                    b.Property<string>("ModDobandire")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Moneda")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Nota")
+                        .HasMaxLength(4000);
+
+                    b.Property<int>("NumarulCererii");
+
+                    b.Property<string>("Observatii")
+                        .HasMaxLength(2000);
+
+                    b.Property<string>("ObservatiiDrept")
+                        .HasMaxLength(2000);
+
+                    b.Property<int>("ParteaCartiiFunciare");
+
+                    b.Property<int>("Pozitia");
+
+                    b.Property<string>("TipCota")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("TipInscriere");
+
+                    b.Property<string>("Valoarea")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdForerinta");
+
+                    b.ToTable("InscrieriDetaliu");
                 });
 
             modelBuilder.Entity("CS.Data.Entities.Judet", b =>
@@ -138,7 +226,7 @@ namespace CS.EF.Migrations
 
                     b.Property<int>("Index");
 
-                    b.Property<decimal>("Suprafata");
+                    b.Property<int>("Suprafata");
 
                     b.Property<int>("TarlaId");
 
@@ -351,7 +439,7 @@ namespace CS.EF.Migrations
                     b.ToTable("TipuriActProprietate");
 
                     b.HasData(
-                        new { Id = 1, Denumire = "Titlu Proptietate" },
+                        new { Id = 1, Denumire = "Titlu Proprietate" },
                         new { Id = 2, Denumire = "Contract de Vanzare Cumparare" },
                         new { Id = 3, Denumire = "Sentinta Civila" },
                         new { Id = 4, Denumire = "Certificat de Mostenitor" },
@@ -362,6 +450,45 @@ namespace CS.EF.Migrations
                         new { Id = 9, Denumire = "Contract de Partaj Imobiliar" },
                         new { Id = 10, Denumire = "Act de Donatie" }
                     );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.InscriereAct", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.Inscriere");
+
+                    b.Property<int>("IdActProprietate");
+
+                    b.HasIndex("IdActProprietate");
+
+                    b.ToTable("InscriereAct");
+
+                    b.HasDiscriminator().HasValue("InscriereAct");
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.InscriereImobil", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.Inscriere");
+
+                    b.Property<int>("IdImobil");
+
+                    b.HasIndex("IdImobil");
+
+                    b.ToTable("InscriereImobil");
+
+                    b.HasDiscriminator().HasValue("InscriereImobil");
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.InscriereProprietar", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.Inscriere");
+
+                    b.Property<int>("IdProprietar");
+
+                    b.HasIndex("IdProprietar");
+
+                    b.ToTable("InscriereProprietar");
+
+                    b.HasDiscriminator().HasValue("InscriereProprietar");
                 });
 
             modelBuilder.Entity("CS.Data.Entities.ActProprietate", b =>
@@ -382,20 +509,17 @@ namespace CS.EF.Migrations
 
             modelBuilder.Entity("CS.Data.Entities.Inscriere", b =>
                 {
-                    b.HasOne("CS.Data.Entities.ActProprietate", "ActProprietate")
-                        .WithMany("Inscrieri")
-                        .HasForeignKey("IdActProprietate")
+                    b.HasOne("CS.Data.Entities.InscriereDetaliu", "InscriereDetaliu")
+                        .WithMany()
+                        .HasForeignKey("IdInscriereDetaliu")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
 
-                    b.HasOne("CS.Data.Entities.Parcela", "Parcela")
-                        .WithMany("Inscrieri")
-                        .HasForeignKey("IdParcela")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CS.Data.Entities.Proprietar", "Proprietar")
-                        .WithMany("Inscrieri")
-                        .HasForeignKey("IdProprietar")
-                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("CS.Data.Entities.InscriereDetaliu", b =>
+                {
+                    b.HasOne("CS.Data.Entities.Imobil", "ImobilReferinta")
+                        .WithMany()
+                        .HasForeignKey("IdForerinta");
                 });
 
             modelBuilder.Entity("CS.Data.Entities.Parcela", b =>
@@ -415,6 +539,30 @@ namespace CS.EF.Migrations
                     b.HasOne("CS.Data.Entities.Dictionaries.UAT", "UAT")
                         .WithMany()
                         .HasForeignKey("UATId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.InscriereAct", b =>
+                {
+                    b.HasOne("CS.Data.Entities.ActProprietate", "ActProprietate")
+                        .WithMany()
+                        .HasForeignKey("IdActProprietate")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.InscriereImobil", b =>
+                {
+                    b.HasOne("CS.Data.Entities.Imobil", "Imobil")
+                        .WithMany()
+                        .HasForeignKey("IdImobil")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.InscriereProprietar", b =>
+                {
+                    b.HasOne("CS.Data.Entities.Proprietar", "Proprietar")
+                        .WithMany()
+                        .HasForeignKey("IdProprietar")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

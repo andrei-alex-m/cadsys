@@ -547,7 +547,7 @@
         "runtime": {
           "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll": {
             "assemblyVersion": "4.0.4.0",
-            "fileVersion": "4.0.0.0"
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -574,6 +574,9 @@
       },
       "System.ValueTuple/4.5.0": {},
       "Caly.Common/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.1.1"
+        },
         "runtime": {
           "Caly.Common.dll": {}
         }

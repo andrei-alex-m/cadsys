@@ -33,7 +33,5 @@ namespace CS.Data.Entities
         [Required]
         public int TarlaId { get; set; }
 
-        public ICollection<Inscriere> Inscrieri{ get; set; }
-
     }
 }

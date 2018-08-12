@@ -19,5 +19,21 @@
     <Compile Remove="Migrations\20180727190510_initial.cs" />
     <Compile Remove="Migrations\20180727192849_initial.cs" />
     <Compile Remove="Migrations\20180727193132_initial.cs" />
+    <Compile Remove="Migrations\20180727202207_initial.cs" />
+    <Compile Remove="Migrations\20180803174944_1.Designer.cs" />
+    <Compile Remove="Migrations\20180803174944_1.cs" />
+    <Compile Remove="Migrations\CadSysContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20180811123817_2.cs" />
+    <Compile Remove="Migrations\20180811123817_2.Designer.cs" />
+    <Compile Remove="Migrations_old\20180811123817_2.cs" />
+    <Compile Remove="Migrations_old\20180811123817_2.Designer.cs" />
+    <Compile Remove="Migrations_old\CadSysContextModelSnapshot.cs" />
+    <Compile Remove="Migrations_old\20180727202207_initial.cs" />
+    <Compile Remove="Migrations\20180812130808_Initial.cs" />
+    <Compile Remove="Migrations\20180812134839_Initial.cs" />
+    <Compile Remove="Migrations\20180812135253_Initial.cs" />
+    <Compile Remove="Migrations\20180812140232_Initial.cs" />
+    <Compile Remove="Migrations\20180812140649_Initial.cs" />
+    <Compile Remove="Migrations\20180812142159_Initial.cs" />
   </ItemGroup>
 </Project>

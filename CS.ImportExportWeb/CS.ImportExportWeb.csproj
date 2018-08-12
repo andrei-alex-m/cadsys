@@ -10,5 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CS.Excel\CS.Excel.csproj" />
+    <ProjectReference Include="..\CS.EF\CS.EF.csproj" />
+    <ProjectReference Include="..\Caly.Common\Caly.Common.csproj" />
   </ItemGroup>
 </Project>

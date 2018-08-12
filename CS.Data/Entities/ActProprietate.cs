@@ -44,6 +44,5 @@ namespace CS.Data.Entities
             set;
         }
 
-        public ICollection<Inscriere> Inscrieri { get; set; }
     }
 }

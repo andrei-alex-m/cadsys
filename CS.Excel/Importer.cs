@@ -37,17 +37,46 @@ namespace CS.Excel
 
                     if (row == null && config.IgnoreNullRows) continue;
 
-                    result.Add(GetProprietarDTO(row, columnNames.ToList(), i));
+                    result.Add(GetDTO<OutputProprietar>(row, columnNames.ToList(), i));
                 }
 
                 return result;
             });
         }
 
-        private static OutputProprietar GetProprietarDTO(IRow row, List<string> columnNames, int rowIndex = 0)
+        public static Task<List<T>> GetDTOs<T>(MemoryStream stream, ImportConfig config) where T:Output, new()
         {
-            var result = new OutputProprietar() { RowIndex = rowIndex };
 
+            return Task.Run(() =>
+            {
+                stream.Position = 0;
+                HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read 2007 Excel format  
+                var sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook 
+
+                IRow headerRow = sheet.GetRow(0); //Get Header Row 
+
+                var columnNames = Utils.GetColumnNames(headerRow);
+
+                var result = new List<T>();
+
+                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+                {
+                    var row = sheet.GetRow(i);
+
+                    if (row == null && config.IgnoreNullRows) continue;
+
+                    result.Add(GetDTO<T>(row, columnNames.ToList(), i));
+                }
+
+                return result;
+            });
+        }
+
+
+        private static T GetDTO<T>(IRow row, List<string> columnNames, int rowIndex = 0) where T : Output, new()
+        {
+            var result = new T();
+            result.RowIndex = rowIndex;
             if (row == null) return result;
 
             var kvp = new Dictionary<string, string>();
@@ -61,7 +90,7 @@ namespace CS.Excel
 
                 string value = cell.ToString();
 
-                if (cell.CellType==CellType.Numeric && DateUtil.IsCellDateFormatted(cell))
+                if (cell.CellType == CellType.Numeric && DateUtil.IsCellDateFormatted(cell))
                 {
                     value = cell.DateCellValue.ToString("dd/MM/yyyy");
                 }
@@ -72,20 +101,6 @@ namespace CS.Excel
             Caly.Common.Reflection.FillInstanceFromDictionary(kvp, result, true);
             return result;
         }
-
-        public static Task<List<OutputParcela>> Parcele (MemoryStream stream, ImportConfig config)
-        {
-            
-
-            throw new NotImplementedException();
-        }
-
-        private static OutputParcela GetParcelaDTO(IRow row, List<string> columnNames, int rowIndex = 0)
-        {
-            var result = new OutputParcela() { RowIndex = rowIndex };
-            throw new NotImplementedException();
-        }
-
     }
 
     public class ImportConfig

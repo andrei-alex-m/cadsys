@@ -356,6 +356,9 @@
       },
       "System.ValueTuple/4.5.0": {},
       "Caly.Common/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.1.1"
+        },
         "runtime": {
           "Caly.Common.dll": {}
         },
@@ -365,6 +368,7 @@
       },
       "CS.Data/1.0.0": {
         "dependencies": {
+          "Caly.Common": "1.0.0",
           "FluentValidation": "7.6.104"
         },
         "runtime": {

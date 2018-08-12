@@ -62,6 +62,8 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
+
         public string Judet
         {
             get;
@@ -82,7 +84,5 @@ namespace CS.Data.Entities
             get;
             set;
         }
-
-        public ICollection<Inscriere> Inscrieri { get; set; }
     }
 }

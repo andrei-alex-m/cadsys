@@ -37,3 +37,5 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.csproj.CopyComplete
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.EF.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.EF.pdb

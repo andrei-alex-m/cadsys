@@ -1,12 +1,8 @@
 ﻿using System;
 namespace CS.Data.DTO.Excel
 {
-    public class OutputProprietar
+    public class OutputProprietar:Output
     {
-        public int RowIndex {
-            get;
-            set;
-        }
         public int Index
         {
             get;

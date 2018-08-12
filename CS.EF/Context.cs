@@ -23,11 +23,15 @@ namespace CS.EF
         public DbSet<Tarla> Tarlale { get; set; }
         public DbSet<TipActProprietate> TipuriActProprietate { get; set; }
         public DbSet<Inscriere> Inscrieri { get; set; }
+        public DbSet<InscriereDetaliu> InscrieriDetaliu { get; set; }
+        public DbSet<InscriereAct> InscrieriActe { get; set; }
+        public DbSet<InscriereProprietar> InscrieriProprietari { get; set; }
+        public DbSet<InscriereImobil> InscrieriImobile { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TipActProprietate>().HasData(
-                new TipActProprietate { Id = 1, Denumire = "Titlu Proptietate" },
+                new TipActProprietate { Id = 1, Denumire = "Titlu Proprietate" },
                 new TipActProprietate { Id = 2, Denumire = "Contract de Vanzare Cumparare" },
                 new TipActProprietate { Id = 3, Denumire = "Sentinta Civila" },
                 new TipActProprietate { Id = 4, Denumire = "Certificat de Mostenitor" },
