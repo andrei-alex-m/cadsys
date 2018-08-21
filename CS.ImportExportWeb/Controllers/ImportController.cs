@@ -24,9 +24,9 @@ namespace CS.ImportExportAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadFile(List<IFormFile> files)
+        public async Task<IActionResult> UploadFile(IEnumerable<IFormFile> files)
         {
-            foreach (var file in files)
+            foreach (var file in Request.Form.Files)
             {
                 if (file != null)
                 {
@@ -34,7 +34,7 @@ namespace CS.ImportExportAPI.Controllers
                     {
                         await file.CopyToAsync(stream);
 
-                        if (file.Name.Contains("Proprietar", StringComparison.InvariantCultureIgnoreCase))
+                        if (file.FileName.Contains("Proprietar", StringComparison.InvariantCultureIgnoreCase))
                         {
                             var x = await Importer.GetDTOs<OutputProprietar>(stream, new ImportConfig());
 
@@ -44,31 +44,32 @@ namespace CS.ImportExportAPI.Controllers
                             x.ForEach(y =>
                             {
                                 var z = new Proprietar();
+                                context.Proprietari.Add(z);
                                 z.FromDTO(y);
-                                context.Proprietari.Attach(z);
 
                             });
                             context.SaveChanges();
                         }
 
-                        if (file.Name.Contains("Acte", StringComparison.InvariantCultureIgnoreCase))
+                        if (file.FileName.Contains("Acte", StringComparison.InvariantCultureIgnoreCase))
                         {
                             var x = await Importer.GetDTOs<OutputActProprietate>(stream, new ImportConfig());
 
                             context.DeleteAll<ActProprietate>();
                             context.SaveChanges();
-
                             x.ForEach(y =>
-                            {
-                                var z = new ActProprietate();
-                                z.FromDTO(y, context.TipuriActProprietate.ToList());
-                                context.ActeProprietate.Attach(z);
+                                {
+                                    var z = new ActProprietate();
+                                    context.ActeProprietate.Add(z);
+                                    z.FromDTO(y, context.TipuriActProprietate.ToList());
 
-                            });
+                                });
+
+
                             context.SaveChanges();
                         }
 
-                        if (file.Name.Contains("Parcel", StringComparison.InvariantCultureIgnoreCase))
+                        if (file.FileName.Contains("Parcel", StringComparison.InvariantCultureIgnoreCase))
                         {
                             var x = await Importer.GetDTOs<OutputParcela>(stream, new ImportConfig());
 
@@ -78,20 +79,41 @@ namespace CS.ImportExportAPI.Controllers
                             x.ForEach(y =>
                             {
                                 var z = new Parcela();
+                                context.Parcele.Add(z);
                                 z.FromDTO(y, context.Tarlale.ToList());
-                                context.Parcele.Attach(z);
-
                             });
                             context.SaveChanges();
                         }
 
-                        return Ok("Asswipe");
+                        if (file.FileName.Contains("Centraliz", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            var x = await Importer.GetGroupedDTOs<OutputInscriereDetaliu>(stream, new ImportConfig());
+
+                            context.DeleteAll<InscriereAct>();
+                            context.DeleteAll<InscriereImobil>();
+                            context.DeleteAll<InscriereProprietar>();
+                            context.DeleteAll<Inscriere>();
+                            context.DeleteAll<InscriereDetaliu>();
+
+                            context.SaveChanges();
+
+                            x.ForEach(y =>
+                            {
+                                var z = new InscriereDetaliu();
+                                context.InscrieriDetaliu.Add(z);
+                                z.FromDTO(y, context.Proprietari, context.ActeProprietate, context.Parcele);
+                                //context.InscrieriDetaliu.Attach(z);
+                                context.SaveChanges();
+                            });
+
+                        }
                     }
+
 
                 }
             };
-
-            return BadRequest("File required");
+            return Ok("Asswipe");
+            //return BadRequest("File required");
         }
     }
 }

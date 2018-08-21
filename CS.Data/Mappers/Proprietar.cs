@@ -2,7 +2,6 @@
 using Caly.Common;
 using CS.Data.DTO.Excel;
 using CS.Data.Entities;
-using CS.Data.EntitiesValidators;
 
 namespace CS.Data.Mappers
 {
@@ -11,7 +10,7 @@ namespace CS.Data.Mappers
         public static void FromDTO (this Proprietar prop, OutputProprietar propDTO)
         {
             prop.ExcelRow = propDTO.RowIndex;
-            prop.Index = propDTO.Index;
+            prop.Index = propDTO.Index.Value;
             prop.Nume = propDTO.Nume;
             prop.Initiala = propDTO.Initiala;
             prop.Prenume = propDTO.Prenume;
@@ -33,7 +32,7 @@ namespace CS.Data.Mappers
             prop.Judet = propDTO.Judet;
             prop.Tara = propDTO.Tara;
 
-            prop.TipPersoana = ProprietarValidator.isValidCNP(prop.Identificator)
+            prop.TipPersoana = Validation.isValidCNP(prop.Identificator)
                                 && !prop.Nume.ContainsAny("S.C.", "SC ", "S.R.L.", "SRL") ?
                                 TipPersoana.F : TipPersoana.J;
             

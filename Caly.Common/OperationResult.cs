@@ -10,10 +10,16 @@ namespace Caly.Common
             get;
             set;
         }
-        public IEnumerable<string> Observations
+        public List<object> Observations
         {
             get;
             set;
         }
+
+        public OperationResult()
+        {
+            Observations = new List<object>();
+        }
+
     }
 }

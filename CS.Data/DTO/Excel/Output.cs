@@ -8,5 +8,11 @@ namespace CS.Data.DTO.Excel
             get;
             set;
         }
+
+        public int? Index
+        {
+            get;
+            set;
+        }
     }
 }

@@ -8,4 +8,3 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.Data/obj/Debug/netcoreapp2.1/CS.Data.AssemblyInfo.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.Data/obj/Debug/netcoreapp2.1/CS.Data.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.Data/obj/Debug/netcoreapp2.1/CS.Data.pdb
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.Data/obj/Debug/netcoreapp2.1/CS.Data.csprojResolveAssemblyReference.cache

@@ -3,11 +3,7 @@ namespace CS.Data.DTO.Excel
 {
     public class OutputParcela:Output
     {
-        public int Index
-        {
-            get;
-            set;
-        }
+
         public string Tarla
         {
             get;

@@ -35,5 +35,22 @@
     <Compile Remove="Migrations\20180812140232_Initial.cs" />
     <Compile Remove="Migrations\20180812140649_Initial.cs" />
     <Compile Remove="Migrations\20180812142159_Initial.cs" />
+    <Compile Remove="Migrations\20180813201854_Initial.cs" />
+    <Compile Remove="Migrations\20180813204124_Initial.cs" />
+    <Compile Remove="Migrations\20180813205528_Initial.cs" />
+    <Compile Remove="Migrations\20180813210057_Initial.cs" />
+    <Compile Remove="Migrations\20180813210057_Initial.Designer.cs" />
+    <Compile Remove="Migrations\CadSysContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20180815122137_Initial.cs" />
+    <Compile Remove="Migrations\20180819172021_Initial.cs" />
+    <Compile Remove="Migrations\20180819172021_Initial.Designer.cs" />
+    <Compile Remove="Migrations\CadSysContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20180819203903_Initial.cs" />
+    <Compile Remove="Migrations\20180821190817_Initial.cs" />
+    <Compile Remove="Migrations\20180821201335_Initial.cs" />
+    <Compile Remove="Migrations\20180821205120_Initial.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EntitiesValidators\" />
   </ItemGroup>
 </Project>

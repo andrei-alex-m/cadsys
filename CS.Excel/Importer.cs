@@ -46,7 +46,6 @@ namespace CS.Excel
 
         public static Task<List<T>> GetDTOs<T>(MemoryStream stream, ImportConfig config) where T:Output, new()
         {
-
             return Task.Run(() =>
             {
                 stream.Position = 0;
@@ -64,19 +63,68 @@ namespace CS.Excel
                     var row = sheet.GetRow(i);
 
                     if (row == null && config.IgnoreNullRows) continue;
-
+                    try
+                    {
+                        if (row.All(x => x == null || string.IsNullOrEmpty(x.ToString()))) continue;
+                    }
+                    catch
+                    {
+                        System.Diagnostics.Debugger.Break();
+                    }
                     result.Add(GetDTO<T>(row, columnNames.ToList(), i));
+
                 }
 
                 return result;
             });
         }
 
+        public static Task<List<List<T>>> GetGroupedDTOs<T>(MemoryStream stream, ImportConfig config) where T : Output, new()
+        {
+            return Task.Run(() =>
+            {
+                stream.Position = 0;
+                HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read 2007 Excel format  
+                var sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook 
+
+                IRow headerRow = sheet.GetRow(0); //Get Header Row 
+
+                var columnNames = Utils.GetColumnNames(headerRow);
+
+                var result = new List<List<T>>();
+
+                var miniResult = new List<T>();
+
+                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+                {
+                    var row = sheet.GetRow(i);
+
+                    if (row == null || row.All(x => x == null || string.IsNullOrEmpty(x.ToString())))
+                    {
+                        if (miniResult.Count > 0)
+                        {
+                            result.Add(miniResult);
+                            miniResult = new List<T>();
+                        }
+                    }
+                    else
+                    {
+                        miniResult.Add(GetDTO<T>(row, columnNames.ToList(), i));                        
+                    }
+                }
+
+                if (miniResult.Count>0) result.Add(miniResult);
+
+                return result;
+            });
+        }
 
         private static T GetDTO<T>(IRow row, List<string> columnNames, int rowIndex = 0) where T : Output, new()
         {
-            var result = new T();
-            result.RowIndex = rowIndex;
+            var result = new T
+            {
+                RowIndex = rowIndex
+            };
             if (row == null) return result;
 
             var kvp = new Dictionary<string, string>();
@@ -101,6 +149,7 @@ namespace CS.Excel
             Caly.Common.Reflection.FillInstanceFromDictionary(kvp, result, true);
             return result;
         }
+
     }
 
     public class ImportConfig
@@ -109,7 +158,7 @@ namespace CS.Excel
         {
             get;
             set;
-        } = false;
+        } = true;
 
         public bool UppercaseColumnsCompare
         {

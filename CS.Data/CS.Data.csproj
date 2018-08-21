@@ -10,13 +10,13 @@
     <Folder Include="Entities\Enums\" />
     <Folder Include="Entities\Dictionaries\" />
     <Folder Include="DTO\Excel\" />
-    <Folder Include="EntitiesValidators\" />
     <Folder Include="Mappers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />
     <Compile Remove="Entities\ActIdentitate.cs" />
     <Compile Remove="Entities\Act.cs" />
+    <Compile Remove="Mappers\Inscrierecs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Entities\Imobil.css" />

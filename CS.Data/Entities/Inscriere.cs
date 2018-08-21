@@ -13,22 +13,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CS.Data.Entities
 {
-    public class Inscriere
+    public class Inscriere:BaseEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get;
-            set;
-        }
-
         [Required]
+        [ForeignKey("InscriereDetaliu")]
         public int IdInscriereDetaliu
         {
             get;
             set;
         }
-        [ForeignKey("IdInscriereDetaliu")]
+
         public InscriereDetaliu InscriereDetaliu
         {
             get;
@@ -39,14 +33,13 @@ namespace CS.Data.Entities
     public class InscriereAct:Inscriere
     {
         
-        [Required]
-        public int IdActProprietate
+        [ForeignKey("ActProprietate")]
+        public int? IdActProprietate
         {
             get;
             set;
         }
 
-        [ForeignKey("IdActProprietate")]
         public ActProprietate ActProprietate
         {
             get;
@@ -58,14 +51,13 @@ namespace CS.Data.Entities
     public class InscriereProprietar:Inscriere
     {
         
-        [Required]
-        public int IdProprietar
+        [ForeignKey("Proprietar")]
+        public int? IdProprietar
         {
             get;
             set;
         }
 
-        [ForeignKey("IdProprietar")]
         public Proprietar Proprietar
         {
             get;
@@ -76,14 +68,14 @@ namespace CS.Data.Entities
     public class InscriereImobil:Inscriere
     {
         
-        [Required]
-        public int IdImobil
+        [ForeignKey("Imobil")]
+        public int? IdImobil
         {
             get;
             set;
         }
 
-        [ForeignKey("IdImobil")]
+
         public Imobil Imobil
         {
             get;

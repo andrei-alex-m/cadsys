@@ -3,11 +3,7 @@ namespace CS.Data.DTO.Excel
 {
     public class OutputProprietar:Output
     {
-        public int Index
-        {
-            get;
-            set;
-        }
+
         public string Nume
         {
             get;

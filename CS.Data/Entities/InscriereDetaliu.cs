@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,14 +30,8 @@ namespace CS.Data.Entities
     //[nvarchar]
     //(max) NULL,
 
-    public class InscriereDetaliu
+    public class InscriereDetaliu:BaseEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get;
-            set;
-        }
         public string TipInscriere
         {
             get;
@@ -121,17 +117,27 @@ namespace CS.Data.Entities
             set;
         }
 
-        [Required]
-        public int IdImobilReferinta
+        [ForeignKey("ImobilReferinta")]
+        public int? IdImobilReferinta
         {
             get;
             set;
         }
-        [ForeignKey("IdForerinta")]
+
         public Imobil ImobilReferinta
         {
             get;
             set;
         }
+
+        [InverseProperty("InscriereDetaliu")]
+        public virtual ICollection<InscriereAct> InscrieriActe { get; set; } = new HashSet<InscriereAct>();
+
+        [InverseProperty("InscriereDetaliu")]
+        public virtual ICollection<InscriereImobil> InscrieriImobile { get; set; } = new HashSet<InscriereImobil>();
+
+        [InverseProperty("InscriereDetaliu")]
+        public virtual ICollection<InscriereProprietar> InscrieriProprietari { get; set; } = new HashSet<InscriereProprietar>();
+
     }
 }

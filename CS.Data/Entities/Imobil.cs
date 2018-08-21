@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -78,5 +79,12 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
+        [InverseProperty("Imobil")]
+        public virtual ICollection<InscriereImobil> Inscrieri { get; set; } = new HashSet<InscriereImobil>();
+
+        [InverseProperty("Imobil")]
+        public virtual ICollection<Parcela> Parcele { get; set; } = new HashSet<Parcela>();
+
     }
 }

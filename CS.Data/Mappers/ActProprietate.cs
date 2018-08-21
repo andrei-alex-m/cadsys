@@ -10,20 +10,30 @@ namespace CS.Data.Mappers
     {
         public static void FromDTO(this ActProprietate actProp, OutputActProprietate actPropDTO, List<TipActProprietate> tipActe)
         {
-            actProp.ExcelRow = actPropDTO.RowIndex;
-            actProp.Index = actPropDTO.Index;
-            actProp.TipActProprietateId = tipActe.FirstOrDefault(x => x.Denumire == actPropDTO.TipAct).Id;
-            actProp.Numar = actPropDTO.Numar;
-            actProp.Data = actPropDTO.Data;
-            actProp.Emitent = actPropDTO.Emitent;
-            actProp.Carnet = actPropDTO.Carnet;
+            
+            try
+            {
+                actProp.ExcelRow = actPropDTO.RowIndex;
+                actProp.Index = actPropDTO.Index.Value;
+
+                TipActProprietate tipActProprietate = string.IsNullOrEmpty(actPropDTO.TipAct) ? null :  tipActe.FirstOrDefault(x => x.Denumire.Trim().Equals(actPropDTO.TipAct.Trim(), StringComparison.InvariantCultureIgnoreCase));
+                actProp.IdTipActProprietate = tipActProprietate !=null ? tipActProprietate.Id: (int?)null;
+                actProp.Numar = actPropDTO.Numar;
+                actProp.Data = actPropDTO.Data;
+                actProp.Emitent = actPropDTO.Emitent;
+                actProp.Carnet = actPropDTO.Carnet;
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debugger.Break();
+            }
         }
 
         public static void FromPOCO(this OutputActProprietate actPropDTO, ActProprietate actProp)
         {
             actPropDTO.RowIndex = actProp.ExcelRow;
             actPropDTO.Index = actProp.Index;
-            actPropDTO.TipAct = actProp.TipActProprietate.Denumire;
+            actPropDTO.TipAct = actProp.TipAct?.Denumire;
             actPropDTO.Numar = actProp.Numar;
             actPropDTO.Data = actProp.Data;
             actPropDTO.Emitent = actProp.Emitent;

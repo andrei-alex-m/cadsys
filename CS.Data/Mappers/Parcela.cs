@@ -3,6 +3,7 @@ using CS.Data.Entities;
 using CS.Data.DTO.Excel;
 using System.Collections.Generic;
 using System.Linq;
+using Caly.Common;
 
 namespace CS.Data.Mappers
 {
@@ -10,10 +11,11 @@ namespace CS.Data.Mappers
     {
         public static void FromDTO(this Parcela parcela, OutputParcela parcelaDTO, List<Tarla> tarlale)
         {
-            parcela.Index = parcelaDTO.Index;
+            parcela.Index = parcelaDTO.Index.Value;
             parcela.ExcelRow = parcelaDTO.RowIndex;
+            Tarla tarla = string.IsNullOrEmpty(parcelaDTO.Tarla) ? null : tarlale.FirstOrDefault(x => x.Denumire.Trim().ReplaceMultiple('_','.',',').Equals(parcelaDTO.Tarla.ReplaceMultiple('_', '.', ','), StringComparison.InvariantCultureIgnoreCase) );
 
-            parcela.TarlaId = tarlale.FirstOrDefault(x => x.Denumire == parcelaDTO.Tarla).Id;
+            parcela.IdTarla = tarla!=null?tarla.Id:(int?)null;
             parcela.Denumire = parcelaDTO.Parcela;
             object catFol;
             if (Enum.TryParse(typeof(CatFol), parcelaDTO.CatFol, true, out catFol))

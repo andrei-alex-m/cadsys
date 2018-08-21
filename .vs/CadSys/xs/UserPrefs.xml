@@ -1,34 +1,29 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
     <Files>
-      <File FileName="CS.ImportExportWeb/Startup.cs" Line="37" Column="72" />
-      <File FileName="CS.EF/Context.cs" Line="12" Column="21" />
-      <File FileName="CS.EF/DBContextFactory.cs" Line="18" Column="26" />
-      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="29" Column="37" />
-      <File FileName="Caly.Common/DBContext.cs" Line="6" Column="44" />
-      <File FileName="CS.Data/Entities/Proprietar.cs" Line="65" Column="9" />
-      <File FileName="CS.EF/appsettings.json" Line="4" Column="4" />
-      <File FileName="CS.ImportExportWeb/appsettings.json" Line="10" Column="4" />
-      <File FileName="Caly.Common/Reflection.cs" Line="46" Column="38" />
-      <File FileName="CS.ImportExportWeb/Views/Home/Upload.cshtml" Line="10" Column="9" />
-      <File FileName="CS.Excel/Importer.cs" Line="102" Column="27" />
-      <File FileName="CS.Data/DTO/Excel/OutputActProprietate.cs" Line="4" Column="45" />
-      <File FileName="CS.Data/DTO/Excel/Output.cs" Line="10" Column="10" />
-      <File FileName="CS.Data/DTO/Excel/OutputParcela.cs" Line="5" Column="6" />
-      <File FileName="CS.Data/DTO/Excel/OutputProprietar.cs" Line="4" Column="41" />
-      <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="11" Column="79" />
-      <File FileName="CS.Data/Mappers/Parcela.cs" Line="11" Column="28" />
+      <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="12" Column="33" />
+      <File FileName="CS.Data/Entities/InscriereDetaliu.cs" Line="140" Column="24" />
+      <File FileName="CS.Data/Entities/Inscriere.cs" Line="37" Column="37" />
+      <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="21" Column="50" />
+      <File FileName="CS.Data/Mappers/Parcela.cs" Line="26" Column="38" />
+      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="106" Column="1" />
+      <File FileName="CS.Excel/Importer.cs" Line="106" Column="1" />
+      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="13" Column="45" />
+      <File FileName="CS.Data/DTO/Excel/OutputInscriereDetaliu.cs" Line="4" Column="45" />
+      <File FileName="CS.Data/DTO/Excel/Output.cs" Line="4" Column="27" />
+      <File FileName="CS.Data/Entities/BaseEntity.cs" Line="7" Column="18" />
+      <File FileName="CS.Data/Entities/Imobil.cs" Line="87" Column="24" />
+      <File FileName="CS.Data/Entities/Proprietar.cs" Line="89" Column="118" />
+      <File FileName="CS.Data/Entities/Dictionaries/Tarla.cs" Line="18" Column="92" />
+      <File FileName="CS.Data/Entities/Dictionaries/TipActProprietate.cs" Line="11" Column="114" />
+      <File FileName="CS.Data/Entities/ActProprietate.cs" Line="48" Column="104" />
       <File FileName="CadSys Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/usr/local/share/dotnet/sdk/2.1.300/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" line="198" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel.Tests/ImportTests.cs" relfile="CS.Excel.Tests/ImportTests.cs" line="15" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/DBContextFactory.cs" relfile="CS.EF/DBContextFactory.cs" line="22" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ImportController.cs" relfile="CS.ImportExportWeb/Controllers/ImportController.cs" line="37" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ImportController.cs" relfile="CS.ImportExportWeb/Controllers/ImportController.cs" line="29" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ImportController.cs" relfile="CS.ImportExportWeb/Controllers/ImportController.cs" line="90" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

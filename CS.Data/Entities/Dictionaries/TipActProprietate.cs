@@ -7,6 +7,7 @@ namespace CS.Data.Entities
 {
     public class TipActProprietate:BaseDictionary
     {
-        public ICollection<ActProprietate> ActeProprietate { get; set; }
+        [InverseProperty("TipAct")]
+        public virtual ICollection<ActProprietate> ActeProprietate { get; set; } = new HashSet<ActProprietate>();
     }
 }

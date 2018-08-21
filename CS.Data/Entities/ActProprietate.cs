@@ -8,12 +8,12 @@ namespace CS.Data.Entities
     public class ActProprietate:BaseEntity
     {
 
-        [ForeignKey("TipActProprietateId")]
-        public TipActProprietate TipActProprietate { get; set; }
-        [Required]
-        public int TipActProprietateId { get; set; }
 
-        [Required]
+        [ForeignKey("TipAct")]
+        public int? IdTipActProprietate { get; set; }
+
+        public TipActProprietate TipAct { get; set; }
+
         public string Numar
         {
             get;
@@ -43,6 +43,9 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
+        [InverseProperty("ActProprietate")]
+        public virtual ICollection<InscriereAct> Inscrieri { get; set; } = new HashSet<InscriereAct>();
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CS.Data.Entities
 {
@@ -63,7 +64,6 @@ namespace CS.Data.Entities
             set;
         }
 
-
         public string Judet
         {
             get;
@@ -84,5 +84,8 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
+        [InverseProperty("Proprietar")]
+        public virtual ICollection<InscriereProprietar> Inscrieri { get; set; } = new HashSet<InscriereProprietar>();
     }
 }

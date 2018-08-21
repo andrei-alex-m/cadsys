@@ -2,9 +2,16 @@
     ViewData["Title"] = "Upload";
 }
 <h2>Hi MoFo</h2>
-<form asp-controller="Import" asp-action="UploadFile" method="post"
+@using (Html.BeginForm("UploadFile", "Import", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type = "file" name = "file" multiple/>
+    <br/>
+    <button type = "submit" > Upload File </button>
+}
+
+@*<form asp-controller="Import" asp-action="UploadFile" method="post"
       enctype="multipart/form-data">
 
-    <input type="file" name="file" multiple/>
+    <input type="file" name="file" multiple />
     <button type="submit">Upload File</button>
-</form> 
+</form>*@ 

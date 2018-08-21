@@ -40,24 +40,28 @@ namespace Caly.Common
                 {
                     try
                     {
+                        var type = info.PropertyType.IsGenericType
+                           && info.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                           ? Nullable.GetUnderlyingType(info.PropertyType) : info.PropertyType;
+
                         if (string.IsNullOrEmpty(kvp.Value))
                         {
                             info.SetValue(instance, null);
                             continue;
                         }
                         
-                        if (info.PropertyType == typeof(DateTime) || info.PropertyType== typeof(DateTime?))
+                        if (type == typeof(DateTime))
                         {
                             info.SetValue(instance, DateTime.ParseExact(kvp.Value, dateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None));
                         }
                         else
                         {
-                            info.SetValue(instance, Convert.ChangeType(kvp.Value, info.PropertyType));
+                            info.SetValue(instance, Convert.ChangeType(kvp.Value, type));
                         }
                     }
                     catch(Exception ex)
                     {
-                        System.Diagnostics.Debugger.Break();
+                        info.SetValue(instance, null);
                     }
 
                 }

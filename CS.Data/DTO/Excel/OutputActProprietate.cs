@@ -4,11 +4,7 @@ namespace CS.Data.DTO.Excel
     public class OutputActProprietate:Output
     {
 
-        public int Index
-        {
-            get;
-            set;
-        }
+
         public string TipAct
         {
             get;
