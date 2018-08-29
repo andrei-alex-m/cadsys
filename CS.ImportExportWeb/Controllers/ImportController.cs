@@ -9,24 +9,43 @@ using Caly.Common;
 using CS.Data.Entities;
 using CS.Data.Mappers;
 using CS.Data.DTO.Excel;
+using CS.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Concurrent;
 
 namespace CS.ImportExportAPI.Controllers
 {
-    public class ImportController:Controller
+    public class ImportController : Controller
     {
-        private CadSysContext context;
+        CadSysContext context;
+        IExcelConfigurationRepo excelConfiguration;
+        IRepo repo;
 
-        public ImportController(CadSysContext _context)
+
+        public ImportController(CadSysContext _context, IRepo _repo, IExcelConfigurationRepo _excelConfiguration)
         {
             context = _context;
+            repo = _repo;
+            excelConfiguration = _excelConfiguration;
         }
 
         [HttpPost]
         public async Task<IActionResult> UploadFile(IEnumerable<IFormFile> files)
         {
-            foreach (var file in Request.Form.Files)
+            Prepare();
+
+            List<IFormFile> fileCollection = OrderUploadedFiles(Request.Form.Files);
+
+            await CycleFiles(fileCollection);
+
+            return Ok("Asswipe");
+
+        }
+
+        private async Task CycleFiles(List<IFormFile> fileCollection)
+        {
+            foreach (var file in fileCollection)
             {
                 if (file != null)
                 {
@@ -36,84 +55,122 @@ namespace CS.ImportExportAPI.Controllers
 
                         if (file.FileName.Contains("Proprietar", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            var x = await Importer.GetDTOs<OutputProprietar>(stream, new ImportConfig());
-
-                            context.DeleteAll<Proprietar>();
-                            context.SaveChanges();
-
-                            x.ForEach(y =>
-                            {
-                                var z = new Proprietar();
-                                context.Proprietari.Add(z);
-                                z.FromDTO(y);
-
-                            });
-                            context.SaveChanges();
+                            await CycleProprietari(file.FileName, stream);
                         }
 
                         if (file.FileName.Contains("Acte", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            var x = await Importer.GetDTOs<OutputActProprietate>(stream, new ImportConfig());
-
-                            context.DeleteAll<ActProprietate>();
-                            context.SaveChanges();
-                            x.ForEach(y =>
-                                {
-                                    var z = new ActProprietate();
-                                    context.ActeProprietate.Add(z);
-                                    z.FromDTO(y, context.TipuriActProprietate.ToList());
-
-                                });
-
-
-                            context.SaveChanges();
+                            await CycleActe(file.FileName, stream);
                         }
 
                         if (file.FileName.Contains("Parcel", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            var x = await Importer.GetDTOs<OutputParcela>(stream, new ImportConfig());
-
-                            context.DeleteAll<Parcela>();
-                            context.SaveChanges();
-
-                            x.ForEach(y =>
-                            {
-                                var z = new Parcela();
-                                context.Parcele.Add(z);
-                                z.FromDTO(y, context.Tarlale.ToList());
-                            });
-                            context.SaveChanges();
+                            await CycleParcele(file.FileName, stream);
                         }
 
                         if (file.FileName.Contains("Centraliz", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            var x = await Importer.GetGroupedDTOs<OutputInscriereDetaliu>(stream, new ImportConfig());
-
-                            context.DeleteAll<InscriereAct>();
-                            context.DeleteAll<InscriereImobil>();
-                            context.DeleteAll<InscriereProprietar>();
-                            context.DeleteAll<Inscriere>();
-                            context.DeleteAll<InscriereDetaliu>();
-
-                            context.SaveChanges();
-
-                            x.ForEach(y =>
-                            {
-                                var z = new InscriereDetaliu();
-                                context.InscrieriDetaliu.Add(z);
-                                z.FromDTO(y, context.Proprietari, context.ActeProprietate, context.Parcele);
-                                //context.InscrieriDetaliu.Attach(z);
-                                context.SaveChanges();
-                            });
-
+                            await CycleCentralizator(file.FileName, stream);
                         }
+
+                        await context.SaveChangesAsync();
                     }
-
-
                 }
-            };
-            return Ok("Asswipe");
-            //return BadRequest("File required");
+            }
+        }
+
+        private async Task CycleCentralizator(string fileName, MemoryStream stream)
+        {
+            var x = await Importer.GetGroupedDTOs<OutputInscriereDetaliu>(stream, fileName, new ImportConfig(), excelConfiguration);
+
+            context.SaveChanges();
+
+            x.ForEach(y =>
+            {
+                var z = new InscriereDetaliu();
+                context.InscrieriDetaliu.Add(z);
+                z.FromDTO(y, context.Proprietari, context.ActeProprietate, context.Parcele);
+
+            });
+        }
+
+        private async Task CycleParcele(string fileName, MemoryStream stream)
+        {
+            var x = await Importer.GetDTOs<OutputParcela>(stream, fileName, new ImportConfig(), excelConfiguration);
+
+            object locker = new object();
+            var tarlale = new ConcurrentBag<Tarla>(context.Tarlale);
+
+            Parallel.ForEach(x, y =>
+            {
+                var z = new Parcela();
+
+                lock (locker)
+                {
+                    context.Parcele.Add(z);
+                }
+
+                z.FromDTO(y, tarlale);
+            });
+        }
+
+        private async Task CycleActe(string fileName, MemoryStream stream)
+        {
+            var x = await Importer.GetDTOs<OutputActProprietate>(stream, fileName, new ImportConfig(), excelConfiguration);
+
+            object locker = new object();
+            var tipuriActe = new ConcurrentBag<TipActProprietate>(context.TipuriActProprietate);
+
+
+            Parallel.ForEach(x, y =>
+            {
+                var z = new ActProprietate();
+
+                lock (locker)
+                {
+                    context.ActeProprietate.Add(z);
+                }
+
+                z.FromDTO(y, tipuriActe);
+            });
+        }
+
+        private async Task CycleProprietari(string fileName, MemoryStream stream)
+        {
+            var x = await Importer.GetDTOs<OutputProprietar>(stream, fileName, new ImportConfig(), excelConfiguration);
+
+            object locker = new object();
+
+            Parallel.ForEach(x, y =>
+            {
+                var z = new Proprietar();
+                lock (locker)
+                {
+                    context.Proprietari.Add(z);
+                }
+
+                z.FromDTO(y);
+            });
+        }
+
+        private void Prepare()
+        {
+            excelConfiguration.ClearAll();
+            repo.ClearDatabase();
+        }
+
+        /// <summary>
+        /// Centralizator vine ultimul
+        /// </summary>
+        /// <returns>The uploaded files.</returns>
+        private List<IFormFile> OrderUploadedFiles(IFormFileCollection files)
+        {
+            var fileCollection = new List<IFormFile>();
+
+            fileCollection.AddRange(files.Where(x => !x.FileName.Contains("centraliz", StringComparison.InvariantCultureIgnoreCase)));
+            fileCollection.AddRange(files.Where(x => x.FileName.Contains("centraliz", StringComparison.InvariantCultureIgnoreCase)));
+
+            return fileCollection;
         }
     }
 }

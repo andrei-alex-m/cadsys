@@ -26,6 +26,7 @@
         "dependencies": {
           "CS.EF": "1.0.0",
           "CS.Excel": "1.0.0",
+          "CS.Services": "1.0.0",
           "Caly.Common": "1.0.0",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.NETCore.App": "2.1.0"
@@ -451,6 +452,20 @@
         },
         "compile": {
           "CS.Excel.dll": {}
+        }
+      },
+      "CS.Services/1.0.0": {
+        "dependencies": {
+          "CS.Data": "1.0.0",
+          "CS.EF": "1.0.0",
+          "Caly.Common": "1.0.0",
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "CS.Services.dll": {}
+        },
+        "compile": {
+          "CS.Services.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3562,6 +3577,11 @@
       "sha512": ""
     },
     "CS.Excel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CS.Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

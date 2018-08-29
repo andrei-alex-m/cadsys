@@ -15,21 +15,5 @@ namespace CS.ImportExportAPI.Controllers
             
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ReadFileHeaders(IFormFile file)
-        {
-            if (file != null)
-            {
-                using (var stream = new MemoryStream())
-                {
-                    await file.CopyToAsync(stream);
-                    var x = await Importer.Persoane(stream, new ImportConfig());
-                    return Ok(x); 
-                }
-
-            }
-
-            return BadRequest("File required");
-        }
     }
 }

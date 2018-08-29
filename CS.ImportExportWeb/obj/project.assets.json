@@ -4569,6 +4569,22 @@
         "runtime": {
           "bin/placeholder/CS.Excel.dll": {}
         }
+      },
+      "CS.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "CS.Data": "1.0.0",
+          "CS.EF": "1.0.0",
+          "Caly.Common": "1.0.0",
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "compile": {
+          "bin/placeholder/CS.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CS.Services.dll": {}
+        }
       }
     }
   },
@@ -12029,12 +12045,18 @@
       "type": "project",
       "path": "../CS.Excel/CS.Excel.csproj",
       "msbuildProject": "../CS.Excel/CS.Excel.csproj"
+    },
+    "CS.Services/1.0.0": {
+      "type": "project",
+      "path": "../CS.Services/CS.Services.csproj",
+      "msbuildProject": "../CS.Services/CS.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "CS.EF >= 1.0.0",
       "CS.Excel >= 1.0.0",
+      "CS.Services >= 1.0.0",
       "Caly.Common >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.NETCore.App >= 2.1.0"
@@ -12076,6 +12098,9 @@
             },
             "/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/Caly.Common.csproj": {
               "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/Caly.Common.csproj"
+            },
+            "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Services/CS.Services.csproj": {
+              "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Services/CS.Services.csproj"
             }
           }
         }
@@ -12089,16 +12114,16 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "Microsoft.AspNetCore.App": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "2.1.1"
+          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
             "version": "2.1.0",
             "autoReferenced": true
-          },
-          "Microsoft.AspNetCore.App": {
-            "suppressParent": "All",
-            "target": "Package",
-            "version": "2.1.1"
           }
         },
         "imports": [

@@ -3839,7 +3839,8 @@
       "CS.Data >= 1.0.0",
       "CS.EF >= 1.0.0",
       "Caly.Common >= 1.0.0",
-      "Microsoft.NETCore.App >= 2.1.0"
+      "Microsoft.NETCore.App >= 2.1.0",
+      "Newtonsoft.Json >= 11.0.2"
     ]
   },
   "packageFolders": {
@@ -3891,6 +3892,10 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "11.0.2"
+          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",

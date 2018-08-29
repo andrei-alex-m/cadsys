@@ -26,13 +26,14 @@ namespace Caly.Common
 
             Type t = instance.GetType();
 
-            System.Reflection.BindingFlags flags=BindingFlags.Public | BindingFlags.Instance;
+            BindingFlags flags =BindingFlags.Public | BindingFlags.Instance;
 
-            if (fieldNameCaseIgnore) flags = flags | System.Reflection.BindingFlags.IgnoreCase;
+            if (fieldNameCaseIgnore)
+            {
+                flags = flags | BindingFlags.IgnoreCase;
+            }
 
-
-
-            foreach(var kvp in keyValues)
+            foreach (var kvp in keyValues)
             {
                 var info = t.GetProperty(kvp.Key, flags);
 

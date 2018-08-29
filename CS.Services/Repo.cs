@@ -5,31 +5,28 @@ using CS.Data.Entities;
 using CS.EF;
 using CS.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-/*
-namespace CS.Services.Repo
 
-    public class Repo:IRepo
+namespace CS.Services
+{
+    public class Repo : IRepo
     {
-        private CadSysContext _context;
+        private CadSysContext context;
 
-        public Repo(CadSysContext context)
+        public Repo(CadSysContext _context)
         {
-            _context = context;
+            context = _context;
         }
 
-        public Task<IQueryable<ActProprietate>> GetActeProprietate()
+        public void ClearDatabase()
         {
-            throw new NotImplementedException();
-        }
+            var sql = @"delete from Inscrieri;
+                        delete from InscrieriDetaliu;
+                        delete from ActeProprietate;
+                        delete from Proprietari;
+                        delete from Parcele;
+                        delete from Imobil;";
 
-        public Task<Parcela> GetParcelaByIndex(int index, bool includeProprietari = false, bool includeActe = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Proprietar> GetProprietarByIndex(int index)
-        {
-            return await _context.Proprietari.Include(x=>x.Inscrieri).Where(x => x.Index == index).FirstOrDefaultAsync();
+            context.Database.ExecuteSqlCommand(sql);
         }
     }
-} */
+}

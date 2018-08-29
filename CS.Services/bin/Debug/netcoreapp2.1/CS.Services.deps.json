@@ -10,7 +10,8 @@
         "dependencies": {
           "CS.Data": "1.0.0",
           "CS.EF": "1.0.0",
-          "Caly.Common": "1.0.0"
+          "Caly.Common": "1.0.0",
+          "Newtonsoft.Json": "11.0.2"
         },
         "runtime": {
           "CS.Services.dll": {}

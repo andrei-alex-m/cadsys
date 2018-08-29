@@ -3,12 +3,13 @@ using CS.Data.Entities;
 using CS.Data.DTO.Excel;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Concurrent;
 
 namespace CS.Data.Mappers
 {
     public static class ActProprietateMapperExtensions
     {
-        public static void FromDTO(this ActProprietate actProp, OutputActProprietate actPropDTO, List<TipActProprietate> tipActe)
+        public static void FromDTO(this ActProprietate actProp, OutputActProprietate actPropDTO, ConcurrentBag<TipActProprietate> tipActe)
         {
             
             try

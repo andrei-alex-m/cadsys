@@ -6,30 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CS.Data.Entities
 {
-//    [IdInscriereDetaliu]
-//    [int]
-//    NOT NULL,
-
-//[TipInscriere] [text] NULL,
-    //[IdTipDrept] [int] NULL,
-    //[ObservatiiDrept] [varchar] (2000) NULL,
-    //[Nota] [varchar] (4000) NULL,
-    //[ModDobandire] [varchar] (50) NULL,
-    //[TipCota] [varchar] (50) NULL,
-    //[CotaInitiala] [varchar] (50) NULL,
-    //[CotaActuala] [varchar] (50) NULL,
-    //[Moneda] [varchar] (50) NULL,
-    //[Valoarea] [varchar] (50) NULL,
-    //[Observatii] [varchar] (2000) NULL,
-    //[ParteaCartiiFunciare] [int] NULL,
-    //[Pozitia] [int] NULL,
-    //[NumarulCererii] [int] NULL,
-    //[DataCererii] [datetime] NULL,
-    //[] [int] NULL,
-    //[Concat]
-    //[nvarchar]
-    //(max) NULL,
-
     public class InscriereDetaliu:BaseEntity
     {
         public string TipInscriere

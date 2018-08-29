@@ -10,5 +10,9 @@
   <ItemGroup>
     <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
     <ProjectReference Include="..\Caly.Common\Caly.Common.csproj" />
+    <ProjectReference Include="..\CS.Services\CS.Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ExcelColumns\" />
   </ItemGroup>
 </Project>

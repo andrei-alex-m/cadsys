@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CS.EF;
+using CS.Services;
+using CS.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,12 +19,14 @@ namespace CS.ImportExportWeb
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,7 +38,13 @@ namespace CS.ImportExportWeb
             
             var connectionString = configuration.GetConnectionString("con");
 
+            services.AddTransient<IExcelConfigurationRepo>(s => new ExcelConfigurationRepo(Environment.ContentRootPath));
+
+
+
             services.AddDbContext<CadSysContext>(options => options.UseMySql(connectionString));
+
+            services.AddTransient<IRepo, Repo>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

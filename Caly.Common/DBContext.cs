@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace Caly.Common
@@ -9,10 +10,12 @@ namespace Caly.Common
         public static void DeleteAll<T>(this DbContext context)
         where T : class
         {
-            foreach (var p in context.Set<T>())
-            {
-                context.Entry(p).State = EntityState.Deleted;
-            }
+            Parallel.ForEach(context.Set<T>(), p => context.Entry(p).State = EntityState.Deleted);
+
+            //foreach (var p in context.Set<T>())
+            //{
+            //    context.Entry(p).State = EntityState.Deleted;
+            //}
         }
 
         public static OperationResult CompareInSet<T>(this T item, DbContext context, Func<T, object> returnProp, Func<T, object> identifier, params Func<T, object>[] props) where T:class
@@ -21,15 +24,15 @@ namespace Caly.Common
 
             var result = new OperationResult();
 
-            foreach(var theother in set)
+            Parallel.ForEach(set, theother =>
             {
-                if (identifier(item) == identifier(theother)) continue;
+                if (identifier(item) == identifier(theother)) return;
 
                 if (Compare(item, theother, props))
                 {
                     result.Observations.Add(returnProp(theother));
                 }
-            }
+            });
 
             result.Result = result.Observations.Count == 0;
 

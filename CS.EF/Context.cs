@@ -42,6 +42,7 @@ namespace CS.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<TipActProprietate>().HasData(
                 new TipActProprietate { Id = 1, Denumire = "Titlu Proprietate" },
                 new TipActProprietate { Id = 2, Denumire = "Contract de Vanzare Cumparare" },

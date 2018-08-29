@@ -9,12 +9,13 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/bin/Debug/netcoreapp2.1/CS.Excel.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/bin/Debug/netcoreapp2.1/Caly.Common.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/bin/Debug/netcoreapp2.1/CS.Data.pdb
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.csprojResolveAssemblyReference.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.csprojAssemblyReference.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.csproj.CoreCompileInputs.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.RazorAssemblyInfo.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.RazorAssemblyInfo.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.AssemblyInfoInputs.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.AssemblyInfo.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.RazorTargetAssemblyInfo.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.csproj.CopyComplete
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportAPI/obj/Debug/netcoreapp2.1/CS.ImportExportAPI.pdb

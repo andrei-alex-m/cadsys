@@ -3335,13 +3335,13 @@
       "projectName": "CS.Data",
       "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Data/CS.Data.csproj",
       "packagesPath": "/Users/andrei/.nuget/packages/",
-      "outputPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Data/obj/",
+      "outputPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Data/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/andrei/.nuget/NuGet/NuGet.Config"
+        "/Users/andrei/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -3369,12 +3369,12 @@
         "dependencies": {
           "FluentValidation": {
             "target": "Package",
-            "version": "[7.6.104, )"
+            "version": "7.6.104"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[2.1.0, )",
+            "version": "2.1.0",
             "autoReferenced": true
           }
         },

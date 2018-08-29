@@ -19,60 +19,65 @@ namespace CS.Data.Mappers
 
             var indecsiProprietari = outputInscriereD.Where(x => x.IndexProprietar.HasValue).Select(x => x.IndexProprietar.Value).Distinct().ToList();
 
-            indecsiParcela.ForEach(x => {
+            for (var i = 0; i < indecsiParcela.Count; i++)
+            {
+                var x = indecsiParcela[i];
                 var parcela = parcele.FirstOrDefault(y => y.Index == x);
 
                 var inscriereImobil = new InscriereImobil()
                 {
-                    Index = x
+                    Index = x,
+                    ExcelRow = inscriereD.ExcelRow+i
                 };
 
-                if (parcela!=null)
+                if (parcela != null)
                 {
                     var imobil = new Imobil();
                     imobil.Parcele.Add(parcela);
 
                     inscriereImobil.Imobil = imobil;
+                    inscriereD.ImobilReferinta = imobil;
                 }
 
                 inscriereD.InscrieriImobile.Add(inscriereImobil);
-            });
+            }
 
-            indecsiActe.ForEach(x =>
+
+            for (var i = 0; i < indecsiActe.Count; i++)
             {
-
-                var inscriereAct = new InscriereAct()
+                var x = indecsiActe[i];
+                var inscriereAct = new InscriereAct
                 {
-                    Index = x
+                    Index = x,
+                    ExcelRow=inscriereD.ExcelRow+i
                 };
 
                 var act = acte.FirstOrDefault(y => y.Index == x);
 
-                if (act!=null)
+                if (act != null)
                 {
                     inscriereAct.ActProprietate = act;
                 }
 
                 inscriereD.InscrieriActe.Add(inscriereAct);
-            });
+            }
 
-            indecsiProprietari.ForEach(x =>
+            for (var i = 0; i < indecsiProprietari.Count; i++)
             {
+                var x = indecsiProprietari[i];
                 var proprietar = proprietari.FirstOrDefault(y => y.Index == x);
-
                 var inscriereProprietar = new InscriereProprietar()
                 {
                     Index = x
                 };
 
-                if (proprietar!=null)
+                if (proprietar != null)
                 {
                     inscriereProprietar.Proprietar = proprietar;
                 }
 
                 inscriereD.InscrieriProprietari.Add(inscriereProprietar);
-            });
-
+            }
         }
 
         public static void FromPOCO(this List<OutputInscriereDetaliu> outputInscrieriD, InscriereDetaliu inscriereD)

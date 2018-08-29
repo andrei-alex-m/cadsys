@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using CS.Data.DTO.Excel;
+using CS.Services.Interfaces;
 using NPOI.HSSF.UserModel;
 using NPOI.HSSF.Util;
 using NPOI.SS.UserModel;
@@ -16,49 +18,42 @@ namespace CS.Excel
 {
     public static class Importer
     {
-        public static Task<List<OutputProprietar>> Persoane(MemoryStream stream, ImportConfig config)
+        public static Task<ConcurrentBag<T>> GetDTOs<T>(MemoryStream stream, string fileName, ImportConfig config, IExcelConfigurationRepo excelConfig) where T:Output, new()
         {
-
             return Task.Run(() =>
             {
+                var result = new ConcurrentBag<T>();
+
                 stream.Position = 0;
-                HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read 2007 Excel format  
-                var sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook 
 
-                IRow headerRow = sheet.GetRow(0); //Get Header Row 
+                IWorkbook wbk;
 
-                var columnNames = Utils.GetColumnNames(headerRow);
-
-                var result = new List<OutputProprietar>();
-
-                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+                if (fileName.EndsWith(".xls", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    var row = sheet.GetRow(i);
+                    wbk = new HSSFWorkbook(stream); //This will read 2007 Excel format  
 
-                    if (row == null && config.IgnoreNullRows) continue;
-
-                    result.Add(GetDTO<OutputProprietar>(row, columnNames.ToList(), i));
+                }
+                else if (fileName.EndsWith(".xlsx", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    wbk = new XSSFWorkbook(stream);
+                }
+                else
+                {
+                    throw new Exception("This format is not supported");
                 }
 
-                return result;
-            });
-        }
-
-        public static Task<List<T>> GetDTOs<T>(MemoryStream stream, ImportConfig config) where T:Output, new()
-        {
-            return Task.Run(() =>
-            {
-                stream.Position = 0;
-                HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read 2007 Excel format  
-                var sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook 
+                var sheet = wbk.GetSheetAt(0); //get first sheet from workbook 
 
                 IRow headerRow = sheet.GetRow(0); //Get Header Row 
 
                 var columnNames = Utils.GetColumnNames(headerRow);
 
-                var result = new List<T>();
+                excelConfig.Save(1, typeof(T).Name, fileName, columnNames);
 
-                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+                var firstRow = sheet.FirstRowNum;
+                var lastRow = sheet.LastRowNum;
+
+                for (int i = (firstRow + 1); i <= lastRow; i++) //Read Excel File
                 {
                     var row = sheet.GetRow(i);
 
@@ -79,37 +74,63 @@ namespace CS.Excel
             });
         }
 
-        public static Task<List<List<T>>> GetGroupedDTOs<T>(MemoryStream stream, ImportConfig config) where T : Output, new()
+        public static Task<List<List<T>>> GetGroupedDTOs<T>(MemoryStream stream, string fileName, ImportConfig config, IExcelConfigurationRepo excelConfig) where T : Output, new()
         {
             return Task.Run(() =>
             {
                 stream.Position = 0;
-                HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read 2007 Excel format  
-                var sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook 
+
+                IWorkbook wbk;
+
+                if (fileName.EndsWith(".xls", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    wbk = new HSSFWorkbook(stream); //This will read 2007 Excel format  
+
+                }
+                else if (fileName.EndsWith(".xlsx", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    wbk = new XSSFWorkbook(stream);
+                }
+                else
+                {
+                    throw new Exception("This format is not supported");
+                }
+
+                var sheet = wbk.GetSheetAt(0); //get first sheet from workbook 
 
                 IRow headerRow = sheet.GetRow(0); //Get Header Row 
 
                 var columnNames = Utils.GetColumnNames(headerRow);
 
+                excelConfig.Save(1, typeof(T).Name, fileName, columnNames);
+
                 var result = new List<List<T>>();
 
                 var miniResult = new List<T>();
 
-                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+                var firstRow = sheet.FirstRowNum;
+                var lastRow = sheet.LastRowNum;
+
+                for (int i = (firstRow + 1); i <= lastRow; i++) //Read Excel File
                 {
                     var row = sheet.GetRow(i);
 
-                    if (row == null || row.All(x => x == null || string.IsNullOrEmpty(x.ToString())))
+                    try
                     {
-                        if (miniResult.Count > 0)
+
+                        if (miniResult.Count > 0 && (row == null || row.All(x => x.CellType == CellType.Blank)))
                         {
                             result.Add(miniResult);
                             miniResult = new List<T>();
                         }
+                        else
+                        {
+                            miniResult.Add(GetDTO<T>(row, columnNames.ToList(), i));
+                        }
                     }
-                    else
+                    catch(Exception ex)
                     {
-                        miniResult.Add(GetDTO<T>(row, columnNames.ToList(), i));                        
+                        System.Diagnostics.Debugger.Break();
                     }
                 }
 

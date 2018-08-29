@@ -12,4 +12,7 @@
     <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
     <ProjectReference Include="..\CS.EF\CS.EF.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
 </Project>
