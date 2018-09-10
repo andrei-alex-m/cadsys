@@ -45,6 +45,15 @@ namespace CS.ImportExportWeb.Controllers
             return View();
         }
 
+        public IActionResult Download()
+        {
+            var evm = new ExportViewModel
+            {
+                Files = new List<string>() { "croko" }
+            };
+            return View(evm);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -41,3 +41,4 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Services.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Services.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Home/Download.g.cshtml.cs

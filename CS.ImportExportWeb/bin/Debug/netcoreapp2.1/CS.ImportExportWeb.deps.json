@@ -444,6 +444,7 @@
       "CS.Excel/1.0.0": {
         "dependencies": {
           "CS.Data": "1.0.0",
+          "CS.Services": "1.0.0",
           "Caly.Common": "1.0.0",
           "DotNetCore.NPOI": "1.2.0"
         },

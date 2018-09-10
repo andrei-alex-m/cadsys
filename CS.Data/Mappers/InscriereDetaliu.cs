@@ -68,7 +68,8 @@ namespace CS.Data.Mappers
                 var proprietar = proprietari.FirstOrDefault(y => y.Index == x);
                 var inscriereProprietar = new InscriereProprietar()
                 {
-                    Index = x
+                    Index = x,
+                    ExcelRow=inscriereD.ExcelRow+i
                 };
 
                 if (proprietar != null)

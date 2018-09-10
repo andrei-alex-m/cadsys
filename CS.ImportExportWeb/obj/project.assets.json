@@ -4560,6 +4560,7 @@
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "CS.Data": "1.0.0",
+          "CS.Services": "1.0.0",
           "Caly.Common": "1.0.0",
           "DotNetCore.NPOI": "1.2.0"
         },
