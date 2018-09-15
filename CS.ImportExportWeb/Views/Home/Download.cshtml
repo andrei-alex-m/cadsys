@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ExportViewModel
+@{
+    ViewData["Title"] = "Download";
+}
+
+<h2>You again buttwipe?</h2>
+<ul>
+
+
+    @foreach (var file in Model.Files)
+    {
+        <li>
+            <input type="button" value="Create" onclick="location.href='@Url.Action("GetFile", "Export", new { file = file} )'" />
+        </li>
+    }
+</ul>
