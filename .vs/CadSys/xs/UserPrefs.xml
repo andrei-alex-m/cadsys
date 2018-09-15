@@ -1,16 +1,52 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
     <Files>
+      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="38" Column="1" />
+      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="22" Column="20" />
+      <File FileName="CS.ImportExportWeb/Controllers/HomeController.cs" Line="46" Column="10" />
+      <File FileName="CS.Services/Interfaces/IExcelConfigurationRepo.cs" Line="10" Column="19" />
+      <File FileName="CS.Excel/Exporter.cs" Line="99" Column="60" />
+      <File FileName="CS.Excel/Importer.cs" Line="21" Column="134" />
+      <File FileName="CS.Data/Entities/BaseEntity.cs" Line="7" Column="18" />
+      <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="22" Column="50" />
+      <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="107" Column="44" />
+      <File FileName="CS.EF/EntitiesValidators/InscriereValidator.cs" Line="35" Column="53" />
+      <File FileName="CS.EF/EntitiesValidators/InscriereDetaliuValidator.cs" Line="9" Column="1" />
+      <File FileName="CS.EF/EntitiesValidators/ProprietarValidator.cs" Line="13" Column="58" />
+      <File FileName="CS.Data/DTO/Excel/OutputProprietar.cs" Line="29" Column="17" />
+      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="53" Column="28" />
+      <File FileName="CS.Services/ExcelConfigurationRepo.cs" Line="58" Column="23" />
+      <File FileName="CS.ImportExportWeb/Views/Home/Download.cshtml" Line="16" Column="1" />
+      <File FileName="CS.ImportExportWeb/Program.cs" Line="17" Column="1" />
+      <File FileName="CS.Data/Entities/Proprietar.cs" Line="76" Column="10" />
+      <File FileName="Caly.Common/Validation.cs" Line="8" Column="1" />
+      <File FileName="Caly.Common/Reflection.cs" Line="25" Column="41" />
+      <File FileName="CS.Data/DTO/Excel/OutputActProprietate.cs" Line="4" Column="18" />
+      <File FileName="CS.Data/Entities/ActProprietate.cs" Line="15" Column="34" />
+      <File FileName="CS.EF/EntitiesValidators/ActProprietateValidator.cs" Line="40" Column="14" />
       <File FileName="CadSys Status" />
     </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>DTO</Value>
+          <Value>keyValues</Value>
+          <Value>result</Value>
+          <Value>propIndex</Value>
+          <Value>row.RowNum</Value>
+          <Value>comment</Value>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Services/ExcelConfigurationRepo.cs" relfile="CS.Services/ExcelConfigurationRepo.cs" line="63" column="36" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Services/ExcelConfigurationRepo.cs" relfile="CS.Services/ExcelConfigurationRepo.cs" line="77" column="53" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ExportController.cs" relfile="CS.ImportExportWeb/Controllers/ExportController.cs" line="18" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Views/Home/Download.cshtml" relfile="CS.ImportExportWeb/Views/Home/Download.cshtml" line="16" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ExportController.cs" relfile="CS.ImportExportWeb/Controllers/ExportController.cs" line="33" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ExportController.cs" relfile="CS.ImportExportWeb/Controllers/ExportController.cs" line="34" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ExportController.cs" relfile="CS.ImportExportWeb/Controllers/ExportController.cs" line="35" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

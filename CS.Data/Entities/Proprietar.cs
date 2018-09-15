@@ -36,7 +36,7 @@ namespace CS.Data.Entities
             get;
             set;
         }
-        public long Identificator
+        public long? Identificator
         {
             get;
             set;
@@ -74,7 +74,7 @@ namespace CS.Data.Entities
             get;
             set;
         }
-        public TipPersoana TipPersoana
+        public TipPersoana? TipPersoana
         {
             get;
             set;

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CS.EF.Migrations
 {
     [DbContext(typeof(CadSysContext))]
-    [Migration("20180821211211_Initial")]
+    [Migration("20180913190757_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,7 +259,7 @@ namespace CS.EF.Migrations
 
                     b.Property<int>("ExcelRow");
 
-                    b.Property<long>("Identificator");
+                    b.Property<long?>("Identificator");
 
                     b.Property<int>("Index");
 
@@ -283,7 +283,7 @@ namespace CS.EF.Migrations
 
                     b.Property<int?>("TipActIdentitate");
 
-                    b.Property<int>("TipPersoana");
+                    b.Property<int?>("TipPersoana");
 
                     b.HasKey("Id");
 

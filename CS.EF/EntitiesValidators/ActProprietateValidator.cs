@@ -42,7 +42,7 @@ namespace CS.EF.EntitiesValidators
                 {
                     if (!context.InscrieriActe.Any(z => z.IdActProprietate == x.Id))
                     {
-                        c.AddFailure("Nu are acte");
+                        c.AddFailure("Nu are inscrieri");
                     }
                 });
             });

@@ -70,14 +70,14 @@ namespace CS.EF.Migrations
                     TipActIdentitate = table.Column<int>(nullable: true),
                     Serie = table.Column<string>(nullable: true),
                     Numar = table.Column<string>(nullable: true),
-                    Identificator = table.Column<long>(nullable: false),
+                    Identificator = table.Column<long>(nullable: true),
                     Emitent = table.Column<string>(nullable: true),
                     DataEmiterii = table.Column<DateTime>(nullable: true),
                     Adresa = table.Column<string>(nullable: true),
                     Localitate = table.Column<string>(nullable: true),
                     Judet = table.Column<string>(nullable: true),
                     Tara = table.Column<string>(nullable: true),
-                    TipPersoana = table.Column<int>(nullable: false),
+                    TipPersoana = table.Column<int>(nullable: true),
                     Sex = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

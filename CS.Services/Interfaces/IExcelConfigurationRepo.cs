@@ -7,7 +7,7 @@ namespace CS.Services.Interfaces
         void Clear(int discriminator);
         void ClearAll();
         void Save(int discriminator, string type, string fileName, string[] columnNames);
-        string[] Get(int discriminator, string fileName);
+        string[] Get(int discriminator, string type);
 
 
     }

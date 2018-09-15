@@ -34,7 +34,7 @@ namespace CS.Data.DTO.Excel
             get;
             set;
         }
-        public long Identificator
+        public long? Identificator
         {
             get;
             set;

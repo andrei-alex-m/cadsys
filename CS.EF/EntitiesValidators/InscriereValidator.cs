@@ -52,8 +52,7 @@ namespace CS.EF.EntitiesValidators
     {
         public InscriereActValidator()
         {
-            RuleSet("NoContext", () =>
-            {
+
                 RuleFor(x => x).Custom((x, c) => 
                 {
                     if (x.ActProprietate == null)
@@ -61,18 +60,17 @@ namespace CS.EF.EntitiesValidators
                         c.AddFailure("Index", "Index Act Inexistent");
                     }
                 });
-            });
+
         }
     }
 
-    //must validate with imobil then include parcele
+    //must validate with (imobil then include parcele)
 
     public class InscriereImobilValidator:AbstractValidator<InscriereImobil>
     {
         public InscriereImobilValidator()
         {
-            RuleSet("NoContext", () =>
-            {
+
                 RuleFor(x => x).Custom((x, c) =>
                 {
                     if (x.Imobil == null || x.Imobil.Parcele.Count==0 || x.Imobil.Parcele.FirstOrDefault()?.Index!=x.Index)
@@ -80,7 +78,7 @@ namespace CS.EF.EntitiesValidators
                         c.AddFailure("Index", "Index Parcela Inexistent");
                     }
                 });
-            });
+
         }
     }
 
@@ -88,8 +86,7 @@ namespace CS.EF.EntitiesValidators
     {
         public InscriereProprietarValidator()
         {
-            RuleSet("NoContext", () =>
-            {
+
                 RuleFor(x => x).Custom((x, c) =>
                 {
                     if (x.Proprietar == null)
@@ -97,7 +94,7 @@ namespace CS.EF.EntitiesValidators
                         c.AddFailure("Index", "Index Act Inexistent");
                     }
                 });
-            });
+
         }
     }
 }

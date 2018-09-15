@@ -257,7 +257,7 @@ namespace CS.EF.Migrations
 
                     b.Property<int>("ExcelRow");
 
-                    b.Property<long>("Identificator");
+                    b.Property<long?>("Identificator");
 
                     b.Property<int>("Index");
 
@@ -281,7 +281,7 @@ namespace CS.EF.Migrations
 
                     b.Property<int?>("TipActIdentitate");
 
-                    b.Property<int>("TipPersoana");
+                    b.Property<int?>("TipPersoana");
 
                     b.HasKey("Id");
 

@@ -19,6 +19,12 @@ namespace Caly.Common
             "dd.M.yyyy"
         };
 
+        public static readonly Dictionary<string, string> matches = new Dictionary<string, string>()
+        {
+            {"CNP/CUI", "IDENTIFICATOR"},
+            {"IDENTIFICATOR", "CNP/CUI"}
+        };
+
         public static void FillInstanceFromDictionary(Dictionary<string, string> keyValues, Object instance, bool fieldNameCaseIgnore = true)
         {
             if (keyValues == null || keyValues.Count == 0) return;
@@ -36,6 +42,11 @@ namespace Caly.Common
             foreach (var kvp in keyValues)
             {
                 var info = t.GetProperty(kvp.Key, flags);
+
+                if (info == null && matches.ContainsKey(kvp.Key))
+                {
+                    info = t.GetProperty(matches[kvp.Key], flags);
+                }
 
                 if (info != null)
                 {
@@ -67,6 +78,46 @@ namespace Caly.Common
 
                 }
             };
+        }
+
+        public static void FillDictionaryFromInstance(Dictionary<string, string> keyValues, Object instance, bool fieldNameCaseIgnore = true)
+        {
+            Type t = instance.GetType();
+
+            BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+
+            if (fieldNameCaseIgnore)
+            {
+                flags = flags | BindingFlags.IgnoreCase;
+            }
+
+            foreach (var info in t.GetProperties(flags))
+            {
+                var exportPropName = info.Name.ToUpper();
+                if (matches.ContainsKey(exportPropName))
+                {
+                    exportPropName = matches[exportPropName];
+                }
+
+                var val = info.GetValue(instance);
+
+                if (val!=null)
+                {
+                    var type = info.PropertyType.IsGenericType
+                           && info.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                           ? Nullable.GetUnderlyingType(info.PropertyType) : info.PropertyType;
+
+                    if (type == typeof(DateTime))
+                    {
+                        keyValues.Add(exportPropName, ((DateTime)val).ToString("dd/MM/yyyy"));
+                    }
+                    else
+                    {
+                        keyValues.Add(exportPropName, val.ToString());
+                    }
+                }
+            }
+
         }
     }
 }

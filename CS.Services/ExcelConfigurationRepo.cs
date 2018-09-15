@@ -51,7 +51,7 @@ namespace CS.Services
 
             var configs = JsonConvert.DeserializeObject<Dictionary<int, List<ExcelConfig>>>(File.ReadAllText(filePath)) ?? new Dictionary<int, List<ExcelConfig>>();
 
-            return configs[discriminator]?.FirstOrDefault(x => x.Type == type)?.Columns ?? Array.Empty<string>();
+            return configs[discriminator]?.FirstOrDefault(x => x.Type.Contains(type))?.Columns ?? Array.Empty<string>();
 
         }
 

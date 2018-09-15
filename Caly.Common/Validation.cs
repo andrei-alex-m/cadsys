@@ -3,8 +3,12 @@ namespace Caly.Common
 {
     public static class Validation
     {
-        public static bool isValidCNP(long vcnp)
+        public static bool isValidCNP(long? vcnp)
         {
+            if (vcnp == null)
+            {
+                return false;
+            }
             var cnp = vcnp.ToString();
             try
             {

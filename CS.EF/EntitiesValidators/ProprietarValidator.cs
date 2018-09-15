@@ -20,8 +20,9 @@ namespace CS.EF.EntitiesValidators
                 RuleFor(x => x.Adresa).NotEmpty().WithMessage("Adresa lipsa");
 
                 RuleFor(x => x.Identificator).Must(Validation.isValidCNP)
-                                             .When(x => x.TipPersoana == TipPersoana.F &&
-                                                   (x.TipActIdentitate == TipActIdentitate.BI || x.TipActIdentitate == TipActIdentitate.CI))
+                                             .When(x => x.TipPersoana == TipPersoana.F 
+                                                   //&& (x.TipActIdentitate == TipActIdentitate.BI || x.TipActIdentitate == TipActIdentitate.CI)
+                                                  )
                                              .WithMessage("CNP nevalid");
 
                 RuleFor(x => x.Serie).NotEmpty()

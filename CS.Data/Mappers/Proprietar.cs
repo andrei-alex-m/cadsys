@@ -7,7 +7,7 @@ namespace CS.Data.Mappers
 {
     public static class ProprietarMapperExtensions
     {
-        public static void FromDTO (this Proprietar prop, OutputProprietar propDTO)
+        public static void FromDTO(this Proprietar prop, OutputProprietar propDTO)
         {
             prop.ExcelRow = propDTO.RowIndex;
             prop.Index = propDTO.Index.Value;
@@ -32,17 +32,25 @@ namespace CS.Data.Mappers
             prop.Judet = propDTO.Judet;
             prop.Tara = propDTO.Tara;
 
-            prop.TipPersoana = Validation.isValidCNP(prop.Identificator)
-                                && !prop.Nume.ContainsAny("S.C.", "SC ", "S.R.L.", "SRL") ?
-                                TipPersoana.F : TipPersoana.J;
-            
-            prop.Sex =prop.TipPersoana == TipPersoana.F ? 
-                        (int)prop.Identificator.ToString()[0] % 2 == 1 ? Sex.M : Sex.F 
+            prop.TipPersoana = tipPersoana(prop);
+
+            //Validation.isValidCNP(prop.Identificator)
+            //&& !prop.Nume.ContainsAny("S.C.", "SC ", "S.R.L.", "SRL") ?
+            //TipPersoana.F : TipPersoana.J;
+
+            prop.Sex = prop.TipPersoana == TipPersoana.F ?
+                prop.Identificator.HasValue && (int)prop.Identificator.ToString()[0] % 2 == 1 ? Sex.M : Sex.F
                         : (Sex?)null;
+
+
+            TipPersoana tipPersoana(Proprietar p)
+            {
+                return Validation.isValidCNP(p.Identificator) || !String.IsNullOrEmpty(p.Prenume) ? TipPersoana.F : TipPersoana.J;
+            }
 
         }
 
-        public static void FromPOCO (this OutputProprietar propDTO, Proprietar prop)
+        public static void FromPOCO(this OutputProprietar propDTO, Proprietar prop)
         {
             propDTO.RowIndex = prop.ExcelRow;
             propDTO.Index = prop.Index;
