@@ -11,7 +11,6 @@ namespace CS.Data.Mappers
     {
         public static void FromDTO(this ActProprietate actProp, OutputActProprietate actPropDTO, ConcurrentBag<TipActProprietate> tipActe)
         {
-            
             try
             {
                 actProp.ExcelRow = actPropDTO.RowIndex;

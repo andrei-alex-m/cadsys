@@ -22,7 +22,10 @@ namespace Caly.Common
         public static readonly Dictionary<string, string> matches = new Dictionary<string, string>()
         {
             {"CNP/CUI", "IDENTIFICATOR"},
-            {"IDENTIFICATOR", "CNP/CUI"}
+            {"IDENTIFICATOR", "CNP/CUI"},
+            {"INDEXPARCELA", "INDEX"},
+            {"INDEXACT","INDEX"},
+            {"INDEXPROPRIETAR","INDEX"}
         };
 
         public static void FillInstanceFromDictionary(Dictionary<string, string> keyValues, Object instance, bool fieldNameCaseIgnore = true)

@@ -42,7 +42,6 @@ namespace CS.Data.Mappers
                 inscriereD.InscrieriImobile.Add(inscriereImobil);
             }
 
-
             for (var i = 0; i < indecsiActe.Count; i++)
             {
                 var x = indecsiActe[i];
@@ -103,7 +102,7 @@ namespace CS.Data.Mappers
                 {
                     item.IndexProprietar = inscriereD.InscrieriProprietari.ElementAt(index).Proprietar.Index;
                 }
-
+                item.RowIndex = inscriereD.ExcelRow + index;
                 outputInscrieriD.Add(item);
             }
         }

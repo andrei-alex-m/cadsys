@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CS.EF.EntitiesValidators
 {
-    public class InscriereValidator:AbstractValidator<Inscriere>
+    public class InscriereValidator : AbstractValidator<Inscriere>
     {
         public InscriereValidator(CadSysContext context)
         {
@@ -14,25 +14,25 @@ namespace CS.EF.EntitiesValidators
             {
                 RuleFor(x => x).Custom((x, c) =>
                 {
-                    switch(x.GetType().Name)
+                    switch (x.GetType().Name)
                     {
                         case "InscriereAct":
                             var ia = context.InscrieriActe.Include(y => y.ActProprietate).SingleOrDefault(y => y.Id == x.Id);
-                            if (ia.ActProprietate==null)
+                            if (ia.ActProprietate == null)
                             {
                                 c.AddFailure("Index", "Index Act Inexistent");
                             }
                             break;
                         case "InscriereImobil":
                             var ii = context.InscrieriImobile.Include(y => y.Imobil).SingleOrDefault(y => y.Id == x.Id);
-                            if (ii.Imobil==null)
+                            if (ii.Imobil == null)
                             {
                                 c.AddFailure("Index", "Index Parcela inexistent");
                             }
                             break;
                         case "InscriereProprietar":
                             var ip = context.InscrieriProprietari.Include(y => y.Proprietar).SingleOrDefault(y => y.Id == x.Id);
-                            if (ip.Proprietar==null)
+                            if (ip.Proprietar == null)
                             {
                                 c.AddFailure("Index", "Index Proprietar inexistent");
                             }
@@ -48,37 +48,33 @@ namespace CS.EF.EntitiesValidators
 
     //must validate with include ActProprietate from dbset
 
-    public class InscriereActValidator:AbstractValidator<InscriereAct>
+    public class InscriereActValidator : AbstractValidator<InscriereAct>
     {
         public InscriereActValidator()
         {
-
-                RuleFor(x => x).Custom((x, c) => 
+            RuleFor(x => x).Custom((x, c) =>
+            {
+                if (x.ActProprietate == null)
                 {
-                    if (x.ActProprietate == null)
-                    {
-                        c.AddFailure("Index", "Index Act Inexistent");
-                    }
-                });
-
+                    c.AddFailure("Index", "Index Act Inexistent");
+                }
+            });
         }
     }
 
     //must validate with (imobil then include parcele)
 
-    public class InscriereImobilValidator:AbstractValidator<InscriereImobil>
+    public class InscriereImobilValidator : AbstractValidator<InscriereImobil>
     {
         public InscriereImobilValidator()
         {
-
-                RuleFor(x => x).Custom((x, c) =>
+            RuleFor(x => x).Custom((x, c) =>
+            {
+                if (x.Imobil == null || x.Imobil.Parcele.Count == 0 || x.Imobil.Parcele.FirstOrDefault()?.Index != x.Index)
                 {
-                    if (x.Imobil == null || x.Imobil.Parcele.Count==0 || x.Imobil.Parcele.FirstOrDefault()?.Index!=x.Index)
-                    {
-                        c.AddFailure("Index", "Index Parcela Inexistent");
-                    }
-                });
-
+                    c.AddFailure("Index", "Index Parcela Inexistent");
+                }
+            });
         }
     }
 
@@ -86,15 +82,13 @@ namespace CS.EF.EntitiesValidators
     {
         public InscriereProprietarValidator()
         {
-
-                RuleFor(x => x).Custom((x, c) =>
+            RuleFor(x => x).Custom((x, c) =>
+            {
+                if (x.Proprietar == null)
                 {
-                    if (x.Proprietar == null)
-                    {
-                        c.AddFailure("Index", "Index Act Inexistent");
-                    }
-                });
-
+                    c.AddFailure("Index", "Index Act Inexistent");
+                }
+            });
         }
     }
 }
