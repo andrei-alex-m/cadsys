@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CS.EF/EntitiesValidators/ParcelaValidator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
     <Files>
-      <File FileName="CS.Excel/Exporter.cs" Line="102" Column="43" />
+      <File FileName="CS.Excel/Exporter.cs" Line="107" Column="49" />
       <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="11" Column="6" />
       <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="83" Column="28" />
       <File FileName="CS.Data/Mappers/Parcela.cs" Line="1" Column="1" />
@@ -11,7 +11,8 @@
       <File FileName="CS.ImportExportWeb/Data/Excel.json" Line="1" Column="557" />
       <File FileName="Caly.Common/Reflection.cs" Line="27" Column="34" />
       <File FileName="CS.EF/EntitiesValidators/InscriereValidator.cs" Line="70" Column="10" />
-      <File FileName="CS.EF/EntitiesValidators/ParcelaValidator.cs" Line="14" Column="16" />
+      <File FileName="CS.EF/EntitiesValidators/ParcelaValidator.cs" Line="31" Column="14" />
+      <File FileName="CadSys Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
