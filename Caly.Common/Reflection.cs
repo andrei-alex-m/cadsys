@@ -83,7 +83,7 @@ namespace Caly.Common
             };
         }
 
-        public static void FillDictionaryFromInstance(Dictionary<string, string> keyValues, Object instance, bool fieldNameCaseIgnore = true)
+        public static void FillDictionaryFromInstance(Dictionary<string, string> keyValues, Object instance, bool fieldNameCaseIgnore = true, bool skipMatching = false)
         {
             Type t = instance.GetType();
 
@@ -97,7 +97,7 @@ namespace Caly.Common
             foreach (var info in t.GetProperties(flags))
             {
                 var exportPropName = info.Name.ToUpper();
-                if (matches.ContainsKey(exportPropName))
+                if (!skipMatching && matches.ContainsKey(exportPropName))
                 {
                     exportPropName = matches[exportPropName];
                 }

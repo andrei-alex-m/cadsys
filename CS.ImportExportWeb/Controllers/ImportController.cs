@@ -39,8 +39,14 @@ namespace CS.ImportExportAPI.Controllers
 
             await CycleFiles(fileCollection);
 
-            return Ok("Asswipe");
-
+            if (fileCollection.Count > 0)
+            {
+                return new RedirectToActionResult("download", "home", null);//"~/home/download");
+            }
+            else
+            {
+                return Ok("Mai baga 0 fisa");
+            }
         }
 
         private async Task CycleFiles(List<IFormFile> fileCollection)

@@ -220,10 +220,9 @@ namespace CS.EF.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CatFol");
+                    b.Property<int?>("CatFol");
 
-                    b.Property<string>("Denumire")
-                        .IsRequired();
+                    b.Property<string>("Denumire");
 
                     b.Property<int>("ExcelRow");
 
@@ -233,7 +232,7 @@ namespace CS.EF.Migrations
 
                     b.Property<int>("Index");
 
-                    b.Property<int>("Suprafata");
+                    b.Property<int?>("Suprafata");
 
                     b.HasKey("Id");
 

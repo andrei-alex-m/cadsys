@@ -1,41 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using CS.ImportExportWeb.Models;
-
+using CS.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CS.ImportExportWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
-        {
+        IExcelConfigurationRepo excelConfig;
 
+        public HomeController(IExcelConfigurationRepo excelConfigurator)
+        {
+            excelConfig = excelConfigurator;
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }
@@ -49,8 +29,9 @@ namespace CS.ImportExportWeb.Controllers
         {
             var evm = new ExportViewModel
             {
-                Files = new List<string>() { "croko" }
+                Files = excelConfig.GetAll(1).Select(x=>x.Type).ToList()
             };
+
             return View(evm);
         }
 

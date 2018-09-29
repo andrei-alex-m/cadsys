@@ -90,17 +90,17 @@ namespace CS.Data.Mappers
 
                 if (inscriereD.InscrieriActe.Count>index)
                 {
-                    item.IndexAct = inscriereD.InscrieriActe.ElementAt(index).ActProprietate?.Index;
+                    item.IndexAct = inscriereD.InscrieriActe.ElementAt(index).Index;
                 }
 
                 if (inscriereD.InscrieriImobile.Count>index)
                 {
-                    item.IndexParcela = inscriereD.InscrieriImobile.FirstOrDefault().Imobil.Parcele.FirstOrDefault()?.Index;
+                    item.IndexParcela = inscriereD.InscrieriImobile.FirstOrDefault().Index;
                 }
 
                 if (inscriereD.InscrieriProprietari.Count>index)
                 {
-                    item.IndexProprietar = inscriereD.InscrieriProprietari.ElementAt(index).Proprietar.Index;
+                    item.IndexProprietar = inscriereD.InscrieriProprietari.ElementAt(index).Index;
                 }
                 item.RowIndex = inscriereD.ExcelRow + index;
                 outputInscrieriD.Add(item);

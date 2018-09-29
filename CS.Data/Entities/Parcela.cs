@@ -7,22 +7,19 @@ namespace CS.Data.Entities
 {
     public class Parcela:BaseEntity
     {
-        [Required]
         public CatFol? CatFol
         {
             get;
             set;
         }
 
-        [Required]
         public string Denumire
         {
             get;
             set;
         }
 
-        [Required]
-        public int Suprafata
+        public int? Suprafata
         {
             get;
             set;

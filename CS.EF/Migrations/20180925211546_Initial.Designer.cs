@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CS.EF.Migrations
 {
     [DbContext(typeof(CadSysContext))]
-    [Migration("20180919171628_Initial")]
+    [Migration("20180925211546_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -222,10 +222,9 @@ namespace CS.EF.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CatFol");
+                    b.Property<int?>("CatFol");
 
-                    b.Property<string>("Denumire")
-                        .IsRequired();
+                    b.Property<string>("Denumire");
 
                     b.Property<int>("ExcelRow");
 
@@ -235,7 +234,7 @@ namespace CS.EF.Migrations
 
                     b.Property<int>("Index");
 
-                    b.Property<int>("Suprafata");
+                    b.Property<int?>("Suprafata");
 
                     b.HasKey("Id");
 

@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Upload";
 }
-<h2>Hi MoFo</h2>
+<h2>Upload Form</h2>
 @using (Html.BeginForm("UploadFile", "Import", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <input type = "file" name = "file" multiple/>

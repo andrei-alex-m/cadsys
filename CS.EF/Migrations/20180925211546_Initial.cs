@@ -260,9 +260,9 @@ namespace CS.EF.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Index = table.Column<int>(nullable: false),
                     ExcelRow = table.Column<int>(nullable: false),
-                    CatFol = table.Column<int>(nullable: false),
-                    Denumire = table.Column<string>(nullable: false),
-                    Suprafata = table.Column<int>(nullable: false),
+                    CatFol = table.Column<int>(nullable: true),
+                    Denumire = table.Column<string>(nullable: true),
+                    Suprafata = table.Column<int>(nullable: true),
                     IdTarla = table.Column<int>(nullable: true),
                     IdImobil = table.Column<int>(nullable: true)
                 },

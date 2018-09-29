@@ -92,8 +92,7 @@ namespace CS.Excel
             return wbk;
         }
 
-
-        static XSSFWorkbook CycleParcele(CadSysContext context, string[] columnNames, string ruleSet)
+        public static XSSFWorkbook CycleParcele(CadSysContext context, string[] columnNames, string ruleSet)
         {
             var wbk = new XSSFWorkbook();
 
@@ -108,7 +107,7 @@ namespace CS.Excel
                 cell.SetCellValue(columnNames[i]);
             }
 
-            foreach (var x in context.Parcele)
+            foreach (var x in context.Parcele.ToList())
             {
                 ExportParcela(sheet, columnNames, x, validator, ruleSet);
             }
@@ -181,7 +180,9 @@ namespace CS.Excel
             var excelDTO = new OutputParcela();
             excelDTO.FromPOCO(parcela);
 
+
             var row = sheet.CreateRow(excelDTO.RowIndex);
+
 
             writeRow(row, columnNames, excelDTO, validator.Validate(parcela, ruleSet: ruleSet));
         }
@@ -200,39 +201,37 @@ namespace CS.Excel
                     var inscriereAct = inscriereD.InscrieriActe.FirstOrDefault(y => y.Index == excelDTO.IndexAct.Value);
                     if (inscriereAct != null)
                     {
-                        writeRow(row, columnNames, excelDTO, iActValidator.Validate(inscriereAct, ruleSet: ruleSet));
+                        writeRow(row, columnNames, excelDTO, iActValidator.Validate(inscriereAct, ruleSet: ruleSet), true);
                     }
                 }
 
                 if (excelDTO.IndexParcela.HasValue)
                 {
                     var inscriereParcela = inscriereD.InscrieriImobile.FirstOrDefault(y => y.Index == excelDTO.IndexParcela.Value);
-                    if (inscriereParcela!=null)
+                    if (inscriereParcela != null)
                     {
-                        writeRow(row, columnNames, excelDTO, iImobilValidator.Validate(inscriereParcela, ruleSet: ruleSet));
+                        writeRow(row, columnNames, excelDTO, iImobilValidator.Validate(inscriereParcela, ruleSet: ruleSet), true);
                     }
                 }
 
                 if (excelDTO.IndexProprietar.HasValue)
                 {
                     var inscriereProprietar = inscriereD.InscrieriProprietari.FirstOrDefault(y => y.Index == excelDTO.IndexProprietar.Value);
-                    if (inscriereProprietar!=null)
+                    if (inscriereProprietar != null)
                     {
-                        writeRow(row, columnNames, excelDTO, iPropValidator.Validate(inscriereProprietar, ruleSet: ruleSet));
+                        writeRow(row, columnNames, excelDTO, iPropValidator.Validate(inscriereProprietar, ruleSet: ruleSet), true);
                     }
                 }
-
             });
-
 
             //lista de outputinscriereD trecuta printr-un writerow special care sa ia inscrierile de la fiecare dintre cei 3 indecsi, sa le valideze obiectele si sa le scrie in icselß
         }
 
 
-        static void writeRow(IRow row, string[] columnNames, object DTO, ValidationResult result)
+        static void writeRow(IRow row, string[] columnNames, object DTO, ValidationResult result, bool skipMatching = false)
         {
             var keyValues = new Dictionary<string, string>();
-            Reflection.FillDictionaryFromInstance(keyValues, DTO);
+            Reflection.FillDictionaryFromInstance(keyValues, DTO, skipMatching: skipMatching);
 
             var columnCount = columnNames.Length + 1;
 

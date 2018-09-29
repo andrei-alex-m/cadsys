@@ -20,7 +20,7 @@ namespace CS.EF.EntitiesValidators
 
                 RuleFor(x => x.Denumire).NotEmpty().WithMessage("Numar lipsa");
 
-                RuleFor(x => x.CatFol).Must(x => x.HasValue).Must(x => x != 0).WithMessage("Cat Fol lipsa");
+                RuleFor(x => x.CatFol).Must(x => x.HasValue).WithMessage("Cat Fol lipsa");
 
                 RuleFor(x => x.Suprafata).NotEmpty().WithMessage("Suprafata lipsa");
 
@@ -43,7 +43,7 @@ namespace CS.EF.EntitiesValidators
             {
                 RuleFor(x => x).Custom((x, c) =>
                 {
-                    if (!context.InscrieriImobile.Include(q=>q.Imobil).Select(y=>y.Imobil).Any(z => z.Id == x.Id))
+                    if (!context.InscrieriImobile.Include(q=>q.Imobil).Select(y=>y.Imobil).Any(z => z.Id == x.IdImobil))
                     {
                         c.AddFailure("Nu are inscrieri");
                     }

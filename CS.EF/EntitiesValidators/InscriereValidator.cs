@@ -52,12 +52,15 @@ namespace CS.EF.EntitiesValidators
     {
         public InscriereActValidator()
         {
-            RuleFor(x => x).Custom((x, c) =>
+            RuleSet("NoContext", () =>
             {
-                if (x.ActProprietate == null)
+                RuleFor(x => x).Custom((x, c) =>
                 {
-                    c.AddFailure("Index", "Index Act Inexistent");
-                }
+                    if (x.ActProprietate == null)
+                    {
+                        c.AddFailure("IndexAct", "Index Act Inexistent");
+                    }
+                });
             });
         }
     }
@@ -68,12 +71,15 @@ namespace CS.EF.EntitiesValidators
     {
         public InscriereImobilValidator()
         {
-            RuleFor(x => x).Custom((x, c) =>
+            RuleSet("NoContext", () =>
             {
-                if (x.Imobil == null || x.Imobil.Parcele.Count == 0 || x.Imobil.Parcele.FirstOrDefault()?.Index != x.Index)
+                RuleFor(x => x).Custom((x, c) =>
                 {
-                    c.AddFailure("Index", "Index Parcela Inexistent");
-                }
+                    if (x.Imobil == null || x.Imobil.Parcele.Count == 0 || x.Imobil.Parcele.FirstOrDefault()?.Index != x.Index)
+                    {
+                        c.AddFailure("IndexParcela", "Index Parcela Inexistent");
+                    }
+                });
             });
         }
     }
@@ -82,12 +88,15 @@ namespace CS.EF.EntitiesValidators
     {
         public InscriereProprietarValidator()
         {
-            RuleFor(x => x).Custom((x, c) =>
+            RuleSet("NoContext", () =>
             {
-                if (x.Proprietar == null)
+                RuleFor(x => x).Custom((x, c) =>
                 {
-                    c.AddFailure("Index", "Index Act Inexistent");
-                }
+                    if (x.Proprietar == null)
+                    {
+                        c.AddFailure("IndexProprietar", "Index Proprietar Inexistent");
+                    }
+                });
             });
         }
     }

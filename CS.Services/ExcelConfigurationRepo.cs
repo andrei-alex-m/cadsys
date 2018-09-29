@@ -55,6 +55,13 @@ namespace CS.Services
 
         }
 
+        public List<ExcelConfig> GetAll(int discriminator)
+        {
+            var configs = JsonConvert.DeserializeObject<Dictionary<int, List<ExcelConfig>>>(File.ReadAllText(filePath)) ?? new Dictionary<int, List<ExcelConfig>>();
+
+            return configs.ContainsKey(discriminator) ? configs[discriminator] : new List<ExcelConfig>();
+        }
+
         public void Save(int discriminator, string type, string fileName, string[] columnNames)
         {
 
@@ -94,7 +101,7 @@ namespace CS.Services
         }
     }
 
-    class ExcelConfig
+    public class ExcelConfig
 
     {
         public string Type

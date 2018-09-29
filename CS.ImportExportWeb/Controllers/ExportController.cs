@@ -8,8 +8,6 @@ using CS.Excel;
 using CS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace CS.ImportExportWeb.Controllers
 {
     public class ExportController : Controller
@@ -24,25 +22,61 @@ namespace CS.ImportExportWeb.Controllers
         }
 
         // GET: /<controller>/
-        public  ActionResult GetFile (string file)
+        public  IActionResult GetFile (string file)
         {
-            //var wbk = Exporter.CycleProprietari(context, excelConfiguration.Get(1, "Proprietar"), "NoContext,InSet,Context");
-            //byte[] fileContents = null;
-            //using (var propStream = new MemoryStream())
-            //{
-            //    wbk.Write(propStream);
-            //    fileContents = propStream.ToArray();
-            //    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ProprietariValidati.xlsx");
-            //}
 
-            var wbk = Exporter.CycleActeProprietate(context, excelConfiguration.Get(1, "ActProprietate"), "NoContext,InSet,Context");
-            byte[] fileContents = null;
-            using (var propStream = new MemoryStream())
+            if(file.Contains("Proprietar", StringComparison.InvariantCultureIgnoreCase))
             {
-                wbk.Write(propStream);
-                fileContents = propStream.ToArray();
-                return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ActeProprietateValidate.xlsx");
+                var wbk = Exporter.CycleProprietari(context, excelConfiguration.Get(1, "Proprietar"), "NoContext,InSet,Context");
+                byte[] fileContents = null;
+                using (var stream = new MemoryStream())
+                {
+                    wbk.Write(stream);
+                    fileContents = stream.ToArray();
+                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ProprietariValidati.xlsx");
+                }
             }
+
+            if (file.Contains("ActProprietate", StringComparison.InvariantCultureIgnoreCase))
+            {
+
+                var wbk = Exporter.CycleActeProprietate(context, excelConfiguration.Get(1, "ActProprietate"), "NoContext,InSet,Context");
+                byte[] fileContents = null;
+                using (var stream = new MemoryStream())
+                {
+                    wbk.Write(stream);
+                    fileContents = stream.ToArray();
+                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ActeProprietateValidate.xlsx");
+                }
+            }
+
+            if (file.Contains("Parcel", StringComparison.InvariantCultureIgnoreCase))
+            {
+
+                var wbk = Exporter.CycleParcele(context, excelConfiguration.Get(1, "Parcela"), "NoContext,InSet,Context");
+                byte[] fileContents = null;
+                using (var stream = new MemoryStream())
+                {
+                    wbk.Write(stream);
+                    fileContents = stream.ToArray();
+                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ParceleValidate.xlsx");
+                }
+            }
+
+            if (file.Contains("Inscrie", StringComparison.InvariantCultureIgnoreCase))
+            {
+
+                var wbk = Exporter.CycleInscrieri(context, excelConfiguration.Get(1, "Inscriere"), "NoContext,InSet,Context");
+                byte[] fileContents = null;
+                using (var propStream = new MemoryStream())
+                {
+                    wbk.Write(propStream);
+                    fileContents = propStream.ToArray();
+                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "CentralizatorValidat.xlsx");
+                }
+            }
+
+            return new OkResult();
 
         }
     }

@@ -19,7 +19,7 @@ namespace CS.Data.DTO.Excel
             get;
             set;
         }
-        public int Suprafata
+        public int? Suprafata
         {
             get;
             set;
