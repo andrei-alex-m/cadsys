@@ -51,9 +51,9 @@
     <Compile Remove="Migrations\20180821205120_Initial.cs" />
     <Compile Remove="Migrations\20180821211211_Initial.cs" />
     <Compile Remove="Migrations\20180913190757_Initial.cs" />
+    <Compile Remove="Migrations\20180925211546_Initial.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EntitiesValidators\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

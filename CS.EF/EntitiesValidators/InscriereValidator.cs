@@ -46,58 +46,74 @@ namespace CS.EF.EntitiesValidators
         }
     }
 
-    //must validate with include ActProprietate from dbset
-
-    public class InscriereActValidator : AbstractValidator<InscriereAct>
+    public class InscriereDetaliuValidator : AbstractValidator<InscriereDetaliu>
     {
-        public InscriereActValidator()
+        public InscriereDetaliuValidator()
         {
             RuleSet("NoContext", () =>
             {
                 RuleFor(x => x).Custom((x, c) =>
                 {
-                    if (x.ActProprietate == null)
+                    if (x.InscrieriProprietari.Count > 1 && x.InscrieriProprietari.Any(y => String.IsNullOrEmpty(y.CotaParte)))
                     {
-                        c.AddFailure("IndexAct", "Index Act Inexistent");
+                        c.AddFailure("Proprietari multipli fara Cota Parte");
                     }
                 });
             });
         }
-    }
 
-    //must validate with (imobil then include parcele)
+        //must validate with include ActProprietate from dbset
 
-    public class InscriereImobilValidator : AbstractValidator<InscriereImobil>
-    {
-        public InscriereImobilValidator()
+        public class InscriereActValidator : AbstractValidator<InscriereAct>
         {
-            RuleSet("NoContext", () =>
+            public InscriereActValidator()
             {
-                RuleFor(x => x).Custom((x, c) =>
+                RuleSet("NoContext", () =>
                 {
-                    if (x.Imobil == null || x.Imobil.Parcele.Count == 0 || x.Imobil.Parcele.FirstOrDefault()?.Index != x.Index)
+                    RuleFor(x => x).Custom((x, c) =>
                     {
-                        c.AddFailure("IndexParcela", "Index Parcela Inexistent");
-                    }
+                        if (x.ActProprietate == null)
+                        {
+                            c.AddFailure("IndexAct", "Index Act Inexistent");
+                        }
+                    });
                 });
-            });
+            }
         }
-    }
 
-    public class InscriereProprietarValidator : AbstractValidator<InscriereProprietar>
-    {
-        public InscriereProprietarValidator()
+        //must validate with (imobil then include parcele)
+
+        public class InscriereImobilValidator : AbstractValidator<InscriereImobil>
         {
-            RuleSet("NoContext", () =>
+            public InscriereImobilValidator()
             {
-                RuleFor(x => x).Custom((x, c) =>
+                RuleSet("NoContext", () =>
                 {
-                    if (x.Proprietar == null)
+                    RuleFor(x => x).Custom((x, c) =>
                     {
-                        c.AddFailure("IndexProprietar", "Index Proprietar Inexistent");
-                    }
+                        if (x.Imobil == null || x.Imobil.Parcele.Count == 0 || x.Imobil.Parcele.FirstOrDefault()?.Index != x.Index)
+                        {
+                            c.AddFailure("IndexParcela", "Index Parcela Inexistent");
+                        }
+                    });
                 });
-            });
+            }
+        }
+
+        public class InscriereProprietarValidator : AbstractValidator<InscriereProprietar>
+        {
+            public InscriereProprietarValidator()
+            {
+                RuleSet("NoContext", () =>
+                {
+                    RuleFor(x => x).Custom((x, c) =>
+                    {
+                        if (x.Proprietar == null)
+                        {
+                            c.AddFailure("IndexProprietar", "Index Proprietar Inexistent");
+                        }
+                    });
+                });
+            }
         }
     }
-}

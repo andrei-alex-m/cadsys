@@ -50,7 +50,13 @@ namespace CS.Data.Entities
 
     public class InscriereProprietar:Inscriere
     {
-        
+
+        public string CotaParte
+        {
+            get;
+            set;
+        }
+
         [ForeignKey("Proprietar")]
         public int? IdProprietar
         {

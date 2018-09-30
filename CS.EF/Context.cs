@@ -1,21 +1,6 @@
 ﻿using CS.Data.Entities;
 using CS.Data.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-
-
-
-
-
-
-
-
-//
-//Certificat de Legatar Suplimentar
 
 
 

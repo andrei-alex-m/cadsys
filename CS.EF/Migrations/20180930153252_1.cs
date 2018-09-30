@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CS.EF.Migrations
 {
-    public partial class Initial : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -209,6 +209,8 @@ namespace CS.EF.Migrations
                     Discriminator = table.Column<string>(nullable: false),
                     IdActProprietate = table.Column<int>(nullable: true),
                     IdImobil = table.Column<int>(nullable: true),
+                    CotaParte = table.Column<string>(nullable: true),
+                    Pisici = table.Column<string>(nullable: true),
                     IdProprietar = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

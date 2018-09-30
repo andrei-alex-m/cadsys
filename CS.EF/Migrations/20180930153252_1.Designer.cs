@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CS.EF.Migrations
 {
     [DbContext(typeof(CadSysContext))]
-    [Migration("20180925211546_Initial")]
-    partial class Initial
+    [Migration("20180930153252_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -486,7 +486,11 @@ namespace CS.EF.Migrations
                 {
                     b.HasBaseType("CS.Data.Entities.Inscriere");
 
+                    b.Property<string>("CotaParte");
+
                     b.Property<int?>("IdProprietar");
+
+                    b.Property<string>("Pisici");
 
                     b.HasIndex("IdInscriereDetaliu")
                         .HasName("IX_Inscrieri_IdInscriereDetaliu2");

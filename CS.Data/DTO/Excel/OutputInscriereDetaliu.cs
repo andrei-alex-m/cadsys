@@ -20,5 +20,12 @@ namespace CS.Data.DTO.Excel
             get;
             set;
         }
+
+        public string CotaParte
+        {
+            get;
+            set;
+        }
+
     }
 }
