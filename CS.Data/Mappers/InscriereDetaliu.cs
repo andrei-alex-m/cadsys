@@ -17,7 +17,7 @@ namespace CS.Data.Mappers
 
             var indecsiActe = outputInscriereD.Where(x => x.IndexAct.HasValue).Select(x => x.IndexAct.Value).Distinct().ToList();
 
-            var indecsiProprietari = outputInscriereD.Where(x => x.IndexProprietar.HasValue).Select(x => x.IndexProprietar.Value).Distinct().ToList();
+            var indecsiProprietari = outputInscriereD.Where(x => x.IndexProprietar.HasValue).Select(x => new {index = x.IndexProprietar.Value, cota = x.CotaParte} ).Distinct().ToList();
 
             for (var i = 0; i < indecsiParcela.Count; i++)
             {
@@ -64,10 +64,11 @@ namespace CS.Data.Mappers
             for (var i = 0; i < indecsiProprietari.Count; i++)
             {
                 var x = indecsiProprietari[i];
-                var proprietar = proprietari.FirstOrDefault(y => y.Index == x);
+                var proprietar = proprietari.FirstOrDefault(y => y.Index == x.index);
                 var inscriereProprietar = new InscriereProprietar()
                 {
-                    Index = x,
+                    Index = x.index,
+                    CotaParte=x.cota,
                     ExcelRow=inscriereD.ExcelRow+i
                 };
 
@@ -101,6 +102,7 @@ namespace CS.Data.Mappers
                 if (inscriereD.InscrieriProprietari.Count>index)
                 {
                     item.IndexProprietar = inscriereD.InscrieriProprietari.ElementAt(index).Index;
+                    item.CotaParte= inscriereD.InscrieriProprietari.ElementAt(index).CotaParte;
                 }
                 item.RowIndex = inscriereD.ExcelRow + index;
                 outputInscrieriD.Add(item);

@@ -56,64 +56,73 @@ namespace CS.EF.EntitiesValidators
                 {
                     if (x.InscrieriProprietari.Count > 1 && x.InscrieriProprietari.Any(y => String.IsNullOrEmpty(y.CotaParte)))
                     {
-                        c.AddFailure("Proprietari multipli fara Cota Parte");
+                        c.AddFailure("Proprietari Multipli fara Cota Parte");
+                    }
+                });
+
+                RuleFor(x => x).Custom((x, c) =>
+                  {
+                      if (x.InscrieriProprietari.Count > 1 && x.InscrieriActe.Count > 1)
+                      {
+                          c.AddFailure("Acte Multiple, Proprietari Multipli");
+                      }
+                  });
+            });
+        }
+    }
+
+    //must validate with include ActProprietate from dbset
+
+    public class InscriereActValidator : AbstractValidator<InscriereAct>
+    {
+        public InscriereActValidator()
+        {
+            RuleSet("NoContext", () =>
+            {
+                RuleFor(x => x).Custom((x, c) =>
+                {
+                    if (x.ActProprietate == null)
+                    {
+                        c.AddFailure("IndexAct", "Index Act Inexistent");
                     }
                 });
             });
         }
+    }
 
-        //must validate with include ActProprietate from dbset
+    //must validate with (imobil then include parcele)
 
-        public class InscriereActValidator : AbstractValidator<InscriereAct>
+    public class InscriereImobilValidator : AbstractValidator<InscriereImobil>
+    {
+        public InscriereImobilValidator()
         {
-            public InscriereActValidator()
+            RuleSet("NoContext", () =>
             {
-                RuleSet("NoContext", () =>
+                RuleFor(x => x).Custom((x, c) =>
                 {
-                    RuleFor(x => x).Custom((x, c) =>
+                    if (x.Imobil == null || x.Imobil.Parcele.Count == 0 || x.Imobil.Parcele.FirstOrDefault()?.Index != x.Index)
                     {
-                        if (x.ActProprietate == null)
-                        {
-                            c.AddFailure("IndexAct", "Index Act Inexistent");
-                        }
-                    });
+                        c.AddFailure("IndexParcela", "Index Parcela Inexistent");
+                    }
                 });
-            }
-        }
-
-        //must validate with (imobil then include parcele)
-
-        public class InscriereImobilValidator : AbstractValidator<InscriereImobil>
-        {
-            public InscriereImobilValidator()
-            {
-                RuleSet("NoContext", () =>
-                {
-                    RuleFor(x => x).Custom((x, c) =>
-                    {
-                        if (x.Imobil == null || x.Imobil.Parcele.Count == 0 || x.Imobil.Parcele.FirstOrDefault()?.Index != x.Index)
-                        {
-                            c.AddFailure("IndexParcela", "Index Parcela Inexistent");
-                        }
-                    });
-                });
-            }
-        }
-
-        public class InscriereProprietarValidator : AbstractValidator<InscriereProprietar>
-        {
-            public InscriereProprietarValidator()
-            {
-                RuleSet("NoContext", () =>
-                {
-                    RuleFor(x => x).Custom((x, c) =>
-                    {
-                        if (x.Proprietar == null)
-                        {
-                            c.AddFailure("IndexProprietar", "Index Proprietar Inexistent");
-                        }
-                    });
-                });
-            }
+            });
         }
     }
+
+    public class InscriereProprietarValidator : AbstractValidator<InscriereProprietar>
+    {
+        public InscriereProprietarValidator()
+        {
+            RuleSet("NoContext", () =>
+            {
+                RuleFor(x => x).Custom((x, c) =>
+                {
+                    if (x.Proprietar == null)
+                    {
+                        c.AddFailure("IndexProprietar", "Index Proprietar Inexistent");
+                    }
+                });
+            });
+        }
+    }
+}

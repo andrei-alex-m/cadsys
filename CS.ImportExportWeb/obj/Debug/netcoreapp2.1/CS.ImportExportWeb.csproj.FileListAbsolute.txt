@@ -22,10 +22,7 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.TagHelpers.input.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.TagHelpers.output.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.RazorCoreGenerate.cache
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Home/About.g.cshtml.cs
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Home/Contact.g.cshtml.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Home/Index.g.cshtml.cs
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Home/Privacy.g.cshtml.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Home/Upload.g.cshtml.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Shared/Error.g.cshtml.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Shared/_CookieConsentPartial.g.cshtml.cs

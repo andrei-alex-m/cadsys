@@ -3,16 +3,14 @@ using System;
 using CS.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CS.EF.Migrations
 {
     [DbContext(typeof(CadSysContext))]
-    [Migration("20180930153252_1")]
-    partial class _1
+    partial class CadSysContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -489,8 +487,6 @@ namespace CS.EF.Migrations
                     b.Property<string>("CotaParte");
 
                     b.Property<int?>("IdProprietar");
-
-                    b.Property<string>("Pisici");
 
                     b.HasIndex("IdInscriereDetaliu")
                         .HasName("IX_Inscrieri_IdInscriereDetaliu2");

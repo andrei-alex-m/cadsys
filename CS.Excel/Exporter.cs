@@ -121,6 +121,8 @@ namespace CS.Excel
 
             var sheet = wbk.CreateSheet("Sheet 1");
 
+            var validatorInscriereDetaliu = new InscriereDetaliuValidator();
+
             var validatorInscriereAct = new InscriereActValidator();
 
             var validatorInscriereProprietar = new InscriereProprietarValidator();
@@ -144,7 +146,7 @@ namespace CS.Excel
                      .Include(y => y.InscrieriProprietari)
                         .ThenInclude(z => z.Proprietar))
             {
-                ExportInscrieri(sheet, columnNames, x, validatorInscriereAct, validatorInscriereImobil, validatorInscriereProprietar, ruleSet);
+                ExportInscrieri(sheet, columnNames, x, validatorInscriereDetaliu, validatorInscriereAct, validatorInscriereImobil, validatorInscriereProprietar, ruleSet);
 
             }
 
@@ -187,7 +189,7 @@ namespace CS.Excel
             writeRow(row, columnNames, excelDTO, validator.Validate(parcela, ruleSet: ruleSet));
         }
 
-        static void ExportInscrieri(ISheet sheet, string[] columnNames, InscriereDetaliu inscriereD, InscriereActValidator iActValidator, InscriereImobilValidator iImobilValidator, InscriereProprietarValidator iPropValidator, string ruleSet)
+        static void ExportInscrieri(ISheet sheet, string[] columnNames, InscriereDetaliu inscriereD, InscriereDetaliuValidator iDValidator,  InscriereActValidator iActValidator, InscriereImobilValidator iImobilValidator, InscriereProprietarValidator iPropValidator, string ruleSet)
         {
             var xPorts = new List<OutputInscriereDetaliu>();
             xPorts.FromPOCO(inscriereD);
@@ -223,6 +225,13 @@ namespace CS.Excel
                     }
                 }
             });
+
+            //validarea de Inscriere Detaliu
+
+            var anotherRow = sheet.GetRow(inscriereD.ExcelRow) ?? sheet.CreateRow(inscriereD.ExcelRow);
+
+            writeRow(anotherRow, columnNames, null, iDValidator.Validate(inscriereD, ruleSet: ruleSet));
+
 
             //lista de outputinscriereD trecuta printr-un writerow special care sa ia inscrierile de la fiecare dintre cei 3 indecsi, sa le valideze obiectele si sa le scrie in icselß
         }

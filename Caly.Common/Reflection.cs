@@ -85,6 +85,11 @@ namespace Caly.Common
 
         public static void FillDictionaryFromInstance(Dictionary<string, string> keyValues, Object instance, bool fieldNameCaseIgnore = true, bool skipMatching = false)
         {
+            if (instance == null)
+            {
+                return;
+            }
+
             Type t = instance.GetType();
 
             BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;

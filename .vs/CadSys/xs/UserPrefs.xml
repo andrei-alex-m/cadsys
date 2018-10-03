@@ -1,47 +1,42 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.ImportExportWeb/Program.cs">
     <Files>
       <File FileName="../../../Windows7/Work/CGXML/Program/CGRefactoring/Import/CodeFile.vb" Line="352" Column="72" />
       <File FileName="../../../Windows7/Work/CGXML/Program/CGRefactoring/Import/DBModule.vb" Line="14" Column="92" />
       <File FileName="../../../Windows7/Work/CGXML/Program/CGRefactoring/Import/InscrieriAuto.vb" Line="46" Column="55" />
-      <File FileName="CS.EF/Context.cs" Line="13" Column="10" />
+      <File FileName="CS.EF/Context.cs" Line="30" Column="13" />
       <File FileName="CS.DXF/Class1.cs" Line="17" Column="39" />
       <File FileName="CS.Tests/UnitTest1.cs" Line="9" Column="15" />
-      <File FileName="CS.EF/EntitiesValidators/InscriereValidator.cs" Line="58" Column="22" />
-      <File FileName="CS.Excel/Exporter.cs" Line="190" Column="21" />
+      <File FileName="CS.EF/EntitiesValidators/InscriereValidator.cs" Line="65" Column="86" />
+      <File FileName="CS.Excel/Exporter.cs" Line="90" Column="14" />
       <File FileName="CS.Data/Entities/Inscriere.cs" Line="58" Column="10" />
-      <File FileName="CS.Data/DTO/Excel/OutputInscriereDetaliu.cs" Line="22" Column="10" />
       <File FileName="CS.EF/DBContextFactory.cs" Line="22" Column="77" />
       <File FileName="CS.EF/appsettings.json" Line="6" Column="1" />
-      <File FileName="CS.EF/Migrations/20180930153252_1.cs" Line="23" Column="70" />
       <File FileName="CadSys Status" />
+      <File FileName="CS.Data/Entities/Adresa.cs" Line="116" Column="10" />
+      <File FileName="CS.Data/Entities/ActProprietate.cs" Line="49" Column="1" />
+      <File FileName="CS.Data/CGXMLSchema_new_v3.xsd" Line="11" Column="19" />
+      <File FileName="Caly.Common/Reflection.cs" Line="90" Column="24" />
+      <File FileName="CS.ImportExportWeb/Views/Home/Download.cshtml" Line="20" Column="1" />
+      <File FileName="CS.ImportExportWeb/appsettings.json" Line="9" Column="59" />
+      <File FileName="CS.ImportExportWeb/Data/Excel.json" Line="1" Column="1" />
+      <File FileName="CS.Excel/Importer.cs" Line="16" Column="1" />
+      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="101" Column="23" />
+      <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="98" Column="18" />
+      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="69" Column="46" />
+      <File FileName="CS.ImportExportWeb/Program.cs" Line="5" Column="30" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="CadSys" expanded="True">
-            <Node name="CS.Tests" expanded="True">
-              <Node name="CS" expanded="True">
-                <Node name="Tests" expanded="True">
-                  <Node name="UnitTest1" expanded="True">
-                    <Node name="Test1" selected="True" />
-                  </Node>
-                </Node>
-              </Node>
-            </Node>
-            <Node name="Tests" expanded="True">
-              <Node name="CS.Excel.Tests" expanded="True">
-                <Node name="CS" expanded="True">
-                  <Node name="Excel" expanded="True" />
-                </Node>
-              </Node>
-            </Node>
+          <Node name="CadSys" expanded="True" selected="True">
+            <Node name="Tests" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/usr/local/share/dotnet/sdk/2.1.300/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" line="198" column="1" />
