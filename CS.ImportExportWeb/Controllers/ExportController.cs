@@ -33,7 +33,7 @@ namespace CS.ImportExportWeb.Controllers
                 {
                     wbk.Write(stream);
                     fileContents = stream.ToArray();
-                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ProprietariValidati.xlsx");
+                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ProprietariValidati.xls");
                 }
             }
 
@@ -46,7 +46,7 @@ namespace CS.ImportExportWeb.Controllers
                 {
                     wbk.Write(stream);
                     fileContents = stream.ToArray();
-                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ActeProprietateValidate.xlsx");
+                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ActeProprietateValidate.xls");
                 }
             }
 
@@ -59,7 +59,7 @@ namespace CS.ImportExportWeb.Controllers
                 {
                     wbk.Write(stream);
                     fileContents = stream.ToArray();
-                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ParceleValidate.xlsx");
+                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ParceleValidate.xls");
                 }
             }
 
@@ -72,7 +72,7 @@ namespace CS.ImportExportWeb.Controllers
                 {
                     wbk.Write(propStream);
                     fileContents = propStream.ToArray();
-                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "CentralizatorValidat.xlsx");
+                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "CentralizatorValidat.xls");
                 }
             }
 

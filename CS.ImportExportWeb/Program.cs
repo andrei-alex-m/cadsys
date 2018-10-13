@@ -19,8 +19,8 @@ namespace CS.ImportExportWeb
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                   .UseUrls("http://0.0.0.0:5000")
-                .UseKestrel()
+                //   .UseUrls("http://0.0.0.0:5000")
+                //.UseKestrel()
                 .UseStartup<Startup>();
     }
 }

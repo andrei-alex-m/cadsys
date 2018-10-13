@@ -29,7 +29,7 @@ namespace CS.ImportExportWeb.Controllers
         {
             var evm = new ExportViewModel
             {
-                Files = excelConfig.GetAll(1).Select(x=>x.Type).ToList()
+                Files = excelConfig.GetAll(1).ConvertAll(x=> new ExportFile { Display = x.File, ClassName=x.Type })
             };
 
             return View(evm);

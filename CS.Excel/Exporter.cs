@@ -12,6 +12,7 @@ using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using NPOI.HSSF.UserModel;
 using Caly.Common;
 using System.Linq;
 
@@ -19,36 +20,10 @@ namespace CS.Excel
 {
     public static class Exporter
     {
-        public static void Export<T>(IRow row, T data, string[] columnNames, ValidationResult validation) where T : Output
+
+        public static HSSFWorkbook CycleProprietari(CadSysContext context, string[] columnNames, string ruleSet)
         {
-
-        }
-
-        /*public static XSSFWorkbook Cycle<T>(DbSet<T> set, AbstractValidator<T> validator, string[] columnNames, string ruleSet) where T : BaseEntity
-        {
-            var wbk = new XSSFWorkbook();
-
-            var sheet = wbk.CreateSheet("Sheet 1");
-
-            var header = sheet.CreateRow(0);
-
-            for (var i = 0; i < columnNames.Length; i++)
-            {
-                var cell = header.CreateCell(i);
-                cell.SetCellValue(columnNames[i]);
-            }
-
-            foreach (var x in set)
-            {
-                ExportProprietar(sheet, columnNames, x, validator, ruleSet);
-            }
-
-            return wbk;
-        }*/
-
-        public static XSSFWorkbook CycleProprietari(CadSysContext context, string[] columnNames, string ruleSet)
-        {
-            var wbk = new XSSFWorkbook();
+            var wbk = new HSSFWorkbook();
 
             var sheet = wbk.CreateSheet("Sheet 1");
 
@@ -69,9 +44,9 @@ namespace CS.Excel
             return wbk;
         }
 
-        public static XSSFWorkbook CycleActeProprietate(CadSysContext context, string[] columnNames, string ruleSet)
+        public static HSSFWorkbook CycleActeProprietate(CadSysContext context, string[] columnNames, string ruleSet)
         {
-            var wbk = new XSSFWorkbook();
+            var wbk = new HSSFWorkbook();
 
             var sheet = wbk.CreateSheet("Sheet 1");
 
@@ -92,9 +67,9 @@ namespace CS.Excel
             return wbk;
         }
 
-        public static XSSFWorkbook CycleParcele(CadSysContext context, string[] columnNames, string ruleSet)
+        public static HSSFWorkbook CycleParcele(CadSysContext context, string[] columnNames, string ruleSet)
         {
-            var wbk = new XSSFWorkbook();
+            var wbk = new HSSFWorkbook();
 
             var sheet = wbk.CreateSheet("Sheet 1");
 
@@ -115,9 +90,9 @@ namespace CS.Excel
             return wbk;
         }
 
-        public static XSSFWorkbook CycleInscrieri(CadSysContext context, string[] columnNames, string ruleSet)
+        public static HSSFWorkbook CycleInscrieri(CadSysContext context, string[] columnNames, string ruleSet)
         {
-            var wbk = new XSSFWorkbook();
+            var wbk = new HSSFWorkbook();
 
             var sheet = wbk.CreateSheet("Sheet 1");
 
@@ -272,8 +247,8 @@ namespace CS.Excel
                               cell = row.CreateCell(propIndex, CellType.String);
                           }
 
-                          var comment = row.Sheet.CreateDrawingPatriarch().CreateCellComment(new XSSFClientAnchor(0, 0, 0, 0, propIndex, row.RowNum, propIndex + 3, row.RowNum + 1));
-                          comment.String = new XSSFRichTextString(String.Join("; ", x.Select(y => y.ErrorMessage)));
+                        var comment = row.Sheet.CreateDrawingPatriarch().CreateCellComment(new HSSFClientAnchor(0, 0, 0, 0, propIndex, row.RowNum, propIndex + 3, row.RowNum + 2));
+                          comment.String = new HSSFRichTextString(String.Join("; ", x.Select(y => y.ErrorMessage)));
                           comment.Row = row.RowNum;
                           comment.Column = propIndex;
                       }

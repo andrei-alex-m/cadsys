@@ -6,14 +6,14 @@
     ViewData["Title"] = "Download";
 }
 
-<h2>You again buttwipe?</h2>
+<h2>Files download</h2>
 <ul>
 
 
-    @foreach (var file in Model.Files)
+    @foreach (var f in Model.Files)
     {
         <li>
-            <input type="button" value="@file" onclick="location.href='@Url.Action("GetFile", "Export", new { file = file} )'" />
+            <input type="button" value="@f.Display" onclick="location.href='@Url.Action("GetFile", "Export", new { file = f.ClassName } )'" />
         </li>
     }
 </ul>

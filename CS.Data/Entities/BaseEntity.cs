@@ -24,18 +24,5 @@ namespace CS.Data.Entities
             get;
             set;
         }
-
-        public bool CompareBy(BaseEntity other, params Func<BaseEntity, object>[] props)
-        {
-            for (var i = 0; i < props.Length; i++)
-            {
-                if (props[i](this) != props[i](other))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
     }
 }
