@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Caly.Common/Matcher.cs">
     <Files>
       <File FileName="CS.Data/Entities/Dictionaries/Localitate.cs" Line="4" Column="29" />
       <File FileName="CS.Templating/County.xml" Line="36" Column="11" />
@@ -22,7 +22,6 @@
       <File FileName="CS.Excel/Exporter.cs" Line="213" Column="9" />
       <File FileName="Caly.Common/Tree.cs" Line="4" Column="25" />
       <File FileName="Caly.Common/Matcher.cs" Line="52" Column="10" />
-      <File FileName="CadSys Status" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">

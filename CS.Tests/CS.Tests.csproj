@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CS.DXF\CS.DXF.csproj" />
     <ProjectReference Include="..\CS.Templating\CS.Templating.csproj" />
+    <ProjectReference Include="..\Caly.Common\Caly.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Dictionary.xml">
