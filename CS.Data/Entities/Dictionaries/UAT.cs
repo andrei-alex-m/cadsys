@@ -1,14 +1,52 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CS.Data.Entities.Dictionaries
+namespace CS.Data.Entities
 {
-    public class UAT:BaseDictionary
+    public class UAT
     {
-        [ForeignKey("JudetId")]
-        public Judet Judet { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id
+        {
+            get;
+            set;
+        }
+
         [Required]
-        public int JudetId { get; set; }
+        [ForeignKey("Judet")]
+        public int JudetId
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        public string Denumire
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        public int SIRUTA
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        public bool Activ
+        {
+            get;
+            set;
+        }
+
+        public Judet Judet { get; set; }
+
+        [InverseProperty("UAT")]
+        public virtual ICollection<Localitate> Parcele { get; set; } = new HashSet<Localitate>();
     }
 }
