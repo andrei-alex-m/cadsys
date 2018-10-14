@@ -428,6 +428,7 @@
       "CS.EF/1.0.0": {
         "dependencies": {
           "CS.Data": "1.0.0",
+          "CS.Templating": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.1.1",
           "Microsoft.EntityFrameworkCore.Tools": "2.1.1",
           "Microsoft.Extensions.Configuration.FileExtensions": "2.1.1",
@@ -467,6 +468,18 @@
         },
         "compile": {
           "CS.Services.dll": {}
+        }
+      },
+      "CS.Templating/1.0.0": {
+        "dependencies": {
+          "CS.Data": "1.0.0",
+          "System.Xml.XDocument": "4.3.0"
+        },
+        "runtime": {
+          "CS.Templating.dll": {}
+        },
+        "compile": {
+          "CS.Templating.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3583,6 +3596,11 @@
       "sha512": ""
     },
     "CS.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CS.Templating/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

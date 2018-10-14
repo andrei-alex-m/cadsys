@@ -1,10 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.FileExtensions;
-using Microsoft.Extensions.Configuration.Json;
 
 namespace CS.EF
 {
@@ -17,7 +14,8 @@ namespace CS.EF
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var dbContextBuilder = new DbContextOptionsBuilder<CadSysContext>();
+            var dbContextBuilder = new DbContextOptionsBuilder<CadSysContext>()
+                .EnableSensitiveDataLogging();
 
             var connectionString = configuration.GetConnectionString("con");
 

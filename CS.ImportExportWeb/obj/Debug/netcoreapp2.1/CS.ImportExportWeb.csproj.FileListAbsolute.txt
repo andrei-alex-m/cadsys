@@ -9,10 +9,14 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Data.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.EF.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Excel.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Services.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Templating.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Excel.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.EF.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/Caly.Common.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Services.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Data.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Templating.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.csprojAssemblyReference.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.csproj.CoreCompileInputs.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.RazorAssemblyInfo.cache
@@ -22,6 +26,7 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.TagHelpers.input.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.TagHelpers.output.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.RazorCoreGenerate.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Home/Download.g.cshtml.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Home/Index.g.cshtml.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Home/Upload.g.cshtml.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Shared/Error.g.cshtml.cs
@@ -36,6 +41,3 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.csproj.CopyComplete
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/CS.ImportExportWeb.pdb
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Services.dll
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/bin/Debug/netcoreapp2.1/CS.Services.pdb
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/obj/Debug/netcoreapp2.1/Razor/Views/Home/Download.g.cshtml.cs

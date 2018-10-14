@@ -175,7 +175,9 @@ namespace CS.EF
             );
 
             CadSysContextExtensions.DictionaryTemplateAdditions(modelBuilder);
-
+            CadSysContextExtensions.JudeteTemplateAdditions(modelBuilder);
+            CadSysContextExtensions.UATTemplateAdditions(modelBuilder);
+            CadSysContextExtensions.LocalitateTemplateAdditions(modelBuilder);
         }
 
     }

@@ -4560,13 +4560,13 @@
       "projectName": "CS.EF",
       "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/CS.EF.csproj",
       "packagesPath": "/Users/andrei/.nuget/packages/",
-      "outputPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj",
+      "outputPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/andrei/.config/NuGet/NuGet.Config"
+        "/Users/andrei/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -4597,29 +4597,29 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
-            "version": "2.1.1"
+            "version": "[2.1.1, )"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
             "target": "Package",
-            "version": "2.1.1"
+            "version": "[2.1.1, )"
           },
           "Microsoft.Extensions.Configuration.FileExtensions": {
             "target": "Package",
-            "version": "2.1.1"
+            "version": "[2.1.1, )"
           },
           "Microsoft.Extensions.Configuration.Json": {
             "target": "Package",
-            "version": "2.1.1"
-          },
-          "Pomelo.EntityFrameworkCore.MySql": {
-            "target": "Package",
-            "version": "2.1.1"
+            "version": "[2.1.1, )"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.1.0",
+            "version": "[2.1.0, )",
             "autoReferenced": true
+          },
+          "Pomelo.EntityFrameworkCore.MySql": {
+            "target": "Package",
+            "version": "[2.1.1, )"
           }
         },
         "imports": [

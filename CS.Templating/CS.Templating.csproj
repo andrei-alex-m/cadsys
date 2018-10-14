@@ -13,6 +13,22 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DictionaryInContext.cs</LastGenOutput>
     </None>
+    <None Update="AdminInContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AdminInContext.cs</LastGenOutput>
+    </None>
+    <None Update="UATInContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UATInContext.cs</LastGenOutput>
+    </None>
+    <None Update="LocalitateInContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LocalitateInContext.cs</LastGenOutput>
+    </None>
+    <None Update="JudetInContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>JudetInContext.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />
@@ -23,6 +39,18 @@
     </Compile>
     <Compile Update="DictionaryInContext.cs">
       <DependentUpon>DictionaryInContext.tt</DependentUpon>
+    </Compile>
+    <Compile Update="AdminInContext.cs">
+      <DependentUpon>UATInContext.tt</DependentUpon>
+    </Compile>
+    <Compile Update="LocalitateInContext.cs">
+      <DependentUpon>LocalitateInContext.tt</DependentUpon>
+    </Compile>
+    <Compile Update="JudetInContext.cs">
+      <DependentUpon>JudetInContext.tt</DependentUpon>
+    </Compile>
+    <Compile Update="UATInContext.cs">
+      <DependentUpon>UATInContext.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
