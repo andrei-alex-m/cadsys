@@ -81,33 +81,33 @@ public class TreeNode<T, V> : TreeNode
         return Leaf != null;
     }
 
-    public TreeNode<T,V> AddChild(T value)
+    public TreeNode<T, V> AddChild(T value)
     {
-        var node = new TreeNode<T,V>(value);
+        var node = new TreeNode<T, V>(value);
         base.AddChild(node);
         return node;
     }
     public TreeNode<T, V> AddChild(V leaf)
     {
-        var node = new TreeNode<T,V>(leaf);
+        var node = new TreeNode<T, V>(leaf);
         base.AddChild(node);
         return node;
     }
 
-    public List<T> BuildChainUp(List<T> chain, Guid id=default(Guid))
+    public List<T> BuildChainUp(List<T> chain, Guid id = default(Guid))
     {
-        if (chain==null)
+        if (chain == null)
         {
             chain = new List<T>();
         }
 
-        if (this.Id != id || id==Guid.Empty)
+        if (this.Id != id || id == Guid.Empty)
         {
             if (!this.IsLeaf())
             {
                 chain.Add(this.Value);
             }
-            if (this.Parent!=null)
+            if (this.Parent != null)
             {
                 chain = (Parent as TreeNode<T, V>).BuildChainUp(chain, id);
             }
@@ -133,11 +133,11 @@ public class TreeNode<T, V> : TreeNode
     /// </summary>
     /// <returns>The leaves.</returns>
     /// <param name="leaves">Leaves.</param>
-    public List<TreeNode<T,V>> GetLeaves(List<TreeNode<T,V>> leaves=null)
+    public List<TreeNode<T, V>> GetLeaves(List<TreeNode<T, V>> leaves = null)
     {
         if (leaves == null)
         {
-            leaves = new List<TreeNode<T,V>>();
+            leaves = new List<TreeNode<T, V>>();
         }
 
         if (IsLeaf())
@@ -159,18 +159,18 @@ public class TreeNode<T, V> : TreeNode
     /// <param name="criteria">Criteria.</param>
     /// <param name="passFurther">Pass further down the tree. It means that the node is in the criteria but s not of the lowest depth </param>
     /// <param name="acquire">Acquire the node when the lowest depth is reached and is in criteia</param>
-    public List<TreeNode<T, V>> Narrow(List<TreeNode<T,V>> nodelist, List<T> criteria, Func<TreeNode<T,V>, bool> passFurther, Func<TreeNode<T, V>, bool> acquire)
+    public List<TreeNode<T, V>> Narrow(List<TreeNode<T, V>> nodelist, List<T> criteria, Func<TreeNode<T, V>, bool> passFurther, Func<TreeNode<T, V>, bool> acquire)
     {
-        if (nodelist==null)
+        if (nodelist == null)
         {
             nodelist = new List<TreeNode<T, V>>();
         }
-        if (criteria==null)
+        if (criteria == null)
         {
             return nodelist;
         }
 
-        if(acquire(this))
+        if (acquire(this))
         {
             nodelist.Add(this);
             return nodelist;

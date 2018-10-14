@@ -9,6 +9,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Dictionary.cs</LastGenOutput>
     </None>
+    <None Update="DictionaryInContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DictionaryInContext.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />
@@ -17,8 +21,14 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Dictionary.cs">
       <DependentUpon>Dictionary.tt</DependentUpon>
     </Compile>
+    <Compile Update="DictionaryInContext.cs">
+      <DependentUpon>DictionaryInContext.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
   </ItemGroup>
 </Project>

@@ -45,12 +45,33 @@ namespace CS.EF.Migrations
                     b.ToTable("ActeProprietate");
                 });
 
+            modelBuilder.Entity("CS.Data.Entities.BaseXMLDictionary", b =>
+                {
+                    b.Property<int>("Id");
+
+                    b.Property<string>("Denumire")
+                        .IsRequired();
+
+                    b.Property<string>("Descriere");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dictionar");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("BaseXMLDictionary");
+                });
+
             modelBuilder.Entity("CS.Data.Entities.Dictionaries.UAT", b =>
                 {
                     b.Property<int>("Id");
 
                     b.Property<string>("Denumire")
                         .IsRequired();
+
+                    b.Property<string>("Descriere");
 
                     b.Property<int>("JudetId");
 
@@ -190,6 +211,8 @@ namespace CS.EF.Migrations
                     b.Property<string>("Denumire")
                         .IsRequired();
 
+                    b.Property<string>("Descriere");
+
                     b.HasKey("Id");
 
                     b.ToTable("Judet");
@@ -205,6 +228,8 @@ namespace CS.EF.Migrations
 
                     b.Property<string>("Denumire")
                         .IsRequired();
+
+                    b.Property<string>("Descriere");
 
                     b.HasKey("Id");
 
@@ -293,6 +318,8 @@ namespace CS.EF.Migrations
 
                     b.Property<string>("Denumire")
                         .IsRequired();
+
+                    b.Property<string>("Descriere");
 
                     b.Property<int>("UATId");
 
@@ -424,6 +451,8 @@ namespace CS.EF.Migrations
                     b.Property<string>("Denumire")
                         .IsRequired();
 
+                    b.Property<string>("Descriere");
+
                     b.HasKey("Id");
 
                     b.ToTable("TipuriActProprietate");
@@ -446,6 +475,550 @@ namespace CS.EF.Migrations
                         new { Id = 15, Denumire = "Testament" },
                         new { Id = 16, Denumire = "Declaratie Notariala" },
                         new { Id = 17, Denumire = "Certificat de Legatar Suplimentar" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.BUILDDEST", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("BUILDDEST");
+
+                    b.HasDiscriminator().HasValue("BUILDDEST");
+
+                    b.HasData(
+                        new { Id = 1, Denumire = "CA", Descriere = "constructii anexa" },
+                        new { Id = 2, Denumire = "CAS", Descriere = "constructii administrative si social culturale" },
+                        new { Id = 3, Denumire = "CIE", Descriere = "constructii industriale si edilitare" },
+                        new { Id = 4, Denumire = "CL", Descriere = "constructii de locuinte" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.COMMONPARTS", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("COMMONPARTS");
+
+                    b.HasDiscriminator().HasValue("COMMONPARTS");
+
+                    b.HasData(
+                        new { Id = 5, Denumire = "ACOPERIS", Descriere = "Acoperis" },
+                        new { Id = 6, Denumire = "ALTE_SPATII", Descriere = "Alte spatii comune" },
+                        new { Id = 7, Denumire = "BALCON", Descriere = "Balcon" },
+                        new { Id = 8, Denumire = "BOXA", Descriere = "Boxa" },
+                        new { Id = 9, Denumire = "CAMERA_TEHNICA", Descriere = "Camera tehnica" },
+                        new { Id = 10, Denumire = "CASA_ASCENSORULUI", Descriere = "Casa ascensorului" },
+                        new { Id = 11, Denumire = "CASA_SCARII", Descriere = "Casa scarii" },
+                        new { Id = 12, Denumire = "CENTRALA_TERMICA", Descriere = "Centrala termica" },
+                        new { Id = 13, Denumire = "COS_FUM", Descriere = "Cos de fum" },
+                        new { Id = 14, Denumire = "DUSURI_COMUNE", Descriere = "Dusuri comune" },
+                        new { Id = 15, Denumire = "GHENA", Descriere = "Ghena" },
+                        new { Id = 16, Denumire = "HOLURI", Descriere = "Holuri" },
+                        new { Id = 17, Denumire = "LOGIE", Descriere = "Logie" },
+                        new { Id = 18, Denumire = "PIVNITA", Descriere = "Pivnita" },
+                        new { Id = 19, Denumire = "POD", Descriere = "Pod" },
+                        new { Id = 20, Denumire = "RAMPA_ACCES", Descriere = "Rampa de acces" },
+                        new { Id = 21, Denumire = "SCARA_ACCES", Descriere = "Scara de acces" },
+                        new { Id = 22, Denumire = "SCARI_EXTERIOARE", Descriere = "Scari exterioare" },
+                        new { Id = 23, Denumire = "SPALATORIE", Descriere = "Spalatorie" },
+                        new { Id = 24, Denumire = "SUBSOL", Descriere = "Subsol" },
+                        new { Id = 25, Denumire = "TERASA", Descriere = "Terasa" },
+                        new { Id = 26, Denumire = "USCATORIE", Descriere = "Uscatorie" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.COUNTRY", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("COUNTRY");
+
+                    b.HasDiscriminator().HasValue("COUNTRY");
+
+                    b.HasData(
+                        new { Id = 27, Denumire = "AD", Descriere = "Andorra" },
+                        new { Id = 28, Denumire = "AE", Descriere = "United Arab Emirates" },
+                        new { Id = 29, Denumire = "AF", Descriere = "Afghanistan " },
+                        new { Id = 30, Denumire = "AG", Descriere = "Antigua And Barbuda" },
+                        new { Id = 31, Denumire = "AI", Descriere = "Anguilla" },
+                        new { Id = 32, Denumire = "AL", Descriere = "Albania" },
+                        new { Id = 33, Denumire = "AM", Descriere = "Armenia" },
+                        new { Id = 34, Denumire = "AN", Descriere = "Netherlands Antilles" },
+                        new { Id = 35, Denumire = "AO", Descriere = "Angola" },
+                        new { Id = 36, Denumire = "AQ", Descriere = "Antarctica" },
+                        new { Id = 37, Denumire = "AR", Descriere = "Argentina" },
+                        new { Id = 38, Denumire = "AS", Descriere = "American Samoa" },
+                        new { Id = 39, Denumire = "AT", Descriere = "Austria" },
+                        new { Id = 40, Denumire = "AU", Descriere = "Australia" },
+                        new { Id = 41, Denumire = "AW", Descriere = "Aruba" },
+                        new { Id = 42, Denumire = "AX", Descriere = "Aland Islands" },
+                        new { Id = 43, Denumire = "AZ", Descriere = "Azerbaijan" },
+                        new { Id = 44, Denumire = "BA", Descriere = "Bosnia And Herzegovina" },
+                        new { Id = 45, Denumire = "BB", Descriere = "Barbados" },
+                        new { Id = 46, Denumire = "BD", Descriere = "Bangladesh" },
+                        new { Id = 47, Denumire = "BE", Descriere = "Belgium" },
+                        new { Id = 48, Denumire = "BF", Descriere = "Burkina Faso" },
+                        new { Id = 49, Denumire = "BG", Descriere = "Bulgaria" },
+                        new { Id = 50, Denumire = "BH", Descriere = "Bahrain" },
+                        new { Id = 51, Denumire = "BI", Descriere = "Burundi" },
+                        new { Id = 52, Denumire = "BJ", Descriere = "Benin" },
+                        new { Id = 53, Denumire = "BM", Descriere = "Bermuda" },
+                        new { Id = 54, Denumire = "BN", Descriere = "Brunei Darussalam" },
+                        new { Id = 55, Denumire = "BO", Descriere = "Bolivia" },
+                        new { Id = 56, Denumire = "BR", Descriere = "Brazil" },
+                        new { Id = 57, Denumire = "BS", Descriere = "Bahamas" },
+                        new { Id = 58, Denumire = "BT", Descriere = "Bhutan" },
+                        new { Id = 59, Denumire = "BV", Descriere = "Bouvet Island" },
+                        new { Id = 60, Denumire = "BW", Descriere = "Botswana" },
+                        new { Id = 61, Denumire = "BY", Descriere = "Belarus" },
+                        new { Id = 62, Denumire = "BZ", Descriere = "Belize" },
+                        new { Id = 63, Denumire = "CA", Descriere = "Canada" },
+                        new { Id = 64, Denumire = "CC", Descriere = "Cocos (Keeling) Islands" },
+                        new { Id = 65, Denumire = "CD", Descriere = "Congo, The Democratic Republic Of The" },
+                        new { Id = 66, Denumire = "CF", Descriere = "Central African Republic" },
+                        new { Id = 67, Denumire = "CG", Descriere = "Congo" },
+                        new { Id = 68, Denumire = "CH", Descriere = "Switzerland" },
+                        new { Id = 69, Denumire = "CI", Descriere = "Côte D'Ivoire" },
+                        new { Id = 70, Denumire = "CK", Descriere = "Cook Islands" },
+                        new { Id = 71, Denumire = "CL", Descriere = "Chile" },
+                        new { Id = 72, Denumire = "CM", Descriere = "Cameroon" },
+                        new { Id = 73, Denumire = "CN", Descriere = "China" },
+                        new { Id = 74, Denumire = "CO", Descriere = "Colombia" },
+                        new { Id = 75, Denumire = "CR", Descriere = "Costa Rica" },
+                        new { Id = 76, Denumire = "CS", Descriere = "Serbia And Montenegro" },
+                        new { Id = 77, Denumire = "CU", Descriere = "Cuba" },
+                        new { Id = 78, Denumire = "CV", Descriere = "Cape Verde" },
+                        new { Id = 79, Denumire = "CX", Descriere = "Christmas Island" },
+                        new { Id = 80, Denumire = "CY", Descriere = "Cyprus" },
+                        new { Id = 81, Denumire = "CZ", Descriere = "Czech Republic" },
+                        new { Id = 82, Denumire = "DE", Descriere = "Germany" },
+                        new { Id = 83, Denumire = "DJ", Descriere = "Djibouti" },
+                        new { Id = 84, Denumire = "DK", Descriere = "Denmark" },
+                        new { Id = 85, Denumire = "DM", Descriere = "Dominica" },
+                        new { Id = 86, Denumire = "DO", Descriere = "Dominican Republic" },
+                        new { Id = 87, Denumire = "DZ", Descriere = "Algeria" },
+                        new { Id = 88, Denumire = "EC", Descriere = "Ecuador" },
+                        new { Id = 89, Denumire = "EE", Descriere = "Estonia" },
+                        new { Id = 90, Denumire = "EG", Descriere = "Egypt" },
+                        new { Id = 91, Denumire = "EH", Descriere = "Western Sahara" },
+                        new { Id = 92, Denumire = "ER", Descriere = "Eritrea" },
+                        new { Id = 93, Denumire = "ES", Descriere = "Spain" },
+                        new { Id = 94, Denumire = "ET", Descriere = "Ethiopia" },
+                        new { Id = 95, Denumire = "FI", Descriere = "Finland" },
+                        new { Id = 96, Denumire = "FJ", Descriere = "Fiji" },
+                        new { Id = 97, Denumire = "FK", Descriere = "Falkland Islands (Malvinas)" },
+                        new { Id = 98, Denumire = "FM", Descriere = "Micronesia, Federated States Of" },
+                        new { Id = 99, Denumire = "FO", Descriere = "Faroe Islands" },
+                        new { Id = 100, Denumire = "FR", Descriere = "France" },
+                        new { Id = 101, Denumire = "GA", Descriere = "Gabon " },
+                        new { Id = 102, Denumire = "GB", Descriere = "United Kingdom" },
+                        new { Id = 103, Denumire = "GD", Descriere = "Grenada" },
+                        new { Id = 104, Denumire = "GE", Descriere = "Georgia" },
+                        new { Id = 105, Denumire = "GF", Descriere = "French Guiana" },
+                        new { Id = 106, Denumire = "GH", Descriere = "Ghana" },
+                        new { Id = 107, Denumire = "GI", Descriere = "Gibraltar" },
+                        new { Id = 108, Denumire = "GL", Descriere = "Greenland" },
+                        new { Id = 109, Denumire = "GM", Descriere = "Gambia" },
+                        new { Id = 110, Denumire = "GN", Descriere = "Guinea" },
+                        new { Id = 111, Denumire = "GP", Descriere = "Guadeloupe" },
+                        new { Id = 112, Denumire = "GQ", Descriere = "Equatorial Guinea" },
+                        new { Id = 113, Denumire = "GR", Descriere = "Greece" },
+                        new { Id = 114, Denumire = "GS", Descriere = "South Georgia And The South Sandwich Islands" },
+                        new { Id = 115, Denumire = "GT", Descriere = "Guatemala" },
+                        new { Id = 116, Denumire = "GU", Descriere = "Guam" },
+                        new { Id = 117, Denumire = "GW", Descriere = "Guinea-Bissau" },
+                        new { Id = 118, Denumire = "GY", Descriere = "Guyana" },
+                        new { Id = 119, Denumire = "HK", Descriere = "Hong Kong" },
+                        new { Id = 120, Denumire = "HM", Descriere = "Heard Island And Mcdonald Islands" },
+                        new { Id = 121, Denumire = "HN", Descriere = "Honduras" },
+                        new { Id = 122, Denumire = "HR", Descriere = "Croatia" },
+                        new { Id = 123, Denumire = "HT", Descriere = "Haiti" },
+                        new { Id = 124, Denumire = "HU", Descriere = "Hungary" },
+                        new { Id = 125, Denumire = "ID", Descriere = "Indonesia" },
+                        new { Id = 126, Denumire = "IE", Descriere = "Ireland" },
+                        new { Id = 127, Denumire = "IL", Descriere = "Israel" },
+                        new { Id = 128, Denumire = "IN", Descriere = "India" },
+                        new { Id = 129, Denumire = "IO", Descriere = "British Indian Ocean Territory" },
+                        new { Id = 130, Denumire = "IQ", Descriere = "Iraq" },
+                        new { Id = 131, Denumire = "IR", Descriere = "Iran, Islamic Republic Of" },
+                        new { Id = 132, Denumire = "IS", Descriere = "Iceland" },
+                        new { Id = 133, Denumire = "IT", Descriere = "Italy" },
+                        new { Id = 134, Denumire = "JM", Descriere = "Jamaica" },
+                        new { Id = 135, Denumire = "JO", Descriere = "Jordan" },
+                        new { Id = 136, Denumire = "JP", Descriere = "Japan" },
+                        new { Id = 137, Denumire = "KE", Descriere = "Kenya" },
+                        new { Id = 138, Denumire = "KG", Descriere = "Kyrgyzstan" },
+                        new { Id = 139, Denumire = "KH", Descriere = "Cambodia" },
+                        new { Id = 140, Denumire = "KI", Descriere = "Kiribati" },
+                        new { Id = 141, Denumire = "KM", Descriere = "Comoros" },
+                        new { Id = 142, Denumire = "KN", Descriere = "Saint Kitts And Nevis" },
+                        new { Id = 143, Denumire = "KP", Descriere = "Korea, Democratic People'S Republic Of" },
+                        new { Id = 144, Denumire = "KR", Descriere = "Korea, Republic Of" },
+                        new { Id = 145, Denumire = "KW", Descriere = "Kuwait" },
+                        new { Id = 146, Denumire = "KY", Descriere = "Cayman Islands" },
+                        new { Id = 147, Denumire = "KZ", Descriere = "Kazakhstan" },
+                        new { Id = 148, Denumire = "LA", Descriere = "Lao People'S Democratic Republic " },
+                        new { Id = 149, Denumire = "LB", Descriere = "Lebanon" },
+                        new { Id = 150, Denumire = "LC", Descriere = "Saint Lucia" },
+                        new { Id = 151, Denumire = "LI", Descriere = "Liechtenstein" },
+                        new { Id = 152, Denumire = "LK", Descriere = "Sri Lanka" },
+                        new { Id = 153, Denumire = "LR", Descriere = "Liberia" },
+                        new { Id = 154, Denumire = "LS", Descriere = "Lesotho" },
+                        new { Id = 155, Denumire = "LT", Descriere = "Lithuania" },
+                        new { Id = 156, Denumire = "LU", Descriere = "Luxembourg" },
+                        new { Id = 157, Denumire = "LV", Descriere = "Latvia" },
+                        new { Id = 158, Denumire = "LY", Descriere = "Libyan Arab Jamahiriya" },
+                        new { Id = 159, Denumire = "MA", Descriere = "Morocco" },
+                        new { Id = 160, Denumire = "MC", Descriere = "Monaco" },
+                        new { Id = 161, Denumire = "MD", Descriere = "Moldova, Republic Of" },
+                        new { Id = 162, Denumire = "MG", Descriere = "Madagascar" },
+                        new { Id = 163, Denumire = "MH", Descriere = "Marshall Islands" },
+                        new { Id = 164, Denumire = "MK", Descriere = "Macedonia, The Former Yugoslav Republic Of" },
+                        new { Id = 165, Denumire = "ML", Descriere = "Mali" },
+                        new { Id = 166, Denumire = "MM", Descriere = "Myanmar" },
+                        new { Id = 167, Denumire = "MN", Descriere = "Mongolia" },
+                        new { Id = 168, Denumire = "MO", Descriere = "Macao" },
+                        new { Id = 169, Denumire = "MP", Descriere = "Northern Mariana Islands" },
+                        new { Id = 170, Denumire = "MQ", Descriere = "Martinique" },
+                        new { Id = 171, Denumire = "MR", Descriere = "Mauritania" },
+                        new { Id = 172, Denumire = "MS", Descriere = "Montserrat" },
+                        new { Id = 173, Denumire = "MT", Descriere = "Malta" },
+                        new { Id = 174, Denumire = "MU", Descriere = "Mauritius" },
+                        new { Id = 175, Denumire = "MV", Descriere = "Maldives" },
+                        new { Id = 176, Denumire = "MW", Descriere = "Malawi" },
+                        new { Id = 177, Denumire = "MX", Descriere = "Mexico" },
+                        new { Id = 178, Denumire = "MY", Descriere = "Malaysia" },
+                        new { Id = 179, Denumire = "MZ", Descriere = "Mozambique" },
+                        new { Id = 180, Denumire = "NA", Descriere = "Namibia" },
+                        new { Id = 181, Denumire = "NC", Descriere = "New Caledonia" },
+                        new { Id = 182, Denumire = "NE", Descriere = "Niger" },
+                        new { Id = 183, Denumire = "NF", Descriere = "Norfolk Island" },
+                        new { Id = 184, Denumire = "NG", Descriere = "Nigeria" },
+                        new { Id = 185, Denumire = "NI", Descriere = "Nicaragua" },
+                        new { Id = 186, Denumire = "NL", Descriere = "Netherlands" },
+                        new { Id = 187, Denumire = "NO", Descriere = "Norway" },
+                        new { Id = 188, Denumire = "NP", Descriere = "Nepal" },
+                        new { Id = 189, Denumire = "NR", Descriere = "Nauru" },
+                        new { Id = 190, Denumire = "NU", Descriere = "Niue" },
+                        new { Id = 191, Denumire = "NZ", Descriere = "New Zealand" },
+                        new { Id = 192, Denumire = "OM", Descriere = "Oman" },
+                        new { Id = 193, Denumire = "PA", Descriere = "Panama" },
+                        new { Id = 194, Denumire = "PE", Descriere = "Peru" },
+                        new { Id = 195, Denumire = "PF", Descriere = "French Polynesia" },
+                        new { Id = 196, Denumire = "PG", Descriere = "Papua New Guinea" },
+                        new { Id = 197, Denumire = "PH", Descriere = "Philippines" },
+                        new { Id = 198, Denumire = "PK", Descriere = "Pakistan" },
+                        new { Id = 199, Denumire = "PL", Descriere = "Poland" },
+                        new { Id = 200, Denumire = "PM", Descriere = "Saint Pierre And Miquelon" },
+                        new { Id = 201, Denumire = "PN", Descriere = "Pitcairn" },
+                        new { Id = 202, Denumire = "PR", Descriere = "Puerto Rico" },
+                        new { Id = 203, Denumire = "PS", Descriere = "Palestinian Territory, Occupied" },
+                        new { Id = 204, Denumire = "PT", Descriere = "Portugal" },
+                        new { Id = 205, Denumire = "PW", Descriere = "Palau" },
+                        new { Id = 206, Denumire = "PY", Descriere = "Paraguay" },
+                        new { Id = 207, Denumire = "QA", Descriere = "Qatar" },
+                        new { Id = 208, Denumire = "RE", Descriere = "Réunion" },
+                        new { Id = 209, Denumire = "RO", Descriere = "Romania" },
+                        new { Id = 210, Denumire = "RU", Descriere = "Russian Federation" },
+                        new { Id = 211, Denumire = "RW", Descriere = "Rwanda" },
+                        new { Id = 212, Denumire = "SA", Descriere = "Saudi Arabia" },
+                        new { Id = 213, Denumire = "SB", Descriere = "Solomon Islands" },
+                        new { Id = 214, Denumire = "SC", Descriere = "Seychelles" },
+                        new { Id = 215, Denumire = "SD", Descriere = "Sudan" },
+                        new { Id = 216, Denumire = "SE", Descriere = "Sweden" },
+                        new { Id = 217, Denumire = "SG", Descriere = "Singapore" },
+                        new { Id = 218, Denumire = "SH", Descriere = "Saint Helena " },
+                        new { Id = 219, Denumire = "SI", Descriere = "Slovenia" },
+                        new { Id = 220, Denumire = "SJ", Descriere = "Svalbard And Jan Mayen" },
+                        new { Id = 221, Denumire = "SK", Descriere = "Slovakia" },
+                        new { Id = 222, Denumire = "SL", Descriere = "Sierra Leone" },
+                        new { Id = 223, Denumire = "SM", Descriere = "San Marino" },
+                        new { Id = 224, Denumire = "SN", Descriere = "Senegal" },
+                        new { Id = 225, Denumire = "SO", Descriere = "Somalia" },
+                        new { Id = 226, Denumire = "SR", Descriere = "Suriname" },
+                        new { Id = 227, Denumire = "ST", Descriere = "Sao Tome And Principe" },
+                        new { Id = 228, Denumire = "SV", Descriere = "El Salvador" },
+                        new { Id = 229, Denumire = "SY", Descriere = "Syrian Arab Republic" },
+                        new { Id = 230, Denumire = "SZ", Descriere = "Swaziland" },
+                        new { Id = 231, Denumire = "TC", Descriere = "Turks And Caicos Islands" },
+                        new { Id = 232, Denumire = "TD", Descriere = "Chad" },
+                        new { Id = 233, Denumire = "TF", Descriere = "French Southern Territories" },
+                        new { Id = 234, Denumire = "TG", Descriere = "Togo" },
+                        new { Id = 235, Denumire = "TH", Descriere = "Thailand" },
+                        new { Id = 236, Denumire = "TJ", Descriere = "Tajikistan" },
+                        new { Id = 237, Denumire = "TK", Descriere = "Tokelau" },
+                        new { Id = 238, Denumire = "TL", Descriere = "Timor-Leste" },
+                        new { Id = 239, Denumire = "TM", Descriere = "Turkmenistan" },
+                        new { Id = 240, Denumire = "TN", Descriere = "Tunisia" },
+                        new { Id = 241, Denumire = "TO", Descriere = "Tonga" },
+                        new { Id = 242, Denumire = "TR", Descriere = "Turkey" },
+                        new { Id = 243, Denumire = "TT", Descriere = "Trinidad And Tobago" },
+                        new { Id = 244, Denumire = "TV", Descriere = "Tuvalu" },
+                        new { Id = 245, Denumire = "TW", Descriere = "Taiwan, Province Of China" },
+                        new { Id = 246, Denumire = "TZ", Descriere = "Tanzania, United Republic Of" },
+                        new { Id = 247, Denumire = "UA", Descriere = "Ukraine" },
+                        new { Id = 248, Denumire = "UG", Descriere = "Uganda" },
+                        new { Id = 249, Denumire = "UM", Descriere = "United States Minor Outlying Islands" },
+                        new { Id = 250, Denumire = "US", Descriere = "United States" },
+                        new { Id = 251, Denumire = "UY", Descriere = "Uruguay" },
+                        new { Id = 252, Denumire = "UZ", Descriere = "Uzbekistan" },
+                        new { Id = 253, Denumire = "VA", Descriere = "Holy See (Vatican City State)" },
+                        new { Id = 254, Denumire = "VC", Descriere = "Saint Vincent And The Grenadines" },
+                        new { Id = 255, Denumire = "VE", Descriere = "Venezuela" },
+                        new { Id = 256, Denumire = "VG", Descriere = "Virgin Islands, British" },
+                        new { Id = 257, Denumire = "VI", Descriere = "Virgin Islands, U.S." },
+                        new { Id = 258, Denumire = "VN", Descriere = "Viet Nam" },
+                        new { Id = 259, Denumire = "VU", Descriere = "Vanuatu" },
+                        new { Id = 260, Denumire = "WF", Descriere = "Wallis And Futuna" },
+                        new { Id = 261, Denumire = "WS", Descriere = "Samoa" },
+                        new { Id = 262, Denumire = "YE", Descriere = "Yemen" },
+                        new { Id = 263, Denumire = "YT", Descriere = "Mayotte" },
+                        new { Id = 264, Denumire = "ZA", Descriere = "South Africa" },
+                        new { Id = 265, Denumire = "ZM", Descriere = "Zambia" },
+                        new { Id = 266, Denumire = "ZW", Descriere = "Zimbabwe" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.CURRENCY", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("CURRENCY");
+
+                    b.HasDiscriminator().HasValue("CURRENCY");
+
+                    b.HasData(
+                        new { Id = 267, Denumire = "ATS", Descriere = "ATS" },
+                        new { Id = 268, Denumire = "CAD", Descriere = "CAD" },
+                        new { Id = 269, Denumire = "CHF", Descriere = "CHF" },
+                        new { Id = 270, Denumire = "DEM", Descriere = "DEM" },
+                        new { Id = 271, Denumire = "DKK", Descriere = "DKK" },
+                        new { Id = 272, Denumire = "EIR", Descriere = "EIR" },
+                        new { Id = 273, Denumire = "EUR", Descriere = "EUR" },
+                        new { Id = 274, Denumire = "GBP", Descriere = "GBP" },
+                        new { Id = 275, Denumire = "HUF", Descriere = "HUF" },
+                        new { Id = 276, Denumire = "INT", Descriere = "INT" },
+                        new { Id = 277, Denumire = "JPY", Descriere = "JPY" },
+                        new { Id = 278, Denumire = "LEI", Descriere = "LEI" },
+                        new { Id = 279, Denumire = "ROL", Descriere = "ROL" },
+                        new { Id = 280, Denumire = "RON", Descriere = "RON" },
+                        new { Id = 281, Denumire = "TRY", Descriere = "TRY" },
+                        new { Id = 282, Denumire = "USD", Descriere = "USD" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.DISTRICT", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("DISTRICT");
+
+                    b.HasDiscriminator().HasValue("DISTRICT");
+
+                    b.HasData(
+                        new { Id = 283, Denumire = "CAR", Descriere = "Careul" },
+                        new { Id = 284, Denumire = "CART", Descriere = "Cartier" },
+                        new { Id = 285, Denumire = "CVART", Descriere = "Cvartal" },
+                        new { Id = 286, Denumire = "MICRO", Descriere = "Micro" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.DOCT", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("DOCT");
+
+                    b.HasDiscriminator().HasValue("DOCT");
+
+                    b.HasData(
+                        new { Id = 287, Denumire = "ACTIUNE_INSTANTA", Descriere = "actiune in instanta" },
+                        new { Id = 288, Denumire = "ACT_NORMATIV", Descriere = "act normativ" },
+                        new { Id = 289, Denumire = "ACT_NOTARIAL", Descriere = "act notarial" },
+                        new { Id = 290, Denumire = "ADMINISTRATIVE_1", Descriere = "act administrativ" },
+                        new { Id = 291, Denumire = "CERTIFICAT_GREFA1", Descriere = "certificat grefa" },
+                        new { Id = 292, Denumire = "FISA_INTERVIU", Descriere = "fisa de interviu" },
+                        new { Id = 293, Denumire = "HOTARARE_JUDECATOREASCA", Descriere = "hotarare judecatoreasca" },
+                        new { Id = 294, Denumire = "INSCRIS_SUB_SEMNATURA_PRIVATA", Descriere = "inscris sub semnatura privata" },
+                        new { Id = 295, Denumire = "ORDONANTA", Descriere = "ordonanta" },
+                        new { Id = 296, Denumire = "SOMATIE", Descriere = "somatie" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.IDCARDTYPE", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("IDCARDTYPE");
+
+                    b.HasDiscriminator().HasValue("IDCARDTYPE");
+
+                    b.HasData(
+                        new { Id = 297, Denumire = "BI", Descriere = "Buletin de identitate" },
+                        new { Id = 298, Denumire = "CI", Descriere = "Carte de identitate" },
+                        new { Id = 299, Denumire = "PASS", Descriere = "Paşaport" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.ITYPE", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("ITYPE");
+
+                    b.HasDiscriminator().HasValue("ITYPE");
+
+                    b.HasData(
+                        new { Id = 300, Denumire = "APARTMENT", Descriere = "apartament" },
+                        new { Id = 301, Denumire = "BUILDING", Descriere = "constructie" },
+                        new { Id = 302, Denumire = "LAND", Descriere = "teren" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.OT_CAD", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("OT_CAD");
+
+                    b.HasDiscriminator().HasValue("OT_CAD");
+
+                    b.HasData(
+                        new { Id = 303, Denumire = "AMALGAMATION", Descriere = "Alipire imobile" },
+                        new { Id = 304, Denumire = "CREATE_UI", Descriere = "Apartamentare" },
+                        new { Id = 305, Denumire = "DISMEMBER", Descriere = "Dezmembrare imobil" },
+                        new { Id = 306, Denumire = "DISMEMBER_AMALGAMATION_UI", Descriere = "Alipire/Dezlipire UI" },
+                        new { Id = 307, Denumire = "FIRST_REGISTRATION", Descriere = "Prima inregistrare imobil" },
+                        new { Id = 308, Denumire = "FIRST_REGISTRATION_UI", Descriere = "Prima inregistrare UI" },
+                        new { Id = 309, Denumire = "RECREATE_UI", Descriere = "Reapartamentare" },
+                        new { Id = 310, Denumire = "RECTIFY_BOUNDARIES", Descriere = "Rectificare hotar" },
+                        new { Id = 311, Denumire = "UPDATE_DATA_LAND", Descriere = "Actualizare date imobil" },
+                        new { Id = 312, Denumire = "UPDATE_DATA_UI", Descriere = "Actualizare date UI" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.QUOTA_TYPE", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("QUOTA_TYPE");
+
+                    b.HasDiscriminator().HasValue("QUOTA_TYPE");
+
+                    b.HasData(
+                        new { Id = 313, Denumire = "ABSOLUTE_QUOTA", Descriere = "Cota absoluta (supraf.)" },
+                        new { Id = 314, Denumire = "FRACTION_QUOTA", Descriere = "Cota fractionara" },
+                        new { Id = 315, Denumire = "PERCENTAGE_QUOTA", Descriere = "Cota procentuala" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.REGISTRATIONTYPE", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("REGISTRATIONTYPE");
+
+                    b.HasDiscriminator().HasValue("REGISTRATIONTYPE");
+
+                    b.HasData(
+                        new { Id = 316, Denumire = "INTAB", Descriere = "Intabulare" },
+                        new { Id = 317, Denumire = "NOTATION", Descriere = "Notare" },
+                        new { Id = 318, Denumire = "POSESION_REGISTATION", Descriere = "Inscrierea posesiei" },
+                        new { Id = 319, Denumire = "PROVISIONALENTRY", Descriere = "Inscrierea provizorie" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.ST", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("ST");
+
+                    b.HasDiscriminator().HasValue("ST");
+
+                    b.HasData(
+                        new { Id = 320, Denumire = "AL", Descriere = "Aleea" },
+                        new { Id = 321, Denumire = "BDUL", Descriere = "Bulevardul" },
+                        new { Id = 322, Denumire = "CALEA", Descriere = "Calea" },
+                        new { Id = 323, Denumire = "CAREU", Descriere = "Careul" },
+                        new { Id = 324, Denumire = "DRUMUL", Descriere = "Drumul" },
+                        new { Id = 325, Denumire = "FND", Descriere = "Fundatura" },
+                        new { Id = 326, Denumire = "FNDC", Descriere = "Fundacul" },
+                        new { Id = 327, Denumire = "INTR", Descriere = "Intrarea" },
+                        new { Id = 328, Denumire = "PREL", Descriere = "Prelungirea" },
+                        new { Id = 329, Denumire = "PSJ", Descriere = "Pasajul" },
+                        new { Id = 330, Denumire = "PIATA", Descriere = "Piata" },
+                        new { Id = 331, Denumire = "SOS", Descriere = "Soseaua" },
+                        new { Id = 332, Denumire = "SPLAIUL", Descriere = "Splaiul" },
+                        new { Id = 333, Denumire = "STR", Descriere = "Strada" },
+                        new { Id = 334, Denumire = "STRADELA", Descriere = "Stradela" },
+                        new { Id = 335, Denumire = "STRD", Descriere = "Stradela" },
+                        new { Id = 336, Denumire = "ZONA", Descriere = "Zona" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.TITLETYPE", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("TITLETYPE");
+
+                    b.HasDiscriminator().HasValue("TITLETYPE");
+
+                    b.HasData(
+                        new { Id = 337, Denumire = "ACCESIUNE", Descriere = "Accesiune" },
+                        new { Id = 338, Denumire = "CONSTITUIRE", Descriere = "Constituire" },
+                        new { Id = 339, Denumire = "CONSTRUIRE", Descriere = "Construire" },
+                        new { Id = 340, Denumire = "CONVENTIE", Descriere = "Conventie" },
+                        new { Id = 341, Denumire = "EXPROPRIERE", Descriere = "Expropriere" },
+                        new { Id = 342, Denumire = "HOTARARE", Descriere = "Hotarare Judecatoreasca" },
+                        new { Id = 343, Denumire = "IESIRE_INDIVIZIUNE", Descriere = "Iesire Din Indiviziune" },
+                        new { Id = 344, Denumire = "LEGE", Descriere = "Lege" },
+                        new { Id = 345, Denumire = "SUCCESIUNE", Descriere = "Succesiune" },
+                        new { Id = 346, Denumire = "UZUCAPIUNE", Descriere = "Uzucapiune" },
+                        new { Id = 347, Denumire = "adjudecare", Descriere = "Adjudecare" },
+                        new { Id = 348, Denumire = "reconstituire", Descriere = "Reconstituire" }
+                    );
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.USECAT", b =>
+                {
+                    b.HasBaseType("CS.Data.Entities.BaseXMLDictionary");
+
+
+                    b.ToTable("USECAT");
+
+                    b.HasDiscriminator().HasValue("USECAT");
+
+                    b.HasData(
+                        new { Id = 349, Denumire = "A", Descriere = "arabil" },
+                        new { Id = 350, Denumire = "ALTELE", Descriere = "altele" },
+                        new { Id = 351, Denumire = "CC", Descriere = "curti constructii" },
+                        new { Id = 352, Denumire = "CF", Descriere = "cai ferate" },
+                        new { Id = 353, Denumire = "DR", Descriere = "drum" },
+                        new { Id = 354, Denumire = "F", Descriere = "faneata" },
+                        new { Id = 355, Denumire = "HB", Descriere = "ape statatoare" },
+                        new { Id = 356, Denumire = "HR", Descriere = "ape curgatoare" },
+                        new { Id = 357, Denumire = "L", Descriere = "livada" },
+                        new { Id = 358, Denumire = "N", Descriere = "neproductiv" },
+                        new { Id = 359, Denumire = "NA", Descriere = "nedeterminata" },
+                        new { Id = 360, Denumire = "P", Descriere = "pasune" },
+                        new { Id = 361, Denumire = "PD", Descriere = "padure" },
+                        new { Id = 362, Denumire = "V", Descriere = "vie" }
                     );
                 });
 

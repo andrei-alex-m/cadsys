@@ -13,4 +13,19 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Xml.Linq"#>
 <# XDocument doc = XDocument.Load(this.Host.ResolvePath("Dictionary.xml"));
+var groups = doc.Descendants("Dictionary").GroupBy(x=>x.Element("DICTIONARYCODE").Value);
+WriteLine("namespace CS.Data.Entities");
+WriteLine ("{");
+foreach(var g in groups)
+{
+    WriteLine ("    public class " + g.Key + ": BaseXMLDictionary");
+    WriteLine ("    {");
+    foreach (var item in g)
+    {
+        Console.WriteLine($"\t{item.Element("DICTIONARYITEMCODE").Value}; {item.Element("DICTIONARYITEMNAME").Value}");
+    }
+    WriteLine("    }");
+    WriteLine("");
+}
+WriteLine("}");
 #>

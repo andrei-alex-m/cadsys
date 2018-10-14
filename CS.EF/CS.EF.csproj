@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
+    <ProjectReference Include="..\CS.Templating\CS.Templating.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Migrations\20180727183952_initial.cs" />
@@ -53,8 +54,12 @@
     <Compile Remove="Migrations\20180913190757_Initial.cs" />
     <Compile Remove="Migrations\20180925211546_Initial.cs" />
     <Compile Remove="Migrations\20180930152734_Initial.cs" />
+    <Compile Remove="Migrations\20180930222904_Initial.cs" />
+    <Compile Remove="Migrations\20180930222904_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20181014132028_Initial.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EntitiesValidators\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

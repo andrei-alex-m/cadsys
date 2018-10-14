@@ -1,41 +1,48 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Caly.Common/Matcher.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
     <Files>
-      <File FileName="CS.Data/Entities/Dictionaries/Localitate.cs" Line="4" Column="29" />
-      <File FileName="CS.Templating/County.xml" Line="36" Column="11" />
-      <File FileName="CS.Data/Entities/Dictionaries/Judet.cs" Line="4" Column="21" />
-      <File FileName="CS.Data/Entities/Dictionaries/BaseDictionary.cs" Line="6" Column="24" />
-      <File FileName="CS.Templating/Locality.xml" Line="1" Column="1" />
-      <File FileName="CS.Templating/Admin.xml" Line="1" Column="1" />
-      <File FileName="CS.Data/Entities/ActProprietate.cs" Line="1" Column="1" />
-      <File FileName="CS.Data/Entities/Enums/Enums.cs" Line="27" Column="18" />
-      <File FileName="CS.Data/Entities/Adresa.cs" Line="1" Column="1" />
-      <File FileName="CS.Data/Entities/BaseEntity.cs" Line="26" Column="10" />
-      <File FileName="CS.Data/Entities/Parcela.cs" Line="10" Column="16" />
-      <File FileName="CS.Data/Mappers/Parcela.cs" Line="30" Column="9" />
-      <File FileName="CS.Templating/Dictionary.xml" Line="310" Column="44" />
-      <File FileName="CS.Templating/Teste.cs" Line="35" Column="1" />
-      <File FileName="CS.Tests/UnitTest1.cs" Line="19" Column="1" />
-      <File FileName="Caly.Common/Validation.cs" Line="1" Column="1" />
-      <File FileName="Caly.Common/Strings.cs" Line="17" Column="10" />
-      <File FileName="Caly.Common/Reflection.cs" Line="33" Column="67" />
-      <File FileName="CS.Excel/Exporter.cs" Line="213" Column="9" />
-      <File FileName="Caly.Common/Tree.cs" Line="4" Column="25" />
-      <File FileName="Caly.Common/Matcher.cs" Line="52" Column="10" />
+      <File FileName="CS.Data/Entities/Dictionaries/Tarla.cs" Line="11" Column="30" />
+      <File FileName="CS.Data/Entities/Dictionaries/UAT.cs" Line="53" Column="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/Localitate.cs" Line="19" Column="23" />
+      <File FileName="Dictionaries Status" />
+      <File FileName="CadSys Status" />
+      <File FileName="CS.EF/Context.cs" Line="178" Column="13" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/BaseDictionary.cs" Line="27" Column="10" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/BaseXMLDictionary.cs" Line="4" Column="43" NotebookId="1" />
+      <File FileName="CS.Templating/DictionaryInContext.tt" Line="31" Column="56" NotebookId="1" />
+      <File FileName="CS.Templating/Dictionary.tt" Line="17" Column="1" NotebookId="1" />
+      <File FileName="CS.Templating/Dictionary.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/Judet.cs" Line="46" Column="1" NotebookId="1" />
     </Files>
     <Pads>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+      <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="CadSys" expanded="True">
-            <Node name="CS.Tests" expanded="True">
-              <Node name="CS" expanded="True">
-                <Node name="Tests" expanded="True">
-                  <Node name="UnitTest1" expanded="True">
-                    <Node name="TestXml" selected="True" />
-                  </Node>
-                </Node>
+          <Node name="CadSys" expanded="True" selected="True">
+            <Node name="Caly.Common" expanded="True" />
+            <Node name="CS.Data" expanded="True">
+              <Node name="Entities" expanded="True">
+                <Node name="Dictionaries" expanded="True" />
               </Node>
             </Node>
+            <Node name="CS.EF" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="ProjectDependencies" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="CS.Templating" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="ProjectDependencies" expanded="True" />
+              </Node>
+              <Node name="Dictionary.tt" expanded="True" />
+              <Node name="DictionaryInContext.tt" expanded="True" />
+            </Node>
+            <Node name="CS.Tests" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="CadSys" expanded="True" selected="True">
             <Node name="Tests" expanded="True" />
           </Node>
         </State>
@@ -52,8 +59,10 @@
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ImportController.cs" relfile="CS.ImportExportWeb/Controllers/ImportController.cs" line="74" column="1" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/Class1.cs" relfile="CS.DXF/Class1.cs" line="29" column="1" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="32" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Tests/UnitTest1.cs" relfile="CS.Tests/UnitTest1.cs" line="19" column="28" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Tests/UnitTest1.cs" relfile="CS.Tests/UnitTest1.cs" line="21" column="28" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="16" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Tests/UnitTest1.cs" relfile="CS.Tests/UnitTest1.cs" line="37" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Tests/UnitTest1.cs" relfile="CS.Tests/UnitTest1.cs" line="35" column="26" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

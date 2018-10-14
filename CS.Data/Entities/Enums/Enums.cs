@@ -2,7 +2,7 @@
 namespace CS.Data.Entities
 {
 
-    public partial enum TipActIdentitate
+    public enum TipActIdentitate
     {
         BI = 0,
         CI = 1,

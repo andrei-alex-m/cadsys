@@ -20,7 +20,11 @@ namespace CS.Data.Entities
             set;
         }
 
-
+        public string Descriere
+        {
+            get;
+            set;
+        }
 
     }
 }

@@ -1,10 +1,8 @@
 ﻿using System;
-namespace CS.Data.Entities.Dictionaries
+namespace CS.Data.Entities
 {
-    public class BaseXMLDictionary
+    public class BaseXMLDictionary: BaseDictionary
     {
-        public BaseXMLDictionary()
-        {
-        }
+
     }
 }

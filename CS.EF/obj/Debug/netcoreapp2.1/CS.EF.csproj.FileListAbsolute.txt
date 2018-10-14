@@ -14,3 +14,5 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.csproj.CopyComplete
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/bin/Debug/netcoreapp2.1/CS.Templating.dll
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/bin/Debug/netcoreapp2.1/CS.Templating.pdb
