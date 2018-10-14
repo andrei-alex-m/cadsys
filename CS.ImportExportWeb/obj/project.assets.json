@@ -4542,6 +4542,7 @@
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "CS.Data": "1.0.0",
+          "CS.Templating": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.1.1",
           "Microsoft.EntityFrameworkCore.Tools": "2.1.1",
           "Microsoft.Extensions.Configuration.FileExtensions": "2.1.1",
@@ -4585,6 +4586,20 @@
         },
         "runtime": {
           "bin/placeholder/CS.Services.dll": {}
+        }
+      },
+      "CS.Templating/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "CS.Data": "1.0.0",
+          "System.Xml.XDocument": "4.3.0"
+        },
+        "compile": {
+          "bin/placeholder/CS.Templating.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CS.Templating.dll": {}
         }
       }
     }
@@ -12051,6 +12066,11 @@
       "type": "project",
       "path": "../CS.Services/CS.Services.csproj",
       "msbuildProject": "../CS.Services/CS.Services.csproj"
+    },
+    "CS.Templating/1.0.0": {
+      "type": "project",
+      "path": "../CS.Templating/CS.Templating.csproj",
+      "msbuildProject": "../CS.Templating/CS.Templating.csproj"
     }
   },
   "projectFileDependencyGroups": {

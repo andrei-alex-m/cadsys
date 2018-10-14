@@ -1,11 +1,9 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Data/Entities/Dictionaries/UAT.cs">
     <Files>
       <File FileName="CS.Data/Entities/Dictionaries/Tarla.cs" Line="11" Column="30" />
-      <File FileName="CS.Data/Entities/Dictionaries/UAT.cs" Line="53" Column="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/UAT.cs" Line="9" Column="6" />
       <File FileName="CS.Data/Entities/Dictionaries/Localitate.cs" Line="19" Column="23" />
-      <File FileName="Dictionaries Status" />
-      <File FileName="CadSys Status" />
       <File FileName="CS.EF/Context.cs" Line="178" Column="13" NotebookId="1" />
       <File FileName="CS.Data/Entities/Dictionaries/BaseDictionary.cs" Line="27" Column="10" NotebookId="1" />
       <File FileName="CS.Data/Entities/Dictionaries/BaseXMLDictionary.cs" Line="4" Column="43" NotebookId="1" />
@@ -14,40 +12,6 @@
       <File FileName="CS.Templating/Dictionary.cs" Line="1" Column="1" NotebookId="1" />
       <File FileName="CS.Data/Entities/Dictionaries/Judet.cs" Line="46" Column="1" NotebookId="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="CadSys" expanded="True" selected="True">
-            <Node name="Caly.Common" expanded="True" />
-            <Node name="CS.Data" expanded="True">
-              <Node name="Entities" expanded="True">
-                <Node name="Dictionaries" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="CS.EF" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="ProjectDependencies" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="CS.Templating" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="ProjectDependencies" expanded="True" />
-              </Node>
-              <Node name="Dictionary.tt" expanded="True" />
-              <Node name="DictionaryInContext.tt" expanded="True" />
-            </Node>
-            <Node name="CS.Tests" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__">
-          <Node name="CadSys" expanded="True" selected="True">
-            <Node name="Tests" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
