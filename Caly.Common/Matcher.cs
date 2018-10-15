@@ -81,6 +81,17 @@ namespace Caly.Common
 
     public class Classification : IEquatable<Classification>
     {
+        public Classification()
+        {
+
+        }
+
+        public Classification(int order, string name)
+        {
+            this.Order = order;
+            this.Name = name;
+        }
+
         public string Name
         {
             get;

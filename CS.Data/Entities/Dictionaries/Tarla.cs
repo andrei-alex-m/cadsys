@@ -8,10 +8,10 @@ namespace CS.Data.Entities
     public class Tarla:BaseDictionary
     {
         [Required]
-        [ForeignKey("Admin")]
-        public int AdminId { get; set; }
+        [ForeignKey("UAT")]
+        public int IdUAT { get; set; }
 
-        public UAT Admin { get; set; }
+        public UAT UAT { get; set; }
 
         [InverseProperty("Tarla")]
         public virtual ICollection<Parcela> Parcele { get; set; } = new HashSet<Parcela>();

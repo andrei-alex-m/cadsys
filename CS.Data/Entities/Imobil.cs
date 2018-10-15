@@ -80,6 +80,13 @@ namespace CS.Data.Entities
             set;
         }
 
+        public static Adresa Adresa => new Adresa()
+        {
+            SIRSUP = 120496,
+            SIRUTA = 120496,
+            Intravilan = false
+        };
+
         [InverseProperty("Imobil")]
         public virtual ICollection<InscriereImobil> Inscrieri { get; set; } = new HashSet<InscriereImobil>();
 

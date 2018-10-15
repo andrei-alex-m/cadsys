@@ -1,0 +1,44 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml.dll" #>
+
+<#@ assembly name="System.Xml.Linq.dll" #>
+<#@ assembly name="System.Xml.ReaderWriter.dll" #>
+<#@ assembly name="System.Runtime.dll" #>
+<#@ assembly name="System.IO.dll" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Xml.Linq"#>
+<# XDocument doc = XDocument.Load(this.Host.ResolvePath("Admin.xml"));
+var admins = doc.Descendants("Admin");
+WriteLine("using CS.Data.Entities;");
+WriteLine("using Microsoft.EntityFrameworkCore;");
+WriteLine("namespace CS.EF");
+WriteLine ("{");
+WriteLine("    public static partial class CadSysContextExtensions");
+WriteLine("    {");
+WriteLine("        public static void UATTemplateAdditions(ModelBuilder modelBuilder)");
+WriteLine("        {");
+var last = admins.Last();
+    WriteLine ("            modelBuilder.Entity<UAT>().HasData(");
+foreach(var item in admins)
+{
+
+    WriteLine ("               new UAT{ Id = " + item.Element("ADMINISTRATIVEUNITID").Value + ", "
+                                                + "IdJudet = " + item.Element("COUNTYID").Value + ", "
+                                                + "Denumire = \"" + item.Element("NAME").Value +  "\","
+                                                + "SIRUTA = " + item.Element("SIRUTA").Value + ", "
+                                                + "Activ = " + (item.Element("ACTIVE").Value == "1" ? "true" : "false") +
+                                             "}" + (item.Equals(last) ? "" : ","));
+        
+    
+
+}
+    WriteLine ("            );");
+WriteLine("        }");
+WriteLine("    }");
+WriteLine("}");
+#>

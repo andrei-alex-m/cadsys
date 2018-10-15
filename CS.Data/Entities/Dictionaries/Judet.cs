@@ -44,6 +44,6 @@ namespace CS.Data.Entities
         }
 
         [InverseProperty("Judet")]
-        public virtual ICollection<UAT> Parcele { get; set; } = new HashSet<UAT>();
+        public virtual ICollection<UAT> UATs { get; set; } = new HashSet<UAT>();
     }
 }

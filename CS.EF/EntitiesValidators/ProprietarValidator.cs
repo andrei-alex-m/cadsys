@@ -17,7 +17,7 @@ namespace CS.EF.EntitiesValidators
                 RuleFor(x => x.Index).NotEmpty().WithMessage("Index lipsa");
                 RuleFor(x => x.Nume).NotEmpty().WithMessage("Nume lipsa");
                 RuleFor(x => x.Prenume).NotEmpty().WithMessage("Prenume lipsa").When(x => x.TipPersoana == TipPersoana.F);
-                RuleFor(x => x.Adresa).NotEmpty().WithMessage("Adresa lipsa");
+                RuleFor(x => x.Adresa.Concat).NotEmpty().WithMessage("Adresa lipsa");
 
                 RuleFor(x => x.Identificator).Must(Validation.isValidCNP)
                                              .When(x => x.TipPersoana == TipPersoana.F 

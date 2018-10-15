@@ -5,52 +5,52 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Dictionary.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Dictionary.cs</LastGenOutput>
-    </None>
-    <None Update="DictionaryInContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DictionaryInContext.cs</LastGenOutput>
-    </None>
     <None Update="AdminInContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AdminInContext.cs</LastGenOutput>
     </None>
-    <None Update="UATInContext.tt">
+    <None Update="UAT\UATInContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UATInContext.cs</LastGenOutput>
     </None>
-    <None Update="LocalitateInContext.tt">
+    <None Update="Judet\JudetInContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>JudetInContext.cs</LastGenOutput>
+    </None>
+    <None Update="Localitate\LocalitateInContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LocalitateInContext.cs</LastGenOutput>
     </None>
-    <None Update="JudetInContext.tt">
+    <None Update="Dictionar\Dictionary.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>JudetInContext.cs</LastGenOutput>
+      <LastGenOutput>Dictionary.cs</LastGenOutput>
+    </None>
+    <None Update="Dictionar\DictionaryInContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DictionaryInContext.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Dictionary.cs">
-      <DependentUpon>Dictionary.tt</DependentUpon>
-    </Compile>
-    <Compile Update="DictionaryInContext.cs">
-      <DependentUpon>DictionaryInContext.tt</DependentUpon>
-    </Compile>
     <Compile Update="AdminInContext.cs">
       <DependentUpon>UATInContext.tt</DependentUpon>
     </Compile>
-    <Compile Update="LocalitateInContext.cs">
-      <DependentUpon>LocalitateInContext.tt</DependentUpon>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="UAT\UATInContext.cs">
+      <DependentUpon>UATInContext.tt</DependentUpon>
     </Compile>
-    <Compile Update="JudetInContext.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Judet\JudetInContext.cs">
       <DependentUpon>JudetInContext.tt</DependentUpon>
     </Compile>
-    <Compile Update="UATInContext.cs">
-      <DependentUpon>UATInContext.tt</DependentUpon>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Localitate\LocalitateInContext.cs">
+      <DependentUpon>LocalitateInContext.tt</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Dictionar\Dictionary.cs">
+      <DependentUpon>Dictionary.tt</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Dictionar\DictionaryInContext.cs">
+      <DependentUpon>DictionaryInContext.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -58,5 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UAT\" />
+    <Folder Include="Judet\" />
+    <Folder Include="Localitate\" />
+    <Folder Include="Dictionar\" />
   </ItemGroup>
 </Project>

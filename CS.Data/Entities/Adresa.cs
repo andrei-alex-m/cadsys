@@ -6,14 +6,14 @@ namespace CS.Data.Entities
     public class Adresa : BaseEntity
     {
         [MaxLength(50)]
-        public string SIRSUP
+        public int? SIRSUP
         {
             get;
             set;
         }
 
         [MaxLength(50)]
-        public string SIRUTA
+        public int? SIRUTA
         {
             get;
             set;
@@ -110,6 +110,12 @@ namespace CS.Data.Entities
         }
 
         public bool? AdresaNecunoscuta
+        {
+            get;
+            set;
+        }
+
+        public string Concat
         {
             get;
             set;

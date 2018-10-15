@@ -27,7 +27,7 @@ namespace CS.Data.Mappers
             prop.Identificator = propDTO.Identificator;
             prop.Emitent = propDTO.Emitent;
             prop.DataEmiterii = propDTO.DataEmiterii;
-            prop.Adresa = propDTO.Adresa;
+            prop.Adresa.Concat = propDTO.Adresa;
             prop.Localitate = propDTO.Localitate;
             prop.Judet = propDTO.Judet;
             prop.Tara = propDTO.Tara;
@@ -63,7 +63,7 @@ namespace CS.Data.Mappers
             propDTO.Identificator = prop.Identificator;
             propDTO.Emitent = prop.Emitent;
             propDTO.DataEmiterii = prop.DataEmiterii;
-            propDTO.Adresa = prop.Adresa;
+            propDTO.Adresa = prop.Adresa.Concat;
             propDTO.Localitate = prop.Localitate;
             propDTO.Judet = prop.Judet;
             propDTO.Tara = prop.Tara;

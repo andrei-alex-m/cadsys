@@ -6,6 +6,11 @@ namespace CS.Data.Entities
 {
     public class Proprietar : BaseEntity
     {
+        public Proprietar()
+        {
+            Adresa = new Adresa();
+        }
+
         public string Nume
         {
             get;
@@ -53,11 +58,6 @@ namespace CS.Data.Entities
             set;
         }
 
-        public string Adresa
-        {
-            get;
-            set;
-        }
         public string Localitate
         {
             get;
@@ -84,6 +84,11 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
+        [ForeignKey("Adresa")]
+        public int? IdAdresa { get; set; }
+
+        public Adresa Adresa { get; set; }
 
         [InverseProperty("Proprietar")]
         public virtual ICollection<InscriereProprietar> Inscrieri { get; set; } = new HashSet<InscriereProprietar>();

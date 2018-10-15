@@ -62,5 +62,6 @@
   <ItemGroup>
     <Folder Include="EntitiesValidators\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Parsers\" />
   </ItemGroup>
 </Project>

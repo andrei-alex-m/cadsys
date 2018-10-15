@@ -17,7 +17,7 @@ namespace CS.Data.Entities
 
         [Required]
         [ForeignKey("Judet")]
-        public int JudetId
+        public int IdJudet
         {
             get;
             set;
@@ -47,6 +47,6 @@ namespace CS.Data.Entities
         public Judet Judet { get; set; }
 
         [InverseProperty("UAT")]
-        public virtual ICollection<Localitate> Parcele { get; set; } = new HashSet<Localitate>();
+        public virtual ICollection<Localitate> Localitati { get; set; } = new HashSet<Localitate>();
     }
 }
