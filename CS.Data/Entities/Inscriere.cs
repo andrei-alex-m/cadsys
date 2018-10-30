@@ -2,15 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-//[IdInscriere]
-//[int]
-//NOT NULL,
-
-//[IdInscriereDetaliu] [int] NULL,
-    //[IdTipEntitate] [int] NULL,
-    //[IdEntitate] [int] NULL,
-    //[] [int] NULL,
-
 namespace CS.Data.Entities
 {
     public class Inscriere:BaseEntity
@@ -80,7 +71,6 @@ namespace CS.Data.Entities
             get;
             set;
         }
-
 
         public Imobil Imobil
         {

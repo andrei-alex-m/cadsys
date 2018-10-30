@@ -58,17 +58,17 @@ namespace CS.Data.Entities
             set;
         }
 
-        public string Localitate
-        {
-            get;
-            set;
-        }
+        //public string Localitate
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string Judet
-        {
-            get;
-            set;
-        }
+        //public string Judet
+        //{
+        //    get;
+        //    set;
+        //}
         public string Tara
         {
             get;
@@ -92,5 +92,6 @@ namespace CS.Data.Entities
 
         [InverseProperty("Proprietar")]
         public virtual ICollection<InscriereProprietar> Inscrieri { get; set; } = new HashSet<InscriereProprietar>();
+
     }
 }

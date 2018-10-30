@@ -9,7 +9,7 @@ namespace CS.Data.Mappers
 {
     public static class ActProprietateMapperExtensions
     {
-        public static void FromDTO(this ActProprietate actProp, OutputActProprietate actPropDTO, ConcurrentBag<TipActProprietate> tipActe)
+        public static void FromDTO(this ActProprietate actProp, OutputActProprietate actPropDTO, IEnumerable<TipActProprietate> tipActe)
         {
             try
             {

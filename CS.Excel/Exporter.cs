@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
+using System.Linq;
+using Caly.Common;
 using CS.Data.DTO.Excel;
 using CS.Data.Entities;
 using CS.Data.Mappers;
@@ -10,11 +11,9 @@ using CS.EF.EntitiesValidators;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
+using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using NPOI.HSSF.UserModel;
-using Caly.Common;
-using System.Linq;
 
 namespace CS.Excel
 {
@@ -27,7 +26,8 @@ namespace CS.Excel
 
             var sheet = wbk.CreateSheet("Sheet 1");
 
-            var validator = new ProprietarValidator(context);
+            var validatorP = new ProprietarValidator(context);
+            var validatorA = new AdresaValidator();
             var header = sheet.CreateRow(0);
 
             for (var i = 0; i < columnNames.Length; i++)
@@ -36,9 +36,9 @@ namespace CS.Excel
                 cell.SetCellValue(columnNames[i]);
             }
 
-            foreach (var x in context.Proprietari)
+            foreach (var x in context.Proprietari.Include(x=>x.Adresa).ThenInclude(y=>y.Localitate).ThenInclude(z=>z.UAT).ThenInclude(w=>w.Judet))
             {
-                ExportProprietar(sheet, columnNames, x, validator, ruleSet);
+                ExportProprietar(sheet, columnNames, x, validatorP, validatorA, ruleSet);
             }
 
             return wbk;
@@ -128,15 +128,18 @@ namespace CS.Excel
             return wbk;
         }
 
-        private static void ExportProprietar(ISheet sheet, string[] columnNames, Proprietar proprietar, ProprietarValidator validator, string ruleSet)
+        private static void ExportProprietar(ISheet sheet, string[] columnNames, Proprietar proprietar, ProprietarValidator validatorP,  AdresaValidator validatorA, string ruleSet)
         {
-            var result = validator.Validate(proprietar, ruleSet: ruleSet);
-            var excelDTO = new OutputProprietar();
+            var resultP = validatorP.Validate(proprietar, ruleSet: ruleSet);
+            var resultA = validatorA.Validate(proprietar.Adresa, ruleSet: ruleSet);
+            var excelDTO = new OutputProprietarAdresa();
             excelDTO.FromPOCO(proprietar);
+            excelDTO.FromPOCO(proprietar.Adresa);
 
             var row = sheet.CreateRow(excelDTO.RowIndex);
 
-            writeRow(row, columnNames, excelDTO, validator.Validate(proprietar, ruleSet: ruleSet));
+            writeRow(row, columnNames, excelDTO, false, resultP,resultA);
+
 
         }
 
@@ -148,7 +151,7 @@ namespace CS.Excel
 
             var row = sheet.CreateRow(excelDTO.RowIndex);
 
-            writeRow(row, columnNames, excelDTO, validator.Validate(act, ruleSet: ruleSet));
+            writeRow(row, columnNames, excelDTO, false, validator.Validate(act, ruleSet: ruleSet));
         }
 
         static void ExportParcela(ISheet sheet, string[] columnNames, Parcela parcela, ParcelaValidator validator, string ruleSet)
@@ -161,7 +164,7 @@ namespace CS.Excel
             var row = sheet.CreateRow(excelDTO.RowIndex);
 
 
-            writeRow(row, columnNames, excelDTO, validator.Validate(parcela, ruleSet: ruleSet));
+            writeRow(row, columnNames, excelDTO, false, validator.Validate(parcela, ruleSet: ruleSet));
         }
 
         static void ExportInscrieri(ISheet sheet, string[] columnNames, InscriereDetaliu inscriereD, InscriereDetaliuValidator iDValidator,  InscriereActValidator iActValidator, InscriereImobilValidator iImobilValidator, InscriereProprietarValidator iPropValidator, string ruleSet)
@@ -178,7 +181,7 @@ namespace CS.Excel
                     var inscriereAct = inscriereD.InscrieriActe.FirstOrDefault(y => y.Index == excelDTO.IndexAct.Value);
                     if (inscriereAct != null)
                     {
-                        writeRow(row, columnNames, excelDTO, iActValidator.Validate(inscriereAct, ruleSet: ruleSet), true);
+                        writeRow(row, columnNames, excelDTO, true, iActValidator.Validate(inscriereAct, ruleSet: ruleSet));
                     }
                 }
 
@@ -187,7 +190,7 @@ namespace CS.Excel
                     var inscriereParcela = inscriereD.InscrieriImobile.FirstOrDefault(y => y.Index == excelDTO.IndexParcela.Value);
                     if (inscriereParcela != null)
                     {
-                        writeRow(row, columnNames, excelDTO, iImobilValidator.Validate(inscriereParcela, ruleSet: ruleSet), true);
+                        writeRow(row, columnNames, excelDTO, true, iImobilValidator.Validate(inscriereParcela, ruleSet: ruleSet));
                     }
                 }
 
@@ -196,7 +199,7 @@ namespace CS.Excel
                     var inscriereProprietar = inscriereD.InscrieriProprietari.FirstOrDefault(y => y.Index == excelDTO.IndexProprietar.Value);
                     if (inscriereProprietar != null)
                     {
-                        writeRow(row, columnNames, excelDTO, iPropValidator.Validate(inscriereProprietar, ruleSet: ruleSet), true);
+                        writeRow(row, columnNames, excelDTO, true, iPropValidator.Validate(inscriereProprietar, ruleSet: ruleSet));
                     }
                 }
             });
@@ -205,14 +208,14 @@ namespace CS.Excel
 
             var anotherRow = sheet.GetRow(inscriereD.ExcelRow) ?? sheet.CreateRow(inscriereD.ExcelRow);
 
-            writeRow(anotherRow, columnNames, null, iDValidator.Validate(inscriereD, ruleSet: ruleSet));
+            writeRow(anotherRow, columnNames, null, false, iDValidator.Validate(inscriereD, ruleSet: ruleSet));
 
 
             //lista de outputinscriereD trecuta printr-un writerow special care sa ia inscrierile de la fiecare dintre cei 3 indecsi, sa le valideze obiectele si sa le scrie in icselß
         }
 
 
-        static void writeRow(IRow row, string[] columnNames, object DTO, ValidationResult result, bool skipMatching = false)
+        static void writeRow(IRow row, string[] columnNames, object DTO, bool skipMatching = false, params ValidationResult[] result)
         {
             var keyValues = new Dictionary<string, string>();
             Reflection.FillDictionaryFromInstance(keyValues, DTO, skipMatching: skipMatching);
@@ -229,7 +232,7 @@ namespace CS.Excel
             }
 
 
-            result.Errors.GroupBy(y => y.PropertyName).ToList().ForEach(x =>
+            result.SelectMany(x=>x.Errors).GroupBy(y => y.PropertyName).ToList().ForEach(x =>
               {
                   if (!string.IsNullOrEmpty(x.Key))
                   {
@@ -241,12 +244,6 @@ namespace CS.Excel
 
                       if (propIndex >= 0)
                       {
-                          ICell cell = row.GetCell(propIndex);
-                          if (cell == null)
-                          {
-                              cell = row.CreateCell(propIndex, CellType.String);
-                          }
-
                         var comment = row.Sheet.CreateDrawingPatriarch().CreateCellComment(new HSSFClientAnchor(0, 0, 0, 0, propIndex, row.RowNum, propIndex + 3, row.RowNum + 2));
                           comment.String = new HSSFRichTextString(String.Join("; ", x.Select(y => y.ErrorMessage)));
                           comment.Row = row.RowNum;

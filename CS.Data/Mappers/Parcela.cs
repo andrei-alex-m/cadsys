@@ -10,7 +10,7 @@ namespace CS.Data.Mappers
 {
     public static class ParcelaMapperExtensions
     {
-        public static void FromDTO(this Parcela parcela, OutputParcela parcelaDTO, ConcurrentBag<Tarla> tarlale)
+        public static void FromDTO(this Parcela parcela, OutputParcela parcelaDTO, IEnumerable<Tarla> tarlale)
         {
             parcela.Index = parcelaDTO.Index.Value;
             parcela.ExcelRow = parcelaDTO.RowIndex;

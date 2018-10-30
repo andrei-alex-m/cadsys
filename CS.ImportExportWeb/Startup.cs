@@ -40,7 +40,7 @@ namespace CS.ImportExportWeb
 
             services.AddTransient<IExcelConfigurationRepo>(s => new ExcelConfigurationRepo(Environment.ContentRootPath));
 
-
+            services.AddSingleton<IServiceBuilder, ServiceBuilder>();
 
             services.AddDbContext<CadSysContext>(options => options.UseMySql(connectionString));
 

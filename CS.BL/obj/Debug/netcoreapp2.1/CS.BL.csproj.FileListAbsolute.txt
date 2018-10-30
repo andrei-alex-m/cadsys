@@ -1,6 +1,7 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.BL/bin/Debug/netcoreapp2.1/CS.BL.deps.json
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.BL/bin/Debug/netcoreapp2.1/CS.BL.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.BL/bin/Debug/netcoreapp2.1/CS.BL.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.BL/obj/Debug/netcoreapp2.1/CS.BL.csprojAssemblyReference.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.BL/obj/Debug/netcoreapp2.1/CS.BL.csproj.CoreCompileInputs.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.BL/obj/Debug/netcoreapp2.1/CS.BL.AssemblyInfoInputs.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.BL/obj/Debug/netcoreapp2.1/CS.BL.AssemblyInfo.cs

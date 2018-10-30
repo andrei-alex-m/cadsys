@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Caly.Common;
 
 namespace CS.Data.Entities
 {
-    public class Adresa : BaseEntity
+    public class Adresa : BaseEntity, IAdresaFaraLocalitate
     {
         [MaxLength(50)]
         public int? SIRSUP
@@ -11,7 +13,7 @@ namespace CS.Data.Entities
             get;
             set;
         }
-
+        [ForeignKey("Localitate")]
         [MaxLength(50)]
         public int? SIRUTA
         {
@@ -115,10 +117,26 @@ namespace CS.Data.Entities
             set;
         }
 
-        public string Concat
+        public string AdresaImport
         {
             get;
             set;
         }
+
+        public string JudetImport
+        {
+            get;
+            set;
+        }
+
+        public string LocalitateImport
+        {
+            get;
+            set;
+        }
+
+        public Localitate Localitate { get; set; }
+
+
     }
 }

@@ -24,7 +24,8 @@ namespace CS.Services
                         delete from ActeProprietate;
                         delete from Proprietari;
                         delete from Parcele;
-                        delete from Imobil;";
+                        delete from Imobil;
+                        delete from Adresa;";
 
             context.Database.ExecuteSqlCommand(sql);
         }

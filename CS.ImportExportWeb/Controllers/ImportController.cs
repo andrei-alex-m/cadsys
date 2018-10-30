@@ -12,6 +12,8 @@ using CS.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections.Concurrent;
+using Microsoft.EntityFrameworkCore;
+using Caly.Common;
 
 namespace CS.ImportExportAPI.Controllers
 {
@@ -20,13 +22,15 @@ namespace CS.ImportExportAPI.Controllers
         CadSysContext context;
         IExcelConfigurationRepo excelConfiguration;
         IRepo repo;
+        IServiceBuilder serviceBuilder;
 
 
-        public ImportController(CadSysContext _context, IRepo _repo, IExcelConfigurationRepo _excelConfiguration)
+        public ImportController(CadSysContext _context, IRepo _repo, IExcelConfigurationRepo _excelConfiguration, IServiceBuilder _serviceBuilder)
         {
             context = _context;
             repo = _repo;
             excelConfiguration = _excelConfiguration;
+            serviceBuilder = _serviceBuilder;
             
         }
 
@@ -43,13 +47,11 @@ namespace CS.ImportExportAPI.Controllers
             {
                 return new RedirectToActionResult("download", "home", null);//"~/home/download");
             }
-            else
-            {
-                return Ok("Mai baga 0 fisa");
-            }
+
+            return Ok("Mai baga 0 fisa");
         }
 
-        private async Task CycleFiles(List<IFormFile> fileCollection)
+        async Task CycleFiles(List<IFormFile> fileCollection)
         {
             foreach (var file in fileCollection)
             {
@@ -83,12 +85,9 @@ namespace CS.ImportExportAPI.Controllers
                     }
                 }
             }
-
-            
-
         }
 
-        private async Task CycleCentralizator(string fileName, MemoryStream stream)
+        async Task CycleCentralizator(string fileName, MemoryStream stream)
         {
             var x = await Importer.GetGroupedDTOs<OutputInscriereDetaliu>(stream, fileName, new ImportConfig(), excelConfiguration);
 
@@ -103,7 +102,7 @@ namespace CS.ImportExportAPI.Controllers
             });
         }
 
-        private async Task CycleParcele(string fileName, MemoryStream stream)
+        async Task CycleParcele(string fileName, MemoryStream stream)
         {
             var x = await Importer.GetDTOs<OutputParcela>(stream, fileName, new ImportConfig(), excelConfiguration);
 
@@ -123,8 +122,9 @@ namespace CS.ImportExportAPI.Controllers
             });
         }
 
-        private async Task CycleActe(string fileName, MemoryStream stream)
+        async Task CycleActe(string fileName, MemoryStream stream)
         {
+
             var x = await Importer.GetDTOs<OutputActProprietate>(stream, fileName, new ImportConfig(), excelConfiguration);
 
             object locker = new object();
@@ -144,25 +144,34 @@ namespace CS.ImportExportAPI.Controllers
             });
         }
 
-        private async Task CycleProprietari(string fileName, MemoryStream stream)
+        async Task CycleProprietari(string fileName, MemoryStream stream)
         {
-            var x = await Importer.GetDTOs<OutputProprietar>(stream, fileName, new ImportConfig(), excelConfiguration);
+            var judeteAllInclussive = new ConcurrentBag<Judet>(context.Set<Judet>().Include(z => z.UATs).ThenInclude(w => w.Localitati));
+            
+            var x = await Importer.GetDTOs<OutputProprietarAdresa>(stream, fileName, new ImportConfig(), excelConfiguration);
+
+            IAddressParser addressParser = (IAddressParser)serviceBuilder.GetService("AddressParser");
+            var addressMatcher = (IMatcher)serviceBuilder.GetService("AddressMatcher");
+            var matchProcessor = (IMatchProcessor)serviceBuilder.GetService("AddressMatchProcessor");
 
             object locker = new object();
 
-            Parallel.ForEach(x, y =>
-            {
-                var z = new Proprietar();
-                lock (locker)
-                {
-                    context.Proprietari.Add(z);
-                }
 
-                z.FromDTO(y);
-            });
+            Parallel.ForEach(x, y =>
+             {
+                 var z = new Proprietar();
+
+                 lock (locker)
+                 {
+                     context.Proprietari.Add(z);
+                 }
+
+                 z.FromDTO(y);
+                 z.Adresa.FromDTO(y, judeteAllInclussive, addressParser, addressMatcher, matchProcessor);
+             });
         }
 
-        private void Prepare()
+        void Prepare()
         {
             excelConfiguration.ClearAll();
             repo.ClearDatabase();

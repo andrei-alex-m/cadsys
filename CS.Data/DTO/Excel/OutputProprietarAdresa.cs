@@ -1,7 +1,7 @@
 ﻿using System;
 namespace CS.Data.DTO.Excel
 {
-    public class OutputProprietar:Output
+    public class OutputProprietarAdresa:Output
     {
 
         public string Nume

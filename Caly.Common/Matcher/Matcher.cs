@@ -4,25 +4,22 @@ using System.Linq;
 namespace Caly.Common
 {
 
-    public class Matcher : Tree<Classification, string>
+    public class Matcher : Tree<Classification, string>, IMatcher
     {
-        public List<Classification> Find(string find, params Classification[] classifications)
-        {
-            if (classifications == null)
-            {
-                throw new ArgumentNullException(nameof(classifications));
-            }
-
-            var result = new List<Classification>();
-
-
-            return null;
-        }
 
         public Matcher()
         {
-            Root = new TreeNode<Classification, string>(new Classification() { Name = "root", Order = 0 });
+            InitTree(this);
         }
+
+        public Matcher(Action<Matcher> action)
+        {
+            InitTree = action;
+            InitTree?.Invoke(this);
+        }
+
+
+        public Action<Matcher> InitTree = (x) => x.Root= new TreeNode<Classification, string>(new Classification() { Name = "root", Order = 0 });
 
         /// <summary>
         /// Returns the classification of a string, departing from a list of classifications where its match is met
@@ -50,7 +47,7 @@ namespace Caly.Common
             return result;
         }
 
-        public List<TreeNode<Classification, string>> Narrow(List<Classification> criteria)
+        List<TreeNode<Classification, string>> Narrow(List<Classification> criteria)
         {
             var maxOrder = criteria.Max(x => x.Order);
 
@@ -109,9 +106,4 @@ namespace Caly.Common
         }
     }
 
-    public interface IMatchProcessor
-    {
-        bool Process(params object[] prm);
-
-    }
 }
