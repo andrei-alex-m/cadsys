@@ -178,6 +178,7 @@ namespace CS.EF
             CadSysContextExtensions.JudeteTemplateAdditions(modelBuilder);
             CadSysContextExtensions.UATTemplateAdditions(modelBuilder);
             CadSysContextExtensions.LocalitateTemplateAdditions(modelBuilder);
+            CadSysContextExtensions.TipDreptTemplateAdditions(modelBuilder);
         }
 
     }

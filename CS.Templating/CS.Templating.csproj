@@ -29,6 +29,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DictionaryInContext.cs</LastGenOutput>
     </None>
+    <None Update="TipDrept\LocalitateInContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TipDreptInContext.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />
@@ -52,6 +56,11 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Dictionar\DictionaryInContext.cs">
       <DependentUpon>DictionaryInContext.tt</DependentUpon>
     </Compile>
+    <Compile Update="TipDrept\TipDreptInContext.cs">
+      <DependentUpon>TipDreptInContext.tt</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Dictionar\Dictionary %28copy%29.cs" />
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Dictionar\DictionaryInContext %28copy%29.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
@@ -64,5 +73,6 @@
     <Folder Include="Judet\" />
     <Folder Include="Localitate\" />
     <Folder Include="Dictionar\" />
+    <Folder Include="TipDrept\" />
   </ItemGroup>
 </Project>

@@ -1,16 +1,26 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
     <Files>
-      <File FileName="CS.Data/Entities/Dictionaries/Localitate.cs" Line="1" Column="1" />
-      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="34" Column="1" />
-      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="22" Column="31" />
-      <File FileName="CS.Data/Entities/BaseEntity.cs" Line="29" Column="1" />
-      <File FileName="CS.Templating/Dictionar/Dictionary.cs" Line="1" Column="1" />
-      <File FileName="CS.Templating/Dictionar/DictionaryInContext.cs" Line="341" Column="11" />
+      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="1" Column="1" />
+      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="1" Column="1" />
+      <File FileName="CS.Data/Entities/BaseEntity.cs" Line="1" Column="1" />
+      <File FileName="CS.Templating/Dictionar/DictionaryInContext.cs" Line="1" Column="1" />
       <File FileName="CS.Templating/Dictionar/Dictionary.xml" Line="1" Column="1" />
-      <File FileName="CS.Templating/Judet/JudetInContext.cs" Line="10" Column="64" />
-      <File FileName="CS.Data/Entities/TipDrept.cs" Line="36" Column="10" />
-      <File FileName="CS.ImportExportWeb/Views/Home/Index.cshtml" Line="10" Column="1" />
+      <File FileName="CS.Templating/Judet/JudetInContext.cs" Line="1" Column="1" />
+      <File FileName="CS.ImportExportWeb/Views/Home/Index.cshtml" Line="1" Column="1" />
+      <File FileName="CS.Data/Entities/TipDrept.cs" Line="4" Column="18" />
+      <File FileName="CS.Templating/Localitate/LocalitateInContext.tt" Line="1" Column="1" />
+      <File FileName="CS.Templating/TipDrept/TipDreptInContext.tt" Line="37" Column="70" />
+      <File FileName="CS.Templating/TipDrept/TipDreptInContext.cs" Line="11" Column="24" />
+      <File FileName="CS.Templating/Localitate/LocalitateInContext.cs" Line="1" Column="1" />
+      <File FileName="CS.EF/Context.cs" Line="181" Column="48" />
+      <File FileName="CS.Data/Entities/Dictionaries/TipActProprietate.cs" Line="13" Column="16" />
+      <File FileName="CS.Data/Entities/Dictionaries/BaseDictionary.cs" Line="7" Column="6" />
+      <File FileName="CS.Templating/Dictionar/Dictionary.tt" Line="28" Column="24" />
+      <File FileName="CS.Data/Entities/ActProprietate.cs" Line="1" Column="1" />
+      <File FileName="CS.Templating/Dictionar/DictionaryFreezed.cs" Line="16" Column="23" />
+      <File FileName="CS.Templating/Dictionar/Dictionary.cs" Line="1" Column="1" />
+      <File FileName="CS.Templating/Dictionar/DictionaryInContext.tt" Line="44" Column="26" />
       <File FileName="CadSys Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>

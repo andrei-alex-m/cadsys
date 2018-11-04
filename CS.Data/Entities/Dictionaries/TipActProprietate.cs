@@ -9,5 +9,15 @@ namespace CS.Data.Entities
     {
         [InverseProperty("TipAct")]
         public virtual ICollection<ActProprietate> ActeProprietate { get; set; } = new HashSet<ActProprietate>();
+
+        public TipDocument MyProperty
+        {
+            get;
+            set;
+        }
+
     }
+
+
+
 }

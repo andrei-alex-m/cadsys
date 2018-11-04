@@ -58,17 +58,6 @@ namespace CS.Data.Entities
             set;
         }
 
-        //public string Localitate
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public string Judet
-        //{
-        //    get;
-        //    set;
-        //}
         public string Tara
         {
             get;

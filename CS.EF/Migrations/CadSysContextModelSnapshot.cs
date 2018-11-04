@@ -17488,6 +17488,53 @@ namespace CS.EF.Migrations
                     );
                 });
 
+            modelBuilder.Entity("CS.Data.Entities.TipDrept", b =>
+                {
+                    b.Property<int>("Id");
+
+                    b.Property<bool>("CotaObligatorie");
+
+                    b.Property<string>("Denumire")
+                        .IsRequired();
+
+                    b.Property<string>("Descriere");
+
+                    b.Property<bool>("Partea2");
+
+                    b.Property<bool>("Partea3");
+
+                    b.Property<short>("RIGHTOWNERTYPE");
+
+                    b.Property<bool>("TitluObligatoriu");
+
+                    b.Property<bool>("ValoareaObligatorie");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipDrept");
+
+                    b.HasData(
+                        new { Id = 1, CotaObligatorie = false, Denumire = "ADMINISTRARE", Partea2 = true, Partea3 = false, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 33, CotaObligatorie = false, Denumire = "COMODAT", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 4, CotaObligatorie = false, Denumire = "CONCESIUNE", Partea2 = true, Partea3 = true, RIGHTOWNERTYPE = (short)2, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 11, CotaObligatorie = false, Denumire = "FOLOSINTA", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 42, CotaObligatorie = false, Denumire = "FOLOSINTA CU TITLU GRATUIT", Partea2 = true, Partea3 = false, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 32, CotaObligatorie = false, Denumire = "FOLOSINTA SPECIALA", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 13, CotaObligatorie = false, Denumire = "HABITATIE", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 14, CotaObligatorie = false, Denumire = "INCHIRIERE", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 18, CotaObligatorie = false, Denumire = "IPOTECA", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = true },
+                        new { Id = 41, CotaObligatorie = false, Denumire = "IPOTECA LEGALA", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 34, CotaObligatorie = false, Denumire = "LEASING IMOBILIAR", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 20, CotaObligatorie = false, Denumire = "PRIVILEGIU IMOBILIAR", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 23, CotaObligatorie = true, Denumire = "PROPRIETATE", Partea2 = true, Partea3 = false, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = true, ValoareaObligatorie = false },
+                        new { Id = 27, CotaObligatorie = false, Denumire = "SERVITUTE", Partea2 = true, Partea3 = true, RIGHTOWNERTYPE = (short)2, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 29, CotaObligatorie = false, Denumire = "SUPERFICIE", Partea2 = true, Partea3 = true, RIGHTOWNERTYPE = (short)2, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 30, CotaObligatorie = false, Denumire = "UZ", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 31, CotaObligatorie = false, Denumire = "UZUFRUCT", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false },
+                        new { Id = 35, CotaObligatorie = false, Denumire = "UZUFRUCT VIAGER", Partea2 = false, Partea3 = true, RIGHTOWNERTYPE = (short)1, TitluObligatoriu = false, ValoareaObligatorie = false }
+                    );
+                });
+
             modelBuilder.Entity("CS.Data.Entities.UAT", b =>
                 {
                     b.Property<int>("Id");

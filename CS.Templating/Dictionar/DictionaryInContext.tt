@@ -12,7 +12,9 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Xml.Linq"#>
-<# XDocument doc = XDocument.Load(this.Host.ResolvePath("Dictionary.xml"));
+<# 
+#if false
+XDocument doc = XDocument.Load(this.Host.ResolvePath("Dictionary.xml"));
 var groups = doc.Descendants("Dictionary").GroupBy(x=>x.Element("DICTIONARYCODE").Value);
 WriteLine("using CS.Data.Entities;");
 WriteLine("using Microsoft.EntityFrameworkCore;");
@@ -45,4 +47,5 @@ foreach(var g in groups)
 WriteLine("        }");
 WriteLine("    }");
 WriteLine("}");
+#endif
 #>

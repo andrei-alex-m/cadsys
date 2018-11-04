@@ -20,13 +20,13 @@ namespace CS.Data.Entities
             set;
         }
 
-        public short RIGHTOWNERSTYPE
+        public short RIGHTOWNERTYPE
         {
             get;
             set;
         }
 
-        public bool TitluObligatoriu
+        public bool ModDobandireObligatoriu
         {
             get;
             set;

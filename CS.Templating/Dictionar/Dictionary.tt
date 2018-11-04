@@ -12,7 +12,8 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Xml.Linq"#>
-<# XDocument doc = XDocument.Load(this.Host.ResolvePath("Dictionary.xml"));
+<# #if false
+XDocument doc = XDocument.Load(this.Host.ResolvePath("Dictionary.xml"));
 var groups = doc.Descendants("Dictionary").GroupBy(x=>x.Element("DICTIONARYCODE").Value);
 WriteLine("namespace CS.Data.Entities");
 WriteLine ("{");
@@ -28,4 +29,5 @@ foreach(var g in groups)
     WriteLine("");
 }
 WriteLine("}");
+#endif
 #>
