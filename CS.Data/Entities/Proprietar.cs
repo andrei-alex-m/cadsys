@@ -75,7 +75,7 @@ namespace CS.Data.Entities
         }
 
         [ForeignKey("Adresa")]
-        public int? IdAdresa { get; set; }
+        public int? AdresaId { get; set; }
 
         public Adresa Adresa { get; set; }
 

@@ -26,12 +26,12 @@ namespace CS.Data.Entities
         } 
 
         [ForeignKey("Tarla")]
-        public int? IdTarla { get; set; }
+        public int? TarlaId { get; set; }
 
         public Tarla Tarla { get; set; }
 
         [ForeignKey("Imobil")]
-        public int? IdImobil { get; set; }
+        public int? ImobilId { get; set; }
 
         public Imobil Imobil { get; set; }
 

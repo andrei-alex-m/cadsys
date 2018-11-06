@@ -10,11 +10,64 @@ namespace CS.Data.Entities
         [InverseProperty("TipAct")]
         public virtual ICollection<ActProprietate> ActeProprietate { get; set; } = new HashSet<ActProprietate>();
 
-        public TipDocument MyProperty
+        [ForeignKey("TipDocument")]
+        public int TipDocumentId
         {
             get;
             set;
         }
+
+        [ForeignKey("TipDrept")]
+        public int? TipDreptId
+        {
+            get;
+            set;
+        }
+
+        [ForeignKey("ModDobandire")]
+        public int? ModDobandireId
+        {
+            get;
+            set;
+        }
+
+        [ForeignKey("TipInscriere")]
+        public int? TipInscriereId
+        {
+            get;
+            set;
+        }
+
+        public short? ParteaCF
+        {
+            get;
+            set;
+        }
+
+        public TipDocument TipDocument
+        {
+            get;
+            set;
+        }
+
+        public TipDrept TipDrept
+        {
+            get;
+            set;
+        }
+
+        public ModDobandire ModDobandire
+        {
+            get;
+            set;
+        }
+
+        public TipInscriere TipInscriere
+        {
+            get;
+            set;
+        }
+
 
     }
 

@@ -16,7 +16,7 @@ namespace CS.Data.Mappers
             parcela.ExcelRow = parcelaDTO.RowIndex;
             Tarla tarla = string.IsNullOrEmpty(parcelaDTO.Tarla) ? null : tarlale.FirstOrDefault(x => x.Denumire.Trim().ReplaceMultiple('_','.',',').Equals(parcelaDTO.Tarla.ReplaceMultiple('_', '.', ','), StringComparison.InvariantCultureIgnoreCase) );
 
-            parcela.IdTarla = tarla!=null?tarla.Id:(int?)null;
+            parcela.TarlaId = tarla!=null?tarla.Id:(int?)null;
             parcela.Denumire = parcelaDTO.Parcela;
             object catFol;
             if (Enum.TryParse(typeof(CatFol), parcelaDTO.CatFol, true, out catFol))

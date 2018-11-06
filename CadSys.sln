@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS.Tests", "CS.Tests\CS.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS.Templating", "CS.Templating\CS.Templating.csproj", "{44CB8B94-0F3F-420C-A167-FF996706329F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{1FA3D82F-9DC4-4D11-89D2-7BA48CB1B5AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS.CadGen", "CS.CadGen\CS.CadGen.csproj", "{F869D20D-DDC0-4C3C-A7E3-8CD60B027821}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +89,10 @@ Global
 		{44CB8B94-0F3F-420C-A167-FF996706329F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44CB8B94-0F3F-420C-A167-FF996706329F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44CB8B94-0F3F-420C-A167-FF996706329F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F869D20D-DDC0-4C3C-A7E3-8CD60B027821}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F869D20D-DDC0-4C3C-A7E3-8CD60B027821}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F869D20D-DDC0-4C3C-A7E3-8CD60B027821}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F869D20D-DDC0-4C3C-A7E3-8CD60B027821}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8D59ECB7-A337-4243-9E4D-589D298673DC} = {30DEA251-738F-4379-AA8F-F3B8EE6F8D31}

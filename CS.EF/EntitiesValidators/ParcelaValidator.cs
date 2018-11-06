@@ -16,7 +16,7 @@ namespace CS.EF.EntitiesValidators
             RuleSet("NoContext", ()=>
             {
                 RuleFor(x => x.Index).NotEmpty().WithMessage("Index lipsa");
-                RuleFor(x => x.IdTarla).NotNull().NotEqual(0).WithMessage("Tarla lipsa");
+                RuleFor(x => x.TarlaId).NotNull().NotEqual(0).WithMessage("Tarla lipsa");
 
                 RuleFor(x => x.Denumire).NotEmpty().WithMessage("Numar lipsa");
 
@@ -31,7 +31,7 @@ namespace CS.EF.EntitiesValidators
             {
                 RuleFor(x => x).Custom((x, c) =>
                 {
-                    var opResult = x.CompareInSet(context, y => y.Index, y => y.Index, y => y.IdTarla, y => y.Denumire);
+                    var opResult = x.CompareInSet(context, y => y.Index, y => y.Index, y => y.TarlaId, y => y.Denumire);
                     if (opResult.Result)
                     {
                         c.AddFailure("Duplicat pe numar, data si tip la indecsii: " + string.Join(',', opResult.Observations));
@@ -43,7 +43,7 @@ namespace CS.EF.EntitiesValidators
             {
                 RuleFor(x => x).Custom((x, c) =>
                 {
-                    if (!context.InscrieriImobile.Include(q=>q.Imobil).Select(y=>y.Imobil).Any(z => z.Id == x.IdImobil))
+                    if (!context.InscrieriImobile.Include(q=>q.Imobil).Select(y=>y.Imobil).Any(z => z.Id == x.ImobilId))
                     {
                         c.AddFailure("Nu are inscrieri");
                     }

@@ -8,7 +8,7 @@ namespace CS.Data.Entities
     {
         [Required]
         [ForeignKey("InscriereDetaliu")]
-        public int IdInscriereDetaliu
+        public int InscriereDetaliuId
         {
             get;
             set;
@@ -25,7 +25,7 @@ namespace CS.Data.Entities
     {
         
         [ForeignKey("ActProprietate")]
-        public int? IdActProprietate
+        public int? ActProprietateId
         {
             get;
             set;
@@ -49,7 +49,7 @@ namespace CS.Data.Entities
         }
 
         [ForeignKey("Proprietar")]
-        public int? IdProprietar
+        public int? ProprietarId
         {
             get;
             set;
@@ -66,7 +66,7 @@ namespace CS.Data.Entities
     {
         
         [ForeignKey("Imobil")]
-        public int? IdImobil
+        public int? ImobilId
         {
             get;
             set;

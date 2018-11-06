@@ -17,7 +17,7 @@ namespace CS.Data.Mappers
                 actProp.Index = actPropDTO.Index.Value;
 
                 TipActProprietate tipActProprietate = string.IsNullOrEmpty(actPropDTO.TipAct) ? null :  tipActe.FirstOrDefault(x => x.Denumire.Trim().Equals(actPropDTO.TipAct.Trim(), StringComparison.InvariantCultureIgnoreCase));
-                actProp.IdTipActProprietate = tipActProprietate !=null ? tipActProprietate.Id: (int?)null;
+                actProp.TipActProprietateId = tipActProprietate !=null ? tipActProprietate.Id: (int?)null;
                 actProp.Numar = actPropDTO.Numar;
                 actProp.Data = actPropDTO.Data;
                 actProp.Emitent = actPropDTO.Emitent;

@@ -63,7 +63,7 @@ namespace CS.EF.EntitiesValidators
             {
                 RuleFor(x => x).Custom((x, c) =>
                 {
-                    if (!context.InscrieriProprietari.Any(z => z.IdProprietar == x.Id))
+                    if (!context.InscrieriProprietari.Any(z => z.ProprietarId == x.Id))
                     {
                         c.AddFailure("Nu are inscrieri");
                     }

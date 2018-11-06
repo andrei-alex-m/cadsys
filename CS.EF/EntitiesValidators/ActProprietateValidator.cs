@@ -16,7 +16,7 @@ namespace CS.EF.EntitiesValidators
             RuleSet("NoContext", () =>
             {
                 RuleFor(x => x.Index).NotEmpty().WithMessage("Index lipsa");
-                RuleFor(x => x.IdTipActProprietate).NotNull().NotEqual(0).WithMessage("Tip Act lipsa");
+                RuleFor(x => x.TipActProprietateId).NotNull().NotEqual(0).WithMessage("Tip Act lipsa");
                 RuleFor(x => x.Numar).NotEmpty().WithMessage("Numar Act lipsa");
                 RuleFor(x => x.Data).Must(x => x.HasValue).WithMessage("Data lipsa");
                 RuleFor(x => x.Emitent).NotEmpty().WithMessage("Emitent lipsa");
@@ -28,7 +28,7 @@ namespace CS.EF.EntitiesValidators
             {
                 RuleFor(x => x).Custom((x, c) =>
                 {
-                    var opResult = x.CompareInSet(context, y => y.Index, y => y.Index, y => y.Numar, y=>y.Data, y => y.IdTipActProprietate);
+                    var opResult = x.CompareInSet(context, y => y.Index, y => y.Index, y => y.Numar, y=>y.Data, y => y.TipActProprietateId);
                     if (opResult.Result)
                     {
                         c.AddFailure("Duplicat pe numar, data si tip la indecsii: " + string.Join(',', opResult.Observations));
@@ -40,7 +40,7 @@ namespace CS.EF.EntitiesValidators
             {
                 RuleFor(x => x).Custom((x, c) =>
                 {
-                    if (!context.InscrieriActe.Any(z => z.IdActProprietate == x.Id))
+                    if (!context.InscrieriActe.Any(z => z.ActProprietateId == x.Id))
                     {
                         c.AddFailure("Nu are inscrieri");
                     }

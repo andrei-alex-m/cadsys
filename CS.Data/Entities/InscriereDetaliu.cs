@@ -94,7 +94,7 @@ namespace CS.Data.Entities
         }
 
         [ForeignKey("ImobilReferinta")]
-        public int? IdImobilReferinta
+        public int? ImobilReferintaId
         {
             get;
             set;

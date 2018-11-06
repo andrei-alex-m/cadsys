@@ -23,7 +23,7 @@ namespace Caly.Common
             return String.Join(with, temp);
         }
 
-        public static bool Match(this string original, string compareTo, char[] splitters)
+        public static bool Match(this string original, string compareTo, params char[] splitters)
         {
             var splitted = original.Split(splitters, StringSplitOptions.RemoveEmptyEntries);
             splitted.ToList().ForEach(x => x = x.Trim());

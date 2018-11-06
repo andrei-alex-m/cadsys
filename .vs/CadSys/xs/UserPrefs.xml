@@ -1,28 +1,38 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
     <Files>
-      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="1" Column="1" />
-      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="1" Column="1" />
-      <File FileName="CS.Data/Entities/BaseEntity.cs" Line="1" Column="1" />
-      <File FileName="CS.Templating/Dictionar/DictionaryInContext.cs" Line="1" Column="1" />
-      <File FileName="CS.Templating/Dictionar/Dictionary.xml" Line="1" Column="1" />
-      <File FileName="CS.Templating/Judet/JudetInContext.cs" Line="1" Column="1" />
-      <File FileName="CS.ImportExportWeb/Views/Home/Index.cshtml" Line="1" Column="1" />
-      <File FileName="CS.Data/Entities/TipDrept.cs" Line="4" Column="18" />
-      <File FileName="CS.Templating/Localitate/LocalitateInContext.tt" Line="1" Column="1" />
-      <File FileName="CS.Templating/TipDrept/TipDreptInContext.tt" Line="37" Column="70" />
-      <File FileName="CS.Templating/TipDrept/TipDreptInContext.cs" Line="11" Column="24" />
-      <File FileName="CS.Templating/Localitate/LocalitateInContext.cs" Line="1" Column="1" />
-      <File FileName="CS.EF/Context.cs" Line="181" Column="48" />
-      <File FileName="CS.Data/Entities/Dictionaries/TipActProprietate.cs" Line="13" Column="16" />
-      <File FileName="CS.Data/Entities/Dictionaries/BaseDictionary.cs" Line="7" Column="6" />
-      <File FileName="CS.Templating/Dictionar/Dictionary.tt" Line="28" Column="24" />
-      <File FileName="CS.Data/Entities/ActProprietate.cs" Line="1" Column="1" />
-      <File FileName="CS.Templating/Dictionar/DictionaryFreezed.cs" Line="16" Column="23" />
-      <File FileName="CS.Templating/Dictionar/Dictionary.cs" Line="1" Column="1" />
-      <File FileName="CS.Templating/Dictionar/DictionaryInContext.tt" Line="44" Column="26" />
+      <File FileName="CS.Services/ServiceBuilder.cs" Line="302" Column="13" />
+      <File FileName="Caly.Common/Tree.cs" Line="86" Column="28" />
+      <File FileName="CS.CadGen/Exporter.cs" Line="9" Column="56" />
+      <File FileName="Caly.Common/Strings.cs" Line="27" Column="10" />
       <File FileName="CadSys Status" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CadSys" expanded="True" selected="True">
+            <Node name="Caly.Common" expanded="True" />
+            <Node name="CS.CadGen" expanded="True" />
+            <Node name="CS.Data" expanded="True">
+              <Node name="Mappers" expanded="True" />
+            </Node>
+            <Node name="CS.Excel" expanded="True" />
+            <Node name="CS.ImportExportWeb" expanded="True">
+              <Node name="Controllers" expanded="True" />
+            </Node>
+            <Node name="CS.Services" expanded="True">
+              <Node name="Interfaces" expanded="True" />
+            </Node>
+            <Node name="CS.Templating" expanded="True">
+              <Node name="Dictionar" expanded="True" />
+              <Node name="Localitate" expanded="True">
+                <Node name="LocalitateInContext.tt" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -33,12 +43,10 @@
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="32" column="1" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Tests/UnitTest1.cs" relfile="CS.Tests/UnitTest1.cs" line="21" column="28" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="16" column="1" />
-      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="104" column="1" />
-      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="103" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="84" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="83" column="1" />
       <Breakpoint enabled="false" conditionExpression="prop.Localitate != &quot;Bucuresti&quot; &amp;&amp; adresa.AdresaNecunoscuta == null &amp;&amp; adresa.SIRSUP == null" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Parsers/AdresaParser.cs" relfile="CS.EF/Parsers/AdresaParser.cs" line="34" column="1" />
       <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/Matcher/Matcher.cs" relfile="Caly.Common/Matcher/Matcher.cs" line="17" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/Matcher/Matcher.cs" relfile="Caly.Common/Matcher/Matcher.cs" line="12" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
@@ -48,4 +56,5 @@
   <DisabledProjects>
     <String>CS.Interfaces/CS.Interfaces.csproj</String>
   </DisabledProjects>
+  <MonoDevelop.Ide.ItemProperties.CS.CadGen FirstBuild="True" />
 </Properties>

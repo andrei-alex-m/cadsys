@@ -9,7 +9,7 @@ namespace CS.Data.Entities
     {
         [Required]
         [ForeignKey("UAT")]
-        public int IdUAT { get; set; }
+        public int UATId { get; set; }
 
         public UAT UAT { get; set; }
 

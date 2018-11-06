@@ -10,7 +10,7 @@ namespace CS.Data.Entities
 
 
         [ForeignKey("TipAct")]
-        public int? IdTipActProprietate { get; set; }
+        public int? TipActProprietateId { get; set; }
 
         public TipActProprietate TipAct { get; set; }
 

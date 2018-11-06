@@ -16,7 +16,7 @@ namespace CS.Data.Entities
 
         [Required]
         [ForeignKey("UAT")]
-        public int IdUAT
+        public int UATId
         {
             get;
             set;

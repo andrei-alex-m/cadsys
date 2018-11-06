@@ -59,7 +59,6 @@
     <Compile Update="TipDrept\TipDreptInContext.cs">
       <DependentUpon>TipDreptInContext.tt</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Dictionar\Dictionary %28copy%29.cs" />
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Dictionar\DictionaryInContext %28copy%29.cs" />
   </ItemGroup>
   <ItemGroup>
