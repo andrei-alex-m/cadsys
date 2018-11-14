@@ -8,6 +8,7 @@ namespace CS.Data.Entities
     public class Adresa : BaseEntity, IAdresaFaraLocalitate
     {
         [MaxLength(50)]
+        [ForeignKey("UAT")]
         public int? SIRSUP
         {
             get;
@@ -137,6 +138,6 @@ namespace CS.Data.Entities
 
         public Localitate Localitate { get; set; }
 
-
+        public UAT UAT { get; set; }
     }
 }

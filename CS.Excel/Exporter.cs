@@ -59,7 +59,7 @@ namespace CS.Excel
                 cell.SetCellValue(columnNames[i]);
             }
 
-            foreach (var x in context.ActeProprietate.Include(y => y.TipAct))
+            foreach (var x in context.ActeProprietate.Include(y => y.TipActProprietate))
             {
                 ExportAct(sheet, columnNames, x, validator, ruleSet);
             }

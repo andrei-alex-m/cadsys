@@ -10,7 +10,7 @@ namespace CS.Services
     {
         private readonly string directory = "Data";
         private readonly string excelConfigFile = "Excel.json";
-        private string filePath;
+        private readonly string filePath;
 
         public ExcelConfigurationRepo(string contentRoot)
         {

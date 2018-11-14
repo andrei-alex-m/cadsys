@@ -8,13 +8,15 @@ namespace CS.Services
 {
     public class ServiceBuilder : IServiceBuilder
     {
-        static readonly IMatchProcessor smp = new adresaMatchProcessor();
+        static readonly IMatchProcessor adresaMatchProcessor = new adresaMatchProcessor();
 
         static readonly IMatcher adresaMatcher = new Matcher(SarateniInit);
 
-        static readonly IAddressParser ap = new AddressParser();
+        static readonly IAddressParser addressParser = new AddressParser();
 
-        static readonly IMatcher comboIndexMatcher = new Matcher(CadGenDropdownsInit);
+        static readonly IMatchProcessor combosIndexMatchProcessor = new combosIndexMatchProcessor();
+
+        static readonly IMatcher combosIndexMatcher = new Matcher(CadGenCombosInit);
 
         public object GetService(string serviceName, params string[] parameters)
         {
@@ -23,10 +25,14 @@ namespace CS.Services
                 case "AddressMatcher":
                     return GetAdresaMatcher(parameters);
                 case "AddressMatchProcessor":
-                    return GetMatchProcessor(parameters);
+                    return GetAdresaMatchProcessor(parameters);
                 // no need to derive as address structure won't change very soon
                 case "AddressParser":
-                    return ap;
+                    return addressParser;
+                case "CombosIndexMatcher":
+                    return combosIndexMatcher;
+                case "CombosIndexMatchProcessor":
+                    return combosIndexMatchProcessor;
                 default:
                     throw new ArgumentException("Service Name Not Found!");
 
@@ -49,9 +55,19 @@ namespace CS.Services
         /// </summary>
         /// <returns>The match processor.</returns>
         /// <param name="parameters">Parameters.</param> Derive by User prefs later
-        static IMatchProcessor GetMatchProcessor(params string[] parameters)
+        static IMatchProcessor GetAdresaMatchProcessor(params string[] parameters)
         {
-            return smp;
+            return adresaMatchProcessor;
+        }
+
+        static IMatcher GetCombosIndexMatcher(params string[] parameters)
+        {
+            return combosIndexMatcher;
+        }
+
+        static IMatchProcessor GetCombosIndexMatchProcessor(params string[] parameters)
+        {
+            return combosIndexMatchProcessor;
         }
 
         #region trees
@@ -111,7 +127,7 @@ namespace CS.Services
             aptNode.AddChild("Apt,Ap,Apartament");
         }
 
-        public static void CadGenDropdownsInit(Matcher matcher)
+        public static void CadGenCombosInit(Matcher matcher)
         {
             matcher.Root = new TreeNode<Classification, string>(new Classification() { Name = "root", Order = 0 });
 
@@ -295,13 +311,16 @@ namespace CS.Services
         }
     }
 
-    public class dropDownIndexMatchProcessor : IMatchProcessor
+    public class combosIndexMatchProcessor : IMatchProcessor
     {
         public bool Process(params object[] prm)
         {
+            var find = prm[0].ToString();
 
+            var leaf = prm[1].ToString();
+            return leaf.Match(find, ',');
         }
-
+    }
 
 
     #endregion

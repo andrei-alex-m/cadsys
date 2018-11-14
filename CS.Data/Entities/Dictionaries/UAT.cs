@@ -17,7 +17,7 @@ namespace CS.Data.Entities
 
         [Required]
         [ForeignKey("Judet")]
-        public int IdJudet
+        public int JudetId
         {
             get;
             set;

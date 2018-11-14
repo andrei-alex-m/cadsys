@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CS.EF;
 using CS.Excel;
+using CS.CadGen;
 using CS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,11 +15,13 @@ namespace CS.ImportExportWeb.Controllers
     {
         CadSysContext context;
         IExcelConfigurationRepo excelConfiguration;
+        IServiceBuilder serviceBuilder;
 
-        public ExportController(CadSysContext _context, IExcelConfigurationRepo _excelConfiguration)
+        public ExportController(CadSysContext _context, IExcelConfigurationRepo _excelConfiguration, IServiceBuilder _serviceBuilder)
         {
             context = _context;
             excelConfiguration = _excelConfiguration;
+            serviceBuilder = _serviceBuilder;
         }
 
         // GET: /<controller>/
@@ -27,7 +30,7 @@ namespace CS.ImportExportWeb.Controllers
 
             if(file.Contains("Proprietar", StringComparison.InvariantCultureIgnoreCase))
             {
-                var wbk = Exporter.CycleProprietari(context, excelConfiguration.Get(1, "Proprietar"), "NoContext,InSet,Context");
+                var wbk = Excel.Exporter.CycleProprietari(context, excelConfiguration.Get(1, "Proprietar"), "NoContext,InSet,Context");
                 byte[] fileContents = null;
                 using (var stream = new MemoryStream())
                 {
@@ -40,7 +43,7 @@ namespace CS.ImportExportWeb.Controllers
             if (file.Contains("ActProprietate", StringComparison.InvariantCultureIgnoreCase))
             {
 
-                var wbk = Exporter.CycleActeProprietate(context, excelConfiguration.Get(1, "ActProprietate"), "NoContext,InSet,Context");
+                var wbk = Excel.Exporter.CycleActeProprietate(context, excelConfiguration.Get(1, "ActProprietate"), "NoContext,InSet,Context");
                 byte[] fileContents = null;
                 using (var stream = new MemoryStream())
                 {
@@ -53,7 +56,7 @@ namespace CS.ImportExportWeb.Controllers
             if (file.Contains("Parcel", StringComparison.InvariantCultureIgnoreCase))
             {
 
-                var wbk = Exporter.CycleParcele(context, excelConfiguration.Get(1, "Parcela"), "NoContext,InSet,Context");
+                var wbk = Excel.Exporter.CycleParcele(context, excelConfiguration.Get(1, "Parcela"), "NoContext,InSet,Context");
                 byte[] fileContents = null;
                 using (var stream = new MemoryStream())
                 {
@@ -66,7 +69,7 @@ namespace CS.ImportExportWeb.Controllers
             if (file.Contains("Inscrie", StringComparison.InvariantCultureIgnoreCase))
             {
 
-                var wbk = Exporter.CycleInscrieri(context, excelConfiguration.Get(1, "Inscriere"), "NoContext,InSet,Context");
+                var wbk = Excel.Exporter.CycleInscrieri(context, excelConfiguration.Get(1, "Inscriere"), "NoContext,InSet,Context");
                 byte[] fileContents = null;
                 using (var propStream = new MemoryStream())
                 {
@@ -75,8 +78,7 @@ namespace CS.ImportExportWeb.Controllers
                     return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "CentralizatorValidat.xls");
                 }
             }
-
-            return new OkResult();
+            return new NotFoundResult();
 
         }
     }

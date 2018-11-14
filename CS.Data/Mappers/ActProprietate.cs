@@ -33,7 +33,7 @@ namespace CS.Data.Mappers
         {
             actPropDTO.RowIndex = actProp.ExcelRow;
             actPropDTO.Index = actProp.Index;
-            actPropDTO.TipAct = actProp.TipAct?.Denumire;
+            actPropDTO.TipAct = actProp.TipActProprietate?.Denumire;
             actPropDTO.Numar = actProp.Numar;
             actPropDTO.Data = actProp.Data;
             actPropDTO.Emitent = actProp.Emitent;

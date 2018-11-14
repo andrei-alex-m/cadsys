@@ -33,7 +33,7 @@ namespace CS.EF
                 new TipActProprietate { Id = 3, Denumire = "Sentinta Civila", TipDocumentId = 293, TipDreptId = 23, ModDobandireId = 342, TipInscriereId = 316, ParteaCF = 2 },
                 new TipActProprietate { Id = 4, Denumire = "Certificat de Mostenitor", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 345, TipInscriereId = 316, ParteaCF = 2 },
                 new TipActProprietate { Id = 5, Denumire = "Contract de Donatie", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 340, TipInscriereId = 316, ParteaCF = 2 },
-                new TipActProprietate { Id = 6, Denumire = "Contract de Partaj", TipDocumentId = 289, TipDreptId = 23, , ModDobandireId = 343, TipInscriereId = 316, ParteaCF = 2 },
+                new TipActProprietate { Id = 6, Denumire = "Contract de Partaj", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 343, TipInscriereId = 316, ParteaCF = 2 },
                 new TipActProprietate { Id = 7, Denumire = "Testament", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 345, TipInscriereId = 316 },
                 new TipActProprietate { Id = 8, Denumire = "Declaratie Notariala", TipDocumentId = 289 },
                 new TipActProprietate { Id = 9, Denumire = "Contract de Intretinere", TipDocumentId = 289, TipDreptId = 20, ModDobandireId = 340, TipInscriereId = 316, ParteaCF = 3 },

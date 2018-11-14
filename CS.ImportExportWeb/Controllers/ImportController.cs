@@ -22,28 +22,38 @@ namespace CS.ImportExportAPI.Controllers
         CadSysContext context;
         IExcelConfigurationRepo excelConfiguration;
         IRepo repo;
+        IDXFRepo dXFRepo;
         IServiceBuilder serviceBuilder;
 
 
-        public ImportController(CadSysContext _context, IRepo _repo, IExcelConfigurationRepo _excelConfiguration, IServiceBuilder _serviceBuilder)
+        public ImportController(CadSysContext _context, IRepo _repo, IExcelConfigurationRepo _excelConfiguration, IDXFRepo _dXFRepo, IServiceBuilder _serviceBuilder)
         {
             context = _context;
             repo = _repo;
             excelConfiguration = _excelConfiguration;
             serviceBuilder = _serviceBuilder;
-            
+            dXFRepo = _dXFRepo;
+
         }
 
         [HttpPost]
         public async Task<IActionResult> UploadFile(IEnumerable<IFormFile> files)
         {
-            Prepare();
 
-            List<IFormFile> fileCollection = OrderUploadedFiles(Request.Form.Files);
 
-            await CycleFiles(fileCollection);
+            files = Request.Form.Files.Where(x => x != null);
 
-            if (fileCollection.Count > 0)
+            IEnumerable<IFormFile> excelFiles = OrderUploadedExcelFiles(files.Where(x => x.Name.Contains(".xls", StringComparison.InvariantCultureIgnoreCase)));
+
+            IEnumerable<IFormFile> dxfFiles = files.Where(x => x.Name.Contains(".dxf", StringComparison.InvariantCultureIgnoreCase));
+
+            Prepare(!excelFiles.Any() && dxfFiles.Any());
+
+            await CycleExcels(excelFiles);
+
+            await CycleDXFs(dxfFiles);
+
+            if (files.Any())
             {
                 return new RedirectToActionResult("download", "home", null);//"~/home/download");
             }
@@ -51,7 +61,7 @@ namespace CS.ImportExportAPI.Controllers
             return Ok("Mai baga 0 fisa");
         }
 
-        async Task CycleFiles(List<IFormFile> fileCollection)
+        async Task CycleExcels(IEnumerable<IFormFile> fileCollection)
         {
             foreach (var file in fileCollection)
             {
@@ -82,6 +92,23 @@ namespace CS.ImportExportAPI.Controllers
                         }
 
                         await context.SaveChangesAsync();
+                    }
+                }
+            }
+
+
+        }
+
+        async Task CycleDXFs(IEnumerable<IFormFile> fileCollection)
+        {
+            foreach (var file in fileCollection.Where(x => x.Name.Contains(".dxf", StringComparison.InvariantCultureIgnoreCase)))
+            {
+                if (file != null)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await file.CopyToAsync(stream);
+                        await dXFRepo.Store(stream, file.FileName);
                     }
                 }
             }
@@ -124,7 +151,6 @@ namespace CS.ImportExportAPI.Controllers
 
         async Task CycleActe(string fileName, MemoryStream stream)
         {
-
             var x = await Importer.GetDTOs<OutputActProprietate>(stream, fileName, new ImportConfig(), excelConfiguration);
 
             object locker = new object();
@@ -147,7 +173,7 @@ namespace CS.ImportExportAPI.Controllers
         async Task CycleProprietari(string fileName, MemoryStream stream)
         {
             var judeteAllInclussive = new ConcurrentBag<Judet>(context.Set<Judet>().Include(z => z.UATs).ThenInclude(w => w.Localitati));
-            
+
             var x = await Importer.GetDTOs<OutputProprietarAdresa>(stream, fileName, new ImportConfig(), excelConfiguration);
 
             IAddressParser addressParser = (IAddressParser)serviceBuilder.GetService("AddressParser");
@@ -171,17 +197,27 @@ namespace CS.ImportExportAPI.Controllers
              });
         }
 
-        void Prepare()
+
+        /// <summary>
+        /// Daca s-au uploadat numai dxf-uri nu curatam baza
+        /// </summary>
+        /// <param name="dxfOnly">If set to <c>true</c> dxf only.</param>
+        private void Prepare(bool dxfOnly = false)
         {
-            excelConfiguration.ClearAll();
-            repo.ClearDatabase();
+            if (!dxfOnly)
+            {
+                excelConfiguration.ClearAll();
+                repo.ClearDatabase();
+            }
+
+            dXFRepo.ClearAll();
         }
 
         /// <summary>
         /// Centralizator vine ultimul
         /// </summary>
         /// <returns>The uploaded files.</returns>
-        private List<IFormFile> OrderUploadedFiles(IFormFileCollection files)
+        private IEnumerable<IFormFile> OrderUploadedExcelFiles(IEnumerable<IFormFile> files)
         {
             var fileCollection = new List<IFormFile>();
 

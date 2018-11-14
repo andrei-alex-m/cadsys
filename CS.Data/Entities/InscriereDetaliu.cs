@@ -13,13 +13,23 @@ namespace CS.Data.Entities
             get;
             set;
         }
-        public int IdTipDrept
+
+        [ForeignKey("ImobilReferinta")]
+        public int? ImobilReferintaId
         {
             get;
             set;
         }
+
+        [ForeignKey("TipDrept")]
+        public int? TipDreptId
+        {
+            get;
+            set;
+        }
+
         [MaxLength(2000)]
-        public string ObservatiiDrept
+        public string DetaliiDrept
         {
             get;
             set;
@@ -36,20 +46,9 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
         [MaxLength(50)]
-        public string TipCota
-        {
-            get;
-            set;
-        }
-        [MaxLength(50)]
-        public string CotaInitiala
-        {
-            get;
-            set;
-        }
-        [MaxLength(50)]
-        public string CotaActuala
+        public string Cota
         {
             get;
             set;
@@ -82,25 +81,24 @@ namespace CS.Data.Entities
             get;
             set;
         }
-        public int NumarulCererii
+        public int NumarCerere
         {
             get;
             set;
         }
-        public DateTime DataCererii
-        {
-            get;
-            set;
-        }
-
-        [ForeignKey("ImobilReferinta")]
-        public int? ImobilReferintaId
+        public DateTime? DataCerere
         {
             get;
             set;
         }
 
         public Imobil ImobilReferinta
+        {
+            get;
+            set;
+        }
+
+        public TipDrept TipDrept
         {
             get;
             set;

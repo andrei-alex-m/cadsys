@@ -55,6 +55,14 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
+        [MaxLength(200)]
+        public string IdentificatorElectronic
+        {
+            get;
+            set;
+        }
+
         [MaxLength(200)]
         public string NumarCadastral
         {

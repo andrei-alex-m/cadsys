@@ -34,8 +34,12 @@ namespace CS.Data.Entities
 
     public enum TipPersoana
     {
+        //fizica
         F=0,
-        J=1
+        //juridica
+        J=1,
+        //neidentificat
+        N=2
     }
 
     enum TipPrefixPJ

@@ -4523,6 +4523,20 @@
           "bin/placeholder/Caly.Common.dll": {}
         }
       },
+      "CS.CadGen/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "CS.Data": "1.0.0",
+          "Caly.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CS.CadGen.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CS.CadGen.dll": {}
+        }
+      },
       "CS.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
@@ -12047,6 +12061,11 @@
       "path": "../Caly.Common/Caly.Common.csproj",
       "msbuildProject": "../Caly.Common/Caly.Common.csproj"
     },
+    "CS.CadGen/1.0.0": {
+      "type": "project",
+      "path": "../CS.CadGen/CS.CadGen.csproj",
+      "msbuildProject": "../CS.CadGen/CS.CadGen.csproj"
+    },
     "CS.Data/1.0.0": {
       "type": "project",
       "path": "../CS.Data/CS.Data.csproj",
@@ -12075,6 +12094,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "CS.CadGen >= 1.0.0",
       "CS.EF >= 1.0.0",
       "CS.Excel >= 1.0.0",
       "CS.Services >= 1.0.0",
@@ -12122,6 +12142,9 @@
             },
             "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Services/CS.Services.csproj": {
               "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Services/CS.Services.csproj"
+            },
+            "/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/CS.CadGen.csproj": {
+              "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/CS.CadGen.csproj"
             }
           }
         }

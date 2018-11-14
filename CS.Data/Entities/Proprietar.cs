@@ -63,6 +63,13 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
+        public string Observatii
+        {
+            get;
+            set;
+        }
+
         public TipPersoana? TipPersoana
         {
             get;

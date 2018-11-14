@@ -1,45 +1,42 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
     <Files>
-      <File FileName="CS.Services/ServiceBuilder.cs" Line="302" Column="13" />
+      <File FileName="CS.Services/ServiceBuilder.cs" Line="50" Column="10" />
       <File FileName="Caly.Common/Tree.cs" Line="86" Column="28" />
-      <File FileName="CS.CadGen/Exporter.cs" Line="9" Column="56" />
-      <File FileName="Caly.Common/Strings.cs" Line="27" Column="10" />
-      <File FileName="CadSys Status" />
+      <File FileName="CS.CadGen/Exporter.cs" Line="12" Column="42" />
+      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="30" Column="13" />
+      <File FileName="CS.Data/Entities/Adresa.cs" Line="115" Column="31" />
+      <File FileName="CS.Data/Mappers/Adresa.cs" Line="40" Column="61" />
+      <File FileName="CS.Data/Entities/Dictionaries/UAT.cs" Line="20" Column="21" />
+      <File FileName="CS.Data/Entities/Proprietar.cs" Line="29" Column="23" />
+      <File FileName="CS.Data/Entities/Enums/Enums.cs" Line="5" Column="17" />
+      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="49" Column="46" />
+      <File FileName="CS.Data/Entities/InscriereDetaliu.cs" Line="9" Column="18" />
+      <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="12" Column="28" />
+      <File FileName="Caly.Common/Reflection.cs" Line="120" Column="70" />
+      <File FileName="CS.Data/Entities/ActProprietate.cs" Line="31" Column="17" />
+      <File FileName="CS.Data/Entities/Dictionaries/TipActProprietate.cs" Line="8" Column="18" />
+      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="127" Column="21" />
+      <File FileName="CS.Services/ExcelConfigurationRepo.cs" Line="13" Column="42" />
+      <File FileName="CS.ImportExportWeb/Startup.cs" Line="27" Column="9" />
+      <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="29" Column="18" />
+      <File FileName="CS.Data/DTO/Excel/OutputInscriereDetaliu.cs" Line="24" Column="23" />
+      <File FileName="CS.Excel/Importer.cs" Line="77" Column="43" />
+      <File FileName="CS.Services/Interfaces/DXFRepo.cs" Line="16" Column="11" NotebookId="1" />
+      <File FileName="CS.DXF/Class1.cs" Line="30" Column="9" NotebookId="1" />
+      <File FileName="Caly.Common/IO.cs" Line="35" Column="14" NotebookId="1" />
+      <File FileName="CS.Excel.Tests/ImportTests.cs" Line="13" Column="44" NotebookId="1" />
+      <File FileName="CS.Services/Interfaces/IDXFRepo.cs" Line="7" Column="26" NotebookId="1" />
+      <File FileName="CS.Excel/Exporter.cs" Line="18" Column="19" NotebookId="1" />
+      <File FileName="CadSys Status" NotebookId="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="CadSys" expanded="True" selected="True">
-            <Node name="Caly.Common" expanded="True" />
-            <Node name="CS.CadGen" expanded="True" />
-            <Node name="CS.Data" expanded="True">
-              <Node name="Mappers" expanded="True" />
-            </Node>
-            <Node name="CS.Excel" expanded="True" />
-            <Node name="CS.ImportExportWeb" expanded="True">
-              <Node name="Controllers" expanded="True" />
-            </Node>
-            <Node name="CS.Services" expanded="True">
-              <Node name="Interfaces" expanded="True" />
-            </Node>
-            <Node name="CS.Templating" expanded="True">
-              <Node name="Dictionar" expanded="True" />
-              <Node name="Localitate" expanded="True">
-                <Node name="LocalitateInContext.tt" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/usr/local/share/dotnet/sdk/2.1.300/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" line="198" column="1" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel.Tests/ImportTests.cs" relfile="CS.Excel.Tests/ImportTests.cs" line="15" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/Class1.cs" relfile="CS.DXF/Class1.cs" line="29" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/Class1.cs" relfile="CS.DXF/Class1.cs" line="31" column="1" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="32" column="1" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Tests/UnitTest1.cs" relfile="CS.Tests/UnitTest1.cs" line="21" column="28" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="16" column="1" />
@@ -56,5 +53,4 @@
   <DisabledProjects>
     <String>CS.Interfaces/CS.Interfaces.csproj</String>
   </DisabledProjects>
-  <MonoDevelop.Ide.ItemProperties.CS.CadGen FirstBuild="True" />
 </Properties>

@@ -13,6 +13,7 @@
     <ProjectReference Include="..\CS.EF\CS.EF.csproj" />
     <ProjectReference Include="..\Caly.Common\Caly.Common.csproj" />
     <ProjectReference Include="..\CS.Services\CS.Services.csproj" />
+    <ProjectReference Include="..\CS.CadGen\CS.CadGen.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Home\Privacy.cshtml" />

@@ -6,5 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
+    <ProjectReference Include="..\Caly.Common\Caly.Common.csproj" />
   </ItemGroup>
 </Project>
