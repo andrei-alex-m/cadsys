@@ -91,6 +91,9 @@ namespace CS.Data.Entities
             Intravilan = false
         };
 
+        [InverseProperty("ImobilReferinta")]
+        public virtual ICollection<InscriereDetaliu> InscrieriDetaliu { get; set; } = new HashSet<InscriereDetaliu>();
+
         [InverseProperty("Imobil")]
         public virtual ICollection<InscriereImobil> Inscrieri { get; set; } = new HashSet<InscriereImobil>();
 

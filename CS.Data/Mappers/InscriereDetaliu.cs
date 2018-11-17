@@ -38,7 +38,6 @@ namespace CS.Data.Mappers
             var nota = outputInscriereD.Select(x => x.Nota).FirstOrDefault(x => !string.IsNullOrEmpty(x));
             var observatii = outputInscriereD.Select(x => x.Observatii).FirstOrDefault(x => !string.IsNullOrEmpty(x));
             var detaliiDrept = outputInscriereD.Select(x => x.DetaliiDrept).FirstOrDefault(x => !string.IsNullOrEmpty(x));
-            var pozitia = outputInscriereD.Select(x => x.Pozitia).FirstOrDefault(x => x.HasValue);
             var numarCerere = outputInscriereD.Select(x => x.NumarCerere).FirstOrDefault(x => x.HasValue);
             var dataCerere = outputInscriereD.Select(x => x.DataCerere).FirstOrDefault(x => x.HasValue);
 
@@ -127,7 +126,6 @@ namespace CS.Data.Mappers
                     Observatii = observatii,
                     Nota = nota,
                     DetaliiDrept = detaliiDrept,
-                    Pozitia = pozitia,
                     NumarCerere = numarCerere,
                     DataCerere = dataCerere
                 };
@@ -160,7 +158,6 @@ namespace CS.Data.Mappers
                     Observatii = inscriereD.Observatii,
                     Nota = inscriereD.Nota,
                     DetaliiDrept = inscriereD.DetaliiDrept,
-                    Pozitia = inscriereD.Pozitia,
                     NumarCerere = inscriereD.NumarCerere,
                     DataCerere = inscriereD.DataCerere
                 };

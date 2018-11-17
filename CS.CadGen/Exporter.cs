@@ -4,11 +4,18 @@ using CS.Data.Entities;
 using Caly.Common;
 using System.Collections.Generic;
 using System.Linq;
+using CS.EF;
 
 namespace CS.CadGen
 {
     public static class Exporter
     {
+
+        public static string[] Export(CadSysContext context, int indexImobil, List<Tuple<decimal,decimal>> coords)
+        {
+            return null;
+        }
+
         public static string ExportImobil(Imobil imobil)
         {
             StringBuilder builder = new StringBuilder("#01#|");
@@ -26,7 +33,7 @@ namespace CS.CadGen
             return builder.ToString();
         }
 
-        public static string ExportProprietar(Proprietar proprietar, IMatcher matcher)
+        public static string ExportProprietar(Proprietar proprietar)
         {
             StringBuilder builder = new StringBuilder("#07#");
 
@@ -134,14 +141,14 @@ namespace CS.CadGen
             return builder.ToString();
         }
 
-        public static string ExportParcela(Parcela parcela, string titlu)
+        public static string ExportParcela(Parcela parcela)
         {
             StringBuilder builder = new StringBuilder("#03#");
             builder.Append(1).Append('|');//numarul parcelei in imobil
             builder.Append(parcela.Suprafata).Append('|');
             builder.Append(0).Append('|');//intravilan
             builder.Append('|');//valoare impozitare
-            builder.Append(titlu).Append('|');
+            builder.Append(parcela.NumarTitlu).Append('|');
             builder.Append(parcela.Tarla).Append('|');
             builder.Append(parcela.Denumire).Append('|');
             builder.Append('|'); // nr topografic
@@ -150,10 +157,11 @@ namespace CS.CadGen
         }
 
         //include toate tipurile de inscrieri si entitatile asociate + asocierile lor :D
+        // calculeaza pozitia
         // TipDrept
         // InscrieriProprietari, Proprietar
         // InscrieriActeProprietate, ActProprietate
-        public static string[] ExportInscriere(InscriereDetaliu inscriereD, List<Proprietar> proprietariImobil, IMatcher matcher, IMatchProcessor matchProcessor)
+        public static string[] ExportInscriere(InscriereDetaliu inscriereD, List<Proprietar> proprietariImobil, int pozitia, IMatcher matcher, IMatchProcessor matchProcessor)
         {
             StringBuilder builder1 = new StringBuilder();
             StringBuilder builder2 = new StringBuilder();
@@ -284,7 +292,7 @@ namespace CS.CadGen
             builder2.Append(inscriereD.NumarCerere).Append('|');
             builder2.Append(inscriereD.DataCerere.HasValue ? inscriereD.DataCerere.Value.ToString("yyyy-MM-dd") + "T00:00:00+02:00" : "").Append('|');
             builder2.Append(inscriereD.Observatii).Append('|');
-            builder2.Append("poz#").Append(inscriereD.Pozitia).Append('|');
+            builder2.Append("poz#").Append(pozitia).Append('|');
 
             return new string[]
             {

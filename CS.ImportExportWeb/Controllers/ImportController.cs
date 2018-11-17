@@ -40,7 +40,6 @@ namespace CS.ImportExportAPI.Controllers
         public async Task<IActionResult> UploadFile(IEnumerable<IFormFile> files)
         {
 
-
             files = Request.Form.Files.Where(x => x != null);
 
             IEnumerable<IFormFile> excelFiles = OrderUploadedExcelFiles(files.Where(x => x.Name.Contains(".xls", StringComparison.InvariantCultureIgnoreCase)));
@@ -51,7 +50,12 @@ namespace CS.ImportExportAPI.Controllers
 
             await CycleExcels(excelFiles);
 
+            await CyclePostExcel();
+
+
+
             await CycleDXFs(dxfFiles);
+
 
             if (files.Any())
             {
@@ -95,8 +99,6 @@ namespace CS.ImportExportAPI.Controllers
                     }
                 }
             }
-
-
         }
 
         async Task CycleDXFs(IEnumerable<IFormFile> fileCollection)
@@ -114,6 +116,58 @@ namespace CS.ImportExportAPI.Controllers
             }
         }
 
+
+        //aici facem niste post procesari: Titlu in Parcela, Pozitia pe InscriereDetaliu
+        async Task CyclePostExcel()
+        {
+            object locker = new object();
+            //pozitia CF
+            context.Imobile.Include(x => x.InscrieriDetaliu).AsParallel().ForAll(i =>
+            {
+                int idxPt2 = 1;
+                int idxPt3 = 1;
+                foreach (var idPt2 in i.InscrieriDetaliu.Where(x => x.ParteaCF == 2))
+                {
+                    idPt2.Pozitia = idxPt2;
+                    idxPt2++;
+                    context.InscrieriDetaliu.Update(idPt2);
+                }
+
+                foreach (var idPt3 in i.InscrieriDetaliu.Where(x => x.ParteaCF == 3))
+                {
+                    idPt3.Pozitia = idxPt3;
+                    idxPt3++;
+                    context.InscrieriDetaliu.Update(idPt3);
+                }
+            });
+
+            //nrtitlu in parcela
+            context.Imobile.Include(x => x.InscrieriDetaliu)
+                                                .ThenInclude(y => y.InscrieriActe)
+                                                    .ThenInclude(z => z.ActProprietate)
+                   .ThenInclude(w => w.TipActProprietate).AsParallel().ForAll(i =>
+            {
+                var titlu = i.InscrieriDetaliu.SelectMany(x => x.InscrieriActe).Select(w => w.ActProprietate).FirstOrDefault(y => y.TipActProprietate.Denumire.Contains("titlu", StringComparison.InvariantCultureIgnoreCase));
+                if (titlu != null)
+                {
+                    foreach (var p in i.Parcele)
+                    {
+                        p.NumarTitlu = titlu.Numar;
+                        lock (locker)
+                        {
+                            context.Parcele.Update(p);
+                        }
+                    }
+                }
+            });
+
+            //sterg inscrierile fara propr care nu sunt notari
+            context.InscrieriDetaliu.RemoveRange(context.InscrieriDetaliu.Include(y=>y.InscrieriProprietari).Include(w=>w.TipInscriere).AsParallel().Where(x => x.InscrieriProprietari.Count == 0 && !string.Equals(x.TipInscriere.Denumire, "NOTATION", StringComparison.InvariantCultureIgnoreCase));
+            await context.SaveChangesAsync();
+        }
+
+
+
         async Task CycleCentralizator(string fileName, MemoryStream stream)
         {
             var x = await Importer.GetGroupedDTOs<OutputInscriereDetaliu>(stream, fileName, new ImportConfig(), excelConfiguration);
@@ -126,9 +180,9 @@ namespace CS.ImportExportAPI.Controllers
 
             x.ForEach(y =>
             {
-                foreach(var iD in InscriereDetaliuMapperExtensions.FromDTO(y, context.Proprietari.Select(m=>m), context.ActeProprietate.Include(w=>w.TipActProprietate).ThenInclude(w=>w.TipDrept), context.Parcele.Include(w=>w.Imobil), moduriDobandire, tipuriDrept, tipuriInscriere ))
+                foreach (var iD in InscriereDetaliuMapperExtensions.FromDTO(y, context.Proprietari.Select(m => m), context.ActeProprietate.Include(w => w.TipActProprietate).ThenInclude(w => w.TipDrept), context.Parcele.Include(w => w.Imobil), moduriDobandire, tipuriDrept, tipuriInscriere))
                 {
-                    context.InscrieriDetaliu.Add(iD);
+                    context.InscrieriDetaliu.AddAsync(iD);
                 }
             });
         }
@@ -179,7 +233,7 @@ namespace CS.ImportExportAPI.Controllers
 
         async Task CycleProprietari(string fileName, MemoryStream stream)
         {
-            var judeteAllInclussive = new ConcurrentBag<Judet>(context.Set<Judet>().Include(z => z.UATs).ThenInclude(w => w.Localitati));
+            var judeteAllInclussive = new ConcurrentBag<Judet>(context.Judete.Include(z => z.UATs).ThenInclude(w => w.Localitati));
 
             var x = await Importer.GetDTOs<OutputProprietarAdresa>(stream, fileName, new ImportConfig(), excelConfiguration);
 

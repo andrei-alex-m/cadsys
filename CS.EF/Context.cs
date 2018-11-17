@@ -28,6 +28,7 @@ namespace CS.EF
         public DbSet<TipDrept> TipuriDrept { get; set; }
         public DbSet<TipInscriere> TipuriInscriere { get; set; }
         public DbSet<TipDocument> TipuriDocument { get; set; }
+        public DbSet<Judet> Judete { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

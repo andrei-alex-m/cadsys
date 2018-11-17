@@ -1,26 +1,27 @@
 ﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.CadGen/Exporter.cs">
     <Files>
-      <File FileName="CS.CadGen/Exporter.cs" Line="282" Column="13" />
-      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="30" Column="13" />
+      <File FileName="CS.CadGen/Exporter.cs" Line="14" Column="32" />
+      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="72" Column="48" />
       <File FileName="CS.Data/Entities/Enums/Enums.cs" Line="5" Column="17" />
       <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="12" Column="28" />
       <File FileName="Caly.Common/Reflection.cs" Line="120" Column="70" />
       <File FileName="CS.Data/Entities/ActProprietate.cs" Line="31" Column="17" />
-      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="131" Column="54" />
+      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="42" Column="13" />
       <File FileName="CS.Excel/Importer.cs" Line="77" Column="43" />
       <File FileName="CS.ImportExportWeb/Program.cs" Line="1" Column="1" />
-      <File FileName="CS.Data/Entities/Imobil.cs" Line="47" Column="1" />
+      <File FileName="CS.Data/Entities/Imobil.cs" Line="10" Column="67" />
       <File FileName="CS.Data/Mappers/Parcela.cs" Line="13" Column="28" />
-      <File FileName="CS.Data/DTO/Excel/OutputInscriereDetaliu.cs" Line="66" Column="47" />
+      <File FileName="CS.Data/DTO/Excel/OutputInscriereDetaliu.cs" Line="81" Column="10" />
+      <File FileName="CS.EF/Context.cs" Line="30" Column="48" />
       <File FileName="CS.Services/Interfaces/DXFRepo.cs" Line="17" Column="46" NotebookId="1" />
       <File FileName="CS.DXF/Class1.cs" Line="30" Column="9" NotebookId="1" />
       <File FileName="Caly.Common/IO.cs" Line="35" Column="14" NotebookId="1" />
       <File FileName="CS.Excel.Tests/ImportTests.cs" Line="13" Column="44" NotebookId="1" />
       <File FileName="CS.Services/Interfaces/IDXFRepo.cs" Line="7" Column="26" NotebookId="1" />
-      <File FileName="CS.Data/Entities/InscriereDetaliu.cs" Line="122" Column="98" NotebookId="1" />
-      <File FileName="CS.Excel/Exporter.cs" Line="205" Column="12" NotebookId="1" />
-      <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="43" Column="66" NotebookId="1" />
+      <File FileName="CS.Data/Entities/InscriereDetaliu.cs" Line="85" Column="17" NotebookId="1" />
+      <File FileName="CS.Excel/Exporter.cs" Line="173" Column="24" NotebookId="1" />
+      <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="43" Column="13" NotebookId="1" />
       <File FileName="CS.Data/Entities/Dictionaries/TipActProprietate.cs" Line="51" Column="10" NotebookId="1" />
       <File FileName="CS.EF/EntitiesValidators/InscriereValidator.cs" Line="40" Column="33" NotebookId="1" />
       <File FileName="CadSys Status" NotebookId="1" />
@@ -35,8 +36,8 @@
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="32" column="1" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Tests/UnitTest1.cs" relfile="CS.Tests/UnitTest1.cs" line="21" column="28" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="16" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="89" column="1" />
       <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="88" column="1" />
-      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="87" column="1" />
       <Breakpoint enabled="false" conditionExpression="prop.Localitate != &quot;Bucuresti&quot; &amp;&amp; adresa.AdresaNecunoscuta == null &amp;&amp; adresa.SIRSUP == null" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Parsers/AdresaParser.cs" relfile="CS.EF/Parsers/AdresaParser.cs" line="34" column="1" />
       <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
     </BreakpointStore>

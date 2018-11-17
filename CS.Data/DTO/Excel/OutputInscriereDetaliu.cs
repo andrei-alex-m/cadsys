@@ -79,11 +79,6 @@ namespace CS.Data.DTO.Excel
             get;
             set;
         }
-        public int? Pozitia
-        {
-            get;
-            set;
-        }
         public int? NumarCerere
         {
             get;

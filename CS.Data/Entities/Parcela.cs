@@ -23,7 +23,13 @@ namespace CS.Data.Entities
         {
             get;
             set;
-        } 
+        }
+
+        public string NumarTitlu
+        {
+            get;
+            set;
+        }
 
         [ForeignKey("Tarla")]
         public int? TarlaId { get; set; }

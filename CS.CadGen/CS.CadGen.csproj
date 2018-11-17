@@ -7,5 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
     <ProjectReference Include="..\Caly.Common\Caly.Common.csproj" />
+    <ProjectReference Include="..\CS.EF\CS.EF.csproj" />
   </ItemGroup>
 </Project>
