@@ -1,7 +1,3 @@
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.csprojAssemblyReference.cache
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.csproj.CoreCompileInputs.cache
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.AssemblyInfoInputs.cache
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.AssemblyInfo.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/bin/Debug/netcoreapp2.1/CS.EF.deps.json
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/bin/Debug/netcoreapp2.1/CS.EF.runtimeconfig.json
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/bin/Debug/netcoreapp2.1/CS.EF.runtimeconfig.dev.json
@@ -13,6 +9,10 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/bin/Debug/netcoreapp2.1/CS.Data.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/bin/Debug/netcoreapp2.1/CS.Templating.pdb
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/bin/Debug/netcoreapp2.1/Caly.Common.pdb
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.csprojAssemblyReference.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.csproj.CoreCompileInputs.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.AssemblyInfoInputs.cache
+/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.AssemblyInfo.cs
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.csproj.CopyComplete
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/obj/Debug/netcoreapp2.1/CS.EF.pdb

@@ -200,8 +200,18 @@ namespace CS.CadGen
                     break;
             }
 
-            builder1.Append(inscriereD.TipInscriere).Append(' ', 6);
-            builder1.Append(inscriereD.TipDrept.Denumire.ToUpper()).Append(' ', 6);
+            if (inscriereD.TipInscriere.Denumire=="NOTATION")
+            {
+                inscriereD.TipDrept = null;
+                inscriereD.ModDobandire = null;
+                inscriereD.Cota = string.Empty;
+                inscriereD.Moneda = string.Empty;
+                inscriereD.Valoarea = string.Empty;
+                inscriereD.DetaliiDrept = string.Empty;
+            }
+
+            builder1.Append(inscriereD.TipInscriere?.Denumire).Append(' ', 6);
+            builder1.Append(inscriereD.TipDrept?.Denumire.ToUpper()).Append(' ', 6);
             builder1.Append(inscriereD.Cota).Append(' ', 6);
             inscriereD.InscrieriProprietari.ToList().ForEach(x =>
             {
@@ -234,7 +244,7 @@ namespace CS.CadGen
             var act = inscriereD.InscrieriActe.FirstOrDefault().ActProprietate;
 
             builder2.Append(act.Numar).Append('|');
-            builder2.Append(act.Data.HasValue ? act.Data.Value.ToString("dd/MM/yyyy") : "").Append('|');
+            builder2.Append(act.Data.HasValue ? act?.Data.Value.ToString("dd/MM/yyyy") : "").Append('|');
 
             var matchTipDocument = matcher.Match(clasTipDocument, act.TipActProprietate.TipDocumentId.ToString(), matchProcessor);
 
@@ -243,7 +253,7 @@ namespace CS.CadGen
             builder2.Append('^').Append('|'); //observatii
             builder2.Append(0).Append('|'); // no fucking clue
 
-            var matchTipInscriere = matcher.Match(clasTipInscriere, inscriereD.TipInscriere.Denumire, matchProcessor);
+            var matchTipInscriere = matcher.Match(clasTipInscriere, inscriereD.TipInscriere?.Denumire, matchProcessor);
             builder2.Append(matchTipInscriere.Count > 0 ? matchTipInscriere[0].Name : "").Append('|');
 
             List<Classification> matchTipDrept = new List<Classification>();
@@ -258,7 +268,7 @@ namespace CS.CadGen
             }
             builder2.Append(matchTipDrept.Count > 0 ? matchTipDrept[0].Name : "0").Append('|');
 
-            var matchModDobandire = matcher.Match(clasModDobandire, inscriereD.ModDobandire.Denumire, matchProcessor);
+            var matchModDobandire = matcher.Match(clasModDobandire, inscriereD.ModDobandire?.Denumire, matchProcessor);
             builder2.Append(matchModDobandire.Count > 0 ? matchModDobandire[0].Name : "0").Append('|');
 
             builder2.Append(inscriereD.Cota).Append('|');
