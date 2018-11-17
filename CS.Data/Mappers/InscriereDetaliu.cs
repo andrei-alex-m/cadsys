@@ -9,56 +9,68 @@ namespace CS.Data.Mappers
 {
     public static class InscriereDetaliuMapperExtensions
     {
-        public static void FromDTO(this InscriereDetaliu inscriereD, List<OutputInscriereDetaliu> outputInscriereD, DbSet<Proprietar> proprietari, DbSet<ActProprietate> acte, DbSet<Parcela> parcele)
+        enum cazuri
         {
-            inscriereD.ExcelRow = outputInscriereD.Min(x => x.RowIndex);
-                      
-            var indecsiParcela = outputInscriereD.Where(x => x.IndexParcela.HasValue).Select(x => x.IndexParcela.Value).Distinct().ToList();
+            nustim,
+            titlu,
+            sparge,
+            nusparge
+        }
+        /// <summary>
+        /// Tiganie
+        /// </summary>
+        /// <returns>The dto.</returns>
+        /// <param name="outputInscriereD">Output inscriere d.</param>
+        /// <param name="proprietari">Proprietari.</param>
+        /// <param name="acte">Acte.</param>
+        /// <param name="parcele">Parcele.</param>
+        public static IEnumerable<InscriereDetaliu> FromDTO(List<OutputInscriereDetaliu> outputInscriereD, IQueryable<Proprietar> proprietari, IQueryable<ActProprietate> acte, IQueryable<Parcela> parcele, IEnumerable<ModDobandire> moduriDobandire, IEnumerable<TipDrept> tipuriDrept, IEnumerable<TipInscriere> tipuriInscriere)
+        {
+            cazuri caz = cazuri.nustim;
+            string cotaGenerala = string.Empty;
 
-            var indecsiActe = outputInscriereD.Where(x => x.IndexAct.HasValue).Select(x => x.IndexAct.Value).Distinct().ToList();
+            var excelRow = outputInscriereD.Min(x => x.RowIndex);
 
-            var indecsiProprietari = outputInscriereD.Where(x => x.IndexProprietar.HasValue).Select(x => new {index = x.IndexProprietar.Value, cota = x.CotaParte} ).Distinct().ToList();
+            var modDobandire = outputInscriereD.Select(x => x.ModDobandire).FirstOrDefault(x => !string.IsNullOrEmpty(x));
+            var tipInscriere = outputInscriereD.Select(x => x.TipInscriere).FirstOrDefault(x => !string.IsNullOrEmpty(x));
+            var tipDrept = outputInscriereD.Select(x => x.TipDrept).FirstOrDefault(x => !string.IsNullOrEmpty(x));
+            var parteaCF =  outputInscriereD.Select(x => x.ParteaCF).FirstOrDefault(x => x.HasValue);
+            var nota = outputInscriereD.Select(x => x.Nota).FirstOrDefault(x => !string.IsNullOrEmpty(x));
+            var observatii = outputInscriereD.Select(x => x.Observatii).FirstOrDefault(x => !string.IsNullOrEmpty(x));
+            var detaliiDrept = outputInscriereD.Select(x => x.DetaliiDrept).FirstOrDefault(x => !string.IsNullOrEmpty(x));
+            var pozitia = outputInscriereD.Select(x => x.Pozitia).FirstOrDefault(x => x.HasValue);
+            var numarCerere= outputInscriereD.Select(x => x.NumarCerere).FirstOrDefault(x => x.HasValue);
+            var dataCerere = outputInscriereD.Select(x => x.DataCerere).FirstOrDefault(x => x.HasValue);
 
-            for (var i = 0; i < indecsiParcela.Count; i++)
+            var indexParcela = outputInscriereD.FirstOrDefault(x => x.IndexParcela.HasValue).IndexParcela.Value;
+            var indexAct = outputInscriereD.FirstOrDefault(x => x.IndexAct.HasValue).IndexAct.Value;
+            var indecsiProprietari = outputInscriereD.Where(x => x.IndexProprietar.HasValue).Select(x => new { index = x.IndexProprietar.Value, cota = x.CotaParte }).Distinct().ToList();
+
+            if (indecsiProprietari.All(x => !string.IsNullOrEmpty(x.cota)))
             {
-                var x = indecsiParcela[i];
-                var parcela = parcele.FirstOrDefault(y => y.Index == x);
-
-                var inscriereImobil = new InscriereImobil()
-                {
-                    Index = x,
-                    ExcelRow = inscriereD.ExcelRow+i
-                };
-
-                if (parcela != null)
-                {
-                    var imobil = new Imobil();
-                    imobil.Parcele.Add(parcela);
-
-                    inscriereImobil.Imobil = imobil;
-                    inscriereD.ImobilReferinta = imobil;
-                }
-
-                inscriereD.InscrieriImobile.Add(inscriereImobil);
+                caz = cazuri.sparge;
             }
 
-            for (var i = 0; i < indecsiActe.Count; i++)
+            if (indecsiProprietari.Count(x => !string.IsNullOrEmpty(x.cota)) == 1)
             {
-                var x = indecsiActe[i];
-                var inscriereAct = new InscriereAct
-                {
-                    Index = x,
-                    ExcelRow=inscriereD.ExcelRow+i
-                };
+                caz = cazuri.nusparge;
+                cotaGenerala = indecsiProprietari.Single(x => string.IsNullOrEmpty(x.cota)).cota;
+            }
 
-                var act = acte.FirstOrDefault(y => y.Index == x);
+            if (indecsiProprietari.Count == 0)
+            {
+                caz = cazuri.titlu;
+            }
 
-                if (act != null)
-                {
-                    inscriereAct.ActProprietate = act;
-                }
+            var parcela = parcele.FirstOrDefault(y => y.Index == indexParcela);
 
-                inscriereD.InscrieriActe.Add(inscriereAct);
+            var act = acte.FirstOrDefault(y => y.Index == indexAct);
+
+            var inscriereD = getInscriereDetaliu();
+
+            if (caz == cazuri.nusparge)
+            {
+                inscriereD.Cota = cotaGenerala;
             }
 
             for (var i = 0; i < indecsiProprietari.Count; i++)
@@ -68,17 +80,65 @@ namespace CS.Data.Mappers
                 var inscriereProprietar = new InscriereProprietar()
                 {
                     Index = x.index,
-                    CotaParte=x.cota,
-                    ExcelRow=inscriereD.ExcelRow+i
+                    ExcelRow = excelRow + i,
+                    Proprietar=proprietar
                 };
 
-                if (proprietar != null)
-                {
-                    inscriereProprietar.Proprietar = proprietar;
-                }
-
                 inscriereD.InscrieriProprietari.Add(inscriereProprietar);
+
+                if (caz==cazuri.sparge)
+                {
+                    inscriereD.Cota = x.cota;
+                    inscriereD.ExcelRow = excelRow + i;
+                    yield return inscriereD;
+                    inscriereD = getInscriereDetaliu();
+                }
             }
+
+            InscriereImobil getInscriereImobil() =>
+                 new InscriereImobil()
+                 {
+                     Index = indexParcela,
+                     ExcelRow = excelRow,
+                     Imobil = parcela?.Imobil
+                 };
+
+            InscriereAct getInscriereAct() =>
+                new InscriereAct()
+                {
+                    Index = indexAct,
+                    ExcelRow = excelRow,
+                    ActProprietate = act
+                };
+
+            InscriereDetaliu getInscriereDetaliu(int deltaIndex = 0)
+            {
+                var id = new InscriereDetaliu()
+                {
+                    ModDobandireId = string.IsNullOrEmpty(modDobandire) ? act?.TipActProprietate?.ModDobandireId : moduriDobandire.FirstOrDefault(x=> string.Equals(modDobandire,x.Denumire, StringComparison.InvariantCultureIgnoreCase))?.Id,
+                    ParteaCF= parteaCF.HasValue? parteaCF : act.TipActProprietate.ParteaCF,
+                    TipDreptId= string.IsNullOrEmpty(tipDrept)? act?.TipActProprietate?.TipDreptId : tipuriDrept.FirstOrDefault(x=> string.Equals(tipDrept, x.Denumire, StringComparison.InvariantCultureIgnoreCase))?.Id,
+                    TipInscriereId= !string.IsNullOrEmpty(nota)? tipuriInscriere.FirstOrDefault(x=>x.Denumire=="NOTATION").Id: string.IsNullOrEmpty(tipInscriere)? act.TipActProprietate.TipInscriereId:tipuriInscriere.FirstOrDefault(x=> string.Equals(tipInscriere, x.Denumire, StringComparison.InvariantCultureIgnoreCase))?.Id,
+                    Observatii=observatii,
+                    Nota=nota,
+                    DetaliiDrept=detaliiDrept,
+                    Pozitia=pozitia,
+                    NumarCerere=numarCerere,
+                    DataCerere=dataCerere
+                };
+
+                var iImobil = getInscriereImobil();
+
+                id.InscrieriImobile.Add(iImobil);
+                id.InscrieriActe.Add(getInscriereAct());
+                id.ImobilReferinta = iImobil.Imobil;
+
+                return id;
+            }
+
+
+
+            //adauga imobil referinta, ExcelRow+indexul din indecsiProp la inscriereD
         }
 
         public static void FromPOCO(this List<OutputInscriereDetaliu> outputInscrieriD, InscriereDetaliu inscriereD)
@@ -87,23 +147,38 @@ namespace CS.Data.Mappers
             var max = new[] { inscriereD.InscrieriActe.Count, inscriereD.InscrieriImobile.Count, inscriereD.InscrieriProprietari.Count }.Max();
             for (var index = 0; index < max; index++)
             {
-                var item = new OutputInscriereDetaliu();
+                var item = new OutputInscriereDetaliu()
+                {
+                    CotaParte=inscriereD.Cota,
+                    ModDobandire=inscriereD.ModDobandire.Denumire,
+                    ParteaCF=inscriereD.ParteaCF,
+                    TipDrept=inscriereD.TipDrept.Denumire,
+                    TipInscriere=inscriereD.TipInscriere.Denumire,
+                    Observatii=inscriereD.Observatii,
+                    Nota=inscriereD.Nota,
+                    DetaliiDrept=inscriereD.DetaliiDrept,
+                    Pozitia=inscriereD.Pozitia,
+                    NumarCerere=inscriereD.NumarCerere,
+                    DataCerere=inscriereD.DataCerere  
+                };
 
-                if (inscriereD.InscrieriActe.Count>index)
+                if (inscriereD.InscrieriActe.Count > index)
                 {
                     item.IndexAct = inscriereD.InscrieriActe.ElementAt(index).Index;
                 }
 
-                if (inscriereD.InscrieriImobile.Count>index)
+                if (inscriereD.InscrieriImobile.Count > index)
                 {
                     item.IndexParcela = inscriereD.InscrieriImobile.FirstOrDefault().Index;
                 }
 
-                if (inscriereD.InscrieriProprietari.Count>index)
+                if (inscriereD.InscrieriProprietari.Count > index)
                 {
                     item.IndexProprietar = inscriereD.InscrieriProprietari.ElementAt(index).Index;
-                    item.CotaParte= inscriereD.InscrieriProprietari.ElementAt(index).CotaParte;
                 }
+
+                
+
                 item.RowIndex = inscriereD.ExcelRow + index;
                 outputInscrieriD.Add(item);
             }

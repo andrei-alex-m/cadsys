@@ -117,7 +117,6 @@ namespace CS.Excel
 
                     try
                     {
-
                         if (miniResult.Count > 0 && (row == null || row.All(x => x.CellType == CellType.Blank)))
                         {
                             result.Add(miniResult);

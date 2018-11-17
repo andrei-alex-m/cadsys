@@ -19,12 +19,12 @@ namespace CS.Data.Entities
             get;
             set;
         }
-        public decimal SuprafataMasurata
+        public decimal? SuprafataMasurata
         {
             get;
             set;
         }
-        public decimal SuprafataDinActe
+        public decimal? SuprafataDinActe
         {
             get;
             set;
@@ -44,11 +44,7 @@ namespace CS.Data.Entities
             get;
             set;
         }
-        public bool Intravilan
-        {
-            get;
-            set;
-        }
+
         [MaxLength(2000)]
         public string Observatii
         {

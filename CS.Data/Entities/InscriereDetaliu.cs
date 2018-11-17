@@ -8,11 +8,6 @@ namespace CS.Data.Entities
 {
     public class InscriereDetaliu:BaseEntity
     {
-        public string TipInscriere
-        {
-            get;
-            set;
-        }
 
         [ForeignKey("ImobilReferinta")]
         public int? ImobilReferintaId
@@ -28,6 +23,20 @@ namespace CS.Data.Entities
             set;
         }
 
+        [ForeignKey("ModDobandire")]
+        public int? ModDobandireId
+        {
+            get;
+            set;
+        }
+
+        [ForeignKey("TipInscriere")]
+        public int? TipInscriereId
+        {
+            get;
+            set;
+        }
+
         [MaxLength(2000)]
         public string DetaliiDrept
         {
@@ -36,12 +45,6 @@ namespace CS.Data.Entities
         }
         [MaxLength(4000)]
         public string Nota
-        {
-            get;
-            set;
-        }
-        [MaxLength(50)]
-        public string ModDobandire
         {
             get;
             set;
@@ -71,17 +74,17 @@ namespace CS.Data.Entities
             get;
             set;
         }
-        public int ParteaCartiiFunciare
+        public int? ParteaCF
         {
             get;
             set;
         }
-        public int Pozitia
+        public int? Pozitia
         {
             get;
             set;
         }
-        public int NumarCerere
+        public int? NumarCerere
         {
             get;
             set;
@@ -99,6 +102,17 @@ namespace CS.Data.Entities
         }
 
         public TipDrept TipDrept
+        {
+            get;
+            set;
+        }
+        public ModDobandire ModDobandire
+        {
+            get;
+            set;
+        }
+
+        public TipInscriere TipInscriere
         {
             get;
             set;

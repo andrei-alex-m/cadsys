@@ -120,12 +120,16 @@ namespace CS.ImportExportAPI.Controllers
 
             context.SaveChanges();
 
+            var moduriDobandire = new ConcurrentBag<ModDobandire>(context.ModuriDobandire);
+            var tipuriDrept = new ConcurrentBag<TipDrept>(context.TipuriDrept);
+            var tipuriInscriere = new ConcurrentBag<TipInscriere>(context.TipuriInscriere);
+
             x.ForEach(y =>
             {
-                var z = new InscriereDetaliu();
-                context.InscrieriDetaliu.Add(z);
-                z.FromDTO(y, context.Proprietari, context.ActeProprietate, context.Parcele);
-
+                foreach(var iD in InscriereDetaliuMapperExtensions.FromDTO(y, context.Proprietari.Select(m=>m), context.ActeProprietate.Include(w=>w.TipActProprietate).ThenInclude(w=>w.TipDrept), context.Parcele.Include(w=>w.Imobil), moduriDobandire, tipuriDrept, tipuriInscriere ))
+                {
+                    context.InscrieriDetaliu.Add(iD);
+                }
             });
         }
 
@@ -139,13 +143,16 @@ namespace CS.ImportExportAPI.Controllers
             Parallel.ForEach(x, y =>
             {
                 var z = new Parcela();
+                var i = new Imobil();
 
                 lock (locker)
                 {
                     context.Parcele.Add(z);
+                    context.Imobile.Add(i);
                 }
 
                 z.FromDTO(y, tarlale);
+                i.Parcele.Add(z);
             });
         }
 

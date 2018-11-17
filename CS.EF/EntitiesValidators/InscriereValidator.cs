@@ -52,13 +52,13 @@ namespace CS.EF.EntitiesValidators
         {
             RuleSet("NoContext", () =>
             {
-                RuleFor(x => x).Custom((x, c) =>
-                {
-                    if (x.InscrieriProprietari.Count > 1 && x.InscrieriProprietari.Any(y => String.IsNullOrEmpty(y.CotaParte)))
-                    {
-                        c.AddFailure("Proprietari Multipli fara Cota Parte");
-                    }
-                });
+                //RuleFor(x => x).Custom((x, c) =>
+                //{
+                //    if (x.InscrieriProprietari.Count > 1 && x.InscrieriProprietari.Any(y => String.IsNullOrEmpty(y.CotaParte)))
+                //    {
+                //        c.AddFailure("Proprietari Multipli fara Cota Parte");
+                //    }
+                //});
 
                 RuleFor(x => x).Custom((x, c) =>
                   {

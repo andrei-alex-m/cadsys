@@ -12,18 +12,22 @@ namespace CS.EF
         {
             Database.Migrate();
         }
-
+        public DbSet<Imobil> Imobile { get; set; }
         public DbSet<Proprietar> Proprietari { get; set; }
         public DbSet<ActProprietate> ActeProprietate { get; set; }
         public DbSet<Parcela> Parcele { get; set; }
         public DbSet<Tarla> Tarlale { get; set; }
-        public DbSet<TipActProprietate> TipuriActProprietate { get; set; }
         public DbSet<Inscriere> Inscrieri { get; set; }
         public DbSet<InscriereDetaliu> InscrieriDetaliu { get; set; }
         public DbSet<InscriereAct> InscrieriActe { get; set; }
         public DbSet<InscriereProprietar> InscrieriProprietari { get; set; }
         public DbSet<InscriereImobil> InscrieriImobile { get; set; }
         public DbSet<BaseXMLDictionary> Dictionar { get; set; }
+        public DbSet<ModDobandire> ModuriDobandire { get; set; }
+        public DbSet<TipActProprietate> TipuriActProprietate { get; set; }
+        public DbSet<TipDrept> TipuriDrept { get; set; }
+        public DbSet<TipInscriere> TipuriInscriere { get; set; }
+        public DbSet<TipDocument> TipuriDocument { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

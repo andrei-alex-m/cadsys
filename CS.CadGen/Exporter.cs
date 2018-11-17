@@ -190,7 +190,7 @@ namespace CS.CadGen
                 new Classification(2,"Parte3")
             };
 
-            switch (inscriereD.ParteaCartiiFunciare)
+            switch (inscriereD.ParteaCF)
             {
                 case 2:
                     builder1.Append("#05#T").Append(' ', 6);
@@ -221,7 +221,7 @@ namespace CS.CadGen
             });
             builder1.Remove(builder1.Length - 1, 1); //ultimul punct
 
-            switch (inscriereD.ParteaCartiiFunciare)
+            switch (inscriereD.ParteaCF)
             {
                 case 2:
                     builder2.Append("#55#");
@@ -243,11 +243,11 @@ namespace CS.CadGen
             builder2.Append('^').Append('|'); //observatii
             builder2.Append(0).Append('|'); // no fucking clue
 
-            var matchTipInscriere = matcher.Match(clasTipInscriere, inscriereD.TipInscriere, matchProcessor);
+            var matchTipInscriere = matcher.Match(clasTipInscriere, inscriereD.TipInscriere.Denumire, matchProcessor);
             builder2.Append(matchTipInscriere.Count > 0 ? matchTipInscriere[0].Name : "").Append('|');
 
             List<Classification> matchTipDrept = new List<Classification>();
-            switch (inscriereD.ParteaCartiiFunciare)
+            switch (inscriereD.ParteaCF)
             {
                 case 2:
                     matchTipDrept = matcher.Match(clasTipDreptParte2, inscriereD.TipDreptId.ToString(), matchProcessor);
@@ -258,7 +258,7 @@ namespace CS.CadGen
             }
             builder2.Append(matchTipDrept.Count > 0 ? matchTipDrept[0].Name : "0").Append('|');
 
-            var matchModDobandire = matcher.Match(clasModDobandire, inscriereD.ModDobandire, matchProcessor);
+            var matchModDobandire = matcher.Match(clasModDobandire, inscriereD.ModDobandire.Denumire, matchProcessor);
             builder2.Append(matchModDobandire.Count > 0 ? matchModDobandire[0].Name : "0").Append('|');
 
             builder2.Append(inscriereD.Cota).Append('|');
