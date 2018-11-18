@@ -243,7 +243,6 @@ namespace CS.ImportExportAPI.Controllers
 
             object locker = new object();
 
-
             Parallel.ForEach(x, y =>
              {
                  var z = new Proprietar();

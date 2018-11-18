@@ -7,4 +7,8 @@
   <ItemGroup>
     <PackageReference Include="netDXF.Standard" Version="2.1.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
+    <ProjectReference Include="..\CS.CadGen\CS.CadGen.csproj" />
+  </ItemGroup>
 </Project>

@@ -5,22 +5,109 @@ using Caly.Common;
 using System.Collections.Generic;
 using System.Linq;
 using CS.EF;
+using CS.Services.Interfaces;
 
 namespace CS.CadGen
 {
-    public static class Exporter
+    public class Exporter : IExporter
     {
+        CadSysContext context;
+        IServiceBuilder serviceBuilder;
+        IMatcher comboMatcher;
+        IMatchProcessor comboMatchProcessor;
 
-        public static string[] Export(CadSysContext context, int indexImobil, List<Tuple<decimal,decimal>> coords)
+
+        public Exporter(CadSysContext _context, IServiceBuilder _serviceBuilder)
         {
-            return null;
+            context = _context;
+            serviceBuilder = _serviceBuilder;
+            comboMatcher = (IMatcher)serviceBuilder.GetService("CombosIndexMatcher");
+            comboMatchProcessor = (IMatchProcessor)serviceBuilder.GetService("CombosIndexMatchProcessor");
         }
 
-        public static string ExportImobil(Imobil imobil)
+
+        public string[] Export(int indexImobil, IEnumerable<Point> coords, double suprafata, string nrCadGeneral, string sector)
+        {
+            var result = new List<string>();
+            var imobil = context.Imobile.FirstOrDefault(x => x.Parcele.Any(y => y.Index == indexImobil));
+
+            if (imobil == null)
+            {
+                return result.ToArray();
+            }
+
+            result.AddRange(ExportPozitia(imobil));
+
+            var proprietari = imobil.InscrieriDetaliu.SelectMany(x => x.InscrieriProprietari).Select(y => y.Proprietar);
+
+            foreach (var p in proprietari)
+            {
+                result.Add(ExportProprietar(p) + "$" + ExportAdresa(p.Adresa, comboMatcher, comboMatchProcessor));
+            }
+
+            var linesInscrieriPt3Short = new string[] { };
+            var linesInscrieriPt3Long = new string[] { };
+
+            var linesInscrieriPt2Short = new string[] { };
+            var linesInscrieriPt2Long = new string[] { };
+
+
+            foreach (var idPt3 in imobil.InscrieriDetaliu.Where(x=>x.ParteaCF==3))
+            {
+                var currentLines = ExportInscriere(idPt3, proprietari, comboMatcher, comboMatchProcessor);
+                linesInscrieriPt3Short.Append(currentLines[0]);
+                linesInscrieriPt3Long.Append(currentLines[1]);
+            }
+
+            foreach (var idPt2 in imobil.InscrieriDetaliu.Where(x => x.ParteaCF == 2))
+            {
+                var currentLines = ExportInscriere(idPt2, proprietari, comboMatcher, comboMatchProcessor);
+                linesInscrieriPt2Short.Append(currentLines[0]);
+                linesInscrieriPt2Long.Append(currentLines[1]);
+            }
+
+            result.AddRange(linesInscrieriPt3Short);
+            result.AddRange(linesInscrieriPt3Long);
+
+            result.AddRange(linesInscrieriPt2Short);
+            result.AddRange(linesInscrieriPt2Long);
+
+            result.Add(ExportParcela(imobil.Parcele.FirstOrDefault(),suprafata));
+
+            result.Add("02#" + ExportAdresa(Imobil.Adresa, comboMatcher, comboMatchProcessor)+"1|");
+            result.Add(ExportImobil(imobil, nrCadGeneral, sector));
+
+            result.Add(ExportCoordonate(coords));
+
+            return result.ToArray();
+
+        }
+
+        static string[] ExportPozitia(Imobil imobil)
+        {
+            var result = new string[] { };
+
+            var iPt3 = imobil.InscrieriDetaliu.Where(x => x.ParteaCF == 3).Select(y => y.Pozitia);
+
+            if (iPt3.Any())
+            {
+                result.Append($"#7773#{iPt3.Select(x => x.ToString() + '|')}");
+            }
+
+            var iPt2 = imobil.InscrieriDetaliu.Where(x => x.ParteaCF == 2).Select(y => y.Pozitia);
+
+            if (iPt2.Any())
+            {
+                result.Append($"#7772#{iPt2.Select(x => x.ToString() + '|')}");
+            }
+            return result;
+        }
+
+        static string ExportImobil(Imobil imobil, string nrCadGeneral, string sector)
         {
             StringBuilder builder = new StringBuilder("#01#|");
-            builder.Append(imobil.NumarCadGeneral).Append('|');
-            builder.Append(imobil.SectorCadastral).Append('|');
+            builder.Append(nrCadGeneral).Append('|');
+            builder.Append(sector).Append('|');
             builder.Append('0').Append('|'); //cooperativizata
             builder.Append('0').Append('|'); //dunno
             builder.Append(imobil.IdentificatorElectronic).Append('|');
@@ -33,7 +120,7 @@ namespace CS.CadGen
             return builder.ToString();
         }
 
-        public static string ExportProprietar(Proprietar proprietar)
+        static string ExportProprietar(Proprietar proprietar)
         {
             StringBuilder builder = new StringBuilder("#07#");
 
@@ -100,7 +187,7 @@ namespace CS.CadGen
         }
 
         //#02# inainte, 1| dupa prentru imobil
-        public static string ExportAdresa(Adresa adresa, IMatcher matcher, IMatchProcessor matchProcessor)
+        static string ExportAdresa(Adresa adresa, IMatcher matcher, IMatchProcessor matchProcessor)
         {
 
             StringBuilder builder = new StringBuilder();
@@ -141,11 +228,11 @@ namespace CS.CadGen
             return builder.ToString();
         }
 
-        public static string ExportParcela(Parcela parcela)
+        static string ExportParcela(Parcela parcela, double suprafata)
         {
             StringBuilder builder = new StringBuilder("#03#");
             builder.Append(1).Append('|');//numarul parcelei in imobil
-            builder.Append(parcela.Suprafata).Append('|');
+            builder.Append(Math.Round(suprafata,0)).Append('|');
             builder.Append(0).Append('|');//intravilan
             builder.Append('|');//valoare impozitare
             builder.Append(parcela.NumarTitlu).Append('|');
@@ -161,7 +248,7 @@ namespace CS.CadGen
         // TipDrept
         // InscrieriProprietari, Proprietar
         // InscrieriActeProprietate, ActProprietate
-        public static string[] ExportInscriere(InscriereDetaliu inscriereD, List<Proprietar> proprietariImobil, int pozitia, IMatcher matcher, IMatchProcessor matchProcessor)
+        static string[] ExportInscriere(InscriereDetaliu inscriereD, IEnumerable<Proprietar> proprietariImobil, IMatcher matcher, IMatchProcessor matchProcessor)
         {
             StringBuilder builder1 = new StringBuilder();
             StringBuilder builder2 = new StringBuilder();
@@ -208,7 +295,7 @@ namespace CS.CadGen
                     break;
             }
 
-            if (inscriereD.TipInscriere.Denumire=="NOTATION")
+            if (inscriereD.TipInscriere.Denumire == "NOTATION")
             {
                 inscriereD.TipDrept = null;
                 inscriereD.ModDobandire = null;
@@ -282,7 +369,7 @@ namespace CS.CadGen
             builder2.Append(inscriereD.Cota).Append('|');
             builder2.Append(inscriereD.Nota).Append('|');
 
-            var propIndexes = inscriereD.InscrieriProprietari.ToList().Select(x => proprietariImobil.IndexOf(x.Proprietar));
+            var propIndexes = inscriereD.InscrieriProprietari.ToList().Select(x => proprietariImobil.ToList().IndexOf(x.Proprietar));
             builder2.Append(string.Join(' ', propIndexes)).Append('|');
 
             builder2.Append('|'); //moneda
@@ -292,13 +379,23 @@ namespace CS.CadGen
             builder2.Append(inscriereD.NumarCerere).Append('|');
             builder2.Append(inscriereD.DataCerere.HasValue ? inscriereD.DataCerere.Value.ToString("yyyy-MM-dd") + "T00:00:00+02:00" : "").Append('|');
             builder2.Append(inscriereD.Observatii).Append('|');
-            builder2.Append("poz#").Append(pozitia).Append('|');
+            builder2.Append("poz#").Append(inscriereD.Pozitia).Append('|');
 
             return new string[]
             {
                 builder1.ToString(),
                 builder2.ToString()
             };
+        }
+
+        static string ExportCoordonate(IEnumerable<Point> points)
+        {
+            var result = new StringBuilder("#00#");
+            foreach(var p in points)
+            {
+                result.Append(p.X.ToString("0.000")).Append('_').Append(p.Y.ToString("0.000")).Append('|');
+            }
+            return result.ToString();
         }
     }
 }

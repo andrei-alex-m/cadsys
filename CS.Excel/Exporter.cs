@@ -36,7 +36,7 @@ namespace CS.Excel
                 cell.SetCellValue(columnNames[i]);
             }
 
-            foreach (var x in context.Proprietari.Include(x=>x.Adresa).ThenInclude(y=>y.Localitate).ThenInclude(z=>z.UAT).ThenInclude(w=>w.Judet))
+            foreach (var x in context.Proprietari.Include(x => x.Adresa).ThenInclude(y => y.Localitate).ThenInclude(z => z.UAT).ThenInclude(w => w.Judet))
             {
                 ExportProprietar(sheet, columnNames, x, validatorP, validatorA, ruleSet);
             }
@@ -128,7 +128,7 @@ namespace CS.Excel
             return wbk;
         }
 
-        private static void ExportProprietar(ISheet sheet, string[] columnNames, Proprietar proprietar, ProprietarValidator validatorP,  AdresaValidator validatorA, string ruleSet)
+        private static void ExportProprietar(ISheet sheet, string[] columnNames, Proprietar proprietar, ProprietarValidator validatorP, AdresaValidator validatorA, string ruleSet)
         {
             var resultP = validatorP.Validate(proprietar, ruleSet: ruleSet);
             var resultA = validatorA.Validate(proprietar.Adresa, ruleSet: ruleSet);
@@ -138,7 +138,7 @@ namespace CS.Excel
 
             var row = sheet.CreateRow(excelDTO.RowIndex);
 
-            writeRow(row, columnNames, excelDTO, false, resultP,resultA);
+            writeRow(row, columnNames, excelDTO, false, resultP, resultA);
 
 
         }
@@ -167,7 +167,7 @@ namespace CS.Excel
             writeRow(row, columnNames, excelDTO, false, validator.Validate(parcela, ruleSet: ruleSet));
         }
 
-        static void ExportInscrieri(ISheet sheet, string[] columnNames, InscriereDetaliu inscriereD, InscriereDetaliuValidator iDValidator,  InscriereActValidator iActValidator, InscriereImobilValidator iImobilValidator, InscriereProprietarValidator iPropValidator, string ruleSet)
+        static void ExportInscrieri(ISheet sheet, string[] columnNames, InscriereDetaliu inscriereD, InscriereDetaliuValidator iDValidator, InscriereActValidator iActValidator, InscriereImobilValidator iImobilValidator, InscriereProprietarValidator iPropValidator, string ruleSet)
         {
             var xPorts = new List<OutputInscriereDetaliu>();
             xPorts.FromPOCO(inscriereD);
@@ -232,34 +232,34 @@ namespace CS.Excel
             }
 
 
-            result.SelectMany(x=>x.Errors).GroupBy(y => y.PropertyName).ToList().ForEach(x =>
-              {
-                  if (!string.IsNullOrEmpty(x.Key))
-                  {
-                      var propIndex = Array.IndexOf(columnNames, x.Key.ToUpper());
-                      if (propIndex < 0 && Reflection.matches.ContainsKey(x.Key.ToUpper()))
-                      {
-                          propIndex = Array.IndexOf(columnNames, Reflection.matches[x.Key.ToUpper()]);
-                      }
+            result.SelectMany(x => x.Errors).GroupBy(y => y.PropertyName).ToList().ForEach(x =>
+                {
+                    if (!string.IsNullOrEmpty(x.Key))
+                    {
+                        var propIndex = Array.IndexOf(columnNames, x.Key.ToUpper());
+                        if (propIndex < 0 && Reflection.matches.ContainsKey(x.Key.ToUpper()))
+                        {
+                            propIndex = Array.IndexOf(columnNames, Reflection.matches[x.Key.ToUpper()]);
+                        }
 
-                      if (propIndex >= 0)
-                      {
-                        var comment = row.Sheet.CreateDrawingPatriarch().CreateCellComment(new HSSFClientAnchor(0, 0, 0, 0, propIndex, row.RowNum, propIndex + 3, row.RowNum + 2));
-                          comment.String = new HSSFRichTextString(String.Join("; ", x.Select(y => y.ErrorMessage)));
-                          comment.Row = row.RowNum;
-                          comment.Column = propIndex;
-                      }
-                  }
-                  else
-                  {
-                      x.ToList().ForEach(w =>
-                      {
-                          var cell = row.CreateCell(columnCount);
-                          cell.SetCellValue(w.ErrorMessage);
-                          columnCount++;
-                      });
-                  }
-              });
+                        if (propIndex >= 0)
+                        {
+                            var comment = row.Sheet.CreateDrawingPatriarch().CreateCellComment(new HSSFClientAnchor(0, 0, 0, 0, propIndex, row.RowNum, propIndex + 3, row.RowNum + 2));
+                            comment.String = new HSSFRichTextString(String.Join("; ", x.Select(y => y.ErrorMessage)));
+                            comment.Row = row.RowNum;
+                            comment.Column = propIndex;
+                        }
+                    }
+                    else
+                    {
+                        x.ToList().ForEach(w =>
+                        {
+                            var cell = row.CreateCell(columnCount);
+                            cell.SetCellValue(w.ErrorMessage);
+                            columnCount++;
+                        });
+                    }
+                });
         }
 
         public static MemoryStream Cycle<T>(DbSet<T> set, string[] columnNames, AbstractValidator<T> validator, string ruleSet) where T : BaseEntity
@@ -267,30 +267,29 @@ namespace CS.Excel
             var wbk = new XSSFWorkbook();
             var sheet = wbk.CreateSheet("Sheet 1");
 
-            using (var exportData = new MemoryStream())
+            var exportData = new MemoryStream();
+
+            var header = sheet.CreateRow(0);
+
+            for (var i = 0; i < columnNames.Length; i++)
+            {
+                var cell = header.CreateCell(i);
+                cell.SetCellValue(columnNames[i]);
+            }
+
+            foreach (var x in columnNames)
             {
 
-                var header = sheet.CreateRow(0);
-
-                for (var i = 0; i < columnNames.Length; i++)
-                {
-                    var cell = header.CreateCell(i);
-                    cell.SetCellValue(columnNames[i]);
-                }
-
-                foreach (var x in columnNames)
-                {
-
-                }
-
-                foreach (var x in set)
-                {
-                    var result = validator.Validate(x, ruleSet: ruleSet);
-                }
-
-                wbk.Write(exportData);
-                return exportData;
             }
+
+            foreach (var x in set)
+            {
+                var result = validator.Validate(x, ruleSet: ruleSet);
+            }
+
+            wbk.Write(exportData);
+            return exportData;
+
         }
     }
 }

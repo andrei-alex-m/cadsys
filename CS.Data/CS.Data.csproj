@@ -11,6 +11,7 @@
     <Folder Include="Entities\Dictionaries\" />
     <Folder Include="DTO\Excel\" />
     <Folder Include="Mappers\" />
+    <Folder Include="DTO\DXF\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />
