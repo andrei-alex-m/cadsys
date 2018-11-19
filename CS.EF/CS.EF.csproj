@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
@@ -58,6 +59,9 @@
     <Compile Remove="Migrations\20180930222904_Initial.Designer.cs" />
     <Compile Remove="Migrations\20181014132028_Initial.cs" />
     <Compile Remove="Migrations\20181014185222_Initial.cs" />
+    <Compile Remove="Migrations\20181104112948_Initial.cs" />
+    <Compile Remove="Migrations\20181118174423_Initial.cs" />
+    <Compile Remove="Migrations\20181118175812_Initial.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EntitiesValidators\" />

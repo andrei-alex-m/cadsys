@@ -7,11 +7,11 @@ namespace CS.Data.Entities
 {
     public class TipActProprietate:BaseDictionary
     {
-        [InverseProperty("TipAct")]
+        [InverseProperty("TipActProprietate")]
         public virtual ICollection<ActProprietate> ActeProprietate { get; set; } = new HashSet<ActProprietate>();
 
         [ForeignKey("TipDocument")]
-        public int TipDocumentId
+        public int? TipDocumentId
         {
             get;
             set;
@@ -44,25 +44,25 @@ namespace CS.Data.Entities
             set;
         }
 
-        public TipDocument TipDocument
+        public virtual TipDocument TipDocument
         {
             get;
             set;
         }
 
-        public TipDrept TipDrept
+        public virtual TipDrept TipDrept
         {
             get;
             set;
         }
 
-        public ModDobandire ModDobandire
+        public virtual ModDobandire ModDobandire
         {
             get;
             set;
         }
 
-        public TipInscriere TipInscriere
+        public virtual TipInscriere TipInscriere
         {
             get;
             set;

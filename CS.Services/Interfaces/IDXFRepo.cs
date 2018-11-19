@@ -7,7 +7,7 @@ namespace CS.Services.Interfaces
     public interface IDXFRepo
     {
         void ClearAll();
-        List<string> GetFileNames(bool fullPath = false);
+        List<string> GetAll(bool fullPath = false);
         string GetFullPath(string fileName);
         Task Store(MemoryStream stream, string filename);
     }

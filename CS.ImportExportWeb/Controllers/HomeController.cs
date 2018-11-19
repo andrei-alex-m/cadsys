@@ -9,10 +9,12 @@ namespace CS.ImportExportWeb.Controllers
     public class HomeController : Controller
     {
         IExcelConfigurationRepo excelConfig;
+        IDXFRepo dXFRepo;
 
-        public HomeController(IExcelConfigurationRepo excelConfigurator)
+        public HomeController(IExcelConfigurationRepo _excelConfig, IDXFRepo _dXFRepo)
         {
-            excelConfig = excelConfigurator;
+            excelConfig = _excelConfig;
+            dXFRepo = _dXFRepo;
         }
 
         public IActionResult Index()
@@ -29,7 +31,8 @@ namespace CS.ImportExportWeb.Controllers
         {
             var evm = new ExportViewModel
             {
-                Files = excelConfig.GetAll(1).ConvertAll(x=> new ExportFile { Display = x.File, ClassName=x.Type })
+                Files = excelConfig.GetAll(1).ConvertAll(x => new ExportFile { Display = x.File, ClassName = x.Type })
+                                   .Union(dXFRepo.GetAll(false).ConvertAll(x=> new ExportFile{Display = x, ClassName="dxf"}))
             };
 
             return View(evm);

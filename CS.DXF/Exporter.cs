@@ -20,22 +20,16 @@ namespace CS.DXF
         public Text nrCadGeneral { get; set; }
     }
 
-    public class Exporter
+    public static class Exporter
     {
-        IExporter cadGenExporter;
-
-        public Exporter(IExporter _cadGenExporter)
-        {
-            cadGenExporter = _cadGenExporter;
-        }
 
         //needs to go to cadgen exporter with a list of polylines and attributes
-        public MemoryStream Get(string fileName)
+        public static MemoryStream Get(string fileName, IExporter cadGenExporter)
         {
-            DxfDocument doc = DxfDocument.Load(fileName);
+            DxfDocument doc  = DxfDocument.Load(fileName);
             var docSector = doc.Texts.FirstOrDefault(x => string.Equals(x.Layer.Name, "Index", StringComparison.InvariantCultureIgnoreCase));
 
-            Parallel.ForEach(GetPolys(doc), p =>
+            foreach(var p in GetPolys(doc))
             {
                 var points = p.poly.ToPoints();
                 var area = VectorExtensions.Area(points);
@@ -51,9 +45,8 @@ namespace CS.DXF
                         xD.XDataRecord.Add(xDR);
                     }
                     p.poly.XData.Add(xD);
-
                 }
-            });
+            }
 
             var stream = new MemoryStream();
             doc.Save(stream);
@@ -61,7 +54,7 @@ namespace CS.DXF
             return stream;
         }
 
-         IEnumerable<match> GetPolys(DxfDocument doc)
+        static IEnumerable<match> GetPolys(DxfDocument doc)
         {
             var matches = new ConcurrentBag<match>();
 
@@ -98,7 +91,7 @@ namespace CS.DXF
             return matches;
         }
 
-        private static bool IsPointInPolygon(List<LwPolylineVertex> polygon, Vector3 testPoint)
+        static bool IsPointInPolygon(List<LwPolylineVertex> polygon, Vector3 testPoint)
         {
             bool result = false;
             int j = polygon.Count() - 1;

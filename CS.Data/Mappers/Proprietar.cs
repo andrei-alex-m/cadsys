@@ -36,10 +36,11 @@ namespace CS.Data.Mappers
 
             TipPersoana tipPersoana(Proprietar p)
             {
-                if (p.Nume.Equals("NEDIENTIFICAT",StringComparison.InvariantCultureIgnoreCase))
+                if (string.IsNullOrEmpty(p.Nume) || p.Nume.Equals("NEDIENTIFICAT",StringComparison.InvariantCultureIgnoreCase))
                 {
                     return TipPersoana.N;
                 }
+
                 return Validation.isValidCNP(p.Identificator) || !String.IsNullOrEmpty(p.Prenume) ? TipPersoana.F : TipPersoana.J;
             }
         }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CS.EF;
 using CS.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CS.CadGen
 {
@@ -29,7 +30,13 @@ namespace CS.CadGen
         public string[] Export(int indexImobil, IEnumerable<Point> coords, double suprafata, string nrCadGeneral, string sector)
         {
             var result = new List<string>();
-            var imobil = context.Imobile.FirstOrDefault(x => x.Parcele.Any(y => y.Index == indexImobil));
+            Imobil imobil;
+            object locker = new object();
+
+            lock(locker)
+            {
+                imobil = context.Imobile.FirstOrDefault(x => x.Parcele.Any(y => y.Index == indexImobil));
+            }
 
             if (imobil == null)
             {

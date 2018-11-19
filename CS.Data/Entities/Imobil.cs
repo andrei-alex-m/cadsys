@@ -88,6 +88,7 @@ namespace CS.Data.Entities
         {
             SIRSUP = 120496,
             SIRUTA = 120496,
+            
             Intravilan = false
         };
 

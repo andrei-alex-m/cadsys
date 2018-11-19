@@ -44,7 +44,7 @@ namespace CS.Data.Entities
             set;
         }
 
-        public Judet Judet { get; set; }
+        public virtual Judet Judet { get; set; }
 
         [InverseProperty("UAT")]
         public virtual ICollection<Localitate> Localitati { get; set; } = new HashSet<Localitate>();

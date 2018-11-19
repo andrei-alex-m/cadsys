@@ -9,10 +9,10 @@ namespace CS.Data.Entities
     {
 
 
-        [ForeignKey("TipAct")]
+        [ForeignKey("TipActProprietate")]
         public int? TipActProprietateId { get; set; }
 
-        public TipActProprietate TipActProprietate { get; set; }
+        public virtual TipActProprietate TipActProprietate { get; set; }
 
         public string Numar
         {

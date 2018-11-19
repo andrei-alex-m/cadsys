@@ -32,19 +32,6 @@ namespace CS.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TipActProprietate>().HasData(
-                new TipActProprietate { Id = 1, Denumire = "Titlu Proprietate", TipDocumentId = 290, TipDreptId = 23, ModDobandireId = 344, TipInscriereId = 316, ParteaCF = 2 },
-                new TipActProprietate { Id = 2, Denumire = "Contract de Vanzare Cumparare", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 340, TipInscriereId = 316, ParteaCF = 2 },
-                new TipActProprietate { Id = 3, Denumire = "Sentinta Civila", TipDocumentId = 293, TipDreptId = 23, ModDobandireId = 342, TipInscriereId = 316, ParteaCF = 2 },
-                new TipActProprietate { Id = 4, Denumire = "Certificat de Mostenitor", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 345, TipInscriereId = 316, ParteaCF = 2 },
-                new TipActProprietate { Id = 5, Denumire = "Contract de Donatie", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 340, TipInscriereId = 316, ParteaCF = 2 },
-                new TipActProprietate { Id = 6, Denumire = "Contract de Partaj", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 343, TipInscriereId = 316, ParteaCF = 2 },
-                new TipActProprietate { Id = 7, Denumire = "Testament", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 345, TipInscriereId = 316 },
-                new TipActProprietate { Id = 8, Denumire = "Declaratie Notariala", TipDocumentId = 289 },
-                new TipActProprietate { Id = 9, Denumire = "Contract de Intretinere", TipDocumentId = 289, TipDreptId = 20, ModDobandireId = 340, TipInscriereId = 316, ParteaCF = 3 },
-                new TipActProprietate { Id = 10, Denumire = "Certificat de Legatar Suplimentar" }
-                );
-
             modelBuilder.Entity<Tarla>().HasData(
                 new Tarla { Id = 1, UATId = 120496, Denumire = "119,3" },
                 new Tarla { Id = 2, UATId = 120496, Denumire = "339,1" },
@@ -164,6 +151,19 @@ namespace CS.EF
             CadSysContextExtensions.UATTemplateAdditions(modelBuilder);
             CadSysContextExtensions.LocalitateTemplateAdditions(modelBuilder);
             CadSysContextExtensions.TipDreptTemplateAdditions(modelBuilder);
+
+            modelBuilder.Entity<TipActProprietate>().HasData(
+                new TipActProprietate { Id = 1, Denumire = "Titlu Proprietate", TipDocumentId = 290, TipDreptId = 23, ModDobandireId = 344, TipInscriereId = 316, ParteaCF = 2 },
+                new TipActProprietate { Id = 2, Denumire = "Contract de Vanzare Cumparare", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 340, TipInscriereId = 316, ParteaCF = 2 },
+                new TipActProprietate { Id = 3, Denumire = "Sentinta Civila", TipDocumentId = 293, TipDreptId = 23, ModDobandireId = 342, TipInscriereId = 316, ParteaCF = 2 },
+                new TipActProprietate { Id = 4, Denumire = "Certificat de Mostenitor", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 345, TipInscriereId = 316, ParteaCF = 2 },
+                new TipActProprietate { Id = 5, Denumire = "Contract de Donatie", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 340, TipInscriereId = 316, ParteaCF = 2 },
+                new TipActProprietate { Id = 6, Denumire = "Contract de Partaj", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 343, TipInscriereId = 316, ParteaCF = 2 },
+                new TipActProprietate { Id = 7, Denumire = "Testament", TipDocumentId = 289, TipDreptId = 23, ModDobandireId = 345, TipInscriereId = 316 },
+                new TipActProprietate { Id = 8, Denumire = "Declaratie Notariala", TipDocumentId = 289 },
+                new TipActProprietate { Id = 9, Denumire = "Contract de Intretinere", TipDocumentId = 289, TipDreptId = 20, ModDobandireId = 340, TipInscriereId = 316, ParteaCF = 3 },
+                new TipActProprietate { Id = 10, Denumire = "Certificat de Legatar Suplimentar" }
+            );
         }
 
     }

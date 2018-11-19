@@ -26,7 +26,7 @@ namespace Caly.Common
             using (var fs = File.Create(filename))
             {
                 var data = stream.ToArray();
-                await stream.WriteAsync(data, 0, data.Length);
+                await fs.WriteAsync(data, 0, data.Length);
             }
 
             if (closeMemStream)

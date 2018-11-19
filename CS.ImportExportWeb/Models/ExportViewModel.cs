@@ -5,7 +5,7 @@ namespace CS.ImportExportWeb.Models
 {
     public class ExportViewModel
     {
-        public List<ExportFile> Files
+        public IEnumerable<ExportFile> Files
         {
             get;
             set;

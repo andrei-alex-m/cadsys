@@ -53,7 +53,7 @@ namespace CS.Data.Mappers
             if (indecsiProprietari.Count(x => !string.IsNullOrEmpty(x.cota)) == 1)
             {
                 caz = cazuri.nusparge;
-                cotaGenerala = indecsiProprietari.Single(x => string.IsNullOrEmpty(x.cota)).cota;
+                cotaGenerala = indecsiProprietari.Single(x => !string.IsNullOrEmpty(x.cota)).cota;
             }
 
             if (indecsiProprietari.Count == 0)
@@ -66,9 +66,9 @@ namespace CS.Data.Mappers
             var act = acte.FirstOrDefault(y => y.Index == indexAct);
 
             var modDobandireId = string.IsNullOrEmpty(modDobandire) ? act?.TipActProprietate?.ModDobandireId : moduriDobandire.FirstOrDefault(x => string.Equals(modDobandire, x.Denumire, StringComparison.InvariantCultureIgnoreCase))?.Id;
-            var parteaCFId = parteaCF.HasValue ? parteaCF : act.TipActProprietate.ParteaCF;
+            var parteaCFId = parteaCF.HasValue ? parteaCF : act?.TipActProprietate?.ParteaCF;
             var tipDreptId = string.IsNullOrEmpty(tipDrept) ? act?.TipActProprietate?.TipDreptId : tipuriDrept.FirstOrDefault(x => string.Equals(tipDrept, x.Denumire, StringComparison.InvariantCultureIgnoreCase))?.Id;
-            var tipInscriereId = !string.IsNullOrEmpty(nota) ? tipuriInscriere.FirstOrDefault(x => x.Denumire == "NOTATION").Id : string.IsNullOrEmpty(tipInscriere) ? act.TipActProprietate.TipInscriereId : tipuriInscriere.FirstOrDefault(x => string.Equals(tipInscriere, x.Denumire, StringComparison.InvariantCultureIgnoreCase))?.Id;
+            var tipInscriereId = !string.IsNullOrEmpty(nota) ? tipuriInscriere.FirstOrDefault(x => x.Denumire == "NOTATION").Id : string.IsNullOrEmpty(tipInscriere) ? act?.TipActProprietate?.TipInscriereId : tipuriInscriere.FirstOrDefault(x => string.Equals(tipInscriere, x.Denumire, StringComparison.InvariantCultureIgnoreCase))?.Id;
 
             var inscriereD = getInscriereDetaliu();
 

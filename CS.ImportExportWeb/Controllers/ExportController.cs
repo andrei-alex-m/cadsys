@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using CS.EF;
 using CS.Excel;
 using CS.CadGen;
+using CS.DXF;
 using CS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using CS.ImportExportWeb.Models;
 
 namespace CS.ImportExportWeb.Controllers
 {
@@ -15,20 +17,25 @@ namespace CS.ImportExportWeb.Controllers
     {
         CadSysContext context;
         IExcelConfigurationRepo excelConfiguration;
+        IDXFRepo dXFRepo;
         IServiceBuilder serviceBuilder;
+        IExporter cadGenExporter;
 
-        public ExportController(CadSysContext _context, IExcelConfigurationRepo _excelConfiguration, IServiceBuilder _serviceBuilder)
+        public ExportController(CadSysContext _context, IExcelConfigurationRepo _excelConfiguration, IServiceBuilder _serviceBuilder, IDXFRepo _dxfRepo, IExporter _cadGenExporter)
         {
             context = _context;
             excelConfiguration = _excelConfiguration;
             serviceBuilder = _serviceBuilder;
+            dXFRepo = _dxfRepo;
+            cadGenExporter = _cadGenExporter;
+
         }
 
         // GET: /<controller>/
-        public  IActionResult GetFile (string file)
+        public  IActionResult GetFile (ExportFile file)
         {
 
-            if(file.Contains("Proprietar", StringComparison.InvariantCultureIgnoreCase))
+            if(file.ClassName.Contains("Proprietar", StringComparison.InvariantCultureIgnoreCase))
             {
                 var wbk = Excel.Exporter.CycleProprietari(context, excelConfiguration.Get(1, "Proprietar"), "NoContext,InSet,Context");
                 byte[] fileContents = null;
@@ -40,7 +47,7 @@ namespace CS.ImportExportWeb.Controllers
                 }
             }
 
-            if (file.Contains("ActProprietate", StringComparison.InvariantCultureIgnoreCase))
+            if (file.ClassName.Contains("ActProprietate", StringComparison.InvariantCultureIgnoreCase))
             {
 
                 var wbk = Excel.Exporter.CycleActeProprietate(context, excelConfiguration.Get(1, "ActProprietate"), "NoContext,InSet,Context");
@@ -53,7 +60,7 @@ namespace CS.ImportExportWeb.Controllers
                 }
             }
 
-            if (file.Contains("Parcel", StringComparison.InvariantCultureIgnoreCase))
+            if (file.ClassName.Contains("Parcel", StringComparison.InvariantCultureIgnoreCase))
             {
 
                 var wbk = Excel.Exporter.CycleParcele(context, excelConfiguration.Get(1, "Parcela"), "NoContext,InSet,Context");
@@ -66,7 +73,7 @@ namespace CS.ImportExportWeb.Controllers
                 }
             }
 
-            if (file.Contains("Inscrie", StringComparison.InvariantCultureIgnoreCase))
+            if (file.ClassName.Contains("Inscrie", StringComparison.InvariantCultureIgnoreCase))
             {
 
                 var wbk = Excel.Exporter.CycleInscrieri(context, excelConfiguration.Get(1, "Inscriere"), "NoContext,InSet,Context");
@@ -78,6 +85,16 @@ namespace CS.ImportExportWeb.Controllers
                     return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "CentralizatorValidat.xls");
                 }
             }
+
+            if (file.ClassName.Contains("dxf", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var dxfFullPath = dXFRepo.GetFullPath(file.Display);
+
+                var stream = DXF.Exporter.Get(dxfFullPath, cadGenExporter);
+
+                return File(stream.ToArray(), System.Net.Mime.MediaTypeNames.Application.Octet, file.Display);
+            }
+
             return new NotFoundResult();
 
         }

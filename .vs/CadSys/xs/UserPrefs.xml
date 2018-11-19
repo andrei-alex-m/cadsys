@@ -1,31 +1,52 @@
-﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT" NuGet.AddPackagesDialog.IncludePrerelease="True">
+﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
     <Files>
-      <File FileName="CS.CadGen/Exporter.cs" Line="387" Column="36" />
-      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="18" Column="40" />
+      <File FileName="CS.CadGen/Exporter.cs" Line="62" Column="51" />
+      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="89" Column="1" />
       <File FileName="CS.Data/Entities/Enums/Enums.cs" Line="5" Column="17" />
-      <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="12" Column="28" />
-      <File FileName="Caly.Common/Reflection.cs" Line="120" Column="70" />
-      <File FileName="CS.Data/Entities/ActProprietate.cs" Line="31" Column="17" />
-      <File FileName="CS.Excel/Importer.cs" Line="77" Column="43" />
+      <File FileName="CS.Data/Mappers/ActProprietate.cs" Line="19" Column="1" />
+      <File FileName="Caly.Common/Reflection.cs" Line="68" Column="31" />
+      <File FileName="CS.Data/Entities/ActProprietate.cs" Line="15" Column="24" />
       <File FileName="CS.ImportExportWeb/Program.cs" Line="1" Column="1" />
       <File FileName="CS.Data/Mappers/Parcela.cs" Line="13" Column="28" />
       <File FileName="CS.Data/DTO/Excel/OutputInscriereDetaliu.cs" Line="81" Column="10" />
-      <File FileName="CS.EF/Context.cs" Line="30" Column="48" />
+      <File FileName="CS.EF/Context.cs" Line="13" Column="1" />
       <File FileName="CS.CadGen/IExporter.cs" Line="1" Column="1" />
-      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="238" Column="37" />
+      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="237" Column="130" />
+      <File FileName="CS.ImportExportWeb/Views/Home/Download.cshtml" Line="14" Column="6" />
+      <File FileName="CS.ImportExportWeb/Models/ExportViewModel.cs" Line="9" Column="10" />
+      <File FileName="CS.ImportExportWeb/Controllers/HomeController.cs" Line="36" Column="15" />
+      <File FileName="CS.Services/Interfaces/IExcelConfigurationRepo.cs" Line="13" Column="27" />
+      <File FileName="CS.Services/ExcelConfigurationRepo.cs" Line="9" Column="43" />
+      <File FileName="CS.Excel/Importer.cs" Line="68" Column="22" />
+      <File FileName="CS.Data/Entities/Inscriere.cs" Line="69" Column="24" />
+      <File FileName="CS.Templating/Dictionar/DictionaryInContextFreezed.cs" Line="401" Column="11" />
+      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="43" Column="17" />
+      <File FileName="CS.Data/DTO/Excel/OutputActProprietate.cs" Line="7" Column="1" />
+      <File FileName="CS.Data/Entities/Imobil.cs" Line="87" Column="25" />
+      <File FileName="CS.Data/Entities/Adresa.cs" Line="9" Column="6" />
+      <File FileName="CS.Data/Mappers/Adresa.cs" Line="15" Column="1" />
       <File FileName="CadSys Status" />
-      <File FileName="CS.Services/Interfaces/DXFRepo.cs" Line="17" Column="46" NotebookId="1" />
+      <File FileName="CS.Services/Interfaces/DXFRepo.cs" Line="43" Column="10" NotebookId="1" />
       <File FileName="CS.DXF/Class1.cs" Line="23" Column="1" NotebookId="1" />
       <File FileName="CS.Excel.Tests/ImportTests.cs" Line="13" Column="44" NotebookId="1" />
-      <File FileName="CS.Services/Interfaces/IDXFRepo.cs" Line="7" Column="26" NotebookId="1" />
-      <File FileName="CS.Data/Entities/InscriereDetaliu.cs" Line="85" Column="17" NotebookId="1" />
-      <File FileName="CS.Excel/Exporter.cs" Line="20" Column="29" NotebookId="1" />
-      <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="12" Column="17" NotebookId="1" />
-      <File FileName="CS.Data/Entities/Dictionaries/TipActProprietate.cs" Line="51" Column="10" NotebookId="1" />
+      <File FileName="CS.Data/Entities/InscriereDetaliu.cs" Line="115" Column="24" NotebookId="1" />
+      <File FileName="CS.Excel/Exporter.cs" Line="72" Column="42" NotebookId="1" />
+      <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="64" Column="80" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/TipActProprietate.cs" Line="65" Column="24" NotebookId="1" />
       <File FileName="CS.EF/EntitiesValidators/InscriereValidator.cs" Line="40" Column="33" NotebookId="1" />
-      <File FileName="CS.DXF/Exporter.cs" Line="15" Column="2" NotebookId="1" />
-      <File FileName="CS.ImportExportWeb/Startup.cs" Line="53" Column="13" NotebookId="1" />
+      <File FileName="CS.DXF/Exporter.cs" Line="32" Column="1" NotebookId="1" />
+      <File FileName="CS.ImportExportWeb/Startup.cs" Line="46" Column="70" NotebookId="1" />
+      <File FileName="CS.EF/DBContextFactory.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="CS.Services/Repo.cs" Line="26" Column="45" NotebookId="1" />
+      <File FileName="Caly.Common/IO.cs" Line="30" Column="14" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Parcela.cs" Line="40" Column="43" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Proprietar.cs" Line="11" Column="16" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/Judet.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/Localitate.cs" Line="46" Column="24" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/Tarla.cs" Line="14" Column="24" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/TipDrept.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="CS.Data/Entities/Dictionaries/UAT.cs" Line="40" Column="19" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -37,10 +58,15 @@
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="32" column="1" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Tests/UnitTest1.cs" relfile="CS.Tests/UnitTest1.cs" line="21" column="28" />
       <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="16" column="1" />
-      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="89" column="1" />
-      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="88" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="76" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="75" column="1" />
       <Breakpoint enabled="false" conditionExpression="prop.Localitate != &quot;Bucuresti&quot; &amp;&amp; adresa.AdresaNecunoscuta == null &amp;&amp; adresa.SIRSUP == null" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Parsers/AdresaParser.cs" relfile="CS.EF/Parsers/AdresaParser.cs" line="34" column="1" />
       <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ImportController.cs" relfile="CS.ImportExportWeb/Controllers/ImportController.cs" line="113" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/Exporter.cs" relfile="CS.DXF/Exporter.cs" line="30" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/Exporter.cs" relfile="CS.DXF/Exporter.cs" line="29" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/Exporter.cs" relfile="CS.DXF/Exporter.cs" line="32" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/Exporter.cs" relfile="CS.DXF/Exporter.cs" line="38" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

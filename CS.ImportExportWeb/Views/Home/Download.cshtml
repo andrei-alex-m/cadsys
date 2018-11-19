@@ -13,7 +13,7 @@
     @foreach (var f in Model.Files)
     {
         <li>
-            <input type="button" value="@f.Display" onclick="location.href='@Url.Action("GetFile", "Export", new { file = f.ClassName } )'" />
+            <input type="button" value="@f.Display" onclick="location.href='@Url.Action("GetFile", "Export", f )'" />
         </li>
     }
 </ul>

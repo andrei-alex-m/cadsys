@@ -14,7 +14,7 @@ namespace CS.Data.Entities
             set;
         }
 
-        public InscriereDetaliu InscriereDetaliu
+        public virtual InscriereDetaliu InscriereDetaliu
         {
             get;
             set;
@@ -31,7 +31,7 @@ namespace CS.Data.Entities
             set;
         }
 
-        public ActProprietate ActProprietate
+        public virtual ActProprietate ActProprietate
         {
             get;
             set;
@@ -49,7 +49,7 @@ namespace CS.Data.Entities
             set;
         }
 
-        public Proprietar Proprietar
+        public virtual Proprietar Proprietar
         {
             get;
             set;
@@ -66,7 +66,7 @@ namespace CS.Data.Entities
             set;
         }
 
-        public Imobil Imobil
+        public virtual Imobil Imobil
         {
             get;
             set;

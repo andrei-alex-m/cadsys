@@ -95,24 +95,24 @@ namespace CS.Data.Entities
             set;
         }
 
-        public Imobil ImobilReferinta
+        public virtual Imobil ImobilReferinta
         {
             get;
             set;
         }
 
-        public TipDrept TipDrept
+        public virtual TipDrept TipDrept
         {
             get;
             set;
         }
-        public ModDobandire ModDobandire
+        public virtual ModDobandire ModDobandire
         {
             get;
             set;
         }
 
-        public TipInscriere TipInscriere
+        public virtual TipInscriere TipInscriere
         {
             get;
             set;

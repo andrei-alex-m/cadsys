@@ -22,7 +22,7 @@ namespace CS.Services.Interfaces
             IOExtensions.ClearDirectory(dirPath);
         }
 
-        public List<string> GetFileNames(bool fullPath=false)
+        public List<string> GetAll(bool fullPath = false)
         {
             DirectoryInfo di = new DirectoryInfo(dirPath);
 
@@ -41,7 +41,7 @@ namespace CS.Services.Interfaces
 
         public async Task Store(MemoryStream stream, string filename)
         {
-            await IOExtensions.Store(stream, filename);
+            await IOExtensions.Store(stream, dirPath + Path.DirectorySeparatorChar.ToString() + filename);
         }
 
     }

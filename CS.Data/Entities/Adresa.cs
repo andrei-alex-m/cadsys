@@ -136,8 +136,8 @@ namespace CS.Data.Entities
             set;
         }
 
-        public Localitate Localitate { get; set; }
+        public virtual Localitate Localitate { get; set; }
 
-        public UAT UAT { get; set; }
+        public virtual UAT UAT { get; set; }
     }
 }

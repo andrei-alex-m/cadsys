@@ -42,9 +42,9 @@ namespace CS.ImportExportAPI.Controllers
 
             files = Request.Form.Files.Where(x => x != null);
 
-            IEnumerable<IFormFile> excelFiles = OrderUploadedExcelFiles(files.Where(x => x.Name.Contains(".xls", StringComparison.InvariantCultureIgnoreCase)));
+            IEnumerable<IFormFile> excelFiles = OrderUploadedExcelFiles(files.Where(x => x.FileName.Contains(".xls", StringComparison.InvariantCultureIgnoreCase)));
 
-            IEnumerable<IFormFile> dxfFiles = files.Where(x => x.Name.Contains(".dxf", StringComparison.InvariantCultureIgnoreCase));
+            IEnumerable<IFormFile> dxfFiles = files.Where(x => x.FileName.Contains(".dxf", StringComparison.InvariantCultureIgnoreCase));
 
             Prepare(!excelFiles.Any() && dxfFiles.Any());
 
@@ -95,7 +95,7 @@ namespace CS.ImportExportAPI.Controllers
                             await CycleCentralizator(file.FileName, stream);
                         }
 
-                        await context.SaveChangesAsync();
+                        context.SaveChanges();
                     }
                 }
             }
@@ -103,7 +103,7 @@ namespace CS.ImportExportAPI.Controllers
 
         async Task CycleDXFs(IEnumerable<IFormFile> fileCollection)
         {
-            foreach (var file in fileCollection.Where(x => x.Name.Contains(".dxf", StringComparison.InvariantCultureIgnoreCase)))
+            foreach (var file in fileCollection)
             {
                 if (file != null)
                 {
@@ -147,7 +147,7 @@ namespace CS.ImportExportAPI.Controllers
                                                     .ThenInclude(z => z.ActProprietate)
                    .ThenInclude(w => w.TipActProprietate).AsParallel().ForAll(i =>
             {
-                var titlu = i.InscrieriDetaliu.SelectMany(x => x.InscrieriActe).Select(w => w.ActProprietate).FirstOrDefault(y => y.TipActProprietate.Denumire.Contains("titlu", StringComparison.InvariantCultureIgnoreCase));
+                var titlu = i.InscrieriDetaliu.SelectMany(x => x.InscrieriActe.Where(q=>q.ActProprietate!=null)).Select(w => w.ActProprietate).FirstOrDefault(y => y.TipActProprietate.Denumire.Contains("titlu", StringComparison.InvariantCultureIgnoreCase));
                 if (titlu != null)
                 {
                     foreach (var p in i.Parcele)
@@ -162,8 +162,8 @@ namespace CS.ImportExportAPI.Controllers
             });
 
             //sterg inscrierile fara propr care nu sunt notari
-            context.InscrieriDetaliu.RemoveRange(context.InscrieriDetaliu.Include(y=>y.InscrieriProprietari).Include(w=>w.TipInscriere).AsParallel().Where(x => x.InscrieriProprietari.Count == 0 && !string.Equals(x.TipInscriere.Denumire, "NOTATION", StringComparison.InvariantCultureIgnoreCase));
-            await context.SaveChangesAsync();
+            context.InscrieriDetaliu.RemoveRange(context.InscrieriDetaliu.Include(y=>y.InscrieriProprietari).Include(w=>w.TipInscriere).AsParallel().Where(x => x.InscrieriProprietari.Count == 0 && !string.Equals(x.TipInscriere.Denumire, "NOTATION", StringComparison.InvariantCultureIgnoreCase)));
+            context.SaveChanges();
         }
 
 
@@ -197,16 +197,17 @@ namespace CS.ImportExportAPI.Controllers
             Parallel.ForEach(x, y =>
             {
                 var z = new Parcela();
-                var i = new Imobil();
+                //var i = new Imobil();
 
                 lock (locker)
                 {
                     context.Parcele.Add(z);
-                    context.Imobile.Add(i);
+                    //context.Imobile.Add(i);
                 }
 
                 z.FromDTO(y, tarlale);
-                i.Parcele.Add(z);
+                z.Imobil = new Imobil();
+                //i.Parcele.Add(z);
             });
         }
 
@@ -249,7 +250,7 @@ namespace CS.ImportExportAPI.Controllers
 
                  lock (locker)
                  {
-                     context.Proprietari.Add(z);
+                    context.Proprietari.Add(z);
                  }
 
                  z.FromDTO(y);
