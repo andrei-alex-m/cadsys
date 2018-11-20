@@ -99,6 +99,11 @@ namespace CS.Data.Mappers
                 }
             }
 
+            if (caz == cazuri.nusparge)
+            {
+                yield return inscriereD;
+            }
+
             InscriereImobil getInscriereImobil() =>
                  new InscriereImobil()
                  {

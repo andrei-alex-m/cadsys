@@ -147,7 +147,7 @@ namespace CS.ImportExportAPI.Controllers
                                                     .ThenInclude(z => z.ActProprietate)
                    .ThenInclude(w => w.TipActProprietate).AsParallel().ForAll(i =>
             {
-                var titlu = i.InscrieriDetaliu.SelectMany(x => x.InscrieriActe.Where(q=>q.ActProprietate!=null)).Select(w => w.ActProprietate).FirstOrDefault(y => y.TipActProprietate.Denumire.Contains("titlu", StringComparison.InvariantCultureIgnoreCase));
+                var titlu = i.InscrieriDetaliu.SelectMany(x => x.InscrieriActe.Where(q => q.ActProprietate != null)).Select(w => w.ActProprietate).FirstOrDefault(y => y.TipActProprietate.Denumire.Contains("titlu", StringComparison.InvariantCultureIgnoreCase));
                 if (titlu != null)
                 {
                     foreach (var p in i.Parcele)
@@ -162,7 +162,7 @@ namespace CS.ImportExportAPI.Controllers
             });
 
             //sterg inscrierile fara propr care nu sunt notari
-            context.InscrieriDetaliu.RemoveRange(context.InscrieriDetaliu.Include(y=>y.InscrieriProprietari).Include(w=>w.TipInscriere).AsParallel().Where(x => x.InscrieriProprietari.Count == 0 && !string.Equals(x.TipInscriere.Denumire, "NOTATION", StringComparison.InvariantCultureIgnoreCase)));
+            context.InscrieriDetaliu.RemoveRange(context.InscrieriDetaliu.Include(y => y.InscrieriProprietari).Include(w => w.TipInscriere).AsParallel().Where(x => x.InscrieriProprietari.Count == 0 && !string.Equals(x.TipInscriere.Denumire, "NOTATION", StringComparison.InvariantCultureIgnoreCase)));
             context.SaveChanges();
         }
 
@@ -197,16 +197,25 @@ namespace CS.ImportExportAPI.Controllers
             Parallel.ForEach(x, y =>
             {
                 var z = new Parcela();
-                //var i = new Imobil();
+                var i = new Imobil();
+                var a = new Adresa()
+                {
+                    SIRSUP = 120496,
+                    SIRUTA = 120496,
+                    Intravilan = false
+                };
+
+                i.Parcele.Add(z);
+                i.Adresa = a;
 
                 lock (locker)
                 {
-                    context.Parcele.Add(z);
+                    context.Imobile.Add(i);
                     //context.Imobile.Add(i);
                 }
 
                 z.FromDTO(y, tarlale);
-                z.Imobil = new Imobil();
+                //z.Imobil = new Imobil();
                 //i.Parcele.Add(z);
             });
         }
@@ -250,11 +259,12 @@ namespace CS.ImportExportAPI.Controllers
 
                  lock (locker)
                  {
-                    context.Proprietari.Add(z);
+                     context.Proprietari.Add(z);
                  }
 
                  z.FromDTO(y);
                  z.Adresa.FromDTO(y, judeteAllInclussive, addressParser, addressMatcher, matchProcessor);
+                 z.Adresa.Intravilan = true;
              });
         }
 

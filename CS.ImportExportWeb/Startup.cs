@@ -45,7 +45,7 @@ namespace CS.ImportExportWeb
 
             services.AddSingleton<IServiceBuilder, ServiceBuilder>();
 
-            services.AddDbContext<CadSysContext>(options => options.UseLazyLoadingProxies().UseMySql(connectionString));
+            services.AddDbContext<CadSysContext>(options => options.UseMySql(connectionString));
 
             services.AddTransient<IRepo, Repo>();
 

@@ -7,7 +7,6 @@ namespace CS.Data.Entities
 {
     public class Adresa : BaseEntity, IAdresaFaraLocalitate
     {
-        [MaxLength(50)]
         [ForeignKey("UAT")]
         public int? SIRSUP
         {
@@ -15,7 +14,6 @@ namespace CS.Data.Entities
             set;
         }
         [ForeignKey("Localitate")]
-        [MaxLength(50)]
         public int? SIRUTA
         {
             get;

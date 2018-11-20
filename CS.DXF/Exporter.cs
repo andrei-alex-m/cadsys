@@ -27,7 +27,7 @@ namespace CS.DXF
         public static MemoryStream Get(string fileName, IExporter cadGenExporter)
         {
             DxfDocument doc  = DxfDocument.Load(fileName);
-            var docSector = doc.Texts.FirstOrDefault(x => string.Equals(x.Layer.Name, "Index", StringComparison.InvariantCultureIgnoreCase));
+            var docSector = doc.Texts.FirstOrDefault(x => string.Equals(x.Layer.Name, "Sector", StringComparison.InvariantCultureIgnoreCase));
 
             foreach(var p in GetPolys(doc))
             {
@@ -38,10 +38,11 @@ namespace CS.DXF
                 if (cg.Length > 0)
                 {
                     var xD = new XData(new ApplicationRegistry("TOPO"));
-
+                    var xdb = xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString,"{")))
                     foreach (var line in cg)
                     {
                         var xDR = new XDataRecord(XDataCode.String, line);
+                        
                         xD.XDataRecord.Add(xDR);
                     }
                     p.poly.XData.Add(xD);

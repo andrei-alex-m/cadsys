@@ -13,6 +13,11 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
+        [ForeignKey("Adresa")]
+        public int AdresaId { get; set; } = 1;
+
+
         [MaxLength(200)]
         public String SectorCadastral
         {
@@ -71,12 +76,14 @@ namespace CS.Data.Entities
             get;
             set;
         }
+
         [MaxLength(200)]
         public string NumarTopografic
         {
             get;
             set;
         }
+
         [MaxLength(200)]
         public string NumarCadGeneral
         {
@@ -84,13 +91,11 @@ namespace CS.Data.Entities
             set;
         }
 
-        public static Adresa Adresa => new Adresa()
+        public Adresa Adresa
         {
-            SIRSUP = 120496,
-            SIRUTA = 120496,
-            
-            Intravilan = false
-        };
+            get;
+            set;
+        }
 
         [InverseProperty("ImobilReferinta")]
         public virtual ICollection<InscriereDetaliu> InscrieriDetaliu { get; set; } = new HashSet<InscriereDetaliu>();

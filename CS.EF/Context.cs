@@ -164,6 +164,16 @@ namespace CS.EF
                 new TipActProprietate { Id = 9, Denumire = "Contract de Intretinere", TipDocumentId = 289, TipDreptId = 20, ModDobandireId = 340, TipInscriereId = 316, ParteaCF = 3 },
                 new TipActProprietate { Id = 10, Denumire = "Certificat de Legatar Suplimentar" }
             );
+
+            modelBuilder.Entity<Adresa>().HasData(
+                new Adresa
+                {
+                    Id = 1,
+                    SIRSUP = 120496,
+                    SIRUTA = 120496,
+                    Intravilan = false
+                }
+            );
         }
 
     }

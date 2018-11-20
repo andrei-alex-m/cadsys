@@ -31,6 +31,11 @@ namespace Caly.Common
         {
             var result = new List<Classification>();
 
+            if (string.IsNullOrEmpty(find))
+            { 
+                return result; 
+            }
+
             var narrowed = Narrow(narrowTo);
 
             narrowed.ForEach(x => {

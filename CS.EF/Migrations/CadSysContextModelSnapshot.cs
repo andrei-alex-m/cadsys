@@ -113,6 +113,10 @@ namespace CS.EF.Migrations
                     b.HasIndex("SIRUTA");
 
                     b.ToTable("Adresa");
+
+                    b.HasData(
+                        new { Id = 1, ExcelRow = 0, Index = 0, Intravilan = false, SIRSUP = 120496, SIRUTA = 120496 }
+                    );
                 });
 
             modelBuilder.Entity("CS.Data.Entities.BaseXMLDictionary", b =>
@@ -138,6 +142,8 @@ namespace CS.EF.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AdresaId");
 
                     b.Property<string>("IdentificatorElectronic")
                         .HasMaxLength(200);
@@ -171,6 +177,8 @@ namespace CS.EF.Migrations
                     b.Property<decimal>("ValoareImpozitare");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdresaId");
 
                     b.ToTable("Imobile");
                 });
@@ -21368,6 +21376,14 @@ namespace CS.EF.Migrations
                     b.HasOne("CS.Data.Entities.Localitate", "Localitate")
                         .WithMany()
                         .HasForeignKey("SIRUTA");
+                });
+
+            modelBuilder.Entity("CS.Data.Entities.Imobil", b =>
+                {
+                    b.HasOne("CS.Data.Entities.Adresa", "Adresa")
+                        .WithMany()
+                        .HasForeignKey("AdresaId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CS.Data.Entities.InscriereDetaliu", b =>
