@@ -1,27 +1,22 @@
-﻿<Properties StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default">
+  <MonoDevelop.Ide.ItemProperties.CS.ImportExportWeb PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.CS.CRUDAPI PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.ImportExportWeb/Controllers/ImportController.cs">
     <Files>
-      <File FileName="CS.Excel/Importer.cs" Line="68" Column="22" />
-      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="113" Column="1" />
-      <File FileName="CS.EF/Context.cs" Line="169" Column="1" />
-      <File FileName="CS.Data/Entities/Imobil.cs" Line="104" Column="1" />
-      <File FileName="CS.Data/Entities/Proprietar.cs" Line="9" Column="16" />
-      <File FileName="CS.CadGen/Exporter.cs" Line="268" Column="46" />
-      <File FileName="CS.DXF/Exporter.cs" Line="40" Column="73" />
-      <File FileName="CS.Excel/Exporter.cs" Line="117" Column="26" />
-      <File FileName="CS.Data/Entities/Inscriere.cs" Line="42" Column="43" />
-      <File FileName="CS.Data/Entities/InscriereDetaliu.cs" Line="109" Column="29" />
-      <File FileName="CS.Data/Entities/Dictionaries/DictionaryFreezed.cs" Line="52" Column="18" />
-      <File FileName="CS.Services/ServiceBuilder.cs" Line="327" Column="5" />
-      <File FileName="Caly.Common/Matcher/Matcher.cs" Line="37" Column="13" />
-      <File FileName="Caly.Common/Matcher/IMatcher.cs" Line="5" Column="26" />
+      <File FileName="CS.DXF/Exporter.cs" Line="38" Column="1" />
+      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="40" Column="41" />
       <File FileName="CS.ImportExportWeb/Program.cs" Line="17" Column="1" />
-      <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="99" Column="18" />
-      <File FileName="CS.Data/Entities/Adresa.cs" Line="10" Column="9" />
-      <File FileName="CS.Data/Mappers/Proprietar.cs" Line="10" Column="32" />
-      <File FileName="CadSys Status" />
+      <File FileName="CS.CadGen/Exporter.cs" Line="311" Column="60" />
+      <File FileName="CS.Templating/Judet/JudetInContext.tt" Line="1" Column="1" />
+      <File FileName="CS.Templating/Judet/JudetInContext.cs" Line="1" Column="1" />
+      <File FileName="CS.Data/Mappers/Parcela.cs" Line="13" Column="31" />
+      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="217" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <DisabledProjects>
+    <String>CS.Interfaces/CS.Interfaces.csproj</String>
+  </DisabledProjects>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
@@ -35,13 +30,10 @@
       <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="75" column="1" />
       <Breakpoint enabled="false" conditionExpression="prop.Localitate != &quot;Bucuresti&quot; &amp;&amp; adresa.AdresaNecunoscuta == null &amp;&amp; adresa.SIRSUP == null" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Parsers/AdresaParser.cs" relfile="CS.EF/Parsers/AdresaParser.cs" line="34" column="1" />
       <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="312" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="437" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ImportController.cs" relfile="CS.ImportExportWeb/Controllers/ImportController.cs" line="217" column="33" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.CS.ImportExportWeb PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.CS.CRUDAPI PreferredExecutionTarget="MonoDevelop.Default" />
-  <DisabledProjects>
-    <String>CS.Interfaces/CS.Interfaces.csproj</String>
-  </DisabledProjects>
 </Properties>

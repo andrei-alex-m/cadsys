@@ -58,6 +58,8 @@ namespace CS.CadGen
                 context.Entry(imobil.Adresa).Reference(x => x.Localitate).Load();
 
                 context.Entry(imobil).Collection(x => x.Parcele).Load();
+                context.Entry(imobil.Parcele.FirstOrDefault()).Reference(x => x.Tarla).Load();
+
                 context.Entry(imobil).Collection(x => x.InscrieriDetaliu).Load();
                 foreach (var iD in imobil.InscrieriDetaliu)
                 {
@@ -113,11 +115,11 @@ namespace CS.CadGen
                 result.Add(ExportProprietar(p) + "$" + ExportAdresa(p.Adresa, comboMatcher, comboMatchProcessor));
             }
 
-            var linesInscrieriPt3Short = new string[] { };
-            var linesInscrieriPt3Long = new string[] { };
+            var linesInscrieriPt3Short = new List<string>();
+            var linesInscrieriPt3Long = new List<string>();
 
-            var linesInscrieriPt2Short = new string[] { };
-            var linesInscrieriPt2Long = new string[] { };
+            var linesInscrieriPt2Short = new List<string>();
+            var linesInscrieriPt2Long = new List<string>();
 
 
             foreach (var idPt3 in imobil.InscrieriDetaliu.Where(x=>x.ParteaCF==3))
@@ -132,8 +134,8 @@ namespace CS.CadGen
             foreach (var idPt2 in imobil.InscrieriDetaliu.Where(x => x.ParteaCF == 2))
             {
                 var currentLines = ExportInscriere(idPt2, proprietari, comboMatcher, comboMatchProcessor);
-                linesInscrieriPt2Short.Append(currentLines[0]);
-                linesInscrieriPt2Long.Append(currentLines[1]);
+                linesInscrieriPt2Short.Add(currentLines[0]);
+                linesInscrieriPt2Long.Add(currentLines[1]);
             }
 
             result.AddRange(linesInscrieriPt3Short);
@@ -153,22 +155,22 @@ namespace CS.CadGen
 
         }
 
-        static string[] ExportPozitia(Imobil imobil)
+        static List<string> ExportPozitia(Imobil imobil)
         {
-            var result = new string[] { };
+            var result = new List<string>();
 
-            var iPt3 = imobil.InscrieriDetaliu.Where(x => x.ParteaCF == 3).Select(y => y.Pozitia);
+            var iPt3 = imobil.InscrieriDetaliu.Where(x => x.ParteaCF == 3).Select(y => y.Pozitia.Value);
 
             if (iPt3.Any())
             {
-                result.Append($"#7773#{iPt3.Select(x => x.ToString() + '|')}");
+                result.Add("#7773#" + string.Join("",iPt3.Select(x => $"{x}|")));
             }
 
-            var iPt2 = imobil.InscrieriDetaliu.Where(x => x.ParteaCF == 2).Select(y => y.Pozitia);
+            var iPt2 = imobil.InscrieriDetaliu.Where(x => x.ParteaCF == 2).Select(y => y.Pozitia.Value);
 
             if (iPt2.Any())
             {
-                result.Append($"#7772#{iPt2.Select(x => x.ToString() + '|')}");
+                result.Add("#7772#" + string.Join("",iPt2.Select(x => $"{x}|")));
             }
             return result;
         }
@@ -199,7 +201,7 @@ namespace CS.CadGen
                 case TipPersoana.N:
                     builder.Append("sr").Append('|');
                     builder.Append("NEIDENTIFICAT").Append('|');
-                    builder.Append("obs^").Append(proprietar.Observatii).Append('|');
+                    builder.Append(@"obs ").Append(proprietar.Observatii).Append('|');
                     builder.Append("$||||||||||||||||");
                     break;
                 case TipPersoana.F:
@@ -213,13 +215,13 @@ namespace CS.CadGen
                         switch (proprietar.TipActIdentitate.Value)
                         {
                             case TipActIdentitate.BI:
-                                builder.Append(1);
+                                builder.Append(1).Append('|');
                                 break;
                             case TipActIdentitate.CI:
-                                builder.Append(2);
+                                builder.Append(2).Append('|');
                                 break;
                             case TipActIdentitate.Pasaport:
-                                builder.Append(3);
+                                builder.Append(3).Append('|');
                                 break;
                         }
                         builder.Append(proprietar.Serie).Append('|');
@@ -228,8 +230,8 @@ namespace CS.CadGen
                     builder.Append(proprietar.Initiala).Append('|');
                     builder.Append('|'); // nume anterior
                     builder.Append("RO").Append('|');//cetatenie
-                    builder.Append("");//telefon
-                    builder.Append("");//email
+                    builder.Append('|');//telefon
+                    builder.Append('|');//email
                     if (proprietar.TipActIdentitate.HasValue && proprietar.TipActIdentitate.Value == TipActIdentitate.Deces)
                     {
                         builder.Append(1).Append('|');
@@ -239,7 +241,7 @@ namespace CS.CadGen
                         builder.Append(0).Append('|');
                     }
 
-                    builder.Append("obs^");
+                    builder.Append(@"obs ");
                     if (proprietar.TipActIdentitate.HasValue && proprietar.TipActIdentitate.Value == TipActIdentitate.Deces)
                     {
                         builder.Append("DECEDAT ");
@@ -250,7 +252,7 @@ namespace CS.CadGen
                     builder.Append("pj").Append('|');
                     builder.Append(proprietar.Nume).Append('|');
                     builder.Append(proprietar.Identificator).Append('|');
-                    builder.Append("obs^").Append(proprietar.Observatii).Append('|');
+                    builder.Append(@"obs ").Append(proprietar.Observatii).Append('|');
                     break;
             }
             return builder.ToString();
@@ -304,12 +306,13 @@ namespace CS.CadGen
             builder.Append(1).Append('|');//numarul parcelei in imobil
             builder.Append(Math.Round(suprafata,0)).Append('|');
             builder.Append(0).Append('|');//intravilan
+            builder.Append('1').Append('|');//Arabil
             builder.Append('|');//valoare impozitare
             builder.Append(parcela.NumarTitlu).Append('|');
-            builder.Append(parcela.Tarla).Append('|');
+            builder.Append(parcela.Tarla?.Denumire).Append('|');
             builder.Append(parcela.Denumire).Append('|');
             builder.Append('|'); // nr topografic
-            builder.Append('|');//mentiuni
+            //builder.Append('|');//mentiuni
             return builder.ToString();
         }
 
@@ -318,7 +321,7 @@ namespace CS.CadGen
         // TipDrept
         // InscrieriProprietari, Proprietar
         // InscrieriActeProprietate, ActProprietate
-        static string[] ExportInscriere(InscriereDetaliu inscriereD, IEnumerable<Proprietar> proprietariImobil, IMatcher matcher, IMatchProcessor matchProcessor)
+        static List<string> ExportInscriere(InscriereDetaliu inscriereD, IEnumerable<Proprietar> proprietariImobil, IMatcher matcher, IMatchProcessor matchProcessor)
         {
             StringBuilder builder1 = new StringBuilder();
             StringBuilder builder2 = new StringBuilder();
@@ -415,7 +418,7 @@ namespace CS.CadGen
 
             builder2.Append(matchTipDocument.Count > 0 ? matchTipDocument[0].Name : "").Append('|');
             builder2.Append(act.Emitent);
-            builder2.Append('^').Append('|'); //observatii
+            builder2.Append(@"").Append('|'); //observatii
             builder2.Append(0).Append('|'); // no fucking clue
 
             var matchTipInscriere = matcher.Match(clasTipInscriere, inscriereD.TipInscriere?.Denumire, matchProcessor);
@@ -451,7 +454,7 @@ namespace CS.CadGen
             builder2.Append(inscriereD.Observatii).Append('|');
             builder2.Append("poz#").Append(inscriereD.Pozitia).Append('|');
 
-            return new string[]
+            return new List<string>
             {
                 builder1.ToString(),
                 builder2.ToString()
@@ -463,7 +466,7 @@ namespace CS.CadGen
             var result = new StringBuilder("#00#");
             foreach(var p in points)
             {
-                result.Append(p.X.ToString("0.000")).Append('_').Append(p.Y.ToString("0.000")).Append('|');
+                result.Append(p.Y.ToString("0.000")).Append('_').Append(p.X.ToString("0.000")).Append('|');
             }
             return result.ToString();
         }

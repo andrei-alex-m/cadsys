@@ -29,8 +29,11 @@ namespace CS.DXF
             DxfDocument doc  = DxfDocument.Load(fileName);
             var docSector = doc.Texts.FirstOrDefault(x => string.Equals(x.Layer.Name, "Sector", StringComparison.InvariantCultureIgnoreCase));
 
-            foreach(var p in GetPolys(doc))
+            var polys = GetPolys(doc);
+
+            foreach (var p in polys)
             {
+                p.poly.XData.Clear();
                 var points = p.poly.ToPoints();
                 var area = VectorExtensions.Area(points);
                 var cg = cadGenExporter.Export(int.Parse(p.index.Value), points, area, p.nrCadGeneral?.Value, docSector?.Value);
@@ -38,13 +41,14 @@ namespace CS.DXF
                 if (cg.Length > 0)
                 {
                     var xD = new XData(new ApplicationRegistry("TOPO"));
-                    var xdb = xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString,"{")))
+                    xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString,"{"));
                     foreach (var line in cg)
                     {
                         var xDR = new XDataRecord(XDataCode.String, line);
                         
                         xD.XDataRecord.Add(xDR);
                     }
+                    xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString, "}"));
                     p.poly.XData.Add(xD);
                 }
             }
@@ -72,14 +76,20 @@ namespace CS.DXF
 
                 foreach (var i in docIndexes.Except(matches.Select(y => y.index)))
                 {
-                    currentMatch.index = i;
-                    break;
+                    if (IsPointInPolygon(x.Vertexes, i.Position))
+                    {
+                        currentMatch.index = i;
+                        break;
+                    }
                 }
 
                 foreach (var n in docNrCadGeneral.Except(matches.Select(y => y.nrCadGeneral)))
                 {
-                    currentMatch.nrCadGeneral = n;
-                    break;
+                    if (IsPointInPolygon(x.Vertexes, n.Position))
+                    {
+                        currentMatch.nrCadGeneral = n;
+                        break;
+                    }
                 }
 
                 if (currentMatch.index != null)
