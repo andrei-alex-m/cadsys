@@ -161,10 +161,10 @@ namespace CS.DXF
                 return 0;
             }
 
-            var newP = points;
-            newP.Append(newP[0]);
+            var newP = points.ToList();
+            newP.Add(points[0]);
 
-            return Math.Abs(newP.Take(newP.Length - 1)
+            return Math.Abs(newP.Take(newP.Count() - 1)
    .Select((p, i) => (newP[i + 1].X - p.X) * (newP[i + 1].Y + p.Y))
    .Sum() / 2);
 

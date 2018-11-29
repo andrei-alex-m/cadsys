@@ -146,7 +146,7 @@ namespace CS.CadGen
 
             result.Add(ExportParcela(imobil.Parcele.FirstOrDefault(),suprafata));
 
-            result.Add("#02#" + ExportAdresa(imobil.Adresa, comboMatcher, comboMatchProcessor)+"1|");
+            result.Add("#02#" + ExportAdresa(imobil.Adresa, comboMatcher, comboMatchProcessor)/*+"0|"*/);//extravilan
             result.Add(ExportImobil(imobil, nrCadGeneral, sector));
 
             result.Add(ExportCoordonate(coords));
@@ -181,7 +181,7 @@ namespace CS.CadGen
             builder.Append(nrCadGeneral).Append('|');
             builder.Append(sector).Append('|');
             builder.Append('0').Append('|'); //cooperativizata
-            builder.Append('0').Append('|'); //dunno
+            builder.Append('1').Append('|'); //dunno
             builder.Append(imobil.IdentificatorElectronic).Append('|');
             builder.Append(imobil.NumarCadastral).Append('|');
             builder.Append(imobil.NumarCarteFunciara).Append('|');
@@ -206,9 +206,9 @@ namespace CS.CadGen
                     break;
                 case TipPersoana.F:
                     builder.Append("pf").Append('|');
-                    builder.Append(proprietar.Nume).Append('|');
-                    builder.Append(proprietar.Prenume).Append('|');
-                    builder.Append(proprietar.Identificator).Append('|');
+                    builder.Append(proprietar.Nume.Trim().ToUpper()).Append('|');
+                    builder.Append(proprietar.Prenume.Trim().ToUpper()).Append('|');
+                    builder.Append(proprietar.Identificator ?? 9999999999999).Append('|');
                     //tiganie
                     if (proprietar.TipActIdentitate.HasValue && proprietar.TipActIdentitate.Value != TipActIdentitate.Deces)
                     {
@@ -232,7 +232,7 @@ namespace CS.CadGen
                     builder.Append("RO").Append('|');//cetatenie
                     builder.Append('|');//telefon
                     builder.Append('|');//email
-                    if (proprietar.TipActIdentitate.HasValue && proprietar.TipActIdentitate.Value == TipActIdentitate.Deces)
+                    if (proprietar.TipActIdentitate.HasValue && proprietar.TipActIdentitate.Value == TipActIdentitate.Deces)// u sure?
                     {
                         builder.Append(1).Append('|');
                     }
@@ -240,17 +240,15 @@ namespace CS.CadGen
                     {
                         builder.Append(0).Append('|');
                     }
-
-                    builder.Append(@"obs ");
                     if (proprietar.TipActIdentitate.HasValue && proprietar.TipActIdentitate.Value == TipActIdentitate.Deces)
                     {
-                        builder.Append("DECEDAT ");
+                        builder.Append("obs DECEDAT ");
                     }
                     builder.Append(proprietar.Observatii).Append('|');
                     break;
                 case TipPersoana.J:
                     builder.Append("pj").Append('|');
-                    builder.Append(proprietar.Nume).Append('|');
+                    builder.Append(proprietar.Nume.Trim().ToUpper()).Append('|');
                     builder.Append(proprietar.Identificator).Append('|');
                     builder.Append(@"obs ").Append(proprietar.Observatii).Append('|');
                     break;
@@ -275,7 +273,7 @@ namespace CS.CadGen
             builder.Append(matchJudet.Count > 0 ? matchJudet[0].Name : "").Append('|');
             builder.Append(adresa.UAT?.Denumire).Append('|');
             builder.Append(adresa.Localitate?.Denumire).Append('|');
-            builder.Append("||"); //district, tip district
+            builder.Append("0||"); //district, tip district
 
             //tipStrada
             var clasTipStrada = new List<Classification>()
@@ -285,18 +283,18 @@ namespace CS.CadGen
             };
             var matchTipStrada = matcher.Match(clasTipStrada, adresa.TipStrada, matchProcessor);
 
-            builder.Append(matchTipStrada.Count > 0 ? matchTipStrada[0].Name : "").Append('|');
+            builder.Append(matchTipStrada.Count > 0 ? matchTipStrada[0].Name : "0").Append('|');
             builder.Append(adresa.Strada).Append('|');
             builder.Append(adresa.Numar).Append('|');
-            builder.Append(adresa.CodPostal).Append('|');
+            builder.Append("999999").Append('|');
             builder.Append('|');//tronson
             builder.Append(adresa.Bloc).Append('|');
             builder.Append(adresa.Scara).Append('|');
             builder.Append(adresa.Etaj).Append('|');
             builder.Append(adresa.Apt).Append('|');
-            builder.Append(adresa.Intravilan.HasValue && !adresa.Intravilan.Value ? "out" : "").Append('|');
+            builder.Append('|');//in afara Romaniei
             builder.Append(adresa.Descriere).Append('|');
-
+            builder.Append(adresa.SIRSUP == adresa.SIRUTA ? '0' : '1').Append('|');//intravilan/extravilan
             return builder.ToString();
         }
 
@@ -378,7 +376,7 @@ namespace CS.CadGen
                 inscriereD.DetaliiDrept = string.Empty;
             }
 
-            builder1.Append(inscriereD.TipInscriere?.Denumire).Append(' ', 6);
+            builder1.Append(inscriereD.TipInscriere?.Descriere).Append(' ', 6);
             builder1.Append(inscriereD.TipDrept?.Denumire.ToUpper()).Append(' ', 6);
             builder1.Append(inscriereD.Cota).Append(' ', 6);
             inscriereD.InscrieriProprietari.ToList().ForEach(x =>
@@ -386,7 +384,7 @@ namespace CS.CadGen
                 switch (x.Proprietar.TipPersoana)
                 {
                     case TipPersoana.F:
-                        builder1.Append(x.Proprietar.Nume.ToUpper()).Append(' ').Append(x.Proprietar.Prenume.ToUpper());
+                        builder1.Append(x.Proprietar.Nume.Trim().ToUpper()).Append(' ').Append(x.Proprietar.Prenume.Trim().ToUpper());
                         break;
                     case TipPersoana.J:
                         builder1.Append(x.Proprietar.Nume.ToUpper());
@@ -416,9 +414,9 @@ namespace CS.CadGen
 
             var matchTipDocument = matcher.Match(clasTipDocument, act.TipActProprietate.TipDocumentId.ToString(), matchProcessor);
 
-            builder2.Append(matchTipDocument.Count > 0 ? matchTipDocument[0].Name : "").Append('|');
+            builder2.Append(matchTipDocument.Count > 0 ? matchTipDocument[0].Name : "0").Append('|');
             builder2.Append(act.Emitent);
-            builder2.Append(@"").Append('|'); //observatii
+            builder2.Append('|'); //observatii
             builder2.Append(0).Append('|'); // no fucking clue
 
             var matchTipInscriere = matcher.Match(clasTipInscriere, inscriereD.TipInscriere?.Denumire, matchProcessor);
@@ -466,7 +464,7 @@ namespace CS.CadGen
             var result = new StringBuilder("#00#");
             foreach(var p in points)
             {
-                result.Append(p.Y.ToString("0.000")).Append('_').Append(p.X.ToString("0.000")).Append('|');
+                result.Append(p.X.ToString("0.000")).Append('_').Append(p.Y.ToString("0.000")).Append('|');
             }
             return result.ToString();
         }

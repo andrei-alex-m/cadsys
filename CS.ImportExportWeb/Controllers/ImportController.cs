@@ -200,8 +200,8 @@ namespace CS.ImportExportAPI.Controllers
                 var i = new Imobil();
                 var a = new Adresa()
                 {
-                    SIRSUP = 120496,
-                    SIRUTA = 120496,
+                    SIRSUP = 180019,
+                    SIRUTA = 180019,
                     Intravilan = false
                 };
 
