@@ -12179,23 +12179,23 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/CS.Excel.csproj": {
-              "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/CS.Excel.csproj"
-            },
-            "/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/CS.EF.csproj": {
-              "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/CS.EF.csproj"
-            },
             "/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/Caly.Common.csproj": {
               "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/Caly.Common.csproj"
-            },
-            "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Services/CS.Services.csproj": {
-              "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Services/CS.Services.csproj"
             },
             "/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/CS.CadGen.csproj": {
               "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/CS.CadGen.csproj"
             },
             "/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/CS.DXF.csproj": {
               "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/CS.DXF.csproj"
+            },
+            "/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/CS.EF.csproj": {
+              "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/CS.EF.csproj"
+            },
+            "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/CS.Excel.csproj": {
+              "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel/CS.Excel.csproj"
+            },
+            "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Services/CS.Services.csproj": {
+              "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.Services/CS.Services.csproj"
             }
           }
         }
@@ -12212,12 +12212,12 @@
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.1.1"
+            "version": "[2.1.1, )"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.1.0",
+            "version": "[2.1.0, )",
             "autoReferenced": true
           }
         },

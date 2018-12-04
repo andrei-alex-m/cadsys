@@ -161,7 +161,7 @@ namespace CS.ImportExportAPI.Controllers
                 }
             });
 
-            //sterg inscrierile fara propr care nu sunt notari
+            //sterg inscrierile fara propr care nu sunt notari (gen cele care au doar titluri)
             context.InscrieriDetaliu.RemoveRange(context.InscrieriDetaliu.Include(y => y.InscrieriProprietari).Include(w => w.TipInscriere).AsParallel().Where(x => x.InscrieriProprietari.Count == 0 && !string.Equals(x.TipInscriere.Denumire, "NOTATION", StringComparison.InvariantCultureIgnoreCase)));
             context.SaveChanges();
         }
@@ -193,6 +193,7 @@ namespace CS.ImportExportAPI.Controllers
 
             object locker = new object();
             var tarlale = new ConcurrentBag<Tarla>(context.Tarlale);
+
 
             Parallel.ForEach(x, y =>
             {

@@ -11,6 +11,8 @@ namespace CS.Data.Entities
         [ForeignKey("UAT")]
         public int UATId { get; set; }
 
+        public bool Diminuata { get; set; }
+
         public virtual UAT UAT { get; set; }
 
         [InverseProperty("Tarla")]

@@ -14,7 +14,8 @@ namespace CS.Data.Mappers
             nustim,
             titlu,
             sparge,
-            nusparge
+            nusparge,
+            nota
         }
         /// <summary>
         /// Tiganie
@@ -45,21 +46,24 @@ namespace CS.Data.Mappers
             var indexAct = outputInscriereD.FirstOrDefault(x => x.IndexAct.HasValue).IndexAct.Value;
             var indecsiProprietari = outputInscriereD.Where(x => x.IndexProprietar.HasValue).Select(x => new { index = x.IndexProprietar.Value, cota = x.CotaParte }).Distinct().ToList();
 
-            if (indecsiProprietari.All(x => !string.IsNullOrEmpty(x.cota)))
-            {
-                caz = cazuri.sparge;
-            }
+            caz = cazuri.sparge;
 
+            // daca e doar o cota in excel fa o singura inscriere
             if (indecsiProprietari.Count(x => !string.IsNullOrEmpty(x.cota)) == 1)
             {
                 caz = cazuri.nusparge;
                 cotaGenerala = indecsiProprietari.Single(x => !string.IsNullOrEmpty(x.cota)).cota;
             }
 
-            if (indecsiProprietari.Count == 0)
+            if (indecsiProprietari.All(x => string.IsNullOrEmpty(x.cota)))
             {
-                caz = cazuri.titlu;
+                caz = cazuri.nusparge;
             }
+
+            //if (indecsiProprietari.Count == 0)
+            //{
+            //    caz = cazuri.titlu;
+            //}
 
             var parcela = parcele.FirstOrDefault(y => y.Index == indexParcela);
 

@@ -3369,12 +3369,12 @@
         "dependencies": {
           "FluentValidation": {
             "target": "Package",
-            "version": "7.6.104"
+            "version": "[7.6.104, )"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.1.0",
+            "version": "[2.1.0, )",
             "autoReferenced": true
           }
         },

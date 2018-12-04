@@ -124,7 +124,10 @@ namespace CS.Excel
                         }
                         else
                         {
-                            miniResult.Add(GetDTO<T>(row, columnNames.ToList(), i));
+                            if (row!= null && row.Any(x => x.CellType != CellType.Blank))
+                            {
+                                miniResult.Add(GetDTO<T>(row, columnNames.ToList(), i));
+                            }
                         }
                     }
                     catch(Exception ex)

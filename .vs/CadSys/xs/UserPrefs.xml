@@ -1,37 +1,61 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{1C8A5C82-9844-4DFD-81CE-AB62F46E5C9C}|Default">
   <MonoDevelop.Ide.ItemProperties.CS.ImportExportWeb PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.CS.CRUDAPI PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CS.DXF/Exporter.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CadSys Status">
     <Files>
-      <File FileName="CS.DXF/Exporter.cs" Line="37" Column="48" />
-      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="40" Column="41" />
+      <File FileName="CS.DXF/Exporter.cs" Line="33" Column="1" />
+      <File FileName="CS.ImportExportWeb/Controllers/ExportController.cs" Line="44" Column="39" />
       <File FileName="CS.ImportExportWeb/Program.cs" Line="17" Column="1" />
-      <File FileName="CS.CadGen/Exporter.cs" Line="242" Column="22" />
+      <File FileName="CS.CadGen/Exporter.cs" Line="124" Column="66" />
       <File FileName="CS.Templating/Judet/JudetInContext.tt" Line="1" Column="1" />
       <File FileName="CS.Templating/Judet/JudetInContext.cs" Line="1" Column="1" />
-      <File FileName="CS.Data/Mappers/Parcela.cs" Line="13" Column="31" />
-      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="204" Column="36" />
-      <File FileName="CS.Templating/UAT/UATInContext.cs" Line="2631" Column="90" />
-      <File FileName="CS.Data/Entities/Adresa.cs" Line="8" Column="18" />
+      <File FileName="CS.Data/Mappers/Parcela.cs" Line="13" Column="28" />
+      <File FileName="CS.ImportExportWeb/Controllers/ImportController.cs" Line="199" Column="14" />
+      <File FileName="CS.Excel/Importer.cs" Line="123" Column="34" />
+      <File FileName="CS.EF/Context.cs" Line="144" Column="76" />
+      <File FileName="CS.Data/Mappers/InscriereDetaliu.cs" Line="108" Column="1" />
+      <File FileName="CS.Data/Entities/Proprietar.cs" Line="31" Column="28" />
+      <File FileName="Caly.Common/Matcher/IMatcher.cs" Line="7" Column="30" />
+      <File FileName="CS.Data/Entities/Dictionaries/Tarla.cs" Line="14" Column="44" />
+      <File FileName="CS.Data/Entities/Imobil.cs" Line="8" Column="18" />
+      <File FileName="CS.Data/Entities/Parcela.cs" Line="1" Column="1" />
+      <File FileName="CS.CadGen/IExporter.cs" Line="6" Column="25" />
+      <File FileName="CS.EF/EntitiesValidators/AdresaValidator.cs" Line="11" Column="52" />
+      <File FileName="CS.Services/Repo.cs" Line="27" Column="45" />
+      <File FileName="CadSys Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <DisabledProjects>
     <String>CS.Interfaces/CS.Interfaces.csproj</String>
   </DisabledProjects>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/usr/local/share/dotnet/sdk/2.1.300/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" line="198" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel.Tests/ImportTests.cs" relfile="CS.Excel.Tests/ImportTests.cs" line="15" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/Class1.cs" relfile="CS.DXF/Class1.cs" line="31" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="32" column="1" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Tests/UnitTest1.cs" relfile="CS.Tests/UnitTest1.cs" line="21" column="28" />
-      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="16" column="1" />
-      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="76" column="1" />
-      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Context.cs" relfile="CS.EF/Context.cs" line="75" column="1" />
+      <Breakpoint enabled="false" file="/usr/local/share/dotnet/sdk/2.1.300/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" line="198" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Excel.Tests/ImportTests.cs" relfile="CS.Excel.Tests/ImportTests.cs" line="15" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/Class1.cs" relfile="CS.DXF/Class1.cs" line="31" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="32" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Tests/UnitTest1.cs" relfile="CS.Tests/UnitTest1.cs" line="21" column="28" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Templating/Teste.cs" relfile="CS.Templating/Teste.cs" line="16" column="1" />
       <Breakpoint enabled="false" conditionExpression="prop.Localitate != &quot;Bucuresti&quot; &amp;&amp; adresa.AdresaNecunoscuta == null &amp;&amp; adresa.SIRSUP == null" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.EF/Parsers/AdresaParser.cs" relfile="CS.EF/Parsers/AdresaParser.cs" line="34" column="1" />
-      <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
+      <Catchpoint enabled="false" exceptionName="System.Exception" includeSubclasses="True" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ExportController.cs" relfile="CS.ImportExportWeb/Controllers/ExportController.cs" line="95" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Data/Mappers/InscriereDetaliu.cs" relfile="CS.Data/Mappers/InscriereDetaliu.cs" line="108" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.ImportExportWeb/Controllers/ImportController.cs" relfile="CS.ImportExportWeb/Controllers/ImportController.cs" line="185" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Data/Mappers/InscriereDetaliu.cs" relfile="CS.Data/Mappers/InscriereDetaliu.cs" line="101" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="129" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="139" column="1" />
+      <Breakpoint enabled="false" file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.Data/Mappers/InscriereDetaliu.cs" relfile="CS.Data/Mappers/InscriereDetaliu.cs" line="30" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="157" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="429" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="419" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="525" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="147" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="148" column="35" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="150" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/Exporter.cs" relfile="CS.CadGen/Exporter.cs" line="377" column="1" />
+      <Breakpoint file="/Users/andrei/Work/andrei-alex-m/CadSys/CS.DXF/Exporter.cs" relfile="CS.DXF/Exporter.cs" line="33" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

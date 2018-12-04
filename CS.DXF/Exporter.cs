@@ -18,6 +18,7 @@ namespace CS.DXF
         public LwPolyline poly { get; set; }
         public Text index { get; set; }
         public Text nrCadGeneral { get; set; }
+        public Text nrCadastral { get; set; }
     }
 
     public static class Exporter
@@ -26,32 +27,42 @@ namespace CS.DXF
         //needs to go to cadgen exporter with a list of polylines and attributes
         public static MemoryStream Get(string fileName, IExporter cadGenExporter)
         {
+            bool isBinary;
+            var ver = DxfDocument.CheckDxfFileVersion(fileName, out isBinary);
             DxfDocument doc  = DxfDocument.Load(fileName);
             var docSector = doc.Texts.FirstOrDefault(x => string.Equals(x.Layer.Name, "Sector", StringComparison.InvariantCultureIgnoreCase));
 
             var polys = GetPolys(doc);
 
+
+            //Parallel.ForEach(polys, p =>
             foreach (var p in polys)
             {
                 p.poly.XData.Clear();
                 var points = p.poly.ToPoints();
                 var area = VectorExtensions.Area(points);
-                var cg = cadGenExporter.Export(int.Parse(p.index.Value), points, area, p.nrCadGeneral?.Value, docSector?.Value);
 
-                if (cg.Length > 0)
+                //CF - INDEX
+                int index;
+                if (int.TryParse(p.index.Value.Trim(), out index))
                 {
-                    var xD = new XData(new ApplicationRegistry("TOPO"));
-                    xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString,"{"));
-                    foreach (var line in cg)
+                    var cg = cadGenExporter.Export(index, points, area, p.nrCadGeneral?.Value, docSector?.Value, p.nrCadastral?.Value);
+
+                    if (cg.Length > 0)
                     {
-                        var xDR = new XDataRecord(XDataCode.String, line);
-                        
-                        xD.XDataRecord.Add(xDR);
+                        var xD = new XData(new ApplicationRegistry("TOPO"));
+                        xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString, "{"));
+                        foreach (var line in cg)
+                        {
+                            var xDR = new XDataRecord(XDataCode.String, line);
+
+                            xD.XDataRecord.Add(xDR);
+                        }
+                        xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString, "}"));
+                        p.poly.XData.Add(xD);
                     }
-                    xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString, "}"));
-                    p.poly.XData.Add(xD);
                 }
-            }
+            }//);
 
             var stream = new MemoryStream();
             doc.Save(stream);
@@ -66,6 +77,7 @@ namespace CS.DXF
             var docPolys = doc.LwPolylines.Where(x => string.Equals(x.Layer.Name, "TERENURI", StringComparison.InvariantCultureIgnoreCase));
             var docIndexes = doc.Texts.Where(x => string.Equals(x.Layer.Name, "Index", StringComparison.InvariantCultureIgnoreCase));
             var docNrCadGeneral = doc.Texts.Where(x => string.Equals(x.Layer.Name, "NrCadGeneral", StringComparison.InvariantCultureIgnoreCase));
+            var docNrCadastral = doc.Texts.Where(x => string.Equals(x.Layer.Name, "NrCadastral", StringComparison.InvariantCultureIgnoreCase));
 
             Parallel.ForEach(docPolys, x =>
             {
@@ -88,6 +100,15 @@ namespace CS.DXF
                     if (IsPointInPolygon(x.Vertexes, n.Position))
                     {
                         currentMatch.nrCadGeneral = n;
+                        break;
+                    }
+                }
+
+                foreach (var n in docNrCadastral.Except(matches.Select(y => y.nrCadastral)))
+                {
+                    if (IsPointInPolygon(x.Vertexes, n.Position))
+                    {
+                        currentMatch.nrCadastral = n;
                         break;
                     }
                 }
