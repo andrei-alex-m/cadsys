@@ -14,8 +14,8 @@ namespace CS.CadGen
     {
         CadSysContext context;
         IServiceBuilder serviceBuilder;
-        IMatcher comboMatcher;
-        IMatchProcessor comboMatchProcessor;
+        readonly IMatcher comboMatcher;
+        readonly IMatchProcessor comboMatchProcessor;
 
 
         public Exporter(CadSysContext _context, IServiceBuilder _serviceBuilder)
@@ -24,6 +24,8 @@ namespace CS.CadGen
             serviceBuilder = _serviceBuilder;
             comboMatcher = (IMatcher)serviceBuilder.GetService("CombosIndexMatcher");
             comboMatchProcessor = (IMatchProcessor)serviceBuilder.GetService("CombosIndexMatchProcessor");
+
+            //context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
 
@@ -33,64 +35,55 @@ namespace CS.CadGen
             Imobil imobil;
             object locker = new object();
 
-            lock (locker)
-            {
-                imobil = context.Imobile.FirstOrDefault(x => x.Parcele.Any(y => y.Index == indexImobil));
-            }
+            imobil = context.Imobile.FirstOrDefault(x => x.Parcele.Any(y => y.Index == indexImobil));
 
             if (imobil == null)
             {
                 return result.ToArray();
             }
 
-            //var proprietari = context.Proprietari.Include(x => x.Adresa).SelectMany(y => y.Inscrieri.Select(z => z.InscriereDetaliu)).Where(w => w.ImobilReferintaId == imobil.Id);
+            context.Set<UAT>().Load();
+            context.Set<Localitate>().Load();
+            context.Set<Judet>().Load();
 
+            context.Entry(imobil).Reference(x => x.Adresa).Load();
 
-            lock (locker)
+            context.Entry(imobil.Adresa).Reference(x => x.UAT).Load();
+            context.Entry(imobil.Adresa).Reference(x => x.Localitate).Load();
+
+            context.Entry(imobil).Collection(x => x.Parcele).Load();
+            context.Entry(imobil.Parcele.FirstOrDefault()).Reference(x => x.Tarla).Load();
+
+            context.Entry(imobil).Collection(x => x.InscrieriDetaliu).Load();
+
+            foreach (var iD in imobil.InscrieriDetaliu)
             {
-                context.Set<UAT>().Load();
-                context.Set<Localitate>().Load();
-                context.Set<Judet>().Load();
+                context.Entry(iD).Reference(x => x.ModDobandire).Load();
+                context.Entry(iD).Reference(x => x.TipDrept).Load();
+                context.Entry(iD).Reference(x => x.TipInscriere).Load();
 
-                context.Entry(imobil).Reference(x => x.Adresa).Load();
+                context.Entry(iD).Collection(x => x.InscrieriActe).Load();
+                context.Entry(iD).Collection(x => x.InscrieriImobile).Load();
+                context.Entry(iD).Collection(x => x.InscrieriProprietari).Load();
 
-                context.Entry(imobil.Adresa).Reference(x => x.UAT).Load();
-                context.Entry(imobil.Adresa).Reference(x => x.Localitate).Load();
-
-                context.Entry(imobil).Collection(x => x.Parcele).Load();
-                context.Entry(imobil.Parcele.FirstOrDefault()).Reference(x => x.Tarla).Load();
-
-                context.Entry(imobil).Collection(x => x.InscrieriDetaliu).Load();
-                foreach (var iD in imobil.InscrieriDetaliu)
+                foreach (var ia in iD.InscrieriActe)
                 {
-                    context.Entry(iD).Reference(x => x.ModDobandire).Load();
-                    context.Entry(iD).Reference(x => x.TipDrept).Load();
-                    context.Entry(iD).Reference(x => x.TipInscriere).Load();
-
-                    context.Entry(iD).Collection(x => x.InscrieriActe).Load();
-                    context.Entry(iD).Collection(x => x.InscrieriImobile).Load();
-                    context.Entry(iD).Collection(x => x.InscrieriProprietari).Load();
-
-                    foreach (var ia in iD.InscrieriActe)
+                    context.Entry(ia).Reference(x => x.ActProprietate).Load();
+                    if (ia.ActProprietate != null)
                     {
-                        context.Entry(ia).Reference(x => x.ActProprietate).Load();
-                        if (ia.ActProprietate != null)
-                        {
-                            context.Entry(ia.ActProprietate).Reference(x => x.TipActProprietate).Load();
-                        }
-                    }
-
-                    foreach (var ip in iD.InscrieriProprietari)
-                    {
-                        context.Entry(ip).Reference(x => x.Proprietar).Load();
-                    }
-
-                    foreach (var ii in iD.InscrieriImobile)
-                    {
-                        context.Entry(ii).Reference(x => x.Imobil).Load();
+                        context.Entry(ia.ActProprietate).Reference(x => x.TipActProprietate).Load();
                     }
                 }
 
+                foreach (var ip in iD.InscrieriProprietari)
+                {
+                    context.Entry(ip).Reference(x => x.Proprietar).Load();
+                }
+
+                foreach (var ii in iD.InscrieriImobile)
+                {
+                    context.Entry(ii).Reference(x => x.Imobil).Load();
+                }
             }
 
             result.AddRange(ExportPozitia(imobil));
@@ -155,7 +148,6 @@ namespace CS.CadGen
             result.Add(ExportCoordonate(coords));
 
             return result.ToArray();
-
         }
 
         static List<string> ExportPozitia(Imobil imobil)
@@ -459,7 +451,6 @@ namespace CS.CadGen
             {
                 builder1.Remove(builder1.Length - 1, 1); //ultimul punct
             }
-
 
             switch (inscriereD.ParteaCF)
             {

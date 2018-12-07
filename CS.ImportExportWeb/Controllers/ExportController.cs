@@ -10,6 +10,8 @@ using CS.DXF;
 using CS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using CS.ImportExportWeb.Models;
+using Microsoft.AspNetCore.SignalR;
+using CS.ImportExportWeb.Hubs;
 
 namespace CS.ImportExportWeb.Controllers
 {
@@ -20,14 +22,16 @@ namespace CS.ImportExportWeb.Controllers
         IDXFRepo dXFRepo;
         IServiceBuilder serviceBuilder;
         IExporter cadGenExporter;
+        IHubContext<MessagesHub> hubContext;
 
-        public ExportController(CadSysContext _context, IExcelConfigurationRepo _excelConfiguration, IServiceBuilder _serviceBuilder, IDXFRepo _dxfRepo, IExporter _cadGenExporter)
+        public ExportController(CadSysContext _context, IExcelConfigurationRepo _excelConfiguration, IServiceBuilder _serviceBuilder, IDXFRepo _dxfRepo, IExporter _cadGenExporter, IHubContext<MessagesHub> _hubContext)
         {
             context = _context;
             excelConfiguration = _excelConfiguration;
             serviceBuilder = _serviceBuilder;
             dXFRepo = _dxfRepo;
             cadGenExporter = _cadGenExporter;
+            hubContext = _hubContext;
 
         }
 
@@ -90,7 +94,7 @@ namespace CS.ImportExportWeb.Controllers
             {
                 var dxfFullPath = dXFRepo.GetFullPath(file.Display);
 
-                var stream = DXF.Exporter.Get(dxfFullPath, cadGenExporter);
+                var stream = DXF.Exporter.Get(dxfFullPath, cadGenExporter, (x) => hubContext.Clients.All.SendAsync("receivemessage", x));
 
                 return File(stream.ToArray(), System.Net.Mime.MediaTypeNames.Application.Octet, file.Display);
             }

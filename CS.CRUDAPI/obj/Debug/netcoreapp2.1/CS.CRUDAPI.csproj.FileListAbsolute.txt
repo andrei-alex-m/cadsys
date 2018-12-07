@@ -3,7 +3,6 @@
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/bin/Debug/netcoreapp2.1/CS.CRUDAPI.runtimeconfig.dev.json
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/bin/Debug/netcoreapp2.1/CS.CRUDAPI.dll
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/bin/Debug/netcoreapp2.1/CS.CRUDAPI.pdb
-/Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.csprojAssemblyReference.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.csproj.CoreCompileInputs.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.RazorAssemblyInfo.cache
 /Users/andrei/Work/andrei-alex-m/CadSys/CS.CRUDAPI/obj/Debug/netcoreapp2.1/CS.CRUDAPI.RazorAssemblyInfo.cs

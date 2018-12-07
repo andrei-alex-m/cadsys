@@ -7,13 +7,18 @@
 }
 
 <h2>Files download</h2>
-<ul>
+<div>
+    <ul>
 
 
-    @foreach (var f in Model.Files)
-    {
-        <li>
-            <input type="button" value="@f.Display" onclick="location.href='@Url.Action("GetFile", "Export", f )'" />
-        </li>
-    }
-</ul>
+        @foreach (var f in Model.Files)
+        {
+            <li>
+                <input type="button" value="@f.Display" onclick="location.href='@Url.Action("GetFile", "Export", f )'" />
+            </li>
+        }
+    </ul>
+</div>
+<div>
+    <ul id="messagesList"></ul>
+</div>

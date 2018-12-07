@@ -3,7 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-
+    <PropertyGroup>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
     <ProjectReference Include="..\Caly.Common\Caly.Common.csproj" />

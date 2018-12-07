@@ -25,7 +25,7 @@ namespace CS.DXF
     {
 
         //needs to go to cadgen exporter with a list of polylines and attributes
-        public static MemoryStream Get(string fileName, IExporter cadGenExporter)
+        public static MemoryStream Get(string fileName, IExporter cadGenExporter, Action<string> action)
         {
             bool isBinary;
             var ver = DxfDocument.CheckDxfFileVersion(fileName, out isBinary);
@@ -34,11 +34,13 @@ namespace CS.DXF
 
             var polys = GetPolys(doc);
 
-
+            var i = 1;
+            var c = polys.Count();
             //Parallel.ForEach(polys, p =>
             foreach (var p in polys)
             {
-                p.poly.XData.Clear();
+                action($"Export DXF: {i} / {c}; index:{p.index.Value}");
+
                 var points = p.poly.ToPoints();
                 var area = VectorExtensions.Area(points);
 
@@ -50,6 +52,7 @@ namespace CS.DXF
 
                     if (cg.Length > 0)
                     {
+                        p.poly.XData.Clear();
                         var xD = new XData(new ApplicationRegistry("TOPO"));
                         xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString, "{"));
                         foreach (var line in cg)
@@ -62,6 +65,7 @@ namespace CS.DXF
                         p.poly.XData.Add(xD);
                     }
                 }
+                i++;
             }//);
 
             var stream = new MemoryStream();
