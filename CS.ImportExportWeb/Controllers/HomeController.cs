@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using CS.ImportExportWeb.Models;
+using CS.Services;
 using CS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,12 +10,12 @@ namespace CS.ImportExportWeb.Controllers
     public class HomeController : Controller
     {
         IExcelConfigurationRepo excelConfig;
-        IDXFRepo dXFRepo;
+        IFileRepo dXFRepo;
 
-        public HomeController(IExcelConfigurationRepo _excelConfig, IDXFRepo _dXFRepo)
+        public HomeController(IExcelConfigurationRepo _excelConfig, ServiceBuilder _serviceBuilder)
         {
             excelConfig = _excelConfig;
-            dXFRepo = _dXFRepo;
+            dXFRepo = (IFileRepo)_serviceBuilder.GetService("DXFRepo");
         }
 
         public IActionResult Index()
@@ -23,6 +24,11 @@ namespace CS.ImportExportWeb.Controllers
         }
 
         public IActionResult Upload()
+        {
+            return View();
+        }
+
+        public IActionResult Proceess()
         {
             return View();
         }

@@ -10,6 +10,7 @@ using Caly.Common;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using netDxf.Tables;
+using System.Threading;
 
 namespace CS.DXF
 {
@@ -34,12 +35,14 @@ namespace CS.DXF
 
             var polys = GetPolys(doc);
 
-            var i = 1;
+            var i = 0;
             var c = polys.Count();
-            //Parallel.ForEach(polys, p =>
-            foreach (var p in polys)
+            Parallel.ForEach(polys, p =>
+            //foreach (var p in polys)
             {
-                action($"Export DXF: {i} / {c}; index:{p.index.Value}");
+                var cI=Interlocked.Increment(ref i);
+
+                action($"Export DXF: {cI} / {c}; index:{p.index.Value}");
 
                 var points = p.poly.ToPoints();
                 var area = VectorExtensions.Area(points);
@@ -48,7 +51,7 @@ namespace CS.DXF
                 int index;
                 if (int.TryParse(p.index.Value.Trim(), out index))
                 {
-                    var cg = cadGenExporter.Export(index, points, area, p.nrCadGeneral?.Value, docSector?.Value, p.nrCadastral?.Value);
+                    var cg = cadGenExporter.Export(index, points, area, p.nrCadGeneral?.Value, docSector?.Value, p.nrCadastral?.Value).Result;
 
                     if (cg.Length > 0)
                     {
@@ -65,8 +68,8 @@ namespace CS.DXF
                         p.poly.XData.Add(xD);
                     }
                 }
-                i++;
-            }//);
+
+            });
 
             var stream = new MemoryStream();
             doc.Save(stream);

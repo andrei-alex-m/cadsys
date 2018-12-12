@@ -54,6 +54,18 @@
           "lib/netstandard2.0/NPOI.OpenXmlFormats.dll": {}
         }
       },
+      "Dropbox.Api/4.9.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "10.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/Dropbox.Api.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Dropbox.Api.dll": {}
+        }
+      },
       "FluentValidation/7.6.104": {
         "type": "package",
         "dependencies": {
@@ -4536,6 +4548,19 @@
           "bin/placeholder/Caly.Common.dll": {}
         }
       },
+      "Caly.Dropbox/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "Dropbox.Api": "4.9.2"
+        },
+        "compile": {
+          "bin/placeholder/Caly.Dropbox.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Caly.Dropbox.dll": {}
+        }
+      },
       "CS.CadGen/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
@@ -4691,6 +4716,23 @@
         "dotnetcore.npoi.openxmlformats.nuspec",
         "lib/net461/NPOI.OpenXmlFormats.dll",
         "lib/netstandard2.0/NPOI.OpenXmlFormats.dll"
+      ]
+    },
+    "Dropbox.Api/4.9.2": {
+      "sha512": "6ErzfXpaEXQMnsBfgwOTWqvs7eaRoMZqeoILn1CY4JCSy5fEmdjYyqEUi0Xy0JxglhJ4Qp4he6PK0OGRITHFqA==",
+      "type": "package",
+      "path": "dropbox.api/4.9.2",
+      "files": [
+        ".signature.p7s",
+        "dropbox.api.4.9.2.nupkg.sha512",
+        "dropbox.api.nuspec",
+        "lib/net45/Dropbox.Api.dll",
+        "lib/net45/Dropbox.Api.xml",
+        "lib/netstandard2.0/Dropbox.Api.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Dropbox.Api.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Dropbox.Api.xml",
+        "lib/portable-net45+win8+wpa81/Dropbox.Api.dll",
+        "lib/portable-net45+win8+wpa81/Dropbox.Api.xml"
       ]
     },
     "FluentValidation/7.6.104": {
@@ -12102,6 +12144,11 @@
       "path": "../Caly.Common/Caly.Common.csproj",
       "msbuildProject": "../Caly.Common/Caly.Common.csproj"
     },
+    "Caly.Dropbox/1.0.0": {
+      "type": "project",
+      "path": "../Caly.Dropbox/Caly.Dropbox.csproj",
+      "msbuildProject": "../Caly.Dropbox/Caly.Dropbox.csproj"
+    },
     "CS.CadGen/1.0.0": {
       "type": "project",
       "path": "../CS.CadGen/CS.CadGen.csproj",
@@ -12146,6 +12193,7 @@
       "CS.Excel >= 1.0.0",
       "CS.Services >= 1.0.0",
       "Caly.Common >= 1.0.0",
+      "Caly.Dropbox >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.2"
     ]
@@ -12180,6 +12228,9 @@
           "projectReferences": {
             "/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/Caly.Common.csproj": {
               "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Common/Caly.Common.csproj"
+            },
+            "/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Dropbox/Caly.Dropbox.csproj": {
+              "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/Caly.Dropbox/Caly.Dropbox.csproj"
             },
             "/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/CS.CadGen.csproj": {
               "projectPath": "/Users/andrei/Work/andrei-alex-m/CadSys/CS.CadGen/CS.CadGen.csproj"

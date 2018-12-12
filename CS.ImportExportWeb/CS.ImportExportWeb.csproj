@@ -17,6 +17,7 @@
     <ProjectReference Include="..\CS.Services\CS.Services.csproj" />
     <ProjectReference Include="..\CS.CadGen\CS.CadGen.csproj" />
     <ProjectReference Include="..\CS.DXF\CS.DXF.csproj" />
+    <ProjectReference Include="..\Caly.Dropbox\Caly.Dropbox.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Home\Privacy.cshtml" />

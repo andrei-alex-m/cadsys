@@ -31,6 +31,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Process">Process</a></li>
                         <li><a asp-area="" asp-controller="Home" asp-action="Upload">Upload</a></li>
                         <li><a asp-area="" asp-controller="Home" asp-action="Download">Download</a></li>
                     </ul>
@@ -42,10 +43,14 @@
 
         <div class="container body-content">
             @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2018 - CS.ImportExportWeb</p>
-            </footer>
+            <hr/>
+        <div>
+            <ul id="messagesList" style="height:500px;overflow-y:scroll"></ul>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; 2018 - CS.ImportExportWeb</p>
+        </footer>
         </div>
 
         <environment include="Development">

@@ -7,84 +7,97 @@ using System.Linq;
 using CS.EF;
 using CS.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using CS.Services;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CS.CadGen
 {
     public class Exporter : IExporter
     {
         CadSysContext context;
-        IServiceBuilder serviceBuilder;
         readonly IMatcher comboMatcher;
         readonly IMatchProcessor comboMatchProcessor;
 
-
-        public Exporter(CadSysContext _context, IServiceBuilder _serviceBuilder)
+        public Exporter(CadSysContext _context, ServiceBuilder serviceBuilder)
         {
             context = _context;
-            serviceBuilder = _serviceBuilder;
             comboMatcher = (IMatcher)serviceBuilder.GetService("CombosIndexMatcher");
             comboMatchProcessor = (IMatchProcessor)serviceBuilder.GetService("CombosIndexMatchProcessor");
 
-            //context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            Task.WaitAll(
+            context.Set<UAT>().LoadAsync(),
+            context.Set<Localitate>().LoadAsync(),
+            context.Set<Judet>().LoadAsync()
+            );
+
+            context.ChangeTracker.AutoDetectChangesEnabled = false;
+
         }
 
-
-        public string[] Export(int indexImobil, IEnumerable<Point> coords, double suprafata, string nrCadGeneral, string sector, string nrCadastral)
+        public async Task<string[]> Export(int indexImobil, IEnumerable<Point> coords, double suprafata, string nrCadGeneral, string sector, string nrCadastral)
         {
             var result = new List<string>();
             Imobil imobil;
             object locker = new object();
 
-            imobil = context.Imobile.FirstOrDefault(x => x.Parcele.Any(y => y.Index == indexImobil));
+            imobil = await context.Imobile.FirstOrDefaultAsync(x => x.Parcele.Any(y => y.Index == indexImobil));
 
             if (imobil == null)
             {
                 return result.ToArray();
             }
 
-            context.Set<UAT>().Load();
-            context.Set<Localitate>().Load();
-            context.Set<Judet>().Load();
+            await context.Entry(imobil).Reference(x => x.Adresa).LoadAsync();
 
-            context.Entry(imobil).Reference(x => x.Adresa).Load();
+            await context.Entry(imobil.Adresa).Reference(x => x.UAT).LoadAsync();
+            await context.Entry(imobil.Adresa).Reference(x => x.Localitate).LoadAsync();
 
-            context.Entry(imobil.Adresa).Reference(x => x.UAT).Load();
-            context.Entry(imobil.Adresa).Reference(x => x.Localitate).Load();
+            await context.Entry(imobil).Collection(x => x.Parcele).LoadAsync();
+            await context.Entry(imobil.Parcele.FirstOrDefault()).Reference(x => x.Tarla).LoadAsync();
 
-            context.Entry(imobil).Collection(x => x.Parcele).Load();
-            context.Entry(imobil.Parcele.FirstOrDefault()).Reference(x => x.Tarla).Load();
+            await context.Entry(imobil).Collection(x => x.InscrieriDetaliu).LoadAsync();
 
-            context.Entry(imobil).Collection(x => x.InscrieriDetaliu).Load();
-
+            //Parallel.ForEach(imobil.InscrieriDetaliu, async iD =>
             foreach (var iD in imobil.InscrieriDetaliu)
             {
-                context.Entry(iD).Reference(x => x.ModDobandire).Load();
-                context.Entry(iD).Reference(x => x.TipDrept).Load();
-                context.Entry(iD).Reference(x => x.TipInscriere).Load();
 
-                context.Entry(iD).Collection(x => x.InscrieriActe).Load();
-                context.Entry(iD).Collection(x => x.InscrieriImobile).Load();
-                context.Entry(iD).Collection(x => x.InscrieriProprietari).Load();
+                //await context.Entry(iD).Reference(x => x.ModDobandire).LoadAsync();
+                //await context.Entry(iD).Reference(x => x.TipDrept).LoadAsync();
+                //await context.Entry(iD).Reference(x => x.TipInscriere).LoadAsync();
+                //await context.Entry(iD).Collection(x => x.InscrieriActe).LoadAsync();
+                //await context.Entry(iD).Collection(x => x.InscrieriImobile).LoadAsync();
+                //await context.Entry(iD).Collection(x => x.InscrieriProprietari).LoadAsync();
+
+                Task.WaitAll(
+                context.Entry(iD).Reference(x => x.ModDobandire).LoadAsync(),
+                context.Entry(iD).Reference(x => x.TipDrept).LoadAsync(),
+                context.Entry(iD).Reference(x => x.TipInscriere).LoadAsync(),
+                context.Entry(iD).Collection(x => x.InscrieriActe).LoadAsync(),
+                context.Entry(iD).Collection(x => x.InscrieriImobile).LoadAsync(),
+                context.Entry(iD).Collection(x => x.InscrieriProprietari).LoadAsync());
 
                 foreach (var ia in iD.InscrieriActe)
                 {
-                    context.Entry(ia).Reference(x => x.ActProprietate).Load();
+                    await context.Entry(ia).Reference(x => x.ActProprietate).LoadAsync();
                     if (ia.ActProprietate != null)
                     {
-                        context.Entry(ia.ActProprietate).Reference(x => x.TipActProprietate).Load();
+                        await context.Entry(ia.ActProprietate).Reference(x => x.TipActProprietate).LoadAsync();
                     }
                 }
 
+                //Parallel.ForEach(iD.InscrieriProprietari, async ip =>
                 foreach (var ip in iD.InscrieriProprietari)
                 {
-                    context.Entry(ip).Reference(x => x.Proprietar).Load();
-                }
+                    await context.Entry(ip).Reference(x => x.Proprietar).LoadAsync();
+                };//);
 
+                //Parallel.ForEach(iD.InscrieriImobile, async ii =>
                 foreach (var ii in iD.InscrieriImobile)
                 {
-                    context.Entry(ii).Reference(x => x.Imobil).Load();
-                }
-            }
+                    await context.Entry(ii).Reference(x => x.Imobil).LoadAsync();
+                };//);
+            };//);
 
             result.AddRange(ExportPozitia(imobil));
 
@@ -93,7 +106,7 @@ namespace CS.CadGen
             for (int i = proprietari.Count - 1; i >= 0; i--)
             {
                 var p = proprietari[i];
-                var adrEntity = context.Adrese.Include(x => x.UAT).Include(x => x.Localitate).FirstOrDefault(x => x.Id == p.AdresaId);
+                //var adrEntity = await context.Adrese.Include(x => x.UAT).Include(x => x.Localitate).FirstOrDefaultAsync(x => x.Id == p.AdresaId);
 
                 var adresa = "$";
                 if (p.Adresa.UAT == null && p.Adresa.Localitate == null)
@@ -146,6 +159,37 @@ namespace CS.CadGen
             result.AddRange(ExportImobil(imobil, nrCadGeneral, sector, nrCadastral));
 
             result.Add(ExportCoordonate(coords));
+
+
+            //lock (locker)
+
+                //while (context.ChangeTracker.Entries().Any())
+                //{
+                //    var entry = context.ChangeTracker.Entries().FirstOrDefault();
+
+                //    if(entry!=null)
+                //    switch (entry.State)
+                //    {
+                //        // Under the covers, changing the state of an entity from  
+                //        // Modified to Unchanged first sets the values of all  
+                //        // properties to the original values that were read from  
+                //        // the database when it was queried, and then marks the  
+                //        // entity as Unchanged. This will also reject changes to  
+                //        // FK relationships since the original value of the FK  
+                //        // will be restored. 
+                //        case EntityState.Modified:
+                //            entry.State = EntityState.Unchanged;
+                //            break;
+                //        case EntityState.Added:
+                //            entry.State = EntityState.Detached;
+                //            break;
+                //        // If the EntityState is the Deleted, reload the date from the database.   
+                //        case EntityState.Deleted:
+                //            entry.Reload();
+                //            break;
+                //        default: break;
+                //    }
+                //}
 
             return result.ToArray();
         }

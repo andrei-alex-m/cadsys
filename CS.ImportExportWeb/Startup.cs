@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Caly.Dropbox;
 using CS.CadGen;
 using CS.EF;
 using CS.Services;
@@ -42,17 +43,15 @@ namespace CS.ImportExportWeb
 
             services.AddTransient<IExcelConfigurationRepo>(s => new ExcelConfigurationRepo(Environment.ContentRootPath));
 
-            services.AddTransient<IDXFRepo>(s => new DXFRepo(Environment.ContentRootPath));
+            services.AddSingleton(s => new ServiceBuilder(Environment.ContentRootPath));
 
-            services.AddSingleton<IServiceBuilder, ServiceBuilder>();
+            services.AddSingleton(s => new DropBoxBase());
 
             services.AddDbContext<CadSysContext>(options => options.UseMySql(connectionString));
 
             services.AddTransient<IRepo, Repo>();
 
             services.AddTransient<IExporter, Exporter>();
-
-
 
             services.Configure<CookiePolicyOptions>(options =>
             {

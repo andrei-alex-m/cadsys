@@ -17,6 +17,7 @@
     <ProjectReference Include="..\CS.DXF\CS.DXF.csproj" />
     <ProjectReference Include="..\CS.Templating\CS.Templating.csproj" />
     <ProjectReference Include="..\Caly.Common\Caly.Common.csproj" />
+    <ProjectReference Include="..\Caly.Dropbox\Caly.Dropbox.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Dictionary.xml">

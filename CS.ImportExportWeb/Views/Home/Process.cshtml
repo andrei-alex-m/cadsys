@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ProcessViewModel
+@{
+    ViewData["Title"] = "Procesare";
+}
+<h2>Excels</h2>
+<div style="display:table">
+@foreach (var f in Model.ExcelFiles)
+{
+    <div style="display:table-row">
+        <div style="display:table-cell">@Html.LabelFor(x => x)</div>
+        @if (Model.ShowValidation)
+        {
+            <div style="display:table-cell">
+                <button class="validator processor" value="Valideaza" onclick="location.href='@Url.Action("ValidateExcel", "Process", f)'" />
+            </div>
+        }
+    </div>
+}
+</div>
+
+<button class="processor" value="Importa Excelurile in Baza" onclick="location.href='@Url.Action("ProcessAllExcels", "Process")'" />
+
+<h2>DXFs</h2>
+
+<div style="display:table">
+@foreach(var f in Model.DXFFiles)
+{
+    <div style="display:table-row">
+        <div style="display:table-cell">@Html.LabelFor(x => x)</div>
+        @if (Model.ShowProcess)
+        {
+            <div style="display:table-cell">
+                <button class="processor" value="Injecteaza date CadGen" onclick="location.href='@Url.Action("ProcessDXF", "Process", f)'" />
+            </div>
+        }
+    </div>
+}
+</div>
+
+
+

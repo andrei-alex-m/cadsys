@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using CS.EF;
-using CS.Excel;
 using CS.CadGen;
-using CS.DXF;
 using CS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using CS.ImportExportWeb.Models;
 using Microsoft.AspNetCore.SignalR;
 using CS.ImportExportWeb.Hubs;
+using CS.Services;
 
 namespace CS.ImportExportWeb.Controllers
 {
@@ -19,17 +15,15 @@ namespace CS.ImportExportWeb.Controllers
     {
         CadSysContext context;
         IExcelConfigurationRepo excelConfiguration;
-        IDXFRepo dXFRepo;
-        IServiceBuilder serviceBuilder;
+        IFileRepo dXFRepo;
         IExporter cadGenExporter;
         IHubContext<MessagesHub> hubContext;
 
-        public ExportController(CadSysContext _context, IExcelConfigurationRepo _excelConfiguration, IServiceBuilder _serviceBuilder, IDXFRepo _dxfRepo, IExporter _cadGenExporter, IHubContext<MessagesHub> _hubContext)
+        public ExportController(CadSysContext _context, IExcelConfigurationRepo _excelConfiguration, ServiceBuilder _serviceBuilder, IExporter _cadGenExporter, IHubContext<MessagesHub> _hubContext)
         {
             context = _context;
             excelConfiguration = _excelConfiguration;
-            serviceBuilder = _serviceBuilder;
-            dXFRepo = _dxfRepo;
+            dXFRepo = (IFileRepo)_serviceBuilder.GetService("DXFRepo");
             cadGenExporter = _cadGenExporter;
             hubContext = _hubContext;
 

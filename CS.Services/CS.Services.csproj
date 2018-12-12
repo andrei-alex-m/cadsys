@@ -17,4 +17,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Interfaces\IServiceBuilder.cs" />
+  </ItemGroup>
 </Project>

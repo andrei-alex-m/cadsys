@@ -4,6 +4,7 @@ using Xunit;
 using CS.DXF;
 using CS.Templating;
 using Caly.Common;
+using Caly.Dropbox;
 
 namespace CS.Tests
 {
@@ -47,6 +48,11 @@ namespace CS.Tests
                 return leaf.Match(find, splitters);
             }
         }
-
+        [Fact]
+        public void DropboxTest()
+        {
+            var db = new Caly.Dropbox.DropBoxBase();
+            db.List("/CadGen");
+        }
     }
 }

@@ -6,17 +6,32 @@ using CS.Services.Interfaces;
 
 namespace CS.Services
 {
-    public class ServiceBuilder : IServiceBuilder
+    public class ServiceBuilder
     {
-        static readonly IMatchProcessor adresaMatchProcessor = new adresaMatchProcessor();
 
-        static readonly IMatcher adresaMatcher = new Matcher(SarateniInit);
+        readonly IMatchProcessor adresaMatchProcessor = new adresaMatchProcessor();
 
-        static readonly IAddressParser addressParser = new AddressParser();
+        readonly IMatcher adresaMatcher;
 
-        static readonly IMatchProcessor combosIndexMatchProcessor = new combosIndexMatchProcessor();
+        readonly IAddressParser addressParser;
 
-        static readonly IMatcher combosIndexMatcher = new Matcher(CadGenCombosInit);
+        readonly IMatchProcessor combosIndexMatchProcessor;
+
+        readonly IMatcher combosIndexMatcher;
+
+        readonly FileRepo DXFRepo;
+
+        readonly FileRepo ExcelRepo;
+
+        public ServiceBuilder(string contentRootPath)
+        {
+            adresaMatcher = new Matcher(SarateniInit);
+            addressParser = new AddressParser();
+            combosIndexMatchProcessor = new combosIndexMatchProcessor();
+            combosIndexMatcher = new Matcher(CadGenCombosInit);
+            DXFRepo = new FileRepo(contentRootPath, "DXF", "*.dxf");
+            ExcelRepo = new FileRepo(contentRootPath, "Excel", "*.xls");
+        }
 
         public object GetService(string serviceName, params string[] parameters)
         {
@@ -33,6 +48,10 @@ namespace CS.Services
                     return combosIndexMatcher;
                 case "CombosIndexMatchProcessor":
                     return combosIndexMatchProcessor;
+                case "DXFRepo":
+                    return DXFRepo;
+                case "ExcelRepo":
+                    return ExcelRepo;
                 default:
                     throw new ArgumentException("Service Name Not Found!");
 
@@ -44,7 +63,7 @@ namespace CS.Services
         /// </summary>
         /// <returns>The adresa matcher.</returns>
         /// <param name="parameters">Parameters.</param> Derive by User prefs later
-        static IMatcher GetAdresaMatcher(params string[] parameters)
+        IMatcher GetAdresaMatcher(params string[] parameters)
         {
             return adresaMatcher;
         }
@@ -55,17 +74,17 @@ namespace CS.Services
         /// </summary>
         /// <returns>The match processor.</returns>
         /// <param name="parameters">Parameters.</param> Derive by User prefs later
-        static IMatchProcessor GetAdresaMatchProcessor(params string[] parameters)
+        IMatchProcessor GetAdresaMatchProcessor(params string[] parameters)
         {
             return adresaMatchProcessor;
         }
 
-        static IMatcher GetCombosIndexMatcher(params string[] parameters)
+        IMatcher GetCombosIndexMatcher(params string[] parameters)
         {
             return combosIndexMatcher;
         }
 
-        static IMatchProcessor GetCombosIndexMatchProcessor(params string[] parameters)
+        IMatchProcessor GetCombosIndexMatchProcessor(params string[] parameters)
         {
             return combosIndexMatchProcessor;
         }
@@ -74,7 +93,7 @@ namespace CS.Services
         /// <summary>
         /// Maybe load from config later
         /// </summary>
-        public static void SarateniInit(Matcher matcher)
+        public void SarateniInit(Matcher matcher)
         {
             Dictionary<string, string> streetTypeAbreviations = new Dictionary<string, string>()
             {
@@ -127,7 +146,7 @@ namespace CS.Services
             aptNode.AddChild("Apt,Ap,Apartament");
         }
 
-        public static void CadGenCombosInit(Matcher matcher)
+        public void CadGenCombosInit(Matcher matcher)
         {
             matcher.Root = new TreeNode<Classification, string>(new Classification() { Name = "root", Order = 0 });
 

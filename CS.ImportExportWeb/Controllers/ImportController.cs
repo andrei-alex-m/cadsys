@@ -14,6 +14,7 @@ using System.Linq;
 using System.Collections.Concurrent;
 using Microsoft.EntityFrameworkCore;
 using Caly.Common;
+using CS.Services;
 
 namespace CS.ImportExportAPI.Controllers
 {
@@ -22,18 +23,16 @@ namespace CS.ImportExportAPI.Controllers
         CadSysContext context;
         IExcelConfigurationRepo excelConfiguration;
         IRepo repo;
-        IDXFRepo dXFRepo;
-        IServiceBuilder serviceBuilder;
+        IFileRepo dXFRepo;
+        ServiceBuilder serviceBuilder;
 
-
-        public ImportController(CadSysContext _context, IRepo _repo, IExcelConfigurationRepo _excelConfiguration, IDXFRepo _dXFRepo, IServiceBuilder _serviceBuilder)
+        public ImportController(CadSysContext _context, IRepo _repo, IExcelConfigurationRepo _excelConfiguration, ServiceBuilder _serviceBuilder)
         {
             context = _context;
             repo = _repo;
             excelConfiguration = _excelConfiguration;
             serviceBuilder = _serviceBuilder;
-            dXFRepo = _dXFRepo;
-
+            dXFRepo = (IFileRepo)serviceBuilder.GetService("DXFRepo");
         }
 
         [HttpPost]
@@ -64,6 +63,8 @@ namespace CS.ImportExportAPI.Controllers
 
             return Ok("Mai baga 0 fisa");
         }
+
+
 
         async Task CycleExcels(IEnumerable<IFormFile> fileCollection)
         {
