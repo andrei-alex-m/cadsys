@@ -93,6 +93,13 @@ namespace CS.ImportExportWeb.Controllers
                 return File(stream.ToArray(), System.Net.Mime.MediaTypeNames.Application.Octet, file.Display);
             }
 
+            if(file.ClassName.Contains("pdf", StringComparison.InvariantCultureIgnoreCase))
+            {
+
+
+                return Ok();
+            }
+
             return new NotFoundResult();
 
         }
