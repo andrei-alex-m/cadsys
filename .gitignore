@@ -331,3 +331,6 @@ ASALocalRun/
 
 # Mac shit
 .DS_Store
+*.pdf
+*.dxf
+*.jpg

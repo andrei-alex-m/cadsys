@@ -1,17 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0"><IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+<PrivateAssets>all</PrivateAssets>
+</PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.0.0-rc1.19477.21" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CS.Data\CS.Data.csproj" />
@@ -65,6 +67,10 @@
     <Compile Remove="Migrations\20181118175812_Initial.cs" />
     <Compile Remove="Migrations\20181118175943_Initial.cs" />
     <Compile Remove="Migrations\20181119203716_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20181203112049_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20181203112049_Initial.cs" />
+    <Compile Remove="Migrations\20190122053800_Initial.cs" />
+    <Compile Remove="Migrations\20190206062239_Initial.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EntitiesValidators\" />

@@ -15,6 +15,11 @@
         {
             <li>
                 <input type="button" value="@f.Display" onclick="location.href='@Url.Action("GetFile", "Export", f )'" />
+                @if (f.ClassName.Contains("dxf"))
+                {
+                    <input type="button" value="Importa in baza NrCadGeneral" onclick="location.href='@Url.Action("ImportNrCadGen", "Export", f )'" />
+                }
+
             </li>
         }
     </ul>

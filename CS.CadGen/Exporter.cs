@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Text;
-using CS.Data.Entities;
-using Caly.Common;
 using System.Collections.Generic;
 using System.Linq;
-using CS.EF;
-using CS.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using CS.Services;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Caly.Common;
+using CS.Data.Entities;
+using CS.EF;
+using CS.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace CS.CadGen
 {
@@ -19,17 +17,17 @@ namespace CS.CadGen
         readonly IMatcher comboMatcher;
         readonly IMatchProcessor comboMatchProcessor;
 
-        public Exporter(CadSysContext _context, ServiceBuilder serviceBuilder)
+        public Exporter(ServiceBuilder serviceBuilder, CadSysContext _context)
         {
             context = _context;
             comboMatcher = (IMatcher)serviceBuilder.GetService("CombosIndexMatcher");
             comboMatchProcessor = (IMatchProcessor)serviceBuilder.GetService("CombosIndexMatchProcessor");
 
-            Task.WaitAll(
-            context.Set<UAT>().LoadAsync(),
-            context.Set<Localitate>().LoadAsync(),
-            context.Set<Judet>().LoadAsync()
-            );
+
+            context.Set<UAT>().Load();
+            context.Set<Localitate>().Load();
+            context.Set<Judet>().Load();
+    
 
             context.ChangeTracker.AutoDetectChangesEnabled = false;
 
@@ -37,11 +35,12 @@ namespace CS.CadGen
 
         public async Task<string[]> Export(int indexImobil, IEnumerable<Point> coords, double suprafata, string nrCadGeneral, string sector, string nrCadastral)
         {
+ 
             var result = new List<string>();
             Imobil imobil;
             object locker = new object();
 
-            imobil = await context.Imobile.FirstOrDefaultAsync(x => x.Parcele.Any(y => y.Index == indexImobil));
+            imobil = context.Imobile.FirstOrDefault(x => x.Parcele.Any(y => y.Index == indexImobil));
 
             if (imobil == null)
             {
@@ -50,54 +49,49 @@ namespace CS.CadGen
 
             await context.Entry(imobil).Reference(x => x.Adresa).LoadAsync();
 
-            await context.Entry(imobil.Adresa).Reference(x => x.UAT).LoadAsync();
-            await context.Entry(imobil.Adresa).Reference(x => x.Localitate).LoadAsync();
 
-            await context.Entry(imobil).Collection(x => x.Parcele).LoadAsync();
-            await context.Entry(imobil.Parcele.FirstOrDefault()).Reference(x => x.Tarla).LoadAsync();
-
-            await context.Entry(imobil).Collection(x => x.InscrieriDetaliu).LoadAsync();
-
-            //Parallel.ForEach(imobil.InscrieriDetaliu, async iD =>
+            //Task.WaitAll(
+            context.Entry(imobil.Adresa).Reference(x => x.UAT).Load();
+            context.Entry(imobil.Adresa).Reference(x => x.Localitate).Load();
+            context.Entry(imobil).Collection(x => x.Parcele).Load();
+            context.Entry(imobil.Parcele.FirstOrDefault()).Reference(x => x.Tarla).Load();
+            context.Entry(imobil).Collection(x => x.InscrieriDetaliu).Load();
+            //);
+            //Parallel.ForEach(imobil.InscrieriDetaliu.ToList(), iD =>
             foreach (var iD in imobil.InscrieriDetaliu)
+            //Parallel.For(0, imobil.InscrieriDetaliu.Count, i=>
             {
+                //var iD = imobil.InscrieriDetaliu.ElementAt(i);
+                //Task.WaitAll(
+                context.Entry(iD).Reference(x => x.ModDobandire).Load();
+                context.Entry(iD).Reference(x => x.TipDrept).Load();
+                context.Entry(iD).Reference(x => x.TipInscriere).Load();
+                context.Entry(iD).Collection(x => x.InscrieriActe).Load();
+                context.Entry(iD).Collection(x => x.InscrieriImobile).Load();
+                context.Entry(iD).Collection(x => x.InscrieriProprietari).Load();
+                //);
 
-                //await context.Entry(iD).Reference(x => x.ModDobandire).LoadAsync();
-                //await context.Entry(iD).Reference(x => x.TipDrept).LoadAsync();
-                //await context.Entry(iD).Reference(x => x.TipInscriere).LoadAsync();
-                //await context.Entry(iD).Collection(x => x.InscrieriActe).LoadAsync();
-                //await context.Entry(iD).Collection(x => x.InscrieriImobile).LoadAsync();
-                //await context.Entry(iD).Collection(x => x.InscrieriProprietari).LoadAsync();
-
-                Task.WaitAll(
-                context.Entry(iD).Reference(x => x.ModDobandire).LoadAsync(),
-                context.Entry(iD).Reference(x => x.TipDrept).LoadAsync(),
-                context.Entry(iD).Reference(x => x.TipInscriere).LoadAsync(),
-                context.Entry(iD).Collection(x => x.InscrieriActe).LoadAsync(),
-                context.Entry(iD).Collection(x => x.InscrieriImobile).LoadAsync(),
-                context.Entry(iD).Collection(x => x.InscrieriProprietari).LoadAsync());
-
-                foreach (var ia in iD.InscrieriActe)
+                foreach (var ia in iD.InscrieriActe.ToList())
                 {
-                    await context.Entry(ia).Reference(x => x.ActProprietate).LoadAsync();
+                    context.Entry(ia).Reference(x => x.ActProprietate).Load();
                     if (ia.ActProprietate != null)
                     {
-                        await context.Entry(ia.ActProprietate).Reference(x => x.TipActProprietate).LoadAsync();
+                        context.Entry(ia.ActProprietate).Reference(x => x.TipActProprietate).Load();
                     }
                 }
 
                 //Parallel.ForEach(iD.InscrieriProprietari, async ip =>
                 foreach (var ip in iD.InscrieriProprietari)
                 {
-                    await context.Entry(ip).Reference(x => x.Proprietar).LoadAsync();
+                    context.Entry(ip).Reference(x => x.Proprietar).Load();
                 };//);
 
                 //Parallel.ForEach(iD.InscrieriImobile, async ii =>
                 foreach (var ii in iD.InscrieriImobile)
                 {
-                    await context.Entry(ii).Reference(x => x.Imobil).LoadAsync();
+                    context.Entry(ii).Reference(x => x.Imobil).Load();
                 };//);
-            };//);
+            }//);
 
             result.AddRange(ExportPozitia(imobil));
 
@@ -158,38 +152,13 @@ namespace CS.CadGen
             result.Add("#02#" + ExportAdresa(imobil.Adresa, comboMatcher, comboMatchProcessor)/*+"0|"*/);//extravilan
             result.AddRange(ExportImobil(imobil, nrCadGeneral, sector, nrCadastral));
 
-            result.Add(ExportCoordonate(coords));
+            var coordExport = ExportCoordonate(coords).ToList();
+            coordExport.Reverse();
 
-
-            //lock (locker)
-
-                //while (context.ChangeTracker.Entries().Any())
-                //{
-                //    var entry = context.ChangeTracker.Entries().FirstOrDefault();
-
-                //    if(entry!=null)
-                //    switch (entry.State)
-                //    {
-                //        // Under the covers, changing the state of an entity from  
-                //        // Modified to Unchanged first sets the values of all  
-                //        // properties to the original values that were read from  
-                //        // the database when it was queried, and then marks the  
-                //        // entity as Unchanged. This will also reject changes to  
-                //        // FK relationships since the original value of the FK  
-                //        // will be restored. 
-                //        case EntityState.Modified:
-                //            entry.State = EntityState.Unchanged;
-                //            break;
-                //        case EntityState.Added:
-                //            entry.State = EntityState.Detached;
-                //            break;
-                //        // If the EntityState is the Deleted, reload the date from the database.   
-                //        case EntityState.Deleted:
-                //            entry.Reload();
-                //            break;
-                //        default: break;
-                //    }
-                //}
+            coordExport.ForEach(x =>
+            {
+                result.Add($"#00#{x}");
+            });
 
             return result.ToArray();
         }
@@ -222,7 +191,7 @@ namespace CS.CadGen
 
             var observatii = imobil.Observatii;
 
-            if (parcela.Tarla.Diminuata && parcela.Suprafata.HasValue)
+            if (parcela.Tarla != null && parcela.Tarla.Diminuata && parcela.Suprafata.HasValue)
             {
                 observatii = $"Suprafata din act: {parcela.Suprafata.Value} mp. {observatii}";
             }
@@ -241,7 +210,7 @@ namespace CS.CadGen
             builder.Append(nrCad).Append('|');
             builder.Append(imobil.NumarCarteFunciara).Append('|');
             builder.Append('1').Append('|'); //neimprejmuit
-            builder.Append(parcela.Tarla.Diminuata ? 1 : 0).Append('|'); //suprafatadiminuata
+            builder.Append(parcela.Tarla != null && parcela.Tarla.Diminuata ? 1 : 0).Append('|'); //suprafatadiminuata
             builder.Append(imobil.NumarTopografic).Append('|');
             //adresa
             result.Add(builder.ToString());
@@ -390,11 +359,11 @@ namespace CS.CadGen
             builder.Append(1).Append('|');//numarul parcelei in imobil
             builder.Append(Math.Round(suprafata, 0)).Append('|');
             builder.Append(0).Append('|');//intravilan
-            builder.Append(parcela.CatFol == 0 ? 1 : 14).Append('|');//0 Arabil, restul Vie
+            builder.Append((int)parcela.CatFol).Append('|');//0 Arabil, restul Vie
             builder.Append('|');//valoare impozitare
             builder.Append(parcela.NumarTitlu).Append('|');
-            builder.Append(parcela.Tarla?.Denumire).Append('|');
-            builder.Append(parcela.Denumire).Append('|');
+            builder.Append(parcela.Tarla != null ? parcela.Tarla.Denumire.ReplaceMultiple('/', '.', ',') : "-").Append('|');
+            builder.Append(parcela.Denumire.ReplaceMultiple('/', '.', ',', '_')).Append('|');
             builder.Append('|'); // nr topografic
             //builder.Append('|');//mentiuni
             return builder.ToString();
@@ -452,15 +421,18 @@ namespace CS.CadGen
                     break;
             }
 
-            if (inscriereD.TipInscriere.Denumire == "NOTATION")
-            {
-                inscriereD.TipDrept = null;
-                inscriereD.ModDobandire = null;
-                inscriereD.Cota = string.Empty;
-                inscriereD.Moneda = string.Empty;
-                inscriereD.Valoarea = string.Empty;
-                inscriereD.DetaliiDrept = string.Empty;
-            }
+
+            //moved to importer
+            //if (inscriereD.TipInscriere.Denumire == "NOTATION")
+            //{
+            //    inscriereD.TipDrept = null;
+            //    inscriereD.ModDobandire = null;
+            //    inscriereD.Cota = string.Empty;
+            //    inscriereD.Moneda = string.Empty;
+            //    inscriereD.Valoarea = string.Empty;
+            //    inscriereD.DetaliiDrept = string.Empty;
+            //}
+
 
             builder1.Append(inscriereD.TipInscriere?.Descriere).Append(' ', 6);
 
@@ -564,14 +536,20 @@ namespace CS.CadGen
             };
         }
 
-        static string ExportCoordonate(IEnumerable<Point> points)
+        static IEnumerable<string> ExportCoordonate(IEnumerable<Point> points)
         {
-            var result = new StringBuilder("#00#");
+            var result = new StringBuilder();
             foreach (var p in points)
             {
                 result.Append(p.X.ToString("0.000")).Append('_').Append(p.Y.ToString("0.000")).Append('|');
+                if (result.Length > 215)
+                {
+                    yield return result.ToString();
+                    result.Clear();
+                }
             }
-            return result.ToString();
+            yield return result.ToString();
+
         }
     }
 }

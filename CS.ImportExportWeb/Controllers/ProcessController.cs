@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Caly.Dropbox;
 using CS.EF;
 using CS.ImportExportWeb.Models;
@@ -44,7 +43,7 @@ namespace CS.ImportExportWeb.Controllers
             pvm.ExcelFiles = dropBox.ListFolder(excelIn, false, true, ".xls");
             pvm.DXFFiles = dropBox.ListFolder(excelIn, false, true, ".dxf");
 
-            return View(pvm);
+            return View("~/Views/Home/Process.cshtml", pvm);
         }
 
         public IActionResult ProcessAllExcels()

@@ -1,16 +1,14 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
-using CS.Data.DTO.DXF;
+using System.Threading;
+using System.Threading.Tasks;
+using CS.CadGen;
 using netDxf;
 using netDxf.Entities;
-using CS.CadGen;
-using Caly.Common;
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
 using netDxf.Tables;
-using System.Threading;
 
 namespace CS.DXF
 {
@@ -22,40 +20,54 @@ namespace CS.DXF
         public Text nrCadastral { get; set; }
     }
 
+    public struct matchStrings
+    {
+        public int index { get; set; }
+        public string nrCadGeneral { get; set; }
+        public string nrCadastral { get; set; }
+        public string sector { get; set; }
+    }
+
     public static class Exporter
     {
+
 
         //needs to go to cadgen exporter with a list of polylines and attributes
         public static MemoryStream Get(string fileName, IExporter cadGenExporter, Action<string> action)
         {
             bool isBinary;
             var ver = DxfDocument.CheckDxfFileVersion(fileName, out isBinary);
+
+
             DxfDocument doc  = DxfDocument.Load(fileName);
+            
             var docSector = doc.Texts.FirstOrDefault(x => string.Equals(x.Layer.Name, "Sector", StringComparison.InvariantCultureIgnoreCase));
 
             var polys = GetPolys(doc);
 
             var i = 0;
             var c = polys.Count();
-            Parallel.ForEach(polys, p =>
-            //foreach (var p in polys)
+            //Parallel.ForEach(polys, p =>
+            foreach (var p in polys)
             {
                 var cI=Interlocked.Increment(ref i);
 
                 action($"Export DXF: {cI} / {c}; index:{p.index.Value}");
 
-                var points = p.poly.ToPoints();
-                var area = VectorExtensions.Area(points);
+                
 
                 //CF - INDEX
                 int index;
                 if (int.TryParse(p.index.Value.Trim(), out index))
                 {
+                    var points = p.poly.ToPoints();
+                    var area = VectorExtensions.Area(points);
+                    p.poly.XData.Clear();
                     var cg = cadGenExporter.Export(index, points, area, p.nrCadGeneral?.Value, docSector?.Value, p.nrCadastral?.Value).Result;
 
                     if (cg.Length > 0)
                     {
-                        p.poly.XData.Clear();
+
                         var xD = new XData(new ApplicationRegistry("TOPO"));
                         xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString, "{"));
                         foreach (var line in cg)
@@ -67,14 +79,34 @@ namespace CS.DXF
                         xD.XDataRecord.Add(new XDataRecord(XDataCode.ControlString, "}"));
                         p.poly.XData.Add(xD);
                     }
+
                 }
 
-            });
+            }//);
 
             var stream = new MemoryStream();
-            doc.Save(stream);
-            stream.Position = 0;
+            doc.Save(stream,isBinary);
+            stream.Seek(0,SeekOrigin.Begin);
             return stream;
+        }
+
+        public static IEnumerable<matchStrings> GetPolys(string fileName)
+        {
+
+            DxfDocument doc = DxfDocument.Load(fileName);
+            var docSector = doc.Texts.FirstOrDefault(x => string.Equals(x.Layer.Name, "Sector", StringComparison.InvariantCultureIgnoreCase));
+
+            var polys = GetPolys(doc);
+            int index;
+
+            foreach (var x in polys)
+            {
+                if (int.TryParse(x.index.Value.Trim(), out index))
+                {
+                    yield return new matchStrings() { index = index, nrCadastral = x.nrCadastral?.Value, nrCadGeneral = x.nrCadGeneral?.Value, sector = docSector?.Value };
+                }
+
+            }
         }
 
         static IEnumerable<match> GetPolys(DxfDocument doc)

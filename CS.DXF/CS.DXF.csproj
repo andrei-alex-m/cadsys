@@ -1,11 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
     <PropertyGroup>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <IntermediateOutputPath></IntermediateOutputPath>
+      <RunWithWarnings>true</RunWithWarnings>
+    </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="netDXF.Standard" Version="2.1.1" />
   </ItemGroup>

@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model PDFViewModel
+@{
+    ViewData["Title"] = "Procesare";
+}
+<div style="display:table">
+    @using (Html.BeginForm("Generate","PDF", FormMethod.Post))
+    {
+        <div style="display:table-row">
+            <div style="display:table-cell">@Html.LabelFor(m => m.ActeIdentitateDirectory)</div>
+            <div style="display:table-cell">@Html.EditorFor(m => m.ActeIdentitateDirectory, new { htmlAttributes = new { style = "Width:400px" } })</div>
+        </div>
+        <div style="display:table-row">
+            <div style="display:table-cell">@Html.LabelFor(m => m.ActeProprietateDirectory)</div>
+            <div style="display:table-cell">@Html.EditorFor(m => m.ActeProprietateDirectory, new { htmlAttributes = new { style = "Width:400px" } })</div>
+        </div>
+        <div style="display:table-row">
+            <div style="display:table-cell">@Html.LabelFor(m => m.FiseDirectory)</div>
+            <div style="display:table-cell">@Html.EditorFor(m => m.FiseDirectory, new { htmlAttributes = new { style = "Width:400px" } })</div>
+        </div>
+        <div style="display:table-row">
+            <div style="display:table-cell">@Html.LabelFor(m => m.OutputDirectory)</div>
+            <div style="display:table-cell">@Html.EditorFor(m => m.OutputDirectory, new { htmlAttributes = new { style = "Width:400px" } })</div>
+        </div>
+        <div style="display:table-row"><input type="submit" value="Generate" /></div>
+    }
+    </div>

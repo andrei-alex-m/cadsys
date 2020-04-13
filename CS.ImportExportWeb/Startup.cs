@@ -17,26 +17,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace CS.ImportExportWeb
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IHostEnvironment environment)
         {
             Configuration = configuration;
             Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
-        public IHostingEnvironment Environment { get; }
+        public IHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{Environment.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables()
                 .Build();
             
             var connectionString = configuration.GetConnectionString("con");
@@ -47,7 +50,7 @@ namespace CS.ImportExportWeb
 
             services.AddSingleton(s => new DropBoxBase());
 
-            services.AddDbContext<CadSysContext>(options => options.UseMySql(connectionString));
+            services.AddDbContext<CadSysContext>(options => options.UseMySql(connectionString), ServiceLifetime.Transient);
 
             services.AddTransient<IRepo, Repo>();
 
@@ -61,17 +64,17 @@ namespace CS.ImportExportWeb
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                     .AddJsonOptions(opt =>
                         {
-                            opt.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                            opt.JsonSerializerOptions.IgnoreNullValues = true;
                         });
             services.AddSignalR();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -86,18 +89,20 @@ namespace CS.ImportExportWeb
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseRouting();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoint =>
             {
-                routes.MapRoute(
+                endpoint.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoint.MapHub<MessagesHub>("/messageshub");
             });
 
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<MessagesHub>("/messageshub");
-            });
+            //app.UseSignalR(routes =>
+            //{
+            //    routes.MapHub<MessagesHub>("/messageshub");
+            //});
 
 
         }

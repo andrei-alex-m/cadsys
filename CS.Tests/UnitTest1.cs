@@ -1,10 +1,13 @@
-using System;
 using System.Collections.Generic;
 using Xunit;
 using CS.DXF;
 using CS.Templating;
 using Caly.Common;
-using Caly.Dropbox;
+using CS.EF;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using CS.ImportExportAPI.Controllers;
 
 namespace CS.Tests
 {
@@ -34,8 +37,8 @@ namespace CS.Tests
             blvd.AddChild("Blvd,Bulevard,Bulevardul,Blv");
 
             var res = matcher.Match(new List<Classification>() { new Classification() { Name = "root", Order = 0 }/*, new Classification() { Name = "Address", Order = 1 }*/ }, "Blv", new MatchMaker());
-
         }
+
 
         public class MatchMaker : IMatchProcessor
         {
@@ -48,11 +51,42 @@ namespace CS.Tests
                 return leaf.Match(find, splitters);
             }
         }
+
         [Fact]
         public void DropboxTest()
         {
             var db = new Caly.Dropbox.DropBoxBase();
-            db.List("/CadGen");
+            //var k = db.ListFolder("");
+            //var z = db.FolderExists("");
+
+            var q = db.DBClient.Files.ListFolderAsync("").Result;
+
+        }
+        [Fact]
+        public void PdfExportTest()
+        {
+
+        }
+
+        [Fact]
+        public void postExcelTest()
+        {
+
+
+            var dbContextBuilder = new DbContextOptionsBuilder<CadSysContext>()
+    .EnableSensitiveDataLogging();
+
+            var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+            var connectionString = configuration.GetConnectionString("con");
+
+            dbContextBuilder.UseMySql(connectionString);
+            CadSysContext context = new CadSysContext(dbContextBuilder.Options);
+
+            ImportController.CyclePostExcel(context);
         }
     }
 }

@@ -1,23 +1,16 @@
 ﻿using System;
-
-using Dropbox.Api;
-using Dropbox.Api.Files;
-
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using Dropbox.Api;
+using Dropbox.Api.Files;
 
 namespace Caly.Dropbox
 {
     public class DropBoxBase
     {
-        #region Variables  
-        private DropboxClient DBClient;
-        #endregion
+        public DropboxClient DBClient;
 
         #region Constructor  
         public DropBoxBase()
@@ -37,8 +30,7 @@ namespace Caly.Dropbox
         #region Properties  
         public string AppName => "CadGen";
 
-
-        public string AccessToken => "p5L439MIDIkAAAAAAAAHD-_eE6ucNeU6dICc7EHCVnhfciaNH5VAvraS0PcUEtCa";
+        public string AccessToken => "p5L439MIDIkAAAAAAAAHHSY07z6Eo80dKH_CswL_h2u3lK9pvgO31gm6cD1LodTU";
 
         #endregion
 
@@ -70,6 +62,11 @@ namespace Caly.Dropbox
         //    var folder = DBClient.Files.CreateFolderV2Async(folderArg).Result;
         //    return folder.Metadata;
         //}
+        public void CreateFolder(string path)
+        {
+            var folderArg = new CreateFolderArg(path);
+            var folder =  DBClient.Files.CreateFolderV2Async(folderArg).Result;
+        }
 
         /// <summary>  
         /// Method is to check that whether folder exists on Dropbox or not.  
@@ -80,8 +77,19 @@ namespace Caly.Dropbox
         {
             try
             {
-                var folders = DBClient.Files.ListFolderAsync(path).Result;
-                return true;
+                return DBClient.Files.GetMetadataAsync(path).Result.IsFolder;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool FileExists(string path)
+        {
+            try
+            {
+                return DBClient.Files.GetMetadataAsync(path).Result.IsFile;
             }
             catch (Exception ex)
             {
@@ -93,16 +101,36 @@ namespace Caly.Dropbox
         {
             var list = DBClient.Files.ListFolderAsync(path).Result;
 
+            var result = new List<string>();
+
             foreach (var i in list.Entries)
             {
                 if (((i.IsFolder && folders) ||
                         (i.IsFile && files)) &&
                     (string.IsNullOrEmpty(filters) || i.Name.Contains(filters, StringComparison.InvariantCultureIgnoreCase)))
                 {
-                    yield return i.Name;
+                    result.Add(i.Name);
                 }
-
             }
+
+            while(list.HasMore)
+            {
+                list = DBClient.Files.ListFolderContinueAsync(cursor: list.Cursor).Result;
+
+                foreach (var i in list.Entries)
+                {
+                    if (((i.IsFolder && folders) ||
+                            (i.IsFile && files)) &&
+                        (string.IsNullOrEmpty(filters) || i.Name.Contains(filters, StringComparison.InvariantCultureIgnoreCase)))
+                    {
+                        result.Add(i.Name);
+                    }
+                }
+            }
+
+            return result;
+
+
         }
 
         /// <summary>  
@@ -122,6 +150,7 @@ namespace Caly.Dropbox
                 return false;
             }
         }
+
         /// <summary>  
         /// Method to upload files on Dropbox  
         /// </summary>  
@@ -129,7 +158,7 @@ namespace Caly.Dropbox
         /// <param name="UploadfileName"> File name to be created in Dropbox</param>  
         /// <param name="SourceFilePath"> Local file path which we want to upload</param>  
         /// <returns></returns>  
-        public bool Upload(string UploadfolderPath, string UploadfileName, string SourceFilePath)
+        public async Task Upload(string UploadfolderPath, string UploadfileName, string SourceFilePath)
         {
             try
             {
@@ -138,13 +167,26 @@ namespace Caly.Dropbox
                     var response = DBClient.Files.UploadAsync(UploadfolderPath + "/" + UploadfileName, WriteMode.Overwrite.Instance, true, body: stream).Result;
                 }
 
+                //return true;
+            }
+            catch (Exception ex)
+            {
+                //return false;
+            }
+        }
+
+        public bool Upload(string UploadfolderPath, string UploadfileName, MemoryStream stream)
+        {
+            try
+            {
+                var response = DBClient.Files.UploadAsync(UploadfolderPath + "/" + UploadfileName, WriteMode.Overwrite.Instance, body: stream).Result;
+
                 return true;
             }
             catch (Exception ex)
             {
                 return false;
             }
-
         }
 
         /// <summary>  
@@ -157,11 +199,21 @@ namespace Caly.Dropbox
         /// <returns></returns>  
         public bool Download(string DropboxFolderPath, string DropboxFileName, string DownloadFolderPath, string DownloadFileName)
         {
+
+            return Download(DropboxFolderPath + "/" + DropboxFileName, DownloadFolderPath + "/" + DownloadFileName);
+        }
+
+        public bool Download(string dropboxFilePath, string downloadFilePath)
+        {
             try
             {
-                var response = DBClient.Files.DownloadAsync(DropboxFolderPath + "/" + DropboxFileName);
-                var result = response.Result.GetContentAsStreamAsync(); //Added to wait for the result from Async method  
-
+                using (var response = DBClient.Files.DownloadAsync(dropboxFilePath).Result)
+                {
+                    using (var fileStream = File.Create($"{downloadFilePath}/{Path.GetFileName(dropboxFilePath)}"))
+                    {
+                        (response.GetContentAsStreamAsync().Result).CopyTo(fileStream);
+                    }
+                }
                 return true;
             }
             catch (Exception ex)
@@ -170,6 +222,9 @@ namespace Caly.Dropbox
             }
 
         }
+
+
+
         #endregion
     }
 }

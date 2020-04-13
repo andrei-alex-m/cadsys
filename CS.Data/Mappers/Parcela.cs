@@ -14,7 +14,7 @@ namespace CS.Data.Mappers
         {
             parcela.Index = parcelaDTO.Index.Value;
             parcela.ExcelRow = parcelaDTO.RowIndex;
-            Tarla tarla = string.IsNullOrEmpty(parcelaDTO.Tarla) ? null : tarlale.FirstOrDefault(x => x.Denumire.Trim().ReplaceMultiple('_','.',',').Equals(parcelaDTO.Tarla.ReplaceMultiple('_', '.', ','), StringComparison.InvariantCultureIgnoreCase) );
+            Tarla tarla = string.IsNullOrEmpty(parcelaDTO.Tarla) ? null : tarlale.FirstOrDefault(x => x.Denumire.Trim().ReplaceMultiple('_','.',',','/').Equals(parcelaDTO.Tarla.Trim().ReplaceMultiple('_', '.', ',','/'), StringComparison.InvariantCultureIgnoreCase) );
 
             parcela.TarlaId = tarla!=null?tarla.Id:(int?)null;
             parcela.Denumire = parcelaDTO.Parcela;

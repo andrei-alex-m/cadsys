@@ -2,12 +2,15 @@
 using System.IO;
 using CS.EF;
 using CS.CadGen;
+using Caly.Dropbox;
 using CS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using CS.ImportExportWeb.Models;
 using Microsoft.AspNetCore.SignalR;
 using CS.ImportExportWeb.Hubs;
 using CS.Services;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace CS.ImportExportWeb.Controllers
 {
@@ -18,19 +21,21 @@ namespace CS.ImportExportWeb.Controllers
         IFileRepo dXFRepo;
         IExporter cadGenExporter;
         IHubContext<MessagesHub> hubContext;
+        DropBoxBase dropBoxBase;
 
-        public ExportController(CadSysContext _context, IExcelConfigurationRepo _excelConfiguration, ServiceBuilder _serviceBuilder, IExporter _cadGenExporter, IHubContext<MessagesHub> _hubContext)
+        public ExportController(CadSysContext _context, IExcelConfigurationRepo _excelConfiguration, ServiceBuilder _serviceBuilder, IExporter _cadGenExporter, IHubContext<MessagesHub> _hubContext, DropBoxBase _dropBoxBase)
         {
             context = _context;
             excelConfiguration = _excelConfiguration;
             dXFRepo = (IFileRepo)_serviceBuilder.GetService("DXFRepo");
             cadGenExporter = _cadGenExporter;
             hubContext = _hubContext;
+            dropBoxBase = _dropBoxBase;
 
         }
 
         // GET: /<controller>/
-        public  IActionResult GetFile (ExportFile file)
+        public  void GetFile (ExportFile file)
         {
 
             if(file.ClassName.Contains("Proprietar", StringComparison.InvariantCultureIgnoreCase))
@@ -41,7 +46,8 @@ namespace CS.ImportExportWeb.Controllers
                 {
                     wbk.Write(stream);
                     fileContents = stream.ToArray();
-                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ProprietariValidati.xls");
+
+                    //return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ProprietariValidati.xls");
                 }
             }
 
@@ -54,7 +60,7 @@ namespace CS.ImportExportWeb.Controllers
                 {
                     wbk.Write(stream);
                     fileContents = stream.ToArray();
-                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ActeProprietateValidate.xls");
+                    //return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ActeProprietateValidate.xls");
                 }
             }
 
@@ -67,7 +73,7 @@ namespace CS.ImportExportWeb.Controllers
                 {
                     wbk.Write(stream);
                     fileContents = stream.ToArray();
-                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ParceleValidate.xls");
+                    //return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "ParceleValidate.xls");
                 }
             }
 
@@ -80,7 +86,7 @@ namespace CS.ImportExportWeb.Controllers
                 {
                     wbk.Write(propStream);
                     fileContents = propStream.ToArray();
-                    return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "CentralizatorValidat.xls");
+                    //return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, "CentralizatorValidat.xls");
                 }
             }
 
@@ -89,19 +95,40 @@ namespace CS.ImportExportWeb.Controllers
                 var dxfFullPath = dXFRepo.GetFullPath(file.Display);
 
                 var stream = DXF.Exporter.Get(dxfFullPath, cadGenExporter, (x) => hubContext.Clients.All.SendAsync("receivemessage", x));
-
-                return File(stream.ToArray(), System.Net.Mime.MediaTypeNames.Application.Octet, file.Display);
+                stream.Seek(0, SeekOrigin.Begin);
+                var success = dropBoxBase.Upload(@"/CadGen/DXFResults", file.Display, stream);
             }
+            //return new NotFoundResult();
 
-            if(file.ClassName.Contains("pdf", StringComparison.InvariantCultureIgnoreCase))
+        }
+
+        public ActionResult ImportNrCadGen(ExportFile file)
+        {
+            if (!file.ClassName.Contains("dxf", StringComparison.InvariantCultureIgnoreCase))
             {
-
-
-                return Ok();
+                return new  NotFoundResult();
             }
 
-            return new NotFoundResult();
+            var dxfFullPath = dXFRepo.GetFullPath(file.Display);
+            foreach (var p in DXF.Exporter.GetPolys(dxfFullPath))
+            {
+                var imobil = context.Imobile.FirstOrDefault(x => x.Parcele.Any(y => y.Index == p.index));
 
+                if (imobil == null)
+                {
+                    continue;
+                }
+
+                imobil.NumarCadGeneral = p.nrCadGeneral;
+                imobil.SectorCadastral = p.sector;
+                imobil.NumarCadastral = p.nrCadastral;
+
+                context.Update(imobil);
+
+            }
+            context.SaveChanges();
+
+            return new RedirectToActionResult("Download","Home", null);
         }
     }
 }

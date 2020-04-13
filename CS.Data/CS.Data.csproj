@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
     <PropertyGroup>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
@@ -26,7 +26,7 @@
     <None Remove="DTO\Excel\OutputActProprietate.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="7.6.104" />
+    <PackageReference Include="FluentValidation" Version="8.5.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Caly.Common\Caly.Common.csproj" />

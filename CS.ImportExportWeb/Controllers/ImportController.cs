@@ -15,6 +15,7 @@ using System.Collections.Concurrent;
 using Microsoft.EntityFrameworkCore;
 using Caly.Common;
 using CS.Services;
+using System.Diagnostics;
 
 namespace CS.ImportExportAPI.Controllers
 {
@@ -49,8 +50,8 @@ namespace CS.ImportExportAPI.Controllers
 
             await CycleExcels(excelFiles);
 
-            await CyclePostExcel();
-
+            if (excelFiles.Count()>0)
+                CyclePostExcel(context);
 
 
             await CycleDXFs(dxfFiles);
@@ -119,51 +120,92 @@ namespace CS.ImportExportAPI.Controllers
 
 
         //aici facem niste post procesari: Titlu in Parcela, Pozitia pe InscriereDetaliu
-        async Task CyclePostExcel()
+        public static void CyclePostExcel(CadSysContext context)
         {
             object locker = new object();
             //pozitia CF
-            context.Imobile.Include(x => x.InscrieriDetaliu).AsParallel().ForAll(i =>
+            context.Imobile.Include(x => x.InscrieriDetaliu).ToList().ForEach(i =>
             {
+
                 int idxPt2 = 1;
                 int idxPt3 = 1;
-                foreach (var idPt2 in i.InscrieriDetaliu.Where(x => x.ParteaCF == 2))
+                try
                 {
-                    idPt2.Pozitia = idxPt2;
-                    idxPt2++;
-                    context.InscrieriDetaliu.Update(idPt2);
-                }
+                    foreach (var idPt2 in i.InscrieriDetaliu.Where(x => x.ParteaCF == 2))
+                    {
+                        idPt2.Pozitia = idxPt2;
+                        idxPt2++;
+                        context.InscrieriDetaliu.Update(idPt2);
+                    }
 
-                foreach (var idPt3 in i.InscrieriDetaliu.Where(x => x.ParteaCF == 3))
-                {
-                    idPt3.Pozitia = idxPt3;
-                    idxPt3++;
-                    context.InscrieriDetaliu.Update(idPt3);
+                    foreach (var idPt3 in i.InscrieriDetaliu.Where(x => x.ParteaCF == 3))
+                    {
+                        idPt3.Pozitia = idxPt3;
+                        idxPt3++;
+                        context.InscrieriDetaliu.Update(idPt3);
+                    }
                 }
+                catch(Exception ex)
+                {
+                    var q = ex.Message;
+
+                }
+                
             });
 
+            
+
+            /*var x = context.ActeProprietate.ToList().Where(x => x.TipActProprietateId == 1).ToList();
+
+            var y = context.InscrieriActe.ToList().Join(x, x1 => (int)x1.ActProprietateId, x2 => x2.Id, (x1, x2) => new { IdInscriere = x1.InscriereDetaliuId, NrTitlu = x2.Numar }).ToList();
+
+            var z = context.InscrieriDetaliu.ToList().Join(y, x1 => x1.Id, x2 => x2.IdInscriere, (x1, x2) => new { IdImobil = x1.ImobilReferintaId, NrTitlu = x2.NrTitlu }).ToList();
+
+            foreach(var i in z)
+            {
+                var parcela = context.Parcele.FirstOrDefault(p => p.ImobilId == i.IdImobil);
+                if (parcela!=null)
+                {
+                    parcela.NumarTitlu = i.NrTitlu;
+                    lock (locker)
+                    {
+                        context.Parcele.Update(parcela);
+                    }
+                } 
+            }*/
+
+           
+
             //nrtitlu in parcela
-            context.Imobile.Include(x => x.InscrieriDetaliu)
+           context.Imobile.Include(x => x.InscrieriDetaliu)
                                                 .ThenInclude(y => y.InscrieriActe)
                                                     .ThenInclude(z => z.ActProprietate)
-                   .ThenInclude(w => w.TipActProprietate).AsParallel().ForAll(i =>
+                                                    .Include(x=>x.Parcele)
+                   .ToList().ForEach(i =>
             {
-                var titlu = i.InscrieriDetaliu.SelectMany(x => x.InscrieriActe.Where(q => q.ActProprietate != null)).Select(w => w.ActProprietate).FirstOrDefault(y => y.TipActProprietate.Denumire.Contains("titlu", StringComparison.InvariantCultureIgnoreCase));
-                if (titlu != null)
+                try
                 {
-                    foreach (var p in i.Parcele)
+                    var titlu = i.InscrieriDetaliu.SelectMany(x => x.InscrieriActe.Where(q => q.ActProprietate != null)).Select(w => w.ActProprietate).FirstOrDefault(y => y.TipActProprietateId ==1);
+                    if (titlu != null)
                     {
-                        p.NumarTitlu = titlu.Numar;
-                        lock (locker)
+                        foreach (var p in i.Parcele)
                         {
-                            context.Parcele.Update(p);
+                            p.NumarTitlu = titlu.Numar;
+                            lock (locker)
+                            {
+                                context.Parcele.Update(p);
+                            }
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    var q = ex.Message;
                 }
             });
 
             //sterg inscrierile fara propr care nu sunt notari (gen cele care au doar titluri)
-            context.InscrieriDetaliu.RemoveRange(context.InscrieriDetaliu.Include(y => y.InscrieriProprietari).Include(w => w.TipInscriere).AsParallel().Where(x => x.InscrieriProprietari.Count == 0 && !string.Equals(x.TipInscriere.Denumire, "NOTATION", StringComparison.InvariantCultureIgnoreCase)));
+            context.InscrieriDetaliu.RemoveRange(context.InscrieriDetaliu.Include(y => y.InscrieriProprietari).ToList().Where(x => x.InscrieriProprietari.Count == 0 && x.TipInscriereId!=317));
             context.SaveChanges();
         }
 
@@ -181,10 +223,28 @@ namespace CS.ImportExportAPI.Controllers
 
             x.ForEach(y =>
             {
-                foreach (var iD in InscriereDetaliuMapperExtensions.FromDTO(y, context.Proprietari.Select(m => m), context.ActeProprietate.Include(w => w.TipActProprietate).ThenInclude(w => w.TipDrept), context.Parcele.Include(w => w.Imobil), moduriDobandire, tipuriDrept, tipuriInscriere))
+                try
                 {
-                    context.InscrieriDetaliu.AddAsync(iD);
+                    foreach (var iD in InscriereDetaliuMapperExtensions.FromDTO(y, context.Proprietari.Select(m => m), context.ActeProprietate.Include(w => w.TipActProprietate).ThenInclude(w => w.TipDrept), context.Parcele.Include(w => w.Imobil), moduriDobandire, tipuriDrept, tipuriInscriere))
+                    {
+                        if (iD.TipInscriereId == tipuriInscriere.FirstOrDefault(z => z.Denumire.Equals("NOTATION", StringComparison.InvariantCultureIgnoreCase)).Id)
+                        {
+                            iD.TipDreptId = null;
+                            iD.ModDobandireId = null;
+                            iD.Cota = string.Empty;
+                            iD.Moneda = string.Empty;
+                            iD.Valoarea = string.Empty;
+                            iD.DetaliiDrept = string.Empty;
+                        }
+
+                        context.InscrieriDetaliu.AddAsync(iD);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                }
+
             });
         }
 

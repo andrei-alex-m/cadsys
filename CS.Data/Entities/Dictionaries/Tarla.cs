@@ -13,6 +13,8 @@ namespace CS.Data.Entities
 
         public bool Diminuata { get; set; }
 
+        public string Sector { get; set; }
+
         public virtual UAT UAT { get; set; }
 
         [InverseProperty("Tarla")]

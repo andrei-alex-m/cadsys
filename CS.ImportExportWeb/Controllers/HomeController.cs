@@ -28,9 +28,9 @@ namespace CS.ImportExportWeb.Controllers
             return View();
         }
 
-        public IActionResult Proceess()
+        public IActionResult Process()
         {
-            return View();
+            return RedirectToAction("Index", "Process");
         }
 
         public IActionResult Download()
@@ -42,6 +42,11 @@ namespace CS.ImportExportWeb.Controllers
             };
 
             return View(evm);
+        }
+
+        public IActionResult PDF()
+        {
+            return View(new PDFViewModel());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
